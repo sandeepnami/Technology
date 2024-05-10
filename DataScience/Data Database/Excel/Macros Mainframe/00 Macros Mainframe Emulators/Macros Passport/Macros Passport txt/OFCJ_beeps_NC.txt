@@ -1,0 +1,65 @@
+Sub ZMain
+Dim  ret,risk	
+for i = 1 to 150
+    SendHostKeys ("<PF4>")
+    ret = wait(3)
+    risk=NGYG_CHK()	
+    ret = Wait(180)	
+Next
+
+End Sub
+ 
+
+Private Function NGYG_CHK()
+Dim ret,AUTH_PREV,RISK, MAX_RISK
+MAX_RISK = 1
+
+Set Sys = CreateObject("PASSPORT.System")
+Set Sess = Sys.ActiveSession
+Set MyScreen = Sess.Screen
+
+AUTH_PREV = "Y"
+AUTH_NG=0
+AUTH_YG=0
+RISK=0
+for ri = 6 to 22
+	Set MyArea = MyScreen.Area(ri, 74, ri, 74)
+	MyArea.Select     
+	MyScreen.Copy
+	AUTH = MyArea.Value
+	If AUTH  = "N" THEN
+		AUTH_NG=AUTH_NG +1
+	ELSEIF AUTH = "Y" THEN
+		AUTH_YG=AUTH_YG +1
+	END IF
+
+	IF AUTH = AUTH_PREV  AND AUTH= "Y"  THEN
+		RISK= RISK + 1
+		AUTH_PREV  = AUTH
+	ELSEIF AUTH= "N" THEN
+		RISK = 0 
+	END IF
+Next
+
+if  RISK > MAX_RISK then
+	beep_sound()
+end if
+
+if  RISK > 5 then
+	SendHostKeys ("<PF4>")
+    	wait(3)
+    	ret=NGYG_CHK()	
+	risk=ret+risk
+end if
+
+NGYG_CHK = risk
+End Function
+
+Sub beep_sound()
+
+For loopvar = 1 To 20
+	Beep
+	ret = wait(1)
+Next        
+
+end Sub

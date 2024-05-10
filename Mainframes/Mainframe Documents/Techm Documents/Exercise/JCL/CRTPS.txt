@@ -1,0 +1,15 @@
+//UGBPCRPS JOB 345,'CREATE PS',                                         00010007
+//             MSGCLASS=X,MSGLEVEL=(1,1),                               00020006
+//             CLASS=2,NOTIFY=&SYSUID                                   00030001
+//*                                                                     00030107
+//STEP1   EXEC PGM=IEFBR14                                              00030201
+//DD1      DD  DSN=CDKVPGE.SANDEEPN.TRM.NCVCALP.SE.BAK2,                00040007
+//             DISP=(NEW,CATLG,DELETE),                                 00050007
+//             UNIT=SYSDA,                                              00080001
+//             SPACE=(TRK,(5,5),RLSE),                                  00090008
+//             LRECL=584,                                               00100007
+//             BLKSIZE=584,                                             00110007
+//             RECFM=FB                                                 00110103
+//SYSPRINT DD  SYSOUT=*                                                 00110301
+//SYSIN    DD  DUMMY                                                    00110401
+

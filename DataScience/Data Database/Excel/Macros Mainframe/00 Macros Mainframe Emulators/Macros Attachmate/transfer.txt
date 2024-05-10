@@ -1,0 +1,7 @@
+HostOS 1 
+Local0 "C:\Documents and Settings\P732083\My Documents\Sandeep\Technical -Curr\Exercise\EZY\NAB\SAMPEZY.txt" Direction0 1 Host0 "'SDAF.PP40399.CNTL.TEST(SAMPEZY)'" Scheme0 "C:\Program Files\National\AttachmateExtraSessions\Schemes\Text Default.eis"
+Local1 "C:\Documents and Settings\P732083\My Documents\Sandeep\Technical -Curr\Exercise\EZY\NAB\EASY1.txt" Direction1 1 Host1 "'SDAF.P732083.NAMI.JCL.CNTL(EASY1)'" Scheme1 "C:\Program Files\National\AttachmateExtraSessions\Schemes\Text Default.eis"
+Local2 "C:\Documents and Settings\P732083\My Documents\Sandeep\Technical -Curr\Exercise\EZY\NAB\SAMPLE.txt" Direction2 1 Host2 "'SDAF.P732083.NAMI.EZYLIB(SAMPLE)'" Scheme2 "C:\Program Files\National\AttachmateExtraSessions\Schemes\Text Default.eis"
+Local3 "C:\Documents and Settings\P732083\My Documents\Sandeep\Technical -Curr\Exercise\EZY\NAB\COMPARE.txt" Direction3 1 Host3 "'SDAF.P732083.NAMI.EZYLIB(COMPARE)'" Scheme3 "C:\Program Files\National\AttachmateExtraSessions\Schemes\Text Default.eis"
+Local4 "C:\Documents and Settings\P732083\My Documents\Sandeep\Technical -Curr\Exercise\EZY\NAB\COMPARE1.txt" Direction4 1 Host4 "'SDAF.P732083.NAMI.EZYLIB(COMPARE1)'" Scheme4 "C:\Program Files\National\AttachmateExtraSessions\Schemes\Text Default.eis"
+Local5 "C:\Documents and Settings\P732083\My Documents\Sandeep\Technical -Curr\Exercise\EZY\NAB\EZYRUN.txt" Direction5 1 Host5 "'SDAF.PP40399.CNTL.TEST(EZYRUN)'" Scheme5 "C:\Program Files\National\AttachmateExtraSessions\Schemes\Text Default.eis"

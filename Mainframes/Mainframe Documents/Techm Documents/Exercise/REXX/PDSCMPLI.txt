@@ -1,0 +1,60 @@
+/* REXX TO COPY PDS MEMBERS INTO ANOTHER FILE                           00010000
+** THIS IS ALSO EXAMPLE FOR USING CALLING ANOTHER REXX                  00011000
+** THIS IS MEMBER READS MEMBERS OF THE PDS(LIB ) AND COMPARES WITH LIB2 00012000
+** THIS RETURNS COMMON MEMBERS OF BOTH THE PDS                          00012100
+*/                                                                      00013000
+/*NANI SAMPLE EXAMPLES                                                  00014000
+/*INDD1 IS THE MASTER FILE WHOSE COMPLIMENT TO BE FOUND*/               00020000
+INDD1="CDKVPGE.FIX.SANDEEPN.IN.SE"                                      00020100
+INDD2="CDKVPGE.FIX.SANDEEPN.IN1.SE"                                     00020200
+OUTDD1="CDKVPGE.FIX.SANDEEPN.OUT.SE"                                    00021000
+                                                                        00021100
+"ALLOC FI(INDD1) DA('"INDD1"') SHR "                                    00021300
+"ALLOC FI(INDD2) DA('"INDD2"') SHR "                                    00021400
+"ALLOC FI(OUTDD1) DA('"OUTDD1"') SHR "                                  00021500
+                                                                        00021600
+"EXECIO * DISKR INDD1 (STEM MAST. FINIS"                                00021700
+"EXECIO * DISKR INDD2 (STEM SLAV. FINIS"                                00021800
+*/                                                                      00021900
+                                                                        00022000
+/*INDD1 IS THE MASTER FILE WHOSE COMPLIMENT TO BE FOUND*/               00022100
+INDD1="CDKVPGE.FIX.SANDEEPN.IN.SE"                                      00022200
+INDD2="CDKVPGE.FIX.SANDEEPN.UNION.IN1.SE"                               00022300
+/*INDD2="CDKVPGE.FIX.SANDEEPN.UNION.IN1.SE"*/                           00022400
+OUTDD1="CDKVPGE.FIX.SANDEEPN.OUT.SE"                                    00022500
+                                                                        00022600
+"ALLOC FI(INDD1) DA('"INDD1"') SHR "                                    00022700
+"ALLOC FI(INDD2) DA('"INDD2"') SHR "                                    00022800
+"ALLOC FI(OUTDD1) DA('"OUTDD1"') SHR "                                  00022900
+                                                                        00023000
+"EXECIO * DISKR INDD1 (STEM MAST. FINIS"                                00023100
+"EXECIO * DISKR INDD2 (STEM SLAV. FINIS"                                00024000
+                                                                        00050500
+J = 0                                                                   00051000
+MATCH = 0                                                               00052000
+DO I = 1 TO MAST.0                                                      00060000
+    MAST1.I=STRIP(MAST.I)                                               00060200
+    MATCH = 0/*INITIALISE MATCH FOR EACH MASTER REC */                  00060300
+    DO K = 1 TO SLAV.0                                                  00060400
+       SLAV.K=STRIP(SLAV.K)                                             00060500
+       IF MAST.I = SLAV.K THEN                                          00060600
+       DO                                                               00060700
+          MATCH = 1                                                     00060800
+       /* SAY "MATCHED REC= "SLAV.K*/                                   00060900
+       END                                                              00061300
+    END/*END OF SLAV DO */                                              00062000
+    IF MATCH = 0 THEN                                                   00063000
+    DO                                                                  00064000
+       J= J + 1                                                         00064100
+       OUT.J = STRIP(MAST.I)                                            00065000
+    END                                                                 00066000
+END                                                                     00081000
+OUT.0=J                                                                 00081100
+                                                                        00081300
+"EXECIO" OUT.0 "DISKW OUTDD1 (STEM OUT. FINIS"                          00082000
+                                                                        00083000
+"FREE FI(OUTDD1)"                                                       00085000
+"FREE FI(INDD1)"                                                        00086000
+"FREE FI(INDD2)"                                                        00087000
+EXIT(0)                                                                 00100000
+

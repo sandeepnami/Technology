@@ -1,0 +1,5 @@
+https://www.excel-pratique.com/en/vba_tricks/vba-obfuscator
+
+obj_pcomm_ecloia
+obj_pcomm_eclps
+obj_pcomm

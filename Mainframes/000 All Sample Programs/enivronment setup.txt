@@ -1,0 +1,80 @@
+Environments setup
+
+1. Check for the psbs in DBA.SOURCE.PSBTEST whether tehy are pointing to rt region.
+if any descripances tell onsite
+
+Databases
+
+CAMS databases
+DD358V#
+DD359V#
+
+ME Databases
+DD635V#
+DD637V#
+DD638V#
+DD627V#
+DD636V#
+DD761V#
+DD851V#
+
+			
+PSBS
+Online PSB 
+AF000IF#  
+	
+Batch PSBs
+AF100BV#  
+AF200BV#
+AF210BV#
+AF214BV#
+AF220BV#
+AF402BV#
+AF408BV#
+AF413BV#
+AF410BV#
+AF414BV# 
+AF419BV#
+AF428BV#
+AF426BV# 
+AF464BV#
+AF482BV#
+AF706BV#
+AF707BV#
+AF731BV#
+AF732BV#
+AF733BV#
+AF752BV#
+AF753BV#
+AF754BV#
+AF770BV#
+AF782BV#
+AF806BV#
+AF817BV#
+AF845BV#
+AF848BV#
+AF849BV#
+AF872BV#
+AF876BV#
+
+For PU Region:
+
+PU000IM#	
+
+
+
+
+2. wipeout IMS DB
+6->1->5
+
+3. Unload and load PD tables
+
+4.Create Buffer(Buffer must be created because DB2 tables are not directly accesed they are accesssed via buffer(Assembler tables) only)
+
+
+
+
+
+
+
+

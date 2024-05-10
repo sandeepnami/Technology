@@ -1,0 +1,6 @@
+>>> s = SortedIntList()                                                         
+>>> super(IntList, s).add                                                       
+<bound method SortedList.add of SortedIntList([])>                              
+>>> super(IntList, s).add("I am not a number! I am a free man!")                
+>>> s                                                                           
+SortedIntList(['I am not a number! I am a free man!'])                          

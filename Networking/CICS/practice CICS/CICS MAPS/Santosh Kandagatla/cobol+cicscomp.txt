@@ -1,0 +1,16 @@
+//UELT228C JOB NOTIFY=&SYSUID,REGION=0M                                 00010075
+//*COBOL + CICS                                                         00020035
+//*ASSUMED THAT IPPGM = DBRM = LOAD MODULE NAME ARE SAME                00030035
+//*                                                                     00040002
+//PROCLIB JCLLIB ORDER='ELTP.HYD.VENKAT.PROCLIB'                        00050055
+//*                                                                     00060002
+//STEP1 EXEC PROC=COB2CICS,                                             00070004
+//           INLIB='UELT228.ELTP1026.CICS',                             00080075
+//           RPLLIB='ELTP.HYD.CICSA1.LOADLIB',                          00110057
+//           COPYLIB='UELT228.ELTP1026.COPYMAP',                        00111075
+//           MEM=CS2P62                                                 00120093
+//LKED.SYSIN DD *                                                       00130002
+   NAME CS2P62(R)                                                       00150093
+/*                                                                      00160041
+//                                                                      00170029
+

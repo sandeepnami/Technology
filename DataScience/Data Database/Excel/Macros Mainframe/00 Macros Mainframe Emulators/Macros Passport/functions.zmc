@@ -1,0 +1,29 @@
+Sub ZMain
+Dim  ret,PrNoOld,str1
+str1="sandeep    " 
+PrNoOld =111
+
+testResult = 10 Mod 5
+MsgBox "10 Mod 5 = "  & testResult 
+
+if  10 Mod 5 = 0 then
+MsgBox "Mod in if working" 
+End if
+
+ret = IsNumeric(PrNoOld )
+Prompt " IsNumeric PrNoOld =" &ret, 0, "Attention"
+
+'trim or strip functions
+str1 = Trim(str1)
+MsgBox "string after trimming " &str1 
+
+'cursor functions in passport
+row = GetCursorRow ( )
+ret = SetCursor (4, 21)
+
+End Sub
+
+Sub Prompt( sMsg, nType, sTitle )
+            Set ws = CreateObject( "wscript.shell" )
+            ws.popup sMsg, 0, sTitle, 4096 + nType
+End Sub 

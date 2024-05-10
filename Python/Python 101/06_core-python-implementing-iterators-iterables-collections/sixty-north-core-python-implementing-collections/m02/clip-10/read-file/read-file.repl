@@ -1,0 +1,5 @@
+...    lines = iter(lambda: f.readline().strip(), "END")                        
+...    readings = [int(line) for line in lines]                                 
+...                                                                             
+>>> readings                                                                    
+[291, 149, 17, 31, 547, 2069]                                                   

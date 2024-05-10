@@ -1,0 +1,95 @@
+ IDENTIFICATION DIVISION.                                         
+ PROGRAM-ID. STRHANLG.                                            
+ AUTHOR.  SANDEEP NAMI.                                           
+ ENVIRONMENT DIVISION.                                            
+ DATA DIVISION.                                                   
+ WORKING-STORAGE SECTION.                                         
+ 01  XSTR         PIC X(50) VALUE                                 
+                            "   THIS IS THE FIRST SOURCE STRING". 
+ 01  XSTR2        PIC X(32) VALUE                                 
+                            "THIS IS THE SECOND SOURCE STRING".   
+ 01  STRSIZE      PIC 99 VALUE 32.                                
+ 01  CHARCOUNT    PIC 99 VALUE ZEROS.                             
+ 01  ENDCOUNT     PIC 99 VALUE ZEROS.                             
+ 01  YSTR         PIC X(4) VALUE SPACES.                          
+ 01  CHARPOS      PIC 99 VALUE ZEROS.                             
+ 01  STRLENGTH    PIC 99 VALUE ZEROS.                             
+ PROCEDURE DIVISION.                                              
+ BEGIN.                                                           
+*   TASK1 SUBSTRING(XSTR, STARTPOS, LENGTH)                       
+*   EXTRACT A SUBSTRING FROM A STRING GIVEN THE STARTPOS AND LENG 
+*   SOLUTION - USE REFERENCE MODIFICATION TO GET THE SUBSTRING.   
+*   IN THIS EXAMPLE WE GET 3 CHARACTERS STARTING AT POSITION 9    
+     DISPLAY "TASK1 = " XSTR(9:3).                                
+*   TASK2 PREFIX(XSTR,LENGTH)                                     
+*   EXTRACT THE FIRST LENGTH NUMBER OF CHARS FROM A STRING        
+*   SOLUTION - USE REFERENCE MODIFICATION STARTING AT POSITION 1. 
+*   IN THIS EXAMPLE WE GET THE FIRST 7 CHARACTERS                 
+     DISPLAY "TASK2 = " XSTR(1:7).                                
+*   TASK3 SUFFIX(XSTR,LENGTH)                                     
+*   EXTRACT THE LAST LENGTH NUMBER OF CHARS FROM A STRING         
+*   SOLUTION - USE REFERENCE MODIFICATION WITH START OF SUBSTRING 
+*   DEFINED AS THE FULLSTRINGLENGTH - SUBSTRINGLENGTH + 1         
+*   IN THIS EXAMPLE WE GET THE LAST 13 CHARACTERS.                
+     MOVE 13 TO STRLENGTH                                         
+     DISPLAY "TASK3 = "                                           
+             XSTR2((STRSIZE - STRLENGTH) + 1:STRLENGTH).          
+*   TASK4: TRIMBLANK(XSTR)                                        
+*   REMOVE TRAILING BLANKS FROM A STRING                          
+*   SOLUTION 1                                                    
+*   USE THE REVERSE INTRINSIC FUNCTION TO REVERSE THE STRING      
+*   THEN USE THE INSPECT TALLYING TO COUNT THE NUMBER OF SPACES AT
+*   BEGINING OF THE REVERSED STRING.  THE SUBSTRING LENGTH IS THEN
+*   FULLSRINGLENGTH - CHARCOUNT.                                  
+*   USE REFERENCE MODIFICATION OF GET THE SUBSTRING.              
+     DISPLAY "TASK4 BEFORE = " XSTR "<<<<<<"                      
+     MOVE 0 TO CHARCOUNT                                          
+     INSPECT FUNCTION REVERSE(XSTR) TALLYING CHARCOUNT            
+         FOR LEADING SPACES                                       
+     DISPLAY "TASK4 AFTER = "XSTR(1:50 - CHARCOUNT) "<<<<<<<".    
+*   SOLUTION 2                                                    
+*   USE REFERENCE MODIFICATION AND THE PERFORM..VARYING TO        
+*   KEEP REDUCING THE SIZE OF THE SUBSTRING UNTIL A NON SPACE CHAR
+*   IS ENCOUNTERED.  THEN USE REFERENCE MODIFICATION TO GET THE SU
+     PERFORM VARYING CHARCOUNT FROM 50 BY -1                      
+           UNTIL XSTR(CHARCOUNT:1) NOT = SPACE                    
+     END-PERFORM                                                  
+     DISPLAY "TASK4 AFTER = "XSTR(1:CHARCOUNT) "<<<<<<<".         
+*   TASK5 LEFT_TRIMBLANK(XSTR)                                    
+*   REMOVE LEADING BLANKS FROM A STRING.                          
+*   SOLUTION - USE THE INSPECT TO COUNT THE LEADING BLANKS AND REF
+*   MODIFICATION TO GET THE SUBSTRING FROM THE POINT INDICATED BY 
+*   AND FOR FULLSTRLENGTH - CHARCOUNT CHARACTERS.                 
+     MOVE 1 TO CHARCOUNT.                                         
+     INSPECT XSTR TALLYING CHARCOUNT FOR LEADING SPACES           
+     DISPLAY "TASK5 =" XSTR(CHARCOUNT: 50 - CHARCOUNT)            
+*   TASK6 INDEX(XSTR,YSTR)                                        
+*   FIND THE LOCATION OF THE FIRST OCCURRENCE OF SUBSTRING YSTR IN
+*   SOLUTION - USE THE INSPECT..TALLYING TO COUNT THE CHARACTERS B
+*   THE FIRST OCCURRENCE OF THE SUBSTRING. CHARCOUNT HAS THE LOCAT
+*   IN THIS EXAMPLE WE GET THE POSITION OF THE SUBSTRING "SOURCE".
+     MOVE 1 TO CHARCOUNT                                          
+     INSPECT XSTR TALLYING CHARCOUNT FOR CHARACTERS               
+         BEFORE INITIAL "SOURCE".                                 
+     DISPLAY "TASK6 FIRST OCCURRENCE IS IN CHAR POSITION "        
+                                                     CHARCOUNT.   
+*   TASK7 CINDEX(XSTR,YSTR)                                       
+*   FIND THE LOCATION OF THE FIRST OCCURRENCE OF ANY OF THE CHARAC
+*   IN SUBSTRING XSTR, IN STRING YSTR                             
+*   SOLUTION - USE THE PERFORM..VARYING AND REFERENCE MODIFICATION
+*   LOCATE EACH OF THE CHARACTERS IN THE YSTRING.  THEN USE THE IN
+*   FIND THE POSITION OF EACH IN THE XSTRING.  RETURN WHICHEVER IS
+     MOVE "NALLI" TO YSTR                                         
+     MOVE 51 TO ENDCOUNT                                          
+     PERFORM VARYING CHARPOS FROM 1 BY 1 UNTIL CHARPOS > 4        
+        MOVE 1 TO CHARCOUNT                                       
+        INSPECT XSTR TALLYING CHARCOUNT FOR CHARACTERS            
+             BEFORE INITIAL YSTR(CHARPOS:1)                       
+        IF CHARCOUNT < ENDCOUNT MOVE CHARCOUNT TO ENDCOUNT        
+        END-IF                                                    
+     END-PERFORM                                                  
+     DISPLAY "TASK7 FIRST OCCURRENCE IS IN CHAR POSITION "        
+                                                  ENDCOUNT        
+     DISPLAY "THE CHARACTER IS " XSTR(ENDCOUNT:1).                
+ BEGIN.                                                           
+     STOP RUN.                                                    

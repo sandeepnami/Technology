@@ -1,0 +1,12 @@
+//UGBSETRC JOB (00000000),'SET  RC',                                    00010000
+//             MSGCLASS=X,REGION=0M,                                    00020000
+//             CLASS=2,NOTIFY=&SYSUID                                   00030000
+//*                                                                     00040000
+//FILECHEK EXEC PGM=IDCAMS                                              00140000
+//INDD     DD   DUMMY                                                   00150000
+//OUTDD    DD   DUMMY                                                   00160000
+//SYSIN    DD   *                                                       00170000
+  SET MAXCC = 4                                                         00180000
+//SYSOUT   DD  SYSOUT=*                                                 00190000
+//SYSPRINT DD  SYSOUT=*                                                 00200000
+

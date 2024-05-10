@@ -1,0 +1,278 @@
+/* REXX TO COMPARE PROD AND TEST REGION PROGRAMS                        00010028
+** PASSING THE SECTION FROM WHICH COMPARISION SHOULD START              00020028
+** O/P HAS ONLY CODE ADDED IN TEST REGION                               00030028
+*/                                                                      00040000
+/*********************************************************************  00050000
+PARSE VAR InVar Out1Var (In2Var) Out2Var                                00060000
+WHERE IN2VAR IS PATTERN MARKER                                          00070000
+*/                                                                      00080000
+/*INPUT                                                                 00090000
+INDD1="TST.M53.RZA.RG0.WDD7000.DMGPADEC.UAT0121"                        00100000
+INDD2="TST.M53.RZA.RG0.WDD7000.DMGPADEC.INT0121"                        00110000
+*/                                                                      00120000
+SEARCHSTR1= " PROCEDURE DIVISION"                                       00130028
+PRODPOL="PROD"                                                          00140020
+PREPRODPOL="PREPROD"                                                    00150020
+CONSLINESKIPS=0                                                         00160028
+CONSTRECLEN=133                                                         00170017
+CONSTPOLDIFPAD=16                                                       00180017
+CONSTPAGEPOS=74                                                         00190018
+CONSTPAGERECS=80                                                        00200018
+PRODRANGE=0                                                             00210000
+PRODSTART=0                                                             00220000
+PRODEND=0                                                               00230000
+PRODPOLPAGECOUNT=0                                                      00240018
+PREPRODRANGE=0                                                          00250000
+PREPRODSTART=0                                                          00260000
+PREPRODEND=0                                                            00270000
+PREPRODPOLPAGECOUNT=0                                                   00280018
+RECORDSTATUS=""                                                         00290000
+SEARCHSTRFL1=""                                                         00300000
+SEARCHSTRFL2=""                                                         00310000
+HEADERPOLCOMPARE="N"                                                    00320000
+FORMEND="NO"                                                            00330000
+EOFFILE1="NO"                                                           00340000
+EOFFILE2="NO"                                                           00350000
+TOTOUTREC=0                                                             00360017
+/*ALLOCATION OF DATASET*/                                               00370000
+/*                                                                      00380000
+"ALLOC FI(INDD1) DA('"INDD1"') SHR "                                    00390000
+"ALLOC FI(INDD2) DA('"INDD2"') SHR "                                    00400000
+*/                                                                      00410000
+"EXECIO * DISKR INDD1(STEM INARR1. FINIS"                               00420000
+"EXECIO * DISKR INDD2(STEM INARR2. FINIS"                               00430000
+"FREE F(INDD1)"                                                         00440000
+"FREE F(INDD2)"                                                         00450000
+                                                                        00460000
+POLCOUNTER=0                                                            00470000
+I = 1                                                                   00480000
+J = 1                                                                   00490000
+LINEFL1 = 1;  LINEFL2 = 1                                               00500023
+/*CALL POLPAGECOUNT 140                                                 00510018
+EXIT                                                                    00520018
+SAY "NAMITS AFTER EXIT"                                                 00530018
+*/                                                                      00540018
+                                                                        00550018
+CALL RANGE 1,INARR1                                                     00560028
+PRODSTART=STARTPOS; PRODRANGE=RANGENO ;                                 00570029
+EOFILE1 = EOFFILE;                                                      00590027
+                                                                        00600027
+CALL RANGE 1,INARR2                                                     00610028
+PREPRODSTART=STARTPOS; PREPRODRANGE=RANGENO ;                           00620029
+EOFILE2 = EOFFILE;                                                      00640027
+                                                                        00650027
+CALL POLCOMPARE PRODSTART,PRODEND,PREPRODSTART,PREPRODEND               00660023
+                                                                        00670018
+LINEFL1=PRODEND ; LINEFL2=PREPRODEND                                    00680023
+DO WHILE (LINEFL1 <= INARR1.0 & LINEFL2 <= INARR2.0) & ,                00690023
+     (EOFFILE1 \= "YES" & EOFFILE2 \= "YES")                            00700023
+                                                                        00710000
+   CALL RANGENO PRODEND,INARR1                                          00720029
+   PRODSTART=STARTPOS; PRODRANGE=RANGENO ;                              00730029
+   PRODEND=POLEND; PRODPOL=POLCURR;                                     00740027
+   EOFILE1 = EOFFILE;                                                   00750027
+                                                                        00760027
+   CALL RANGENO PREPRODEND,INARR2                                       00770029
+   PREPRODSTART=STARTPOS; PREPRODRANGE=RANGENO ;                        00780029
+   PREPRODEND=POLEND; PREPRODPOL=POLCURR;                               00790027
+   EOFILE2 = EOFFILE;                                                   00800027
+                                                                        00810027
+   IF PRODPOL = PREPRODPOL THEN                                         00820023
+   DO                                                                   00830023
+     CALL POLCOMPARE PRODSTART,PRODEND,PREPRODSTART,PREPRODEND          00840023
+   END                                                                  00850023
+   ELSE                                                                 00860023
+   DO                                                                   00870023
+     TEMPERRSTR= ,                                                      00880023
+                "POLICIES WITH DIFFERENCE " || ,                        00890023
+                  "PRODPOL=" || PRODPOL        || ,                     00900023
+                  "LINEFL1=" || LINEFL1 || ,                            00910023
+                  "PREPRODPOL=" || PREPRODPOL || ,                      00920023
+                  "LINEFL2=" || LINEFL2                                 00930023
+     SAY TEMPERRSTR                                                     00940023
+   END                                                                  00950023
+   LINEFL1=PRODEND ; LINEFL2=PREPRODEND                                 00960023
+END                                                                     00970000
+ /* LAST POLICY                                                         00980000
+   PRODRANGE = PRODRANGE - 1                                            00990000
+   PRODEND = PRODSTART + PRODRANGE - CONSLINESKIPS                      01000028
+   SAY "PRODPOL=" || PRODPOL ,                                          01010020
+       "PRODRANGE=" || PRODRANGE ,                                      01020000
+       "START LINE=" || PRODSTART ,                                     01030000
+       "END   LINE=" || PRODEND                                         01040000
+ */                                                                     01050000
+ OUTARR1.0=TOTOUTREC                                                    01060017
+/*writng stem data to file */                                           01070017
+"EXECIO "OUTARR1.0" DISKW OUTDD1 (FINIS STEM OUTARR1."                  01080017
+"FREE FI(OUTDD1)"                                                       01090017
+EXIT                                                                    01100000
+                                                                        01110000
+RANGE:                                                                  01120028
+  ARG START,ARRNAME                                                     01130025
+  /*INITIALISATION*/                                                    01140021
+  RECORDSTATUS = "";EOFFILE = "NO"                                      01150027
+  POLHEADCNT = 0 ; RANGENO=1 ; POLDEND=0 ; POLCURR="";                  01160029
+  STARTPOS=START;                                                       01170029
+                                                                        01180027
+  /*DYNAMIC DOWHILE EXPRESSION*/                                        01190029
+  INTERPRET 'DOWHILEEXPR = START <='ARRNAME'.'0                         01200028
+  DO WHILE DOWHILEEXPR                                                  01210027
+                                                                        01220021
+     INTERPRET 'IFEXPR1 = SUBSTR('ARRNAME'.'START'7,19)  = SEARCHSTR1'  01230028
+     IF IFEXPR1 THEN                                                    01240027
+     DO                                                                 01250027
+       IF POLHEADCNT = 0 THEN                                           01260029
+       DO                                                               01270029
+          RANGENO = START                                               01280029
+          STARTPOS = START                                              01290029
+       END                                                              01300029
+       POLHEADCNT = 1                                                   01310029
+     END                                                                01320027
+                                                                        01330027
+     START = START+1                                                    01340021
+     RANGENO = RANGENO+1                                                01350029
+      /*CHECK WITH EOF*/                                                01360027
+     INTERPRET 'IFEXPR2 = START = ' ARRNAME'.'0                         01370027
+     IF IFEXPR2 THEN                                                    01380027
+        EOFFILE = "YES"                                                 01390027
+  END /*END DOWHILE*/                                                   01400021
+  /*SAY "NAMITS PROD LINE WHILE LEAVING SUBROUTIEN=" || START */        01410000
+  RETURN                                                                01420000
+                                                                        01430000
+                                                                        01440000
+COMPARE:                                                                01450029
+  PARSE ARG LINEFL1,ENDLNFL1,LINEFL2,ENDLNFL2                           01460023
+  HEADERPOLCOMPARE="N"                                                  01470000
+  /*COMPARE POL DOWHILE*/                                               01480000
+  DO WHILE LINEFL1 <= ENDLNFL1 | LINEFL2 <= ENDLNFL2                    01490024
+    SEARCHSTRFL1=SUBSTR(INARR1.LINEFL1,4,5)                             01500000
+    SEARCHSTRFL2=SUBSTR(INARR2.LINEFL2,4,5)                             01510000
+    RESULT= COMPARE(INARR1.LINEFL1,INARR2.LINEFL2)                      02470000
+    IF RESULT > 0 THEN                                                  02480000
+    DO                                                                  02490000
+      IF HEADERPOLCOMPARE="N" THEN                                      02500000
+      DO                                                                02510000
+         TEMPOUTREC = ,                                                 02520023
+             "POLICIES WITH DIFFERENCE " || ,                           02530023
+             "PRODPOL=" || PRODPOL        || ,                          02540020
+             "LINEFL1=" || LINEFL1 || ,                                 02550000
+             "PREPRODPOL=" || PREPRODPOL || ,                           02560020
+             "LINEFL2=" || LINEFL2                                      02570000
+         SAY TEMPOUTREC                                                 02580023
+                                                                        02590023
+         CALL BUILDOUTREC TOTOUTREC,TEMPOUTREC                          02600023
+         TOTOUTREC = WRITERECPOS                                        02610023
+         HEADERPOLCOMPARE="Y"                                           02620000
+      END                                                               02630000
+      TEMPOUTREC = ,                                                    02640023
+          "XPROD   " || "LINEFL1=" || LINEFL1 || ,                      02650023
+           INARR1.LINEFL1                                               02660024
+      SAY SUBSTR(TEMPOUTREC,1,80)                                       02670024
+      CALL BUILDOUTREC TOTOUTREC,TEMPOUTREC                             02680023
+      TOTOUTREC = WRITERECPOS                                           02690023
+                                                                        02700023
+      TEMPOUTREC = ,                                                    02710023
+          "XPREPROD" || "LINEFL2=" || LINEFL2 || ,                      02720023
+            INARR2.LINEFL2                                              02730024
+      SAY SUBSTR(TEMPOUTREC,1,80)                                       02740024
+      CALL BUILDOUTREC TOTOUTREC,TEMPOUTREC                             02750023
+      TOTOUTREC = WRITERECPOS                                           02760023
+                                                                        02770023
+      CALL STRINGDIFF INARR1.LINEFL1,INARR2.LINEFL2                     02780017
+      TEMPOUTREC = ,                                                    02790023
+          "DIFFPOS " || "LINEFL1=" || LINEFL1 || ,                      02800023
+            DIFFSTRING                                                  02810024
+      SAY SUBSTR(TEMPOUTREC,1,80)                                       02820024
+      CALL BUILDOUTREC TOTOUTREC,TEMPOUTREC                             02830023
+      TOTOUTREC = WRITERECPOS                                           02840023
+                                                                        02850023
+      TEMPOUTREC = ,                                                    02860023
+          "" /*VISUAL FORMATTING*/                                      02870023
+      SAY TEMPOUTREC                                                    02880023
+      CALL BUILDOUTREC TOTOUTREC,TEMPOUTREC                             02890023
+      TOTOUTREC = WRITERECPOS                                           02900023
+                                                                        02910023
+    END                                                                 02920000
+                                                                        02930000
+    /*INCREMENTING LINENOS FOR FILE 1 AND FILE2*/                       02940024
+    IF LINEFL1 >= ENDLNFL1 THEN                                         02950024
+    DO                                                                  02960024
+      IF LINEFL2 >= ENDLNFL2 THEN                                       02970024
+      DO                                                                02980024
+         /* SPACE AND SPACE*/                                           02990024
+         LINEFL2=LINEFL2+1; LINEFL1=LINEFL1+1                           03000024
+      END                                                               03010024
+      ELSE                                                              03020024
+      DO                                                                03030024
+         LINEFL2 = LINEFL2 + 1                                          03040024
+      END                                                               03050024
+    END                                                                 03060024
+    ELSE                                                                03070024
+    DO                                                                  03080024
+      IF LINEFL2 >= ENDLNFL2 THEN                                       03090024
+      DO                                                                03100024
+         LINEFL1 = LINEFL1 + 1                                          03110024
+      END                                                               03120024
+      ELSE                                                              03130024
+      DO                                                                03140024
+         LINEFL2=LINEFL2+1; LINEFL1=LINEFL1+1                           03150024
+      END                                                               03160024
+    END                                                                 03170024
+  END /* DOWHILE POLICY PICKED NOW BEING COMPARED */                    03180000
+  RETURN                                                                03190000
+                                                                        03200000
+STRINGDIFF:                                                             03210017
+  PARSE ARG STRING1,STRING2                                             03220017
+/*SAY "NAMITS BASIC " || SUBSTR(STRING1,1,50)                           03230017
+  SAY "NAMITS BASIC " || SUBSTR(STRING2,1,50)*/                         03240017
+  LOOPCNTR=1                                                            03250017
+  DIFFSTRING = ""                                                       03260017
+  DIFFSTARTPOS = COMPARE(STRING1,STRING2)                               03270017
+  DIFFSTRING = OVERLAY("_",DIFFSTRING,DIFFSTARTPOS)                     03280017
+                                                                        03290017
+  LOOPCNTR = DIFFSTARTPOS                                               03300017
+  LOOPCNTR=LOOPCNTR+1                                                   03310017
+  DO WHILE LOOPCNTR <= CONSTRECLEN                                      03320017
+                                                                        03330017
+     IF SUBSTR(STRING1,LOOPCNTR,1) /= SUBSTR(STRING2,LOOPCNTR,1) THEN   03340017
+        DIFFSTRING = OVERLAY("_",DIFFSTRING,LOOPCNTR)                   03350017
+                                                                        03360017
+     LOOPCNTR=LOOPCNTR+1                                                03370017
+  END                                                                   03380017
+/*SAY "NAMITS " || SUBSTR(STRING1,1,80)                                 03390017
+  SAY "NAMITS " || SUBSTR(STRING2,1,80)                                 03400017
+  SAY "NAMITS " || SUBSTR(DIFFSTRING,1,80)*/                            03410017
+  RETURN                                                                03420017
+                                                                        03430018
+POLPAGECOUNT:                                                           03440018
+  ARG PAGELINE                                                          03450018
+  TEMPEXTRACT  = ""                                                     03460018
+  PAGELINE = PAGELINE + CONSTPAGEPOS                                    03470018
+  TEMPEXTRACT=SUBSTR(INARR1.PAGELINE,70,4)                              03480018
+/*SAY "NAMITS " || "TEMPEXTRACT =" TEMPEXTRACT                          03490018
+  SAY "NAMITS " || "PAGELINE =" PAGELINE || ,                           03500018
+       " " || INARR1.PAGELINE */                                        03510018
+  IF TEMPEXTRACT = "PAGE" THEN                                          03520018
+  DO                                                                    03530018
+    POLCURRPAGE  = SUBSTR(INARR1.PAGELINE,75,2)                         03540018
+    POLPAGEEND   = SUBSTR(INARR1.PAGELINE,81,2)                         03550018
+    IF DATATYPE(POLCURRPAGE) \= "NUM" | ,                               03560018
+       DATATYPE(POLPAGEEND) \= "NUM" THEN                               03570018
+    DO                                                                  03580018
+      POLCURRPAGE=1 ; POLPAGEEND=1                                      03590018
+    END                                                                 03600018
+  END                                                                   03610018
+  ELSE                                                                  03620018
+  DO                                                                    03630018
+    POLCURRPAGE=1 ; POLPAGEEND=1                                        03640018
+  END                                                                   03650018
+/*SAY "NAMITS  AFTER CALC " || "POLCURRPAGE  =" POLCURRPAGE  || ,       03660018
+      "POLPAGEEND   =" POLPAGEEND */                                    03670018
+  RETURN                                                                03680018
+                                                                        03690018
+BUILDOUTREC:                                                            03700023
+  PARSE ARG WRITERECPOS,OUTREC                                          03710023
+  WRITERECPOS = WRITERECPOS+1                                           03720023
+  OUTARR1.WRITERECPOS=OUTREC                                            03730023
+  RETURN                                                                03740023
+

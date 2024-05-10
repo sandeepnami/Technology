@@ -1,0 +1,59 @@
+      *READ SE FILE                                                     00001012
+       IDENTIFICATION DIVISION.                                         00010001
+       PROGRAM-ID. READSE.                                              00020012
+      *                                                                 00020112
+       ENVIRONMENT DIVISION.                                            00021001
+       CONFIGURATION SECTION.                                           00022001
+       INPUT-OUTPUT SECTION.                                            00023012
+       FILE-CONTROL.                                                    00024012
+           SELECT FILE-IN ASSIGN TO INDD                                00025013
+               FILE STATUS IS WS-STATUS-IN.                             00026012
+      *                                                                 00027012
+       DATA DIVISION.                                                   00030001
+       FILE SECTION.                                                    00030115
+       FD FILE-IN.                                                      00031014
+      *RECL=584                                                         00032113
+       01 EMPLOYEE-DATA.                                                00033013
+           05 EMP-ID  PIC 9(3).                                         00033113
+           05 EMP-NAME PIC  X(11).                                      00033219
+           05 EMP-DEPT-ID PIC 9(3).                                     00033313
+           05 EMP-SALARY  PIC 9(5).                                     00033413
+           05 FILLER     PIC X(563).                                    00034017
+                                                                        00035013
+       WORKING-STORAGE SECTION.                                         00040001
+       01 WS-EMPLOYEE-DATA.                                             00041013
+           05 WS-EMP-ID  PIC 9(3).                                      00042013
+           05 FILER   PIC X(1) VALUE SPACES.                            00042114
+           05 WS-EMP-NAME PIC  X(11).                                   00043019
+           05 FILER   PIC X(1) VALUE SPACES.                            00043114
+           05 WS-EMP-DEPT-ID PIC 9(3).                                  00044013
+           05 FILER   PIC X(1) VALUE SPACES.                            00044114
+           05 WS-EMP-SALARY  PIC 9(5).                                  00045013
+                                                                        00045112
+       01 WS-STATUS-IN PIC 9(02) VALUE ZERO.                            00046014
+      *                                                                 00101012
+       PROCEDURE DIVISION.                                              00110001
+       MAIN-PARA.                                                       00130012
+      *OPENING FILE                                                     00140013
+           OPEN INPUT FILE-IN                                           00160013
+           INITIALIZE EMPLOYEE-DATA                                     00161018
+      *READING FILE                                                     00170013
+           READ FILE-IN                                                 00180013
+                 AT END MOVE HIGH-VALUES TO EMPLOYEE-DATA               00181013
+              END-READ                                                  00181113
+      *          DISPLAY 'NANI TEST'EMPLOYEE-DATA                       00181217
+              PERFORM UNTIL EMPLOYEE-DATA = HIGH-VALUES                 00181414
+                 MOVE EMP-ID TO WS-EMP-ID                               00181517
+                 MOVE EMP-NAME TO WS-EMP-NAME                           00181617
+                 MOVE EMP-DEPT-ID TO WS-EMP-DEPT-ID                     00181717
+                 MOVE EMP-SALARY TO WS-EMP-SALARY                       00181817
+                 DISPLAY WS-EMPLOYEE-DATA                               00181917
+                 INITIALIZE EMPLOYEE-DATA                               00182018
+                 READ FILE-IN                                           00182113
+                    AT END MOVE HIGH-VALUES TO EMPLOYEE-DATA            00182213
+                 END-READ                                               00183013
+              END-PERFORM                                               00183113
+      *CLOSEING FILE                                                    00183213
+              CLOSE FILE-IN                                             00184013
+              STOP RUN.                                                 00185013
+

@@ -1,0 +1,10 @@
+3.0                                                                             
+1.414213562373095                                                               
+Traceback (most recent call last):                                              
+  File "roots.py", line 41, in <module>                                         
+    main()                                                                      
+  File "roots.py", line 32, in main                                             
+    print(sqrt(-1))                                                             
+  File "roots.py", line 16, in sqrt                                             
+    raise ValueError(                                                           
+ValueError: Cannot compute square root of negative number -1                    

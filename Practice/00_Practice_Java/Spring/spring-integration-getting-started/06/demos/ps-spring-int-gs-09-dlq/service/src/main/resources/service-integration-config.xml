@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
+       xmlns:int-http="http://www.springframework.org/schema/integration/http"
+       xmlns:int-mail="http://www.springframework.org/schema/integration/mail"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/integration https://www.springframework.org/schema/integration/spring-integration.xsd
+            http://www.springframework.org/schema/integration/amqp https://www.springframework.org/schema/integration/amqp/spring-integration-amqp.xsd
+            http://www.springframework.org/schema/integration/http https://www.springframework.org/schema/integration/http/spring-integration-http.xsd
+            http://www.springframework.org/schema/integration/mail https://www.springframework.org/schema/integration/mail/spring-integration-mail.xsd">
+
+    <!-- Inbound channel adapter which receives messages from RabbitMQ -->
+    <int-amqp:inbound-channel-adapter queue-names="globomantics.registrationRequest" channel="fromRabbit" error-handler="registrationErrorHandler"
+                                      channel-transacted="true" transaction-manager="transactionManager"/>
+
+    <int:channel id="fromRabbit"/>
+
+    <!-- Transformer to convert the message payload from a string containing JSON to an AttendeeRegistration object -->
+    <int:json-to-object-transformer input-channel="fromRabbit" output-channel="registrationRequest" type="com.pluralsight.demo.model.AttendeeRegistration"/>
+
+    <int:channel id="registrationRequest"/>
+
+    <!-- Service activator to execute registrationService.register(...) -->
+    <int:service-activator input-channel="registrationRequest" ref="registrationService" method="register" output-channel="registrationEvent"/>
+
+    <!-- Publish-subscribe channel for registration events -->
+    <int:publish-subscribe-channel id="registrationEvent"/>
+
+    <!-- Chain for composing and sending confirmation e-mail -->
+    <int:chain id="confirmationEmailChain" input-channel="registrationEvent">
+        <!-- Header enricher to set message headers for e-mail -->
+        <int-mail:header-enricher>
+            <int-mail:from value="registration@globomantics.com"/>
+            <int-mail:to expression="payload.attendeeEmail"/>
+            <int-mail:subject value="Confirmation of your registration for the Globomantics Tech Conference"/>
+        </int-mail:header-enricher>
+
+        <!-- Transform payload to text to be used as the body of the e-mail -->
+        <int:transformer ref="confirmationMailTransformer" method="toMailText"/>
+
+        <!-- Outbound channel adapter for sending e-mail -->
+        <int-mail:outbound-channel-adapter host="localhost" port="3025" username="globomantics" password="globomail"/>
+    </int:chain>
+
+    <int:chain id="billingChain" input-channel="registrationEvent">
+        <!-- Header enricher to set Content-Type header of HTTP request to application/json -->
+        <int:header-enricher>
+            <int:header name="contentType" value="application/json" overwrite="true"/>
+        </int:header-enricher>
+
+        <!-- Outbound channel adapter for sending HTTP request (automatically converts payload to JSON) -->
+        <int-http:outbound-channel-adapter url="http://localhost:8083" http-method="POST"/>
+    </int:chain>
+
+</beans>

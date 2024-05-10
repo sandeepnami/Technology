@@ -1,0 +1,32 @@
+//COMPILE1 JOB (TS-1055-N),'COMLNKM0',                                  JOB28264
+//         CLASS=P,
+//         MSGCLASS=X,
+//         NOTIFY=&SYSUID,
+//         REGION=4096K
+//*
+//*-------------------------------------------------------------------*
+//*        Cobol compile of module : AFADPTER
+//*-------------------------------------------------------------------*
+//STEP010  EXEC PROC=GUDOSCD2,COBOPT=LIB,
+//         DBRMLIB='SDAF.P723471.DBRMLIB',
+//         DB2DBRM=CA416M00
+//*
+//*PANDD1  DD DSN=SDAF.PP41475.SOURCE.LIBRARY,DISP=SHR                  00008014
+//PANDD1  DD DSN=PROG.DEV4.SOURCE.LIBRARY,DISP=SHR                      00008014
+//*PANDD13 DD DSN=PROG.DEV8.COPY.LIBRARY,DISP=SHR                       00090000
+//*PANDD14 DD DSN=PROG.UNIT8.COPY.LIBRARY,DISP=SHR                      00090000
+//*
+//EXPNDPAN.SYSIN DD *
+++WRITE WORK,CA416M00
+//*
+//*-------------------------------------------------------------------*
+//*        Link AFADPTER
+//*-------------------------------------------------------------------*
+//STEP020  EXEC PROC=GUDOSLNK,
+//         LOADMOD=CA416BA0
+//*
+//SYSIN    DD   *
+  ENTRY CA416M00
+//LKED.SYSLMOD DD DSN=PROG.DEV4.OS.LOAD.LIBRARY(&LOADMOD),
+//         DISP=SHR
+

@@ -1,0 +1,53 @@
+Summary,Issue Type,Description,Epic Name
+"As an internet user, I should be able to view the calendar of activities at the Fitness Club so I can sign up for the activities.",Story,"1. The website should display weekly calendar with one cell for each day of the week.
+2. Each cell should display Title, Description and instruction name for the activity.",
+"As a Fitness Club Member, I should be able to generate member badge on my mobile phone so I can check-in without my physical membership card.",Story,1. The mobile app should ,
+"As a fitness club member, I should be able to book a tennis court or racquetball court on from the mobile app.",Story,"1. I should only be able to book one timeslot of one hour.
+2. I should be able to book a timeslot within the next seven calendar days.",
+"As a potential club member, I should be able to signup as a trial member and print temporary badge so I can try fitness center facilities.",Story,"1. I should be able to enter my name, phone number and email address so I could sign up a trial member. 
+2. The webpage should generate a membership badge with scannable barcode that I could print.
+3. The webpage should email a Temporary Badge ID with scannable bar code.
+4. The membership should valid for 3 calendar days from the date of sign up.
+5. The temporary badge should display the word 'Trial Member' ",
+"As an internet user, I should be able to view a list of fitness equipment types at the Fitness Club so I can make a decision on joining the Club.",Story,"For each equipment, the website should display a picture and description of the equipment.
+",
+"As an internet user, I should be able to view a list of Sports facilities at the Fitness Club so I can make a decision on joining the Club.",Story,"This includes tennis, basketball, racquetball courts and swimming pools. A picture of each type of facility should be included.",
+Menu at the top of the website's home page seems to overlap with other visual controls on <X> tablet <Y> browser.,Bug,Menu Items on the home page of the site seem to hide other controls on the same page. Pleae see screenshot.,
+Font Size on the ‘Contact us’ page looks different from the rest of the website.,Bug,,
+"As an internet user, I should be able to view the nearest fitness center location without entering my address so I can contact nearest fitness location for additional information.",Story,"1. The web browser should ask for permission to determine my location. 
+2.  If I deny permission to determine my location, the browser should display a message that my location could not be determined and allow me to enter my zip code or address.
+3. If I allow permission to determine my location, the web page display the location nearest to my address. If the nearest location is more than 25 miles from my address, the web page should display a warning message stating that the location is  x miles away and still display the location.",
+"As an internet user, I should be able to view membership types and associated monthly fee with each membership type so I can make a decision on joining the club.",Story,"1. The Fitness Club website should display different types of membership with monthly fee associated , signup fee and discounted fee for long term commitment with each membership type.",
+"As an internet user, I should be able to enter my zip code or address and view contact details of the nearest Location so I can visit or contact the nearest fitness club.",Story,"1. The webpage should validate my zip code and address. It should display an error message or matching addresses for an incomplete address.
+2. The webpage should display contact information (Address and Phone Number) for the nearest location. It should also display the distance from my address or center of the zipn code.",
+"As an internet user, I can view employment opportunities at the Fitness Club so I can apply for employment online.",Story,,
+"As an internet user, I should be apply to submit an online application for employment opportunities at the Fitness Club.",Story,,
+"As a site administrator, I should be able to send Monthly Newsletters to all Fitness Club members so I can keep them informed about the latest events at the club.",Story,,
+"As a fitness club member, I should be able to create my online profile so I can view details of my account.",Story,"1. I should be able to use my fitness club member ID and email id to setup an account.
+2. I should be able to update my name on my online profile.",
+"As a fitness club member, I should be able to view records of my attendance at the fitness center based on inputted date range so I can view frequency of my visit to the fitness club.",Story,1. I should not be allowed to enter a date range of more than 90 days and a date range more than 6 months in the past.,
+"As a fitness club member, I should be able to manage my address, phone number and payment information so I could continue to keep my account current.",Story,,
+"As an internet user, I should be able to view the profiles of personal trainers.",Story,"1. For each personal trainer, the site should display name, photo and short biodata of their experience and type of work they have done.",
+"As an internet user, I should be able to view gymnasium facilities at the Fitness Club so I can make a decision on joining the Club.",Story,"1. The webpage should have a menu icon to view Gymnasium facilities at the fitness club.
+2. Upon clicking the menu icon, the webpage should display a list of all gymnasium facilities at the fitness club.",
+"As a Fitness Club member, I should be able to refer a friend or family member so both of us avail referral incentives.",Story,,
+"As a Fitness Club Member, I should be able to associate my membership with my mobile app.",Story,,
+"As a Fitness Club Member, I should be able to generate member badge on my mobile phone so I can check-in without my physical membership card.",Story,1. The mobile app should ,
+Maintain Personal Progress Details,Story,,
+"As a registered fitness club member, I should be able to maintain fitness information so I can track my progress towards my fitness goals.",Story,Too big. ,
+"As a fitness club member, I should be able to view and download my invoice. ",Story,"1. The system should allow me to view and download my invoice for the last 12 months.
+2.  The downloaded invoice should be in the PDF (Portable Document Format) form.
+3. Each invoice should be displayed as a record with the invoice date and invoice amount displayed. A link on each record should popup redirect me to a downloaded version of the invoice.",
+"As a fitness club member, I should be able to view my payment history so I know how and when I am being billed. ",Story,,
+"As a Fitness Club Manager, I should be able to maintain the schedule of classes.",Story,,
+"As a fitness club manager, I should be able to add Trainer's Profile to our website.",Story,"I should be able to enter trainer name, biodate of 300 words or less and upload a photo.",
+"As a fitness club member, I should be able to make a payment for my membership fee so my account stays current.",Story,I should be able to pay by credit card (master/visa/american express) or by electronic check.,
+"As a fitness club manager, I should be able to accept membership fee payment for any member so their account stays current..",Story,I should be able to post a payment by credit card (master/visa/american express) or by electronic check.,
+"As a Fitness Club Member, I should be able to Setup Recurring Payments.",Story,,
+"As a fitness club member, I should be able to view fitness training videos.",Story,,
+"As an internet user, I should be able to setup personal training appointments",Story,,
+"As an internet user, I should be able to setup personal training appointment reminders",Story,,
+"As a fitness club member, I should be able to cancel my membership online.",Story,"If the member has any dues, the system should not allow the member to cancel membership.",
+"As a fitness club manager, I should be able to cancel membership of any club member.",Story,"1. If the member has any dues, the system should display a warning message to the manager and generate a letter asking the member to pay the due amount.",
+Mobile App Enhancements,Epic,Improve the usability of mobile applications,Mobile Apps
+Data Analytics: Generate various reports.,Epic,Generate analytic reports,Data Analytics

@@ -1,0 +1,177 @@
+                                                                              
+ EDIT       MTPLB06.IMS.DBDSRC(HOSPDB) - 01.11              Columns 00001 0007
+ Command ===>                                                  Scroll ===> CSR
+ ****** ***************************** Top of Data ****************************
+ 000100        PRINT   NOGEN                                                  
+ 000200        DBD     NAME=HOSPDB,ACCESS=(HDAM,VSAM),RMNAME=(DFSHDC10,,10)   
+ 000300        DATASET DD1=HOSPDD,DEVICE=3380                                 
+ 000310 *                                                                     
+ 000400        SEGM    NAME=HOSPITAL,PARENT=0,BYTES=63                        
+ 000500        FIELD   NAME=(HOSPNAME,SEQ,U),BYTES=20,START=1,TYPE=C          
+ 000600        FIELD   NAME=HOSPADDR,BYTES=10,START=21,TYPE=C                 
+ 000700        FIELD   NAME=HOSPTEL,BYTES=10,START=32,TYPE=C                  
+ 000800        FIELD   NAME=HOSPADMN,BYTES=20,START=43,TYPE=C                 
+ 000810 *                                                                     
+ 000900        SEGM    NAME=WARD,PARENT=HOSPITAL,BYTES=35                     
+ 001000        FIELD   NAME=(WARDNO,SEQ,U),BYTES=2,START=1,TYPE=C             
+ 001100        FIELD   NAME=TOTROOMS,BYTES=3,START=3,TYPE=C                   
+ 001200        FIELD   NAME=TOTBEDS,BYTES=3,START=7,TYPE=C                    
+ 001300        FIELD   NAME=BEDAVAIL,BYTES=3,START=11,TYPE=C                  
+ 001400        FIELD   NAME=WARDTYPE,BYTES=20,START=15,TYPE=C                 
+ 001410 *                                                                     
+                                                                               
+ EDIT       MTPLB06.IMS.DBDSRC(HOSPDB) - 01.11              Columns 00001 0007
+ Command ===>                                                  Scroll ===> CSR
+ ****** ***************************** Top of Data ****************************
+ 000100        PRINT   NOGEN                                                  
+ 000200        DBD     NAME=HOSPDB,ACCESS=(HDAM,VSAM),RMNAME=(DFSHDC10,,10)   
+ 000300        DATASET DD1=HOSPDD,DEVICE=3380                                 
+ 000310 *                                                                     
+ 000400        SEGM    NAME=HOSPITAL,PARENT=0,BYTES=63                        
+ 000500        FIELD   NAME=(HOSPNAME,SEQ,U),BYTES=20,START=1,TYPE=C          
+ 000600        FIELD   NAME=HOSPADDR,BYTES=10,START=21,TYPE=C                 
+ 000700        FIELD   NAME=HOSPTEL,BYTES=10,START=32,TYPE=C                  
+ 000800        FIELD   NAME=HOSPADMN,BYTES=20,START=43,TYPE=C                 
+ 000810 *                                                                     
+ 000900        SEGM    NAME=WARD,PARENT=HOSPITAL,BYTES=35                     
+ 001000        FIELD   NAME=(WARDNO,SEQ,U),BYTES=2,START=1,TYPE=C             
+ 001100        FIELD   NAME=TOTROOMS,BYTES=3,START=3,TYPE=C                   
+ 001200        FIELD   NAME=TOTBEDS,BYTES=3,START=7,TYPE=C                    
+ 001300        FIELD   NAME=BEDAVAIL,BYTES=3,START=11,TYPE=C                  
+ 001400        FIELD   NAME=WARDTYPE,BYTES=20,START=15,TYPE=C                 
+ 001410 *                                                                     
+ 001410 *                                                               
+ 001500        SEGM    NAME=PATIENT,PARENT=WARD,BYTES=131               
+ 001510        FIELD   NAME=(BEDIDENT,SEQ,U),BYTES=4,START=64,TYPE=C    
+ 001600        FIELD   NAME=PATNAME,BYTES=20,START=1,TYPE=C             
+ 001700        FIELD   NAME=PATADDR,BYTES=30,START=22,TYPE=C            
+ 001800        FIELD   NAME=PATTEL,BYTES=10,START=53,TYPE=C             
+ 002000        FIELD   NAME=DATEADMT,BYTES=1,START=69,TYPE=C            
+ 002100        FIELD   NAME=PREVSTAY,BYTES=1,START=71,TYPE=C            
+ 002200        FIELD   NAME=PREVHOSP,BYTES=20,START=73,TYPE=C           
+ 002300        FIELD   NAME=PREVDATA,BYTES=6,START=94,TYPE=C            
+ 002400        FIELD   NAME=PREVRESN,BYTES=30,START=101,TYPE=C          
+ 002410 *                                                               
+ 002500        SEGM    NAME=SYMPTOM,PARENT=PATIENT,BYTES=83             
+ 002510        FIELD   NAME=(SYMPDATE,SEQ),BYTES=6,START=22,TYPE=C      
+ 002600        FIELD   NAME=DIAGNOSE,BYTES=20,START=1,TYPE=C            
+ 002800        FIELD   NAME=PREVTRET,BYTES=1,START=29,TYPE=C            
+                                                                               
+ EDIT       MTPLB06.IMS.DBDSRC(HOSPDB) - 01.11              Columns 00001 0007
+ Command ===>                                                  Scroll ===> CSR
+ ****** ***************************** Top of Data ****************************
+ 000100        PRINT   NOGEN                                                  
+ 000200        DBD     NAME=HOSPDB,ACCESS=(HDAM,VSAM),RMNAME=(DFSHDC10,,10)   
+ 000300        DATASET DD1=HOSPDD,DEVICE=3380                                 
+ 000310 *                                                                     
+ 000400        SEGM    NAME=HOSPITAL,PARENT=0,BYTES=63                        
+ 000500        FIELD   NAME=(HOSPNAME,SEQ,U),BYTES=20,START=1,TYPE=C          
+ 000600        FIELD   NAME=HOSPADDR,BYTES=10,START=21,TYPE=C                 
+ 000700        FIELD   NAME=HOSPTEL,BYTES=10,START=32,TYPE=C                  
+ 000800        FIELD   NAME=HOSPADMN,BYTES=20,START=43,TYPE=C                 
+ 000810 *                                                                     
+ 000900        SEGM    NAME=WARD,PARENT=HOSPITAL,BYTES=35                     
+ 001000        FIELD   NAME=(WARDNO,SEQ,U),BYTES=2,START=1,TYPE=C             
+ 001100        FIELD   NAME=TOTROOMS,BYTES=3,START=3,TYPE=C                   
+ 001200        FIELD   NAME=TOTBEDS,BYTES=3,START=7,TYPE=C                    
+ 001300        FIELD   NAME=BEDAVAIL,BYTES=3,START=11,TYPE=C                  
+ 001400        FIELD   NAME=WARDTYPE,BYTES=20,START=15,TYPE=C                 
+ 001410 *                                                                     
+ 001410 *                                                               
+ 001500        SEGM    NAME=PATIENT,PARENT=WARD,BYTES=131               
+ 001510        FIELD   NAME=(BEDIDENT,SEQ,U),BYTES=4,START=64,TYPE=C    
+ 001600        FIELD   NAME=PATNAME,BYTES=20,START=1,TYPE=C             
+ 001700        FIELD   NAME=PATADDR,BYTES=30,START=22,TYPE=C            
+ 001800        FIELD   NAME=PATTEL,BYTES=10,START=53,TYPE=C             
+ 002000        FIELD   NAME=DATEADMT,BYTES=1,START=69,TYPE=C            
+ 002100        FIELD   NAME=PREVSTAY,BYTES=1,START=71,TYPE=C            
+ 002200        FIELD   NAME=PREVHOSP,BYTES=20,START=73,TYPE=C           
+ 002300        FIELD   NAME=PREVDATA,BYTES=6,START=94,TYPE=C            
+ 002400        FIELD   NAME=PREVRESN,BYTES=30,START=101,TYPE=C          
+ 002410 *                                                               
+ 002500        SEGM    NAME=SYMPTOM,PARENT=PATIENT,BYTES=83             
+ 002510        FIELD   NAME=(SYMPDATE,SEQ),BYTES=6,START=22,TYPE=C      
+ 002600        FIELD   NAME=DIAGNOSE,BYTES=20,START=1,TYPE=C            
+ 002800        FIELD   NAME=PREVTRET,BYTES=1,START=29,TYPE=C            
+ 002900        FIELD   NAME=TREATDES,BYTES=20,START=31,TYPE=C    
+ 003000        FIELD   NAME=SYMPDOCT,BYTES=20,START=52,TYPE=C    
+ 003100        FIELD   NAME=SYMPDTEL,BYTES=10,START=73,TYPE=C    
+ 003110 *                                                        
+ 003200        SEGM    NAME=TREATMNT,PARENT=PATIENT,BYTES=120    
+ 003210        FIELD   NAME=(TRDATE,SEQ),BYTES=6,START=22,TYPE=C 
+ 003300        FIELD   NAME=TRTYPE,BYTES=20,START=1,TYPE=C       
+ 003500        FIELD   NAME=MEDITYPE,BYTES=20,START=29,TYPE=C    
+ 003600        FIELD   NAME=DIETCOMT,BYTES=30,START=50,TYPE=C    
+ 003700        FIELD   NAME=SURGFLAG,BYTES=1,START=81,TYPE=C     
+ 003800        FIELD   NAME=SURGDATA,BYTES=6,START=83,TYPE=C     
+ 003900        FIELD   NAME=SURGCOMT,BYTES=30,START=90,TYPE=C    
+ 003910 *                                                        
+ 004000        SEGM    NAME=DOCTOR,PARENT=PATIENT,BYTES=84       
+ 004100        FIELD   NAME=DOCTNAME,BYTES=20,START=1,TYPE=C     
+ 004200        FIELD   NAME=DOCTADDR,BYTES=30,START=22,TYPE=C    
+                                                                               
+ EDIT       MTPLB06.IMS.DBDSRC(HOSPDB) - 01.11              Columns 00001 0007
+ Command ===>                                                  Scroll ===> CSR
+ ****** ***************************** Top of Data ****************************
+ 000100        PRINT   NOGEN                                                  
+ 000200        DBD     NAME=HOSPDB,ACCESS=(HDAM,VSAM),RMNAME=(DFSHDC10,,10)   
+ 000300        DATASET DD1=HOSPDD,DEVICE=3380                                 
+ 000310 *                                                                     
+ 000400        SEGM    NAME=HOSPITAL,PARENT=0,BYTES=63                        
+ 000500        FIELD   NAME=(HOSPNAME,SEQ,U),BYTES=20,START=1,TYPE=C          
+ 000600        FIELD   NAME=HOSPADDR,BYTES=10,START=21,TYPE=C                 
+ 000700        FIELD   NAME=HOSPTEL,BYTES=10,START=32,TYPE=C                  
+ 000800        FIELD   NAME=HOSPADMN,BYTES=20,START=43,TYPE=C                 
+ 000810 *                                                                     
+ 000900        SEGM    NAME=WARD,PARENT=HOSPITAL,BYTES=35                     
+ 001000        FIELD   NAME=(WARDNO,SEQ,U),BYTES=2,START=1,TYPE=C             
+ 001100        FIELD   NAME=TOTROOMS,BYTES=3,START=3,TYPE=C                   
+ 001200        FIELD   NAME=TOTBEDS,BYTES=3,START=7,TYPE=C                    
+ 001300        FIELD   NAME=BEDAVAIL,BYTES=3,START=11,TYPE=C                  
+ 001400        FIELD   NAME=WARDTYPE,BYTES=20,START=15,TYPE=C                 
+ 001410 *                                                                     
+ 001410 *                                                               
+ 001500        SEGM    NAME=PATIENT,PARENT=WARD,BYTES=131               
+ 001510        FIELD   NAME=(BEDIDENT,SEQ,U),BYTES=4,START=64,TYPE=C    
+ 001600        FIELD   NAME=PATNAME,BYTES=20,START=1,TYPE=C             
+ 001700        FIELD   NAME=PATADDR,BYTES=30,START=22,TYPE=C            
+ 001800        FIELD   NAME=PATTEL,BYTES=10,START=53,TYPE=C             
+ 002000        FIELD   NAME=DATEADMT,BYTES=1,START=69,TYPE=C            
+ 002100        FIELD   NAME=PREVSTAY,BYTES=1,START=71,TYPE=C            
+ 002200        FIELD   NAME=PREVHOSP,BYTES=20,START=73,TYPE=C           
+ 002300        FIELD   NAME=PREVDATA,BYTES=6,START=94,TYPE=C            
+ 002400        FIELD   NAME=PREVRESN,BYTES=30,START=101,TYPE=C          
+ 002410 *                                                               
+ 002500        SEGM    NAME=SYMPTOM,PARENT=PATIENT,BYTES=83             
+ 002510        FIELD   NAME=(SYMPDATE,SEQ),BYTES=6,START=22,TYPE=C      
+ 002600        FIELD   NAME=DIAGNOSE,BYTES=20,START=1,TYPE=C            
+ 002800        FIELD   NAME=PREVTRET,BYTES=1,START=29,TYPE=C            
+ 002900        FIELD   NAME=TREATDES,BYTES=20,START=31,TYPE=C    
+ 003000        FIELD   NAME=SYMPDOCT,BYTES=20,START=52,TYPE=C    
+ 003100        FIELD   NAME=SYMPDTEL,BYTES=10,START=73,TYPE=C    
+ 003110 *                                                        
+ 003200        SEGM    NAME=TREATMNT,PARENT=PATIENT,BYTES=120    
+ 003210        FIELD   NAME=(TRDATE,SEQ),BYTES=6,START=22,TYPE=C 
+ 003300        FIELD   NAME=TRTYPE,BYTES=20,START=1,TYPE=C       
+ 003500        FIELD   NAME=MEDITYPE,BYTES=20,START=29,TYPE=C    
+ 003600        FIELD   NAME=DIETCOMT,BYTES=30,START=50,TYPE=C    
+ 003700        FIELD   NAME=SURGFLAG,BYTES=1,START=81,TYPE=C     
+ 003800        FIELD   NAME=SURGDATA,BYTES=6,START=83,TYPE=C     
+ 003900        FIELD   NAME=SURGCOMT,BYTES=30,START=90,TYPE=C    
+ 003910 *                                                        
+ 004000        SEGM    NAME=DOCTOR,PARENT=PATIENT,BYTES=84       
+ 004100        FIELD   NAME=DOCTNAME,BYTES=20,START=1,TYPE=C     
+ 004200        FIELD   NAME=DOCTADDR,BYTES=30,START=22,TYPE=C    
+ 004300        FIELD   NAME=DOCTTEL,BYTES=10,START=53,TYPE=C                    
+ 004400        FIELD   NAME=SPECIALT,BYTES=20,START=64,TYPE=C                   
+ 004410 *                                                                       
+ 004500        SEGM    NAME=FACILITY,PARENT=HOSPITAL,BYTES=29                   
+ 004600        FIELD   NAME=FACTYPE,BYTES=20,START=1,TYPE=C                     
+ 004700        FIELD   NAME=TOTFACIL,BYTES=3,START=22,TYPE=C                    
+ 004800        FIELD   NAME=FACAVAIL,BYTES=3,START=26,TYPE=C                    
+ 004900        DBDGEN                                                           
+ 005000        FINISH                                                           
+ 005100        END                                                              
+****** **************************** Bottom of Data ****************************
+                                                                               
+                                                                               

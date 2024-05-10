@@ -1,0 +1,14 @@
+Sub ZMain()
+Dim ret
+'In this section, a text file is opened and data is read one line at a time, loaded
+                'SendHostKeys ("<HOME>")
+                'SendHostKeys ("<TAB>")
+                'SendHostKeys (a)
+                 SendHostKeys ("<PF3>")       
+                SendHostKeys ("S.P.P")    
+ret = wait(6)
+End Sub
+Sub Prompt( sMsg, nType, sTitle )
+            Set ws = CreateObject( "wscript.shell" )
+            ws.popup sMsg, 0, sTitle, 4096 + nType
+End Sub 

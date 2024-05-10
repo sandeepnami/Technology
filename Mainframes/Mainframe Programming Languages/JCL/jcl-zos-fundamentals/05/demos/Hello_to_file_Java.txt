@@ -1,0 +1,66 @@
+Run Java in batch mode (untested)
+---------------------------------
+
+//jobname JOB blah,'JAVA JZOS',CLASS=A,MSGLEVEL=(1,1)
+// MSGCLASS=X,REGION=0M,NOTIFY=&SYSUID
+
+//GREET EXEC PGM=BPXBATSL,PARM='SH java -jar greeter.jar INPUT OUTPUT'
+//INPUT     DD DSN=your.input.file,DISP=SHR 
+//OUTPUT    DD DSN=your.output.file,DISP=(NEW,CATLG,DELETE) 
+//SYSPRINT DD SYSOUT=* 
+//SYSOUT DD SYSOUT=* 
+//STDOUT DD SYSOUT=* 
+//STDERR DD SYSOUT=* 
+//STDENV DD *
+. /etc/profile
+. ~/.profile
+export CLASSPATH=~/greeter
+for i in ~/greeter/lib/*.jar
+do
+  export CLASSPATH=$i:$CLASSPATH
+done
+/*
+//
+
+
+Greeter.java
+------------
+
+package com.you.greeter;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+
+import com.ibm.jzos.FileFactory;
+
+public class Greeter {
+	
+    public static void main(String[] args) throws IOException {
+    	if (args.length != 2) {
+    		System.out.println("Usage: inputDDName outputDDName");
+    		System.exit(8);
+    	}
+        BufferedReader inputFile = null;
+        BufferedWriter outputFile = null;
+        String ddNamePrefix = "//DD:";
+        String inputDDName = ddNamePrefix + args[0];
+        String outputDDName = ddNamePrefix + args[1];
+        String greetingPrefix = "Hello, ";
+		try {
+			inputFile = FileFactory.newBufferedReader(inputDDName);
+			outputFile = FileFactory.newBufferedWriter(outputDDName);
+		
+			String line;
+			while ((line = inputFile.readLine()) != null) {
+				outputFile.write(greetingPrefix + line);
+				outputFile.write("\n");
+				count++;
+			}
+		} finally {
+			if (outputFile != null) outputFile.close();
+			if (inputFile != null) inputFile.close();
+		}
+    }
+}
+

@@ -1,0 +1,79 @@
+SYNTAX:
+-------
+CREATE STOGROUP stogroup-name
+	VOLUMES (vol1, vol2, ...)
+------------------------------------------------------------------
+CREATE STOGROUP SAMPLESTOG
+	VOLUMES (DBPK01, DBPK02)
+
+
+ALTER STOGROUP SAMPLESTOG
+	ADD VOLUMES (DBPK03)
+	REMOVE VOLUMES (DBPK01)
+
+-----------------------------------------------------------------
+SYNTAX:
+--------
+CREATE DATABASE database-name
+[STOGROUP stogroup-name]
+[BUFFERPOOL bufferpool-name]
+
+
+CREATE DATABASE SAMPLEDB
+	STOGROUP SAMPLESTOG
+	BUFFERPOOL BP0
+
+-------------------------------------------
+SYNTAX:
+-------
+CREATE TABLESPACE <tablespace-name>
+IN <database-name>
+USING STOGROUP <stogroup-name>
+	PRIQTY 	qty
+	SECQTY	qty
+	ERASE	YES/NO
+LOCKSIZE 	ANY/PAGE/TABLESPACE/TABLE
+BUFFERPOOL 	BP0/BP1/BP2/BP32K
+CLOSE		YES/NO	DSETPASS password
+FREEPAGE 	<amount>	PCTFREE <amount>	
+-----------------------------------------------
+
+CREATE TABLESPACE SAMPLESPACE
+	IN SAMPLEDB
+	USING STOGROUP SAMPLESTOG
+		PRIQTY   12
+		SECQTY   12
+		ERASE    NO
+	LOCKSIZE ANY
+	CLOSE    YES
+	BUFFERPOOL BP0 	
+
+--------------------------------------------------
+
+CREATE TABLE  EMPLOYEE
+
+( EMP_NO	CHAR(10)	NOT NULL,
+EMP_STATUS	CHAR(01),
+EMP_NAME	CHAR(20),
+EMP_ADDRESS	CHAR(40),	
+
+PRIMARY KEY (EMP_NO));
+--------------------------------------------------------
+CREATE TABLE  SKILL 
+LIKE EMPLOYEE;
+
+SKILL inherits only column_definitions and nothing else.
+
+It doesn’t inherit any primary, alternate or foreign_key 
+definitions from EMPLOYEE table.
+------------------------------------------------------
+ALTER EMPLOYEE
+ADD JOINING_DATE DATE;
+
+DROP TABLE EMPLOYEE;
+-------------------------------------------------------
+CREATE INDEX EMPIX ON EMPLOYEE
+(EMP_NO ASC);
+
+DROP INDEX EMPIX;
+-------------------------------------------------------

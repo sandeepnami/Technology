@@ -1,0 +1,12 @@
+>>> from exceptional import convert                                             
+>>> convert("one three three seven".split())                                    
+1337                                                                            
+>>> convert("around two grillion".split())                                      
+Traceback (most recent call last):                                              
+  File "<stdin>", line 1, in <module>                                           
+  File "/Users/abingham/repos/sixty-north/pluralsight/core-python-getting-starte
+d/resources/m08/visning/clip-02/use-convert-v1/exceptional.py", line 18, in conv
+ert                                                                             
+    number += DIGIT_MAP[token]                                                  
+KeyError: 'around'                                                              
+>>>                                                                             

@@ -1,0 +1,93 @@
+Sub ZMain
+Dim ret	
+
+'Create Passport Object
+Set Sys = CreateObject("PASSPORT.System")
+'selects the currently active session
+Set Sess = Sys.ActiveSession
+'selects the screen object
+Set MyScreen = Sess.Screen
+
+wait_time = "3"
+'give the test region
+prod_job = "PPL*"
+ctlm_job = "PPL*"
+'ctlm_job = "PPL*WA*"
+test_owner = "o*"
+my_region = "UGB*"
+my_owner = "*AC"
+
+'Spool -1
+SendHostKeys ("<HOME>")
+SendHostKeys("S;DA")
+ret = wait(wait_time)
+SendHostKeys ("<ENTER>")
+ret = wait(wait_time)
+SendHostKeys("PRE " &prod_job)
+SendHostKeys ("<ENTER>")
+ret = wait(wait_time)
+SendHostKeys("OWNER " &test_owner)
+SendHostKeys ("<ENTER>")
+ret = wait(wait_time)
+SendHostKeys("ARRANGE CPU% B OWNER")
+SendHostKeys ("<ENTER>")
+ret = wait(wait_time)
+SendHostKeys("ARRANGE EXCP-CNT B OWNER")
+SendHostKeys ("<ENTER>")
+ret = wait(wait_time)
+
+'CTLM -1
+SendHostKeys ("<HOME>")
+
+'ONLY FOR P1 LPAR DUE TO MENU
+ret = SetCursor (4, 21)
+
+SendHostKeys("START I;CN")
+ret = wait(wait_time)
+SendHostKeys ("<ENTER>")
+ret = wait(wait_time)
+SendHostKeys ("<ENTER>")
+ret = wait(wait_time)
+
+SendHostKeys ("<HOME>")
+SendHostKeys("3")
+SendHostKeys ("<ENTER>")
+ret = wait(wait_time)
+SendHostKeys ("<HOME>")
+SendHostKeys("SH")
+SendHostKeys ("<ENTER>")
+Set MyArea = MyScreen.Area(3,12, 3, 19)
+MyArea.Select     
+MyScreen.Copy
+'initialise the pgm name with spaces and then write the actual data(8 spaces)
+MyArea.Value = "        "
+MyArea.Value =ctlm_job
+SendHostKeys ("<ENTER>")
+ret = wait(6)
+
+ret = wait(wait_time)
+SendHostKeys ("<PF9>")
+ret = wait(wait_time)
+
+'B92 -1
+SendHostKeys ("<HOME>")
+
+'ONLY FOR P1 LPAR DUE TO MENU
+ret = SetCursor (4, 21)
+
+SendHostKeys("START I;B92;;1")
+ret = wait(wait_time)
+SendHostKeys ("<ENTER>")
+ret = wait(wait_time)
+
+'B92 -2
+SendHostKeys ("<HOME>")
+SendHostKeys("START I;B92;;1")
+ret = wait(wait_time)
+SendHostKeys ("<ENTER>")
+ret = wait(wait_time)
+
+
+'EXIT SUB
+End Sub
+ 

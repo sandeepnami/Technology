@@ -1,0 +1,48 @@
+//UGBSORT1 JOB (000000),'CREATE CSV SORT',                              00010000
+//             MSGCLASS=X,MSGLEVEL=(1,1),                               00020000
+//             CLASS=2,NOTIFY=&SYSUID                                   00030000
+//* USE OF ICETOOL AND SPLICE                                           00040100
+//*                                                                     00040200
+//SORT001 EXEC PGM=ICETOOL                                              00042200
+//TOOLMSG  DD  SYSOUT=*                                                 00042300
+//DFSMSG   DD  SYSOUT=*                                                 00042400
+//SORTDIAG DD  SYSOUT=*                                                 00042500
+//SYSPRINT DD  SYSOUT=*                                                 00042600
+//SORTMSG  DD  SYSOUT=*                                                 00042700
+//*INPUT FILE IS OMITTED OUT SOME RECORDS OUTPUT IS CREATED             00042800
+//*PLZ NOTE THAT IN1 IS A VBA FILESO OFFSET 4 IS ADDED                  00042900
+//IN1      DD  *                                                        00043000
+000 $$$$$                                                               00043100
+001 AAAAA                                                               00043200
+002 CCCCC                                                               00043300
+003 EEEEE                                                               00043400
+004 GGGGG                                                               00043500
+/*                                                                      00043600
+//IN2      DD  *                                                        00043700
+001 BBBBB                                                               00043800
+003 DDDDD                                                               00043900
+004 FFFFF                                                               00044000
+005 HHHHH                                                               00044100
+/*                                                                      00044200
+//TMP1     DD  DSN=&&TEMP1,                                             00044300
+//             DISP=(MOD,PASS),                                         00044400
+//             UNIT=SYSDA,                                              00044500
+//             SPACE=(CYL,(5,5))                                        00044600
+//OUT      DD  SYSOUT=*                                                 00044700
+//TOOLIN   DD  *                                                        00044800
+* REFORMAT THE IN1 DATA SET SO IT CAN BE SPLICED                        00044900
+  COPY FROM(IN1) TO(TMP1) USING(CPY1)                                   00045000
+* REFORMAT THE IN2 DATA SET SO IT CAN BE SPLICED                        00045100
+  COPY FROM(IN2) TO(TMP1) USING(CPY2)                                   00046000
+* SPLICE RECORDS WITH MATCHING IN1/IN2 KEYS                             00047000
+  SPLICE FROM(TMP1) TO(OUT) ON(1,3,CH) WITH(11,5)                       00048000
+/*                                                                      00049000
+//CPY1CNTL DD  *                                                        00050000
+* USE OUTREC TO CREATE |KEY |F1FLD |BLANK|                              00060000
+  OUTREC BUILD=(1:1,3,5:5,5,11:5X)                                      00070000
+/*                                                                      00080000
+//CPY2CNTL DD  *                                                        00090000
+* USE OUTREC TO CREATE:|KEY |BLANK |F2FLD|                              00100000
+  OUTREC BUILD=(1:1,3,11:5,5)                                           00110000
+/*                                                                      00120000
+

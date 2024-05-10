@@ -1,0 +1,19 @@
+//UELA003A JOB 'CHK DATA',CLASS=A,MSGCLASS=X,NOTIFY=&SYSUID,   
+//         MSGLEVEL=(1,1)                                      
+//STEP1 EXEC DSNUPROC,UID='UADA007.CHK1',                      
+//      UTPROC='',                                             
+//      SYSTEM='DB2A'                                          
+//SYSUT1  DD DSN=UELA003.CHK3.STEP1.SYSUT1,                    
+//           DISP=(MOD,DELETE,CATLG),                          
+//           UNIT=SYSDA,SPACE=(TRK,(200,20))                   
+//SYSERR  DD DSN=UELA003.CHK3.SYSERR,                          
+//           DISP=(MOD,DELETE,CATLG),                          
+//           UNIT=SYSDA,SPACE=(TRK,(20,20))                    
+//SORTOUT DD DSN=UELA003.CHK3.STEP1.SORTOUT,                   
+//           DISP=(MOD,DELETE,CATLG),                          
+//           UNIT=SYSDA,SPACE=(TRK,(20,20))                    
+//SYSIN DD *                                                            
+  CHECK DATA TABLESPACE DELT01.SELT01                                         TABLESPACE DELT01.STEME                         
+      FOR EXCEPTION IN UELA003.EMPLOYEE8 USE UELA003.EMP23              
+    DELETE YES                                                         
+/*                                                                      

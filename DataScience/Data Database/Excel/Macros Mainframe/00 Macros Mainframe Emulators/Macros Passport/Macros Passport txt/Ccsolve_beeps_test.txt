@@ -1,0 +1,63 @@
+Sub ZMain
+Dim PrNoOld, PrNoCurr
+'Count no of sessions
+nSessionCount = Count
+'MsgBox "Number of Sessions = " & nSessionCount
+
+Set Sys = CreateObject("PASSPORT.System")
+'selects the currently active session
+Set Sess = Sys.ActiveSession
+'selects the screen object
+Set MyScreen = Sess.Screen
+
+'press Enter for every 3mins
+for i = 1 to 150
+                
+	SendHostKeys ("<ENTER>")
+	'refresh screen after 3mins
+	outlook_send()
+	 ret = Wait(180)	
+Next 
+End Sub
+
+
+
+'Function get_msg (ByVal sys Object) As String 
+Function get_msg ()
+'*********************
+'Set Sys = CreateObject("PASSPORT.System")
+'Set Sess = Sys.ActiveSession
+'Set MyScreen = Sess.Screen
+Set MyArea = MyScreen.Area(7, 6, 7, 79)
+MyArea.Select     
+MyScreen.Copy
+msg = MyArea.Value
+get_msg = msg 
+'*********************
+END Function
+
+Sub outlook_send()
+Dim  ret
+msg = get_msg()
+Set otlApp = CreateObject("Outlook.Application")
+Set otlNewMail = otlApp.CreateItem(olMailItem)
+
+With otlNewMail
+.SentOnBehalfOfName = "VisionPlus_Servicedesk@mahindrasatyam.com"
+.To = "sandeep_nami@mahindrasatyam.com"
+.CC = "sandeep_nami@mahindrasatyam.com;"
+.Subject = "High Risk"
+.body = "Hi," & Chr(13) & "There is a PR raised and PR info is "  & Chr(13)  & msg
+'.Attachments.Add fName
+.Display
+ .send
+END With
+End Sub
+
+'beep function	
+Function get_beep()
+	For loopvar = 1 To 20
+	        Beep
+	        ret = wait(1)
+                     Next        
+END Function 

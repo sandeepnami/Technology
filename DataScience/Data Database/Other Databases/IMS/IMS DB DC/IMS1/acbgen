@@ -1,0 +1,15 @@
+//       PROC SOUT=A,COMP=,RGN=4M,SYS2=                                 00000010
+//G      EXEC PGM=DFSRRC00,PARM='UPB,&COMP',                            00000020
+//       REGION=&RGN                                                    00000030
+//SYSPRINT DD SYSOUT=&SOUT                                              00000040
+//STEPLIB  DD DSN=IMS910.&SYS2.SDFSRESL,DISP=SHR                        00000050
+//DFSRESLB DD DSN=IMS910.&SYS2.SDFSRESL,DISP=SHR                        00000060
+//IMS      DD DSN=IMS910.&SYS2.PSBLIB,DISP=SHR                          00000070
+//         DD DSN=IMS910.&SYS2.DBDLIB,DISP=SHR                          00000080
+//IMSACB   DD DSN=IMS910.&SYS2.ACBLIB,DISP=OLD                          00000090
+//SYSUT3   DD UNIT=SYSDA,SPACE=(80,(100,100))                           00000100
+//SYSUT4   DD UNIT=SYSDA,SPACE=(256,(100,100)),                         00000110
+//            DCB=KEYLEN=8                                              00000120
+//COMPCTL  DD DISP=SHR,                                                 00000130
+//         DSN=IMS910.&SYS2.PROCLIB(DFSACBCP)                           00000140
+

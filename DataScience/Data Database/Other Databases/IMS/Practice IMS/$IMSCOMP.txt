@@ -1,0 +1,182 @@
+//CBIMSCMP JOB TS-1039,'COMPCUM',CLASS=W,MSGCLASS=X,MSGLEVEL=(1,1),     JOB31018
+//         NOTIFY=&SYSUID
+/*ROUTE    PRINT MDP10004
+/*JOBPARM  COPIES=1
+//*-------------------------------------------------------------------*
+//         SET RLSE=6
+//*-------------------------------------------------------------------*
+//*        COMPILE & LINK AF300IMS
+//*-------------------------------------------------------------------*
+//RENT    EXEC PGM=IGYCRCTL,REGION=4096K,
+// PARM=('RENT,NUMPROC(MIG),LIB,&COBOPT.')
+//*
+//ONEUP        OUTPUT FORMDEF=0101,PAGEDEF=P0003
+//TWOUP        OUTPUT FORMDEF=F0002,PAGEDEF=P0014
+//TWOSHADE     OUTPUT FORMDEF=F0013,PAGEDEF=P0014
+//*
+//STEPLIB  DD  DSNAME=SYS1.SIGYCOMP,DISP=SHR
+//*
+//SYSLIB   DD  DSNAME=SYS1.SCSQCOBC,DISP=SHR
+//*
+//SYSPRINT DD  SYSOUT=A,OUTPUT=*.TWOUP,HOLD=&HOLD
+//*
+//SYSIN    DD  DSN=SDAF.P732083.NAMI.COBOL.LIBRARY(NEWIMS),DISP=SHR
+//*
+//SYSLIN   DD  DSNAME=&&OBJECT,UNIT=SYSDA,DCB=(BLKSIZE=3200),
+//             DISP=(MOD,PASS),SPACE=(CYL,(40,10),RLSE)
+//*
+//SYSUT1   DD  UNIT=SYSDA,SPACE=(CYL,(1,1))
+//SYSUT2   DD  UNIT=SYSDA,SPACE=(CYL,(1,1))
+//SYSUT3   DD  UNIT=SYSDA,SPACE=(CYL,(1,1))
+//SYSUT4   DD  UNIT=SYSDA,SPACE=(CYL,(1,1))
+//SYSUT5   DD  UNIT=SYSDA,SPACE=(CYL,(1,1))
+//SYSUT6   DD  UNIT=SYSDA,SPACE=(CYL,(1,1))
+//SYSUT7   DD  UNIT=SYSDA,SPACE=(CYL,(1,1))
+//
+//*
+//*AF0306M0   EXEC GUDCMCBL                                             00060003
+//*EXPNDPAN.PANDD1     DD DSN=SDAF.MENTOR.M5.SOURCE.LIBRARY,DISP=SHR
+//*EXPNDPAN.PANDD13    DD DSN=PROG.PROD.COPY.LIBRARY,DISP=SHR
+//*SYSIN DD   *                                                         00070000
+//*++WRITE WORK,AF300IMS                                                00080000
+//*/*
+//*
+//*-------------------------------------------------------------------*
+//*        COMPILE & LINK AF300IMS
+//*-------------------------------------------------------------------*
+//*LINKEDIT EXEC GUDCMLNK,LOADMOD=AF300IMS                              00100001
+//*SYSIN  DD  *
+//*  ENTRY DLITCBL
+//*/*
+//*CEE.SYSLMOD  DD  DSN=SDAF.MENTOR.M5.LOAD.LIBRARY(AF300IMS),
+//*    DISP=SHR
+//GUDCMLNK PROC APPLID='CUMOD',      /* APPLICATION ID               */
+//*
+//             CURRENV='DEV',        /* CURRENT ENVIRONMENT          */
+//             ENV1='UNIT',          /* ENVIRONMENT AFTER CURRENV    */
+//             ENV2='LINK',          /* ENVIRONMENT AFTER ENV1       */
+//             ENV3='TEST',          /* ENVIRONMENT AFTER ENV2       */
+//             ENV4='TST',           /* ENVIRONMENT AFTER ENV3       */
+//             ENV5='PREIMP',        /* ENVIRONMENT AFTER ENV4       */
+//*
+//             RLSE=,                /* SPECIFY PHASED ENV NBR       */
+//*
+//             LOADMOD=,             /* RESULTANT LOAD MODULE        */
+//*
+//             LINKOPT=,             /* ADDITIONAL LINK OPTIONS      */
+//*
+//             HOLD=YES,             /* HOLD OUTPUT LISTING ? - YES  */
+//*
+//             CLASS1='A',           /* OUTPUT CLASS FOR 'SYSPRINT'  */
+//             FORMAT1='TWOUP'       /* OUTPUT FORMAT FOR 'SYSPRINT' */
+//*
+//OKTOLINK IF RC LT 8 THEN
+//*
+//*-------------------------------------------------------------------*
+//*                                                                   *
+//*  EDIT THE LINK CARDS TO PLACE "INCLUDE CARDLIB" IN INPUT          *
+//*                                                                   *
+//*-------------------------------------------------------------------*
+//*
+//SM035   EXEC PGM=SM035BA0,PARM='M'
+//*
+//LINKIN   DD  DDNAME=SYSIN
+//*
+//LINKIMS  DD  DSN=&&OBJECT,DISP=(MOD,PASS)
+//*
+//*
+//*-------------------------------------------------------------------*
+//*                                                                   *
+//*              ***  LINKEDIT SPECIFIED LOAD MODULE  ***             *
+//*                                                                   *
+//*-------------------------------------------------------------------*
+//*
+//CEE      EXEC PGM=HEWL,
+//*
+//      PARM=('LIST',
+//            'XREF',
+//            'LET',
+//            'REUS',
+//            'MAP,&LINKOPT')
+//*
+//ONEUP        OUTPUT FORMDEF=0101,PAGEDEF=P0003
+//TWOUP        OUTPUT FORMDEF=F0002,PAGEDEF=P0014
+//TWOSHADE     OUTPUT FORMDEF=F0013,PAGEDEF=P0014
+//*
+//SYSLIN   DD  DSN=&&OBJECT,DISP=(OLD,PASS)
+//*
+//OLDLOAD  DD  DSN=&APPLID..&CURRENV.&RLSE..CEE.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=&APPLID..&ENV1.&RLSE..CEE.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=&APPLID..&ENV2.&RLSE..CEE.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=&APPLID..&ENV3.&RLSE..CEE.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=&APPLID..&ENV4..CEE.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=&APPLID..&ENV5..CEE.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=&APPLID..PROD.CEE.LOAD.LIBRARY,DISP=SHR
+//PRODLOAD DD  DSN=CUMOD.PROD.CEE.LOAD.LIBRARY,DISP=SHR
+//*
+//CARDLIB  DD  DSN=PROG.PROD.PROC.DATA.LIBRARY(IGZ#REPL),DISP=SHR
+//MQSTUB   DD  DSN=CUMOD.PROD.CEE.LOAD.LIBRARY(GU0226M0),DISP=SHR
+//MQSTUBI  DD  DSN=CUMOD.PROD.CEE.LOAD.LIBRARY(GU0226M0),DISP=SHR
+//*
+//SYSLIB   DD  DSN=SYS1.SCEELKED,DISP=SHR,DCB=(BLKSIZE=32760)
+//         DD  DSN=CUMOD.PROD.OS.DUMMY.LIBRARY,DISP=SHR
+//         DD  DSN=SYS1.IMSTEST.RESLIB,DISP=SHR
+//         DD  DSN=SYS1.DB2.DSNLOAD,DISP=SHR
+//         DD  DSN=SYS1.SISPLOAD,DISP=SHR
+//*
+//SYSUT1   DD  UNIT=SYSDA,SPACE=(CYL,(5,1))
+//*
+//SYSLMOD  DD  DSN=&APPLID..&CURRENV.&RLSE..CEE.LOAD.LIBRARY(&LOADMOD),
+//             DISP=SHR
+//*
+//SYSPRINT DD  SYSOUT=&CLASS1,OUTPUT=*.&FORMAT1,HOLD=&HOLD
+//*
+//SYSLOG   DD  DUMMY
+//SYSPUNCH DD  DUMMY
+//SYSUDUMP DD  DUMMY
+//*
+//*
+//IMSCEE   EXEC PGM=HEWL,
+//*
+//      PARM=('LIST',
+//            'XREF',
+//            'LET',
+//            'NCAL',
+//            'MAP,&LINKOPT')
+//*
+//ONEUP        OUTPUT FORMDEF=0101,PAGEDEF=P0003
+//TWOUP        OUTPUT FORMDEF=F0002,PAGEDEF=P0014
+//TWOSHADE     OUTPUT FORMDEF=F0013,PAGEDEF=P0014
+//*
+//SYSLIN   DD  DSN=&&OBJECT,DISP=(OLD,PASS)
+//*
+//OLDLOAD  DD  DSN=&APPLID..&CURRENV.&RLSE..IMSCEE.LOAD.LIBRARY,
+//         DISP=SHR
+//         DD  DSN=&APPLID..&ENV1.&RLSE..IMSCEE.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=&APPLID..&ENV2.&RLSE..IMSCEE.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=&APPLID..&ENV3.&RLSE..IMSCEE.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=&APPLID..&ENV4..IMSCEE.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=&APPLID..&ENV5..IMSCEE.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=&APPLID..PROD.IMSCEE.LOAD.LIBRARY,DISP=SHR
+//PRODLOAD DD  DSN=CUMOD.PROD.IMSCEE.LOAD.LIBRARY,DISP=SHR
+//*
+//SYSLIB   DD  DSN=SYS1.IMSTEST.RESLIB,DISP=SHR
+//         DD  DSN=SYS1.DB2.DSNLOAD,DISP=SHR
+//*
+//CARDLIB  DD  DSN=PROG.PROD.PROC.DATA.LIBRARY(IGZ#REPL),DISP=SHR
+//MQSTUB   DD  DSN=SYS1.SCSQLOAD(CSQQSTUB),DISP=SHR
+//MQSTUBI  DD  DSN=SYS1.SCSQLOAD(CSQQSTUB),DISP=SHR
+//*
+//SYSUT1   DD  UNIT=SYSDA,SPACE=(CYL,(5,1))
+//*
+//SYSLMOD  DD  DSN=CUMOD.&CURRENV.&RLSE..IMSCEE.LOAD.LIBRARY(&LOADMOD),
+//             DISP=SHR
+//*
+//SYSPRINT DD  SYSOUT=&CLASS1,OUTPUT=*.&FORMAT1,HOLD=&HOLD
+//*
+//SYSLOG   DD  DUMMY
+//SYSPUNCH DD  DUMMY
+//SYSUDUMP DD  DUMMY
+//*
+//ENDLINK  ENDIF
+

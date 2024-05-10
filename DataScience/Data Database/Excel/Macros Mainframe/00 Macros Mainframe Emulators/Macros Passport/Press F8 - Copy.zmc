@@ -1,0 +1,15 @@
+Sub ZMain
+Dim PrNoOld, PrNoCurr, ret	
+'note that refresh_time=180 for 3mins
+refresh_time = "180"
+'refresh_time = "20"
+'press Enter for every specified refresh_time
+for i = 1 to 150
+                
+	SendHostKeys ("<PF8>")
+	'refresh screen after 3mins
+	 ret = Wait(refresh_time)	
+Next 
+
+End Sub
+ 

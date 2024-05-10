@@ -1,0 +1,19 @@
+//JOB1     JOB (9999,8517,3),'1300M /BMP',CLASS=X,                      JOB05237
+//     MSGCLASS=X,NOTIFY=&SYSUID,REGION=0M                              00002001
+//S140093S EXEC PGM=IEFBR14
+//SYSOUT   DD SYSOUT=*
+//TEMP1    DD DSN=&&TEMP1,DISP=(NEW,PASS,DELETE)
+//                                                                      0000000
+//JOB2     JOB (9999,8517,3),'1300M /BMP',CLASS=X,                      JOB05237
+//     MSGCLASS=X,NOTIFY=&SYSUID,REGION=0M                              00002001
+//S140093S EXEC PGM=IEFBR14
+//SYSOUT   DD SYSOUT=*
+//TEMP1    DD DSN=&&TEMP1,DISP=(NEW,PASS,DELETE)
+//                                                                      0000000
+//JOB3     JOB (9999,8517,3),'1300M /BMP',CLASS=X,                      JOB05237
+//     MSGCLASS=X,NOTIFY=&SYSUID,REGION=0M                              00002001
+//S140093S EXEC PGM=IEFBR14
+//SYSOUT   DD SYSOUT=*
+//TEMP1    DD DSN=&&TEMP1,DISP=(NEW,PASS,DELETE)
+//                                                                      0000000
+

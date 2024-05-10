@@ -1,0 +1,46 @@
+[PCOMM SCRIPT HEADER]
+LANGUAGE=VBSCRIPT
+DESCRIPTION=
+[PCOMM SCRIPT SOURCE]
+OPTION EXPLICIT
+autECLSession.SetConnectionByName(ThisSessionName)
+
+REM This line calls the macro subroutine
+subSub1_
+
+sub subSub1_()
+	DIM POLICY, POLICY_REGCHAR, POLICY_REG
+	POLICY = "ZZF570151808" 
+	POLICY_REGCHAR = MID(POLICY,3,1)
+	'MSGBOX POLICY_REGCHAR
+	autECLSession.autECLOIA.WaitForAppAvailable
+
+	autECLSession.autECLOIA.WaitForInputReady
+	autECLSession.autECLPS.SendKeys "[HOME]"   
+
+	autECLSession.autECLOIA.WaitForAppAvailable
+
+	autECLSession.autECLOIA.WaitForInputReady
+	autECLSession.autECLPS.SendKeys "tso idreg"
+	autECLSession.autECLOIA.WaitForInputReady
+	autECLSession.autECLPS.SendKeys "[enter]"
+
+	autECLSession.autECLOIA.WaitForAppAvailable
+
+	autECLSession.autECLOIA.WaitForInputReady
+	autECLSession.autECLPS.SendKeys POLICY_REGCHAR,5,33
+	autECLSession.autECLOIA.WaitForInputReady
+    autECLSession.autECLPS.SendKeys "[enter]"
+	
+	autECLSession.autECLOIA.WaitForAppAvailable
+
+	autECLSession.autECLOIA.WaitForInputReady
+	POLICY_REG = autECLSession.autECLPS.GetText(6,33,3)
+	'MSGBOX "POLICY_REG=" &POLICY_REG
+
+	autECLSession.autECLOIA.WaitForAppAvailable
+	autECLSession.autECLOIA.WaitForInputReady
+	autECLSession.autECLPS.SendKeys "[PF3]"
+   
+   
+end sub

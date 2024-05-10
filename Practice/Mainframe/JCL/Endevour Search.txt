@@ -1,0 +1,52 @@
+//P708029O JOB TS-1093,'MIKE CROSBIE',MSGCLASS=X,CLASS=P,              
+// NOTIFY=&SYSUID                                                      
+//*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+//**=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=**
+//*                                                                   *
+//*   JCL TO EXECUTE AN ENDEVOR SCAN                                  *
+//*                                                                   *
+//*   CHANGE ELEMENT PARAMETER TO *    IF YOU WANT TO SEARCH ALL      *
+//*                                                                   *
+//*                                    ENDEVOR SOURCE.                *
+//*                                                                   *
+//*   CHANGE ELEMENT PARAMETER TO AF0* IF YOU WANT TO SEARCH ALL      *
+//*                                    ONLINE SOURCE.                 *
+//*                                                                   *
+//*   CHANGE ELEMENT PARAMETER TO AF*  IF YOU WANT TO SEARCH ALL      *
+//*                                    ACCOUNTS PROCESSOR SOURCE.     *
+//*                                                                   *
+//*   CHANGE STAGE NUMBER TO '1' IF YOU WANT TO SEARCH ENDEVOR TEST.  *
+//*   CHANGE STAGE NUMBER TO '2' IF YOU WANT TO SEARCH ENDEVOR PROD.  *
+//*                                                                   *
+//*   CHANGE TYPE  TO ONE OF THE FOLLOWING:-                          *
+//*         1/    'COBOL'    - TO SEARCH COBOL SOURCE.                *
+//*        1A/    'COBOLMVS' - TO SEARCH COBOL SOURCE.                *
+//*         2/    '$COPY'    - TO SEARCH COPYBOOK SOURCE.             *
+//*         3/    '$LKEDPRG' - TO SEARCH LINKEDIT SOURCE.             *
+//*         4/    '$DRIVER'  - TO SEARCH DRIVER SOURCE.               *
+//*         5/    'ASMB'     - TO SEARCH ASSEMBLER SOURCE.            *
+//*                                                                   *
+//*   WHERE TEXT  1/ PUT THE STRING YOU WANT TO SEARCH IN QUOTES      *
+//*                  IE 'EL05157'.                                    *
+//*               2/ IF YOU WANT TO SEARCH A STRING WHICH OCCURS IN   *
+//*                  QUOTES ITSELF, IE 'AF9010M0', THEN PLACE THE     *
+//*                  STRING IN DOUBLE QUOTES  IE "'AF9010M0'"         *
+//*               3/ IF YOU WANT TO SEARCH MULTIPLE STRINGS THEN      *
+//*                  PLACE THE STRINGS IN BRACKETS.                   *
+//*                    IE ( 'BLAH', 'BLAH BLAH', 'BLAH' )             * 
+//*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
+//**=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*= 
+//*  FROM ENVIRONMENT 'PROD' SYSTEM 'MO' SUBSYSTEM 'GEN'                
+//*                                                                     
+//SEARCH   EXEC PROC=ENDEVOR                                            
+//*                                                                     
+//ENDEVOR.BSTIPT01   DD *                                               
+LIST ELEMENT *                                                          
+  FROM ENVIRONMENT 'PROD' SYSTEM '*' SUBSYSTEM 'GEN'                    
+  STAGE NUMBER '2' TYPE 'COBOLMVS'                                      
+  WHERE TEXT ('BCVISAR' OR                                              
+              'VQEFSTMC' OR                                             
+              'VQEFMBOS' OR                                             
+              'PR72T' OR                                                
+              'PCK60R')                                                 
+  OPTIONS SHOW TEXT PLUS 1                                              

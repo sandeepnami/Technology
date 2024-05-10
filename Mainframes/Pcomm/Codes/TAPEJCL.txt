@@ -1,0 +1,18 @@
+//#T53VXV2 JOB (9999,8517,3),'TAPE 2 DISK',
+//   CLASS=X,
+//   MSGCLASS=X,
+//   MSGLEVEL=(1,1),
+//   NOTIFY=&SYSUID,
+//   REGION=0M
+//STEP010  EXEC PGM=IEBGENER                                            00100
+//SYSPRINT DD SYSOUT=*                                                  00101
+//*YSUT1   DD DSN=PPY.RG0.WDD6801.DMGHODEC.F17612.G2111V00,DISP=SHR     00102
+//*YSUT1   DD DSN=PPY.RG1.MAP1101.FRAM01.G0919V00,DISP=SHR              00102
+//SYSUT1   DD DSN=PPY.RG0.WDD1301.F14014.G6640V00,DISP=SHR              00102
+//SYSUT2   DD DSN=TST.M53.VXV.WDD1301,                                  00109
+//            DISP=(NEW,CATLG,DELETE),
+//            UNIT=DISK,                                                00111
+//            SPACE=(CYL,(200,200),RLSE)
+//SYSIN    DD DUMMY
+//*
+

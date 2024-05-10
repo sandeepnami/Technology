@@ -1,0 +1,5 @@
+<?php
+//sms sending(way2sms) script by alfredfrancis.in
+$username="9052298330";//replace username with your way2sms username !
+$password="sandeep";//replace Password with your way2sms Password !
+?>

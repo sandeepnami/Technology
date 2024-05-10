@@ -1,0 +1,171 @@
+************************program to print 2 level in database**************************************************************
+
+
+
+
+000100 IDENTIFICATION DIVISION.                                         00010044
+000200 PROGRAM-ID. SEQREAD.                                             00020045
+000300 ENVIRONMENT DIVISION.                                            00030045
+000310 INPUT-OUTPUT SECTION.                                            00031045
+000320 FILE-CONTROL.                                                    00032045
+000330     SELECT OUTFILE ASSIGN TO OUTDD                               00033045
+000340     ORGANIZATION IS SEQUENTIAL                                   00034045
+000350     ACCESS MODE IS SEQUENTIAL                                    00035045
+000360     FILE STATUS IS WS-OUT-STATUS.                                00036045
+000370 DATA DIVISION.                                                   00037045
+000380 FILE SECTION.                                                    00038045
+000390 FD OUTFILE                                                       00039045
+000400     RECORD CONTAINS 132 CHARACTERS                               00040045
+000410     BLOCK CONTAINS 0 RECORDS                                     00041045
+000420     RECORDING MODE IS F.                                         00042045
+000430 01 OUTPUT-REC              PIC          X(132).                  00043045
+000440 WORKING-STORAGE SECTION.                                         00044045
+000450 01 WS-IO-AREA.                                                   00045045
+000460    05 WS-VENDSEG-IO-AREA.                                        00046045
+000470       10 WS-VENDID                          PIC X(5).            00047045
+000480       10 WS-VENDNAME                        PIC X(15).           00048045
+000490       10 WS-VENDADDR                        PIC X(20).           00049045
+000500    05 WS-ITEMSEG-IO-AREA.                                        00050045
+000600       10 WS-ITEMID                          PIC X(10).           00060045
+000700       10 WS-ITEMNAME                        PIC X(20).           00070045
+000800       10 WS-ITEMVAL                         PIC X(05).           00080045
+000900    05 WS-LOCSEG-IO-AREA.                                         00090045
+001000       10 WS-LOCID                           PIC X(10).           00100045
+001100       10 WS-LOCNAME                         PIC X(20).           00110045
+001200       10 WS-ITEMQTY                         PIC  X(5).           00120045
+001300 01  WS-SEGMENT-IO-AREA                       PIC X(131).         00130045
+001310 01  WS-SWITCHES-FLAGS                       PIC X VALUE 'N'.     00131048
+001320 88  END-OF-LEVEL                            VALUE 'Y'.           00132048
+001400 01  WS-OUTPUT-REC.                                               00140045
+001500       10 VENDID-FIELD                       PIC X(5).            00150045
+001880************************************************************      00188045
+001890*              DLI FUNCTIONS DEFINITIONS                          00189045
+001900************************************************************      00190045
+002000 01 DLI-FUNC.                                                     00200045
+002100      05 DLI-GU           PIC X(04)     VALUE 'GU'.               00210045
+002200      05 DLI-GHU          PIC X(04)     VALUE 'GHU'.              00220045
+002300      05 DLI-GN           PIC X(04)     VALUE 'GN'.               00230045
+002301      05 DLI-GHN          PIC X(04)     VALUE 'GHN'.              00230145
+002302      05 DLI-GNP          PIC X(04)     VALUE 'GNP'.              00230245
+002303      05 DLI-GHNP         PIC X(04)     VALUE 'GHNP'.             00230345
+002304      05 DLI-ISRT         PIC X(04)     VALUE 'ISRT'.             00230445
+002305      05 DLI-DLET         PIC X(04)     VALUE 'DLET'.             00230545
+002306      05 DLI-REPL         PIC X(04)     VALUE 'REPL'.             00230645
+002307      05 DLI-CHKP         PIC X(04)     VALUE 'CHKP'.             00230745
+002308      05 DLI-XRST         PIC X(04)     VALUE 'XRST'.             00230845
+002309      05 DLI-PCB          PIC X(04)     VALUE 'PCB'.              00230945
+002310************************************************************      00231045
+002320*                IMS STATUS CODES                                 00232045
+002330************************************************************      00233045
+002340 01 QUAL-VENDSEG-SSA.                                             00234045
+002350    05  VENDSEG-NAME                PIC X(08) VALUE 'VENDSEG '.   00235045
+002360    05  FILLER                      PIC X(01) VALUE '('.          00236045
+002370    05  FILLER                      PIC X(08) VALUE 'VENDID  '.   00237045
+002380    05  FILLER                      PIC X(02) VALUE '='.          00238045
+002390    05  VENDID-VAL                  PIC X(05) VALUE SPACES.       00239045
+002400    05  FILLER                      PIC X(01) VALUE ')'.          00240045
+002500 01 QUAL-ITEMSEG-SSA.                                             00250045
+002600    05  ITEMSEG-NAME                PIC X(08) VALUE 'ITEMSEG '.   00260045
+002700    05  FILLER                      PIC X(01) VALUE '('.          00270045
+002800    05  FILLER                      PIC X(08) VALUE 'ITEMID  '.   00280045
+002900    05  FILLER                      PIC X(02) VALUE '='.          00290045
+003000    05  ITEMID-VAL                  PIC X(10) VALUE SPACES.       00300045
+003100    05  FILLER                      PIC X(01) VALUE ')'.          00310045
+003200 01 QUAL-LOCSEG-SSA.                                              00320045
+003300    05  LOCSEG-NAME                 PIC X(08) VALUE 'LOCSEG '.    00330045
+003400    05  FILLER                      PIC X(01) VALUE '('.          00340045
+003500    05  FILLER                      PIC X(08) VALUE 'LOCID  '.    00350045
+003600    05  FILLER                      PIC X(02) VALUE '='.          00360045
+003700    05  LOCID-VAL                   PIC X(10) VALUE SPACES.       00370045
+003800    05  FILLER                      PIC X(01) VALUE ')'.          00380045
+003900 01 UNQUAL-VENDSEG-SSA.                                           00390045
+004000    05 VENDSEG-NAME                 PIC X(08) VALUE 'VENDSEG '.   00400045
+004100    05 FILLER                       PIC X(01) VALUE SPACE.        00410045
+004200 01 UNQUAL-ITEMSEG-SSA.                                           00420045
+004300    05 ITEMSEG-SEG                  PIC X(08) VALUE 'ITEMSEG '.   00430045
+004400    05 FILLER                       PIC X(01) VALUE SPACE.        00440045
+004500 01 UNQUAL-LOCSEG-SSA.                                            00450045
+004600    05 LOCSEG-NAME                  PIC X(08) VALUE 'LOCSEG  '.   00460045
+004700    05 FILLER                       PIC X(01) VALUE SPACE.        00470045
+004800 01 WS-STATUS.                                                    00480045
+004900    03 WS-OUT-STATUS                PIC X(02) VALUE SPACES.       00490045
+005000 LINKAGE SECTION.                                                 00500045
+005100***************************************************               00510045
+005200*             DB-PCB-MASK DEFINITION FOR DC PART                  00520045
+005300*************************************************                 00530045
+005400*                                                                 00540045
+005500 01 DB-PCB-MASK.                                                  00550045
+005600    05 DB-PCB-DBD-NAME      PIC X(8).                             00560045
+005700    05 DB-PCB-SEGMENT-LEVEL PIC X(2).                             00570045
+005800    05 DB-PCB-STATUS-CODE   PIC X(2).                             00580045
+005900    05 DB-PCB-PROC-OPT      PIC X(4).                             00590045
+006000    05 FILLER               PIC S9(5) COMP.                       00600045
+006100    05 DB-PCB-SEG-NAME      PIC X(8).                             00610045
+006200    05 DB-PCB-KEY-LEN       PIC S9(5) COMP.                       00620045
+006300    05 DB-PCB-NUM-SEN-SEGS  PIC S9(5) COMP.                       00630045
+006400    05 DB-PCB-KEY           PIC X(25).                            00640045
+006500*------------------                                               00650045
+006600 PROCEDURE DIVISION.                                              00660045
+006700*------------------                                               00670045
+006800 0000-MAIN-PARA.                                                  00680045
+006900     ENTRY 'DLITCBL' USING DB-PCB-MASK.                           00690045
+007000     MOVE SPACES TO DB-PCB-STATUS-CODE.                           00700045
+007010                                                                  00701045
+007020     PERFORM 1000-INITIALIZE-PARA.                                00702045
+007030     PERFORM 1500-START-POSITION.                                 00703045
+007040     GOBACK.                                                      00704045
+007050/                                                                 00705045
+007060*--------------------                                             00706045
+007070 1000-INITIALIZE-PARA.                                            00707045
+007080*---------------------                                            00708045
+007090      INITIALIZE WS-VENDSEG-IO-AREA.                              00709045
+007100      OPEN OUTPUT OUTFILE.                                        00710045
+007200      EVALUATE TRUE                                               00720045
+007300         WHEN WS-OUT-STATUS = '00'                                00730045
+007400            CONTINUE                                              00740045
+007500         WHEN OTHER                                               00750045
+007600            DISPLAY "ERROR IN OPENING FILE" WS-OUT-STATUS         00760045
+007700      END-EVALUATE.                                               00770045
+007800 1000-INITIALIZE-PARA-X.                                          00780045
+007900     EXIT.                                                        00790045
+008000/                                                                 00800045
+008100*------------------                                               00810045
+008200 1500-START-POSITION.                                             00820045
+008210     MOVE  'GSM26'       TO          VENDID-VAL.                  00821047
+008300     CALL 'CBLTDLI' USING DLI-GU                                  00830045
+008310                          DB-PCB-MASK                             00831045
+008320                          WS-VENDSEG-IO-AREA                      00832047
+008321                          QUAL-VENDSEG-SSA.                       00832147
+008330     IF DB-PCB-STATUS-CODE = SPACES                               00833045
+008340        DISPLAY "VENDER SEGMENT SUCCESSFULLY POSITIONED"          00834045
+008350        DISPLAY DB-PCB-STATUS-CODE                                00835045
+008370        PERFORM  2000-GETDATA-PARA                                00837045
+008380          THRU 2000-GETDATA-X UNTIL END-OF-LEVEL                  00838047
+008390     END-IF.                                                      00839045
+008400 2000-GETDATA-PARA.                                               00840045
+008410     CALL 'CBLTDLI' USING DLI-GNP                                 00841049
+008420                          DB-PCB-MASK                             00842045
+008430                          WS-SEGMENT-IO-AREA                      00843047
+008431                          QUAL-VENDSEG-SSA                        00843147
+008432                          UNQUAL-ITEMSEG-SSA.                     00843247
+008433                                                                  00843347
+008440        DISPLAY "ERROR CODE " DB-PCB-STATUS-CODE.                 00844045
+008450     IF DB-PCB-STATUS-CODE = SPACES                               00845045
+008460        DISPLAY DB-PCB-STATUS-CODE                                00846045
+008461        DISPLAY WS-SEGMENT-IO-AREA                                00846149
+008480     ELSE                                                         00848045
+008481        IF DB-PCB-STATUS-CODE = 'GE'                              00848147
+008482          SET END-OF-LEVEL TO TRUE                                00848247
+008483     ELSE                                                         00848345
+008484        IF DB-PCB-STATUS-CODE NOT = 'GA' AND                      00848445
+008485            DB-PCB-STATUS-CODE NOT = SPACES                       00848545
+008486        SET END-OF-LEVEL    TO TRUE                               00848648
+008487        DISPLAY "ITEM SEGMENT RETRIVED FAILED ... "               00848747
+008488        DISPLAY DB-PCB-STATUS-CODE "  " WS-ITEMID                 00848847
+008489         END-IF                                                   00848945
+008490       END-IF                                                     00849045
+008491     END-IF.                                                      00849145
+008492*------------------                                               00849245
+008493 2000-GETDATA-X.                                                  00849345
+008494     EXIT.                                                        00849445
+

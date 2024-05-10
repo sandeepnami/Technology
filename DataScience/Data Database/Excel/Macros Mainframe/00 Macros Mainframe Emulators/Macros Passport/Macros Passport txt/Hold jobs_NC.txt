@@ -1,0 +1,30 @@
+Sub ZMain
+Dim PrNoOld, PrNoCurr, ret	
+JOB = ARRAY("LDKGCOLU","LDKGRD22","LDKGRDR1","LDKZ1DUP","LDKC1W20")
+Set Sys = CreateObject("PASSPORT.System")
+
+For N = LBound(JOB) To UBound(JOB)
+                  'ret=MsgBox(JOB(N)) 
+	Set Sess = Sys.ActiveSession
+	Set MyScreen = Sess.Screen
+	Set MyArea = MyScreen.Area(7, 24, 7, 31)
+	MyArea.Select     
+	MyScreen.Copy
+	MyArea.Value = JOB(N)
+	SendHostKeys ("<ENTER>")
+	ret = wait(3)
+
+	Set Sess = Sys.ActiveSession
+	Set MyScreen = Sess.Screen
+	Set MyArea = MyScreen.Area(19, 2, 19, 3)
+	MyArea.Select     
+	MyScreen.Copy
+	MyArea.Value = "MH"
+	SendHostKeys ("<ENTER>")
+	ret = wait(3)
+	SendHostKeys ("<PF3>")
+	ret = wait(3)
+Next 
+
+End Sub
+ 

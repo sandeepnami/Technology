@@ -1,0 +1,231 @@
+OFCJ     DFHMSD                                                        X
+               TYPE=&SYSPARM,                                          X
+               LANG=COBOL,                                             X
+               CTRL=(FREEKB,FRSET),                                    X
+               DATA=FIELD,                                             X
+               MODE=INOUT,                                             X
+               TERM=3270,                                              X
+               STORAGE=AUTO,                                           X
+               TIOAPFX=YES                                              
+*********************************************************************** 
+OFCJ00   DFHMDI                                                        X
+               COLUMN=1,                                               X
+               DATA=FIELD,                                             X
+               JUSTIFY=(LEFT,FIRST),                                   X
+               SIZE=(24,80),                                           X
+               LINE=1,                                                 X
+               TIOAPFX=YES                                              
+*********************************************************************** 
+MAP0101  DFHMDF POS=(01,01),                                           X
+               LENGTH=04,                                              X
+               ATTRB=(ASKIP,NORM,FSET),                                X
+               INITIAL='OFCJ'                                           
+*********************************************************************** 
+MAPLPAR  DFHMDF POS=(01,06),                                           X
+               LENGTH=01,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL='('                                              
+*********************************************************************** 
+MAPTRAN  DFHMDF POS=(01,08),                                           X
+               LENGTH=04,                                              X
+               ATTRB=(UNPROT,NORM,IC)                                   
+*********************************************************************** 
+MAPRPAR  DFHMDF POS=(01,13),                                           X
+               LENGTH=01,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL=')'                                              
+*********************************************************************** 
+         DFHMDF POS=(01,24),                                           X
+               LENGTH=30,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL='FINANCIAL AUTHORIZATION SYSTEM'                 
+*********************************************************************** 
+         DFHMDF POS=(01,57),                                           X
+               LENGTH=04,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL='PAGE'                                           
+*********************************************************************** 
+MAPSCRN  DFHMDF POS=(01,62),                                           X
+               LENGTH=02,                                              X
+               ATTRB=(ASKIP,NUM,NORM),                                 X
+               PICIN='99',                                             X
+               PICOUT='99'                                              
+*********************************************************************** 
+         DFHMDF POS=(01,65),                                           X
+               LENGTH=01,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL=' '                                              
+*********************************************************************** 
+MAP0170  DFHMDF POS=(01,70),                                           X
+               LENGTH=10,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL='00/00/0000'                                     
+*********************************************************************** 
+MAPHDG   DFHMDF POS=(02,25),                                           X
+               LENGTH=30,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL='   CHRONOLOGICAL JOURNAL    '                   
+*********************************************************************** 
+MAP0270  DFHMDF POS=(02,70),                                           X
+               LENGTH=08,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL='00:00:00'                                       
+*********************************************************************** 
+         DFHMDF POS=(03,70),                                           X
+               LENGTH=04,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL='RLSE'                                           
+*********************************************************************** 
+MAPRLSE  DFHMDF POS=(03,75),                                           X
+               LENGTH=05,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL='X.XX '                                          
+*********************************************************************** 
+CJ00401  DFHMDF POS=(04,01),                                           X
+               LENGTH=30,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL='SYSTEM STATUS. . . . . . . . .'                 
+*********************************************************************** 
+CJ00435  DFHMDF POS=(04,35),                                           X
+               LENGTH=45,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL=' '                                              
+*********************************************************************** 
+CJ00501  DFHMDF POS=(05,01),                                           X
+               LENGTH=30,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL='ACTIVE LOG . . . . . . . . . .'                 
+*********************************************************************** 
+CJ00535  DFHMDF POS=(05,35),                                           X
+               LENGTH=01,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL=' '                                              
+*********************************************************************** 
+CJ00601  DFHMDF POS=(06,01),                                           X
+               LENGTH=30,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL='RECORD TYPE. . . . . . . . . .'                 
+*********************************************************************** 
+CJ00633  DFHMDF POS=(06,33),                                           X
+               LENGTH=01,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL='('                                              
+*********************************************************************** 
+CJ00635  DFHMDF POS=(06,35),                                           X
+                                                                        
+               LENGTH=01,                                              X
+               ATTRB=(UNPROT,NORM)                                      
+*********************************************************************** 
+CJ00637  DFHMDF POS=(06,37),                                           X
+               LENGTH=01,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL=')'                                              
+*********************************************************************** 
+CJ00701  DFHMDF POS=(07,01),                                           X
+               LENGTH=30,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL='CARD AND SEQ. NUMBER . . . . .'                 
+*********************************************************************** 
+CJ00733  DFHMDF POS=(07,33),                                           X
+               LENGTH=01,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL='('                                              
+*********************************************************************** 
+CJ00735  DFHMDF POS=(07,35),                                           X
+               LENGTH=19,                                              X
+               ATTRB=(UNPROT,NUM,NORM)                                  
+*********************************************************************** 
+CJ00755  DFHMDF POS=(07,55),                                           X
+               LENGTH=01,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL=')'                                              
+*********************************************************************** 
+CJ00758  DFHMDF POS=(07,58),                                           X
+               LENGTH=01,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL='('                                              
+*********************************************************************** 
+CJ00760  DFHMDF POS=(07,60),                                           X
+               LENGTH=04,                                              X
+               ATTRB=(UNPROT,NUM,NORM),                                X
+               PICIN='9999',                                           X
+               PICOUT='9999'                                            
+*********************************************************************** 
+CJ00765  DFHMDF POS=(07,65),                                           X
+               LENGTH=01,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL=')'                                              
+*********************************************************************** 
+CJ00801  DFHMDF POS=(08,01),                                           X
+               LENGTH=30,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL='TXN REC TYPE. . . . . . . . .'                  
+*********************************************************************** 
+CJ00833  DFHMDF POS=(08,33),                                           X
+               LENGTH=01,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL='('                                              
+*********************************************************************** 
+CJ00835  DFHMDF POS=(08,35),                                           X
+               LENGTH=01,                                              X
+               ATTRB=(UNPROT,NUM,NORM),                                X
+               PICIN='9',                                              X
+               PICOUT='9'                                               
+*********************************************************************** 
+CJ00837  DFHMDF POS=(08,37),                                           X
+               LENGTH=01,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL=')'                                              
+*********************************************************************** 
+CJ00855  DFHMDF POS=(08,55),                                           X
+               LENGTH=05,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL='4/5/6'                                          
+*********************************************************************** 
+CJ00901  DFHMDF POS=(09,01),                                           X
+               LENGTH=30,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL='START DATE . . . . . . . . . .'                 
+*********************************************************************** 
+CJ00933  DFHMDF POS=(09,33),                                           X
+               LENGTH=01,                                              X
+                                                                        
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL='('                                              
+*********************************************************************** 
+CJ00935  DFHMDF POS=(09,35),                                           X
+               LENGTH=08,                                              X
+               ATTRB=(UNPROT,NUM,NORM),                                X
+               PICIN='9(8)'                                             
+*********************************************************************** 
+CJ00944  DFHMDF POS=(09,44),                                           X
+               LENGTH=01,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL=')'                                              
+*********************************************************************** 
+CJ00955  DFHMDF POS=(09,55),                                           X
+               LENGTH=08,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL=' '                                              
+*********************************************************************** 
+CJ01001  DFHMDF POS=(10,01),                                           X
+               LENGTH=30,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL='START TIME . . . . . . . . . .'                 
+*********************************************************************** 
+CJ01033  DFHMDF POS=(10,33),                                           X
+               LENGTH=01,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL='('                                              
+*********************************************************************** 
+CJ01035  DFHMDF POS=(10,35),                                           X
+               LENGTH=06,                                              X
+               ATTRB=(UNPROT,NUM,NORM),                                X
+               PICIN='9(6)'                                             
+*********************************************************************** 
+CJ01042  DFHMDF POS=(10,42),                                           X
+               LENGTH=01,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               INITIAL=')'                                              
+*********************************************************************** 
+                                                                        

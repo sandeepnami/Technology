@@ -1,0 +1,779 @@
+gameId,year,startTime,attendance,awayTeamName,homeTeamName,venueName,venueState,homeFinalRuns,awayFinalRuns,inningNumber,gameStatus
+01d76e9f-6095-40dd-9283-c750bbdbe255,2016,2016-10-19 00:08:00 UTC,54269,Cubs,Dodgers,Dodger Stadium,CA,6,0,9,closed
+01d76e9f-6095-40dd-9283-c750bbdbe255,2016,2016-10-19 00:08:00 UTC,54269,Cubs,Dodgers,Dodger Stadium,CA,6,0,9,closed
+01d76e9f-6095-40dd-9283-c750bbdbe255,2016,2016-10-19 00:08:00 UTC,54269,Cubs,Dodgers,Dodger Stadium,CA,6,0,9,closed
+01d76e9f-6095-40dd-9283-c750bbdbe255,2016,2016-10-19 00:08:00 UTC,54269,Cubs,Dodgers,Dodger Stadium,CA,6,0,9,closed
+01d76e9f-6095-40dd-9283-c750bbdbe255,2016,2016-10-19 00:08:00 UTC,54269,Cubs,Dodgers,Dodger Stadium,CA,6,0,9,closed
+01d76e9f-6095-40dd-9283-c750bbdbe255,2016,2016-10-19 00:08:00 UTC,54269,Cubs,Dodgers,Dodger Stadium,CA,6,0,9,closed
+01d76e9f-6095-40dd-9283-c750bbdbe255,2016,2016-10-19 00:08:00 UTC,54269,Cubs,Dodgers,Dodger Stadium,CA,6,0,9,closed
+01d76e9f-6095-40dd-9283-c750bbdbe255,2016,2016-10-19 00:08:00 UTC,54269,Cubs,Dodgers,Dodger Stadium,CA,6,0,9,closed
+01d76e9f-6095-40dd-9283-c750bbdbe255,2016,2016-10-19 00:08:00 UTC,54269,Cubs,Dodgers,Dodger Stadium,CA,6,0,9,closed
+01d76e9f-6095-40dd-9283-c750bbdbe255,2016,2016-10-19 00:08:00 UTC,54269,Cubs,Dodgers,Dodger Stadium,CA,6,0,9,closed
+01d76e9f-6095-40dd-9283-c750bbdbe255,2016,2016-10-19 00:08:00 UTC,54269,Cubs,Dodgers,Dodger Stadium,CA,6,0,9,closed
+01d76e9f-6095-40dd-9283-c750bbdbe255,2016,2016-10-19 00:08:00 UTC,54269,Cubs,Dodgers,Dodger Stadium,CA,6,0,9,closed
+01d76e9f-6095-40dd-9283-c750bbdbe255,2016,2016-10-19 00:08:00 UTC,54269,Cubs,Dodgers,Dodger Stadium,CA,6,0,9,closed
+01d76e9f-6095-40dd-9283-c750bbdbe255,2016,2016-10-19 00:08:00 UTC,54269,Cubs,Dodgers,Dodger Stadium,CA,6,0,9,closed
+01d76e9f-6095-40dd-9283-c750bbdbe255,2016,2016-10-19 00:08:00 UTC,54269,Cubs,Dodgers,Dodger Stadium,CA,6,0,9,closed
+01d76e9f-6095-40dd-9283-c750bbdbe255,2016,2016-10-19 00:08:00 UTC,54269,Cubs,Dodgers,Dodger Stadium,CA,6,0,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0428cd83-266b-4e17-8dae-096d7c6d4416,2016,2016-10-06 00:09:00 UTC,44747,Giants,Mets,Citi Field,NY,0,3,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+0e8fb2a4-93f4-4642-b463-f1df0a860a85,2016,2016-10-10 20:08:00 UTC,53901,Nationals,Dodgers,Dodger Stadium,CA,3,8,9,closed
+15557732-6fbb-481f-9e14-928b33c4e1e3,2016,2016-10-07 20:38:00 UTC,37842,Red Sox,Indians,Progressive Field,OH,6,0,9,closed
+15557732-6fbb-481f-9e14-928b33c4e1e3,2016,2016-10-07 20:38:00 UTC,37842,Red Sox,Indians,Progressive Field,OH,6,0,9,closed
+15557732-6fbb-481f-9e14-928b33c4e1e3,2016,2016-10-07 20:38:00 UTC,37842,Red Sox,Indians,Progressive Field,OH,6,0,9,closed
+15557732-6fbb-481f-9e14-928b33c4e1e3,2016,2016-10-07 20:38:00 UTC,37842,Red Sox,Indians,Progressive Field,OH,6,0,9,closed
+15557732-6fbb-481f-9e14-928b33c4e1e3,2016,2016-10-07 20:38:00 UTC,37842,Red Sox,Indians,Progressive Field,OH,6,0,9,closed
+15557732-6fbb-481f-9e14-928b33c4e1e3,2016,2016-10-07 20:38:00 UTC,37842,Red Sox,Indians,Progressive Field,OH,6,0,9,closed
+15557732-6fbb-481f-9e14-928b33c4e1e3,2016,2016-10-07 20:38:00 UTC,37842,Red Sox,Indians,Progressive Field,OH,6,0,9,closed
+15557732-6fbb-481f-9e14-928b33c4e1e3,2016,2016-10-07 20:38:00 UTC,37842,Red Sox,Indians,Progressive Field,OH,6,0,9,closed
+15557732-6fbb-481f-9e14-928b33c4e1e3,2016,2016-10-07 20:38:00 UTC,37842,Red Sox,Indians,Progressive Field,OH,6,0,9,closed
+15557732-6fbb-481f-9e14-928b33c4e1e3,2016,2016-10-07 20:38:00 UTC,37842,Red Sox,Indians,Progressive Field,OH,6,0,9,closed
+15557732-6fbb-481f-9e14-928b33c4e1e3,2016,2016-10-07 20:38:00 UTC,37842,Red Sox,Indians,Progressive Field,OH,6,0,9,closed
+1a39d635-16f2-4b4d-844c-d63c56255a3d,2016,2016-10-23 00:08:00 UTC,42386,Dodgers,Cubs,Wrigley Field,IL,5,0,9,closed
+1a39d635-16f2-4b4d-844c-d63c56255a3d,2016,2016-10-23 00:08:00 UTC,42386,Dodgers,Cubs,Wrigley Field,IL,5,0,9,closed
+1a39d635-16f2-4b4d-844c-d63c56255a3d,2016,2016-10-23 00:08:00 UTC,42386,Dodgers,Cubs,Wrigley Field,IL,5,0,9,closed
+1a39d635-16f2-4b4d-844c-d63c56255a3d,2016,2016-10-23 00:08:00 UTC,42386,Dodgers,Cubs,Wrigley Field,IL,5,0,9,closed
+1a39d635-16f2-4b4d-844c-d63c56255a3d,2016,2016-10-23 00:08:00 UTC,42386,Dodgers,Cubs,Wrigley Field,IL,5,0,9,closed
+1a39d635-16f2-4b4d-844c-d63c56255a3d,2016,2016-10-23 00:08:00 UTC,42386,Dodgers,Cubs,Wrigley Field,IL,5,0,9,closed
+1a39d635-16f2-4b4d-844c-d63c56255a3d,2016,2016-10-23 00:08:00 UTC,42386,Dodgers,Cubs,Wrigley Field,IL,5,0,9,closed
+1a39d635-16f2-4b4d-844c-d63c56255a3d,2016,2016-10-23 00:08:00 UTC,42386,Dodgers,Cubs,Wrigley Field,IL,5,0,9,closed
+1a39d635-16f2-4b4d-844c-d63c56255a3d,2016,2016-10-23 00:08:00 UTC,42386,Dodgers,Cubs,Wrigley Field,IL,5,0,9,closed
+1a39d635-16f2-4b4d-844c-d63c56255a3d,2016,2016-10-23 00:08:00 UTC,42386,Dodgers,Cubs,Wrigley Field,IL,5,0,9,closed
+1a39d635-16f2-4b4d-844c-d63c56255a3d,2016,2016-10-23 00:08:00 UTC,42386,Dodgers,Cubs,Wrigley Field,IL,5,0,9,closed
+1a39d635-16f2-4b4d-844c-d63c56255a3d,2016,2016-10-23 00:08:00 UTC,42386,Dodgers,Cubs,Wrigley Field,IL,5,0,9,closed
+1a39d635-16f2-4b4d-844c-d63c56255a3d,2016,2016-10-23 00:08:00 UTC,42386,Dodgers,Cubs,Wrigley Field,IL,5,0,9,closed
+1a39d635-16f2-4b4d-844c-d63c56255a3d,2016,2016-10-23 00:08:00 UTC,42386,Dodgers,Cubs,Wrigley Field,IL,5,0,9,closed
+1a39d635-16f2-4b4d-844c-d63c56255a3d,2016,2016-10-23 00:08:00 UTC,42386,Dodgers,Cubs,Wrigley Field,IL,5,0,9,closed
+1a39d635-16f2-4b4d-844c-d63c56255a3d,2016,2016-10-23 00:08:00 UTC,42386,Dodgers,Cubs,Wrigley Field,IL,5,0,9,closed
+1a39d635-16f2-4b4d-844c-d63c56255a3d,2016,2016-10-23 00:08:00 UTC,42386,Dodgers,Cubs,Wrigley Field,IL,5,0,9,closed
+2177fbeb-0dfc-4360-afed-c379af4f666a,2016,2016-10-09 17:08:00 UTC,43826,Dodgers,Nationals,Nationals Park,DC,5,2,9,closed
+2177fbeb-0dfc-4360-afed-c379af4f666a,2016,2016-10-09 17:08:00 UTC,43826,Dodgers,Nationals,Nationals Park,DC,5,2,9,closed
+2177fbeb-0dfc-4360-afed-c379af4f666a,2016,2016-10-09 17:08:00 UTC,43826,Dodgers,Nationals,Nationals Park,DC,5,2,9,closed
+2177fbeb-0dfc-4360-afed-c379af4f666a,2016,2016-10-09 17:08:00 UTC,43826,Dodgers,Nationals,Nationals Park,DC,5,2,9,closed
+2177fbeb-0dfc-4360-afed-c379af4f666a,2016,2016-10-09 17:08:00 UTC,43826,Dodgers,Nationals,Nationals Park,DC,5,2,9,closed
+2177fbeb-0dfc-4360-afed-c379af4f666a,2016,2016-10-09 17:08:00 UTC,43826,Dodgers,Nationals,Nationals Park,DC,5,2,9,closed
+2177fbeb-0dfc-4360-afed-c379af4f666a,2016,2016-10-09 17:08:00 UTC,43826,Dodgers,Nationals,Nationals Park,DC,5,2,9,closed
+2177fbeb-0dfc-4360-afed-c379af4f666a,2016,2016-10-09 17:08:00 UTC,43826,Dodgers,Nationals,Nationals Park,DC,5,2,9,closed
+2177fbeb-0dfc-4360-afed-c379af4f666a,2016,2016-10-09 17:08:00 UTC,43826,Dodgers,Nationals,Nationals Park,DC,5,2,9,closed
+2177fbeb-0dfc-4360-afed-c379af4f666a,2016,2016-10-09 17:08:00 UTC,43826,Dodgers,Nationals,Nationals Park,DC,5,2,9,closed
+2177fbeb-0dfc-4360-afed-c379af4f666a,2016,2016-10-09 17:08:00 UTC,43826,Dodgers,Nationals,Nationals Park,DC,5,2,9,closed
+2177fbeb-0dfc-4360-afed-c379af4f666a,2016,2016-10-09 17:08:00 UTC,43826,Dodgers,Nationals,Nationals Park,DC,5,2,9,closed
+2177fbeb-0dfc-4360-afed-c379af4f666a,2016,2016-10-09 17:08:00 UTC,43826,Dodgers,Nationals,Nationals Park,DC,5,2,9,closed
+2177fbeb-0dfc-4360-afed-c379af4f666a,2016,2016-10-09 17:08:00 UTC,43826,Dodgers,Nationals,Nationals Park,DC,5,2,9,closed
+2177fbeb-0dfc-4360-afed-c379af4f666a,2016,2016-10-09 17:08:00 UTC,43826,Dodgers,Nationals,Nationals Park,DC,5,2,9,closed
+2177fbeb-0dfc-4360-afed-c379af4f666a,2016,2016-10-09 17:08:00 UTC,43826,Dodgers,Nationals,Nationals Park,DC,5,2,9,closed
+2177fbeb-0dfc-4360-afed-c379af4f666a,2016,2016-10-09 17:08:00 UTC,43826,Dodgers,Nationals,Nationals Park,DC,5,2,9,closed
+2177fbeb-0dfc-4360-afed-c379af4f666a,2016,2016-10-09 17:08:00 UTC,43826,Dodgers,Nationals,Nationals Park,DC,5,2,9,closed
+2177fbeb-0dfc-4360-afed-c379af4f666a,2016,2016-10-09 17:08:00 UTC,43826,Dodgers,Nationals,Nationals Park,DC,5,2,9,closed
+2177fbeb-0dfc-4360-afed-c379af4f666a,2016,2016-10-09 17:08:00 UTC,43826,Dodgers,Nationals,Nationals Park,DC,5,2,9,closed
+446c401d-2c5f-4321-b12e-70b89d4cbfc1,2016,2016-10-09 00:08:00 UTC,42392,Giants,Cubs,Wrigley Field,IL,5,2,9,closed
+446c401d-2c5f-4321-b12e-70b89d4cbfc1,2016,2016-10-09 00:08:00 UTC,42392,Giants,Cubs,Wrigley Field,IL,5,2,9,closed
+446c401d-2c5f-4321-b12e-70b89d4cbfc1,2016,2016-10-09 00:08:00 UTC,42392,Giants,Cubs,Wrigley Field,IL,5,2,9,closed
+446c401d-2c5f-4321-b12e-70b89d4cbfc1,2016,2016-10-09 00:08:00 UTC,42392,Giants,Cubs,Wrigley Field,IL,5,2,9,closed
+446c401d-2c5f-4321-b12e-70b89d4cbfc1,2016,2016-10-09 00:08:00 UTC,42392,Giants,Cubs,Wrigley Field,IL,5,2,9,closed
+446c401d-2c5f-4321-b12e-70b89d4cbfc1,2016,2016-10-09 00:08:00 UTC,42392,Giants,Cubs,Wrigley Field,IL,5,2,9,closed
+446c401d-2c5f-4321-b12e-70b89d4cbfc1,2016,2016-10-09 00:08:00 UTC,42392,Giants,Cubs,Wrigley Field,IL,5,2,9,closed
+446c401d-2c5f-4321-b12e-70b89d4cbfc1,2016,2016-10-09 00:08:00 UTC,42392,Giants,Cubs,Wrigley Field,IL,5,2,9,closed
+446c401d-2c5f-4321-b12e-70b89d4cbfc1,2016,2016-10-09 00:08:00 UTC,42392,Giants,Cubs,Wrigley Field,IL,5,2,9,closed
+446c401d-2c5f-4321-b12e-70b89d4cbfc1,2016,2016-10-09 00:08:00 UTC,42392,Giants,Cubs,Wrigley Field,IL,5,2,9,closed
+446c401d-2c5f-4321-b12e-70b89d4cbfc1,2016,2016-10-09 00:08:00 UTC,42392,Giants,Cubs,Wrigley Field,IL,5,2,9,closed
+446c401d-2c5f-4321-b12e-70b89d4cbfc1,2016,2016-10-09 00:08:00 UTC,42392,Giants,Cubs,Wrigley Field,IL,5,2,9,closed
+446c401d-2c5f-4321-b12e-70b89d4cbfc1,2016,2016-10-09 00:08:00 UTC,42392,Giants,Cubs,Wrigley Field,IL,5,2,9,closed
+446c401d-2c5f-4321-b12e-70b89d4cbfc1,2016,2016-10-09 00:08:00 UTC,42392,Giants,Cubs,Wrigley Field,IL,5,2,9,closed
+446c401d-2c5f-4321-b12e-70b89d4cbfc1,2016,2016-10-09 00:08:00 UTC,42392,Giants,Cubs,Wrigley Field,IL,5,2,9,closed
+446c401d-2c5f-4321-b12e-70b89d4cbfc1,2016,2016-10-09 00:08:00 UTC,42392,Giants,Cubs,Wrigley Field,IL,5,2,9,closed
+446c401d-2c5f-4321-b12e-70b89d4cbfc1,2016,2016-10-09 00:08:00 UTC,42392,Giants,Cubs,Wrigley Field,IL,5,2,9,closed
+4ad2de69-467a-4755-bad1-2362425ca6dd,2016,2016-10-15 20:08:00 UTC,37870,Blue Jays,Indians,Progressive Field,OH,2,1,9,closed
+4ad2de69-467a-4755-bad1-2362425ca6dd,2016,2016-10-15 20:08:00 UTC,37870,Blue Jays,Indians,Progressive Field,OH,2,1,9,closed
+4ad2de69-467a-4755-bad1-2362425ca6dd,2016,2016-10-15 20:08:00 UTC,37870,Blue Jays,Indians,Progressive Field,OH,2,1,9,closed
+4ad2de69-467a-4755-bad1-2362425ca6dd,2016,2016-10-15 20:08:00 UTC,37870,Blue Jays,Indians,Progressive Field,OH,2,1,9,closed
+4ad2de69-467a-4755-bad1-2362425ca6dd,2016,2016-10-15 20:08:00 UTC,37870,Blue Jays,Indians,Progressive Field,OH,2,1,9,closed
+4ad2de69-467a-4755-bad1-2362425ca6dd,2016,2016-10-15 20:08:00 UTC,37870,Blue Jays,Indians,Progressive Field,OH,2,1,9,closed
+4ad2de69-467a-4755-bad1-2362425ca6dd,2016,2016-10-15 20:08:00 UTC,37870,Blue Jays,Indians,Progressive Field,OH,2,1,9,closed
+4ad2de69-467a-4755-bad1-2362425ca6dd,2016,2016-10-15 20:08:00 UTC,37870,Blue Jays,Indians,Progressive Field,OH,2,1,9,closed
+4ad2de69-467a-4755-bad1-2362425ca6dd,2016,2016-10-15 20:08:00 UTC,37870,Blue Jays,Indians,Progressive Field,OH,2,1,9,closed
+4ad2de69-467a-4755-bad1-2362425ca6dd,2016,2016-10-15 20:08:00 UTC,37870,Blue Jays,Indians,Progressive Field,OH,2,1,9,closed
+4ad2de69-467a-4755-bad1-2362425ca6dd,2016,2016-10-15 20:08:00 UTC,37870,Blue Jays,Indians,Progressive Field,OH,2,1,9,closed
+4ad2de69-467a-4755-bad1-2362425ca6dd,2016,2016-10-15 20:08:00 UTC,37870,Blue Jays,Indians,Progressive Field,OH,2,1,9,closed
+4ad2de69-467a-4755-bad1-2362425ca6dd,2016,2016-10-15 20:08:00 UTC,37870,Blue Jays,Indians,Progressive Field,OH,2,1,9,closed
+4ad2de69-467a-4755-bad1-2362425ca6dd,2016,2016-10-15 20:08:00 UTC,37870,Blue Jays,Indians,Progressive Field,OH,2,1,9,closed
+4da8ee8a-ea2c-4625-8ef4-584a5302cf24,2016,2016-10-15 00:08:00 UTC,37727,Blue Jays,Indians,Progressive Field,OH,2,0,9,closed
+4da8ee8a-ea2c-4625-8ef4-584a5302cf24,2016,2016-10-15 00:08:00 UTC,37727,Blue Jays,Indians,Progressive Field,OH,2,0,9,closed
+4da8ee8a-ea2c-4625-8ef4-584a5302cf24,2016,2016-10-15 00:08:00 UTC,37727,Blue Jays,Indians,Progressive Field,OH,2,0,9,closed
+4da8ee8a-ea2c-4625-8ef4-584a5302cf24,2016,2016-10-15 00:08:00 UTC,37727,Blue Jays,Indians,Progressive Field,OH,2,0,9,closed
+4da8ee8a-ea2c-4625-8ef4-584a5302cf24,2016,2016-10-15 00:08:00 UTC,37727,Blue Jays,Indians,Progressive Field,OH,2,0,9,closed
+4da8ee8a-ea2c-4625-8ef4-584a5302cf24,2016,2016-10-15 00:08:00 UTC,37727,Blue Jays,Indians,Progressive Field,OH,2,0,9,closed
+4da8ee8a-ea2c-4625-8ef4-584a5302cf24,2016,2016-10-15 00:08:00 UTC,37727,Blue Jays,Indians,Progressive Field,OH,2,0,9,closed
+4da8ee8a-ea2c-4625-8ef4-584a5302cf24,2016,2016-10-15 00:08:00 UTC,37727,Blue Jays,Indians,Progressive Field,OH,2,0,9,closed
+4da8ee8a-ea2c-4625-8ef4-584a5302cf24,2016,2016-10-15 00:08:00 UTC,37727,Blue Jays,Indians,Progressive Field,OH,2,0,9,closed
+4da8ee8a-ea2c-4625-8ef4-584a5302cf24,2016,2016-10-15 00:08:00 UTC,37727,Blue Jays,Indians,Progressive Field,OH,2,0,9,closed
+4da8ee8a-ea2c-4625-8ef4-584a5302cf24,2016,2016-10-15 00:08:00 UTC,37727,Blue Jays,Indians,Progressive Field,OH,2,0,9,closed
+4da8ee8a-ea2c-4625-8ef4-584a5302cf24,2016,2016-10-15 00:08:00 UTC,37727,Blue Jays,Indians,Progressive Field,OH,2,0,9,closed
+50599fd0-e5a8-4330-b185-cf99db1f5b89,2016,2016-10-18 20:08:00 UTC,49142,Indians,Blue Jays,Rogers Centre,ON,5,1,9,closed
+50599fd0-e5a8-4330-b185-cf99db1f5b89,2016,2016-10-18 20:08:00 UTC,49142,Indians,Blue Jays,Rogers Centre,ON,5,1,9,closed
+50599fd0-e5a8-4330-b185-cf99db1f5b89,2016,2016-10-18 20:08:00 UTC,49142,Indians,Blue Jays,Rogers Centre,ON,5,1,9,closed
+50599fd0-e5a8-4330-b185-cf99db1f5b89,2016,2016-10-18 20:08:00 UTC,49142,Indians,Blue Jays,Rogers Centre,ON,5,1,9,closed
+50599fd0-e5a8-4330-b185-cf99db1f5b89,2016,2016-10-18 20:08:00 UTC,49142,Indians,Blue Jays,Rogers Centre,ON,5,1,9,closed
+50599fd0-e5a8-4330-b185-cf99db1f5b89,2016,2016-10-18 20:08:00 UTC,49142,Indians,Blue Jays,Rogers Centre,ON,5,1,9,closed
+50599fd0-e5a8-4330-b185-cf99db1f5b89,2016,2016-10-18 20:08:00 UTC,49142,Indians,Blue Jays,Rogers Centre,ON,5,1,9,closed
+50599fd0-e5a8-4330-b185-cf99db1f5b89,2016,2016-10-18 20:08:00 UTC,49142,Indians,Blue Jays,Rogers Centre,ON,5,1,9,closed
+50599fd0-e5a8-4330-b185-cf99db1f5b89,2016,2016-10-18 20:08:00 UTC,49142,Indians,Blue Jays,Rogers Centre,ON,5,1,9,closed
+50599fd0-e5a8-4330-b185-cf99db1f5b89,2016,2016-10-18 20:08:00 UTC,49142,Indians,Blue Jays,Rogers Centre,ON,5,1,9,closed
+50599fd0-e5a8-4330-b185-cf99db1f5b89,2016,2016-10-18 20:08:00 UTC,49142,Indians,Blue Jays,Rogers Centre,ON,5,1,9,closed
+50599fd0-e5a8-4330-b185-cf99db1f5b89,2016,2016-10-18 20:08:00 UTC,49142,Indians,Blue Jays,Rogers Centre,ON,5,1,9,closed
+50599fd0-e5a8-4330-b185-cf99db1f5b89,2016,2016-10-18 20:08:00 UTC,49142,Indians,Blue Jays,Rogers Centre,ON,5,1,9,closed
+681dd595-cd0f-440f-b9ac-746dffa9f776,2016,2016-10-11 21:05:00 UTC,49617,Nationals,Dodgers,Dodger Stadium,CA,6,5,9,closed
+681dd595-cd0f-440f-b9ac-746dffa9f776,2016,2016-10-11 21:05:00 UTC,49617,Nationals,Dodgers,Dodger Stadium,CA,6,5,9,closed
+681dd595-cd0f-440f-b9ac-746dffa9f776,2016,2016-10-11 21:05:00 UTC,49617,Nationals,Dodgers,Dodger Stadium,CA,6,5,9,closed
+681dd595-cd0f-440f-b9ac-746dffa9f776,2016,2016-10-11 21:05:00 UTC,49617,Nationals,Dodgers,Dodger Stadium,CA,6,5,9,closed
+681dd595-cd0f-440f-b9ac-746dffa9f776,2016,2016-10-11 21:05:00 UTC,49617,Nationals,Dodgers,Dodger Stadium,CA,6,5,9,closed
+681dd595-cd0f-440f-b9ac-746dffa9f776,2016,2016-10-11 21:05:00 UTC,49617,Nationals,Dodgers,Dodger Stadium,CA,6,5,9,closed
+681dd595-cd0f-440f-b9ac-746dffa9f776,2016,2016-10-11 21:05:00 UTC,49617,Nationals,Dodgers,Dodger Stadium,CA,6,5,9,closed
+681dd595-cd0f-440f-b9ac-746dffa9f776,2016,2016-10-11 21:05:00 UTC,49617,Nationals,Dodgers,Dodger Stadium,CA,6,5,9,closed
+681dd595-cd0f-440f-b9ac-746dffa9f776,2016,2016-10-11 21:05:00 UTC,49617,Nationals,Dodgers,Dodger Stadium,CA,6,5,9,closed
+681dd595-cd0f-440f-b9ac-746dffa9f776,2016,2016-10-11 21:05:00 UTC,49617,Nationals,Dodgers,Dodger Stadium,CA,6,5,9,closed
+681dd595-cd0f-440f-b9ac-746dffa9f776,2016,2016-10-11 21:05:00 UTC,49617,Nationals,Dodgers,Dodger Stadium,CA,6,5,9,closed
+681dd595-cd0f-440f-b9ac-746dffa9f776,2016,2016-10-11 21:05:00 UTC,49617,Nationals,Dodgers,Dodger Stadium,CA,6,5,9,closed
+681dd595-cd0f-440f-b9ac-746dffa9f776,2016,2016-10-11 21:05:00 UTC,49617,Nationals,Dodgers,Dodger Stadium,CA,6,5,9,closed
+681dd595-cd0f-440f-b9ac-746dffa9f776,2016,2016-10-11 21:05:00 UTC,49617,Nationals,Dodgers,Dodger Stadium,CA,6,5,9,closed
+681dd595-cd0f-440f-b9ac-746dffa9f776,2016,2016-10-11 21:05:00 UTC,49617,Nationals,Dodgers,Dodger Stadium,CA,6,5,9,closed
+6d62f75d-2021-46d8-8c8c-f27006914cff,2016,2016-10-09 23:38:00 UTC,49555,Rangers,Blue Jays,Rogers Centre,ON,7,6,9,closed
+6d62f75d-2021-46d8-8c8c-f27006914cff,2016,2016-10-09 23:38:00 UTC,49555,Rangers,Blue Jays,Rogers Centre,ON,7,6,9,closed
+6d62f75d-2021-46d8-8c8c-f27006914cff,2016,2016-10-09 23:38:00 UTC,49555,Rangers,Blue Jays,Rogers Centre,ON,7,6,9,closed
+6d62f75d-2021-46d8-8c8c-f27006914cff,2016,2016-10-09 23:38:00 UTC,49555,Rangers,Blue Jays,Rogers Centre,ON,7,6,9,closed
+6d62f75d-2021-46d8-8c8c-f27006914cff,2016,2016-10-09 23:38:00 UTC,49555,Rangers,Blue Jays,Rogers Centre,ON,7,6,9,closed
+6d62f75d-2021-46d8-8c8c-f27006914cff,2016,2016-10-09 23:38:00 UTC,49555,Rangers,Blue Jays,Rogers Centre,ON,7,6,9,closed
+6d62f75d-2021-46d8-8c8c-f27006914cff,2016,2016-10-09 23:38:00 UTC,49555,Rangers,Blue Jays,Rogers Centre,ON,7,6,9,closed
+6d62f75d-2021-46d8-8c8c-f27006914cff,2016,2016-10-09 23:38:00 UTC,49555,Rangers,Blue Jays,Rogers Centre,ON,7,6,9,closed
+6d62f75d-2021-46d8-8c8c-f27006914cff,2016,2016-10-09 23:38:00 UTC,49555,Rangers,Blue Jays,Rogers Centre,ON,7,6,9,closed
+6d62f75d-2021-46d8-8c8c-f27006914cff,2016,2016-10-09 23:38:00 UTC,49555,Rangers,Blue Jays,Rogers Centre,ON,7,6,9,closed
+6d62f75d-2021-46d8-8c8c-f27006914cff,2016,2016-10-09 23:38:00 UTC,49555,Rangers,Blue Jays,Rogers Centre,ON,7,6,9,closed
+6d62f75d-2021-46d8-8c8c-f27006914cff,2016,2016-10-09 23:38:00 UTC,49555,Rangers,Blue Jays,Rogers Centre,ON,7,6,9,closed
+6d62f75d-2021-46d8-8c8c-f27006914cff,2016,2016-10-09 23:38:00 UTC,49555,Rangers,Blue Jays,Rogers Centre,ON,7,6,9,closed
+6d62f75d-2021-46d8-8c8c-f27006914cff,2016,2016-10-09 23:38:00 UTC,49555,Rangers,Blue Jays,Rogers Centre,ON,7,6,9,closed
+6d62f75d-2021-46d8-8c8c-f27006914cff,2016,2016-10-09 23:38:00 UTC,49555,Rangers,Blue Jays,Rogers Centre,ON,7,6,9,closed
+6d62f75d-2021-46d8-8c8c-f27006914cff,2016,2016-10-09 23:38:00 UTC,49555,Rangers,Blue Jays,Rogers Centre,ON,7,6,9,closed
+6d62f75d-2021-46d8-8c8c-f27006914cff,2016,2016-10-09 23:38:00 UTC,49555,Rangers,Blue Jays,Rogers Centre,ON,7,6,9,closed
+6d62f75d-2021-46d8-8c8c-f27006914cff,2016,2016-10-09 23:38:00 UTC,49555,Rangers,Blue Jays,Rogers Centre,ON,7,6,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+7910731d-d014-44d9-b1ea-68c6caf4e78b,2016,2016-10-10 22:08:00 UTC,39530,Indians,Red Sox,Fenway Park,MA,3,4,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+877def36-ec67-41ee-9261-2fd268f9900d,2016,2016-10-20 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,2,10,9,closed
+892f4258-cfcf-45ef-b8eb-c91a122b9699,2016,2016-10-08 01:15:00 UTC,42148,Giants,Cubs,Wrigley Field,IL,1,0,9,closed
+892f4258-cfcf-45ef-b8eb-c91a122b9699,2016,2016-10-08 01:15:00 UTC,42148,Giants,Cubs,Wrigley Field,IL,1,0,9,closed
+892f4258-cfcf-45ef-b8eb-c91a122b9699,2016,2016-10-08 01:15:00 UTC,42148,Giants,Cubs,Wrigley Field,IL,1,0,9,closed
+892f4258-cfcf-45ef-b8eb-c91a122b9699,2016,2016-10-08 01:15:00 UTC,42148,Giants,Cubs,Wrigley Field,IL,1,0,9,closed
+892f4258-cfcf-45ef-b8eb-c91a122b9699,2016,2016-10-08 01:15:00 UTC,42148,Giants,Cubs,Wrigley Field,IL,1,0,9,closed
+892f4258-cfcf-45ef-b8eb-c91a122b9699,2016,2016-10-08 01:15:00 UTC,42148,Giants,Cubs,Wrigley Field,IL,1,0,9,closed
+892f4258-cfcf-45ef-b8eb-c91a122b9699,2016,2016-10-08 01:15:00 UTC,42148,Giants,Cubs,Wrigley Field,IL,1,0,9,closed
+892f4258-cfcf-45ef-b8eb-c91a122b9699,2016,2016-10-08 01:15:00 UTC,42148,Giants,Cubs,Wrigley Field,IL,1,0,9,closed
+892f4258-cfcf-45ef-b8eb-c91a122b9699,2016,2016-10-08 01:15:00 UTC,42148,Giants,Cubs,Wrigley Field,IL,1,0,9,closed
+892f4258-cfcf-45ef-b8eb-c91a122b9699,2016,2016-10-08 01:15:00 UTC,42148,Giants,Cubs,Wrigley Field,IL,1,0,9,closed
+892f4258-cfcf-45ef-b8eb-c91a122b9699,2016,2016-10-08 01:15:00 UTC,42148,Giants,Cubs,Wrigley Field,IL,1,0,9,closed
+892f4258-cfcf-45ef-b8eb-c91a122b9699,2016,2016-10-08 01:15:00 UTC,42148,Giants,Cubs,Wrigley Field,IL,1,0,9,closed
+892f4258-cfcf-45ef-b8eb-c91a122b9699,2016,2016-10-08 01:15:00 UTC,42148,Giants,Cubs,Wrigley Field,IL,1,0,9,closed
+892f4258-cfcf-45ef-b8eb-c91a122b9699,2016,2016-10-08 01:15:00 UTC,42148,Giants,Cubs,Wrigley Field,IL,1,0,9,closed
+892f4258-cfcf-45ef-b8eb-c91a122b9699,2016,2016-10-08 01:15:00 UTC,42148,Giants,Cubs,Wrigley Field,IL,1,0,9,closed
+892f4258-cfcf-45ef-b8eb-c91a122b9699,2016,2016-10-08 01:15:00 UTC,42148,Giants,Cubs,Wrigley Field,IL,1,0,9,closed
+892f4258-cfcf-45ef-b8eb-c91a122b9699,2016,2016-10-08 01:15:00 UTC,42148,Giants,Cubs,Wrigley Field,IL,1,0,9,closed
+892f4258-cfcf-45ef-b8eb-c91a122b9699,2016,2016-10-08 01:15:00 UTC,42148,Giants,Cubs,Wrigley Field,IL,1,0,9,closed
+892f4258-cfcf-45ef-b8eb-c91a122b9699,2016,2016-10-08 01:15:00 UTC,42148,Giants,Cubs,Wrigley Field,IL,1,0,9,closed
+892f4258-cfcf-45ef-b8eb-c91a122b9699,2016,2016-10-08 01:15:00 UTC,42148,Giants,Cubs,Wrigley Field,IL,1,0,9,closed
+892f4258-cfcf-45ef-b8eb-c91a122b9699,2016,2016-10-08 01:15:00 UTC,42148,Giants,Cubs,Wrigley Field,IL,1,0,9,closed
+892f4258-cfcf-45ef-b8eb-c91a122b9699,2016,2016-10-08 01:15:00 UTC,42148,Giants,Cubs,Wrigley Field,IL,1,0,9,closed
+892f4258-cfcf-45ef-b8eb-c91a122b9699,2016,2016-10-08 01:15:00 UTC,42148,Giants,Cubs,Wrigley Field,IL,1,0,9,closed
+892f4258-cfcf-45ef-b8eb-c91a122b9699,2016,2016-10-08 01:15:00 UTC,42148,Giants,Cubs,Wrigley Field,IL,1,0,9,closed
+892f4258-cfcf-45ef-b8eb-c91a122b9699,2016,2016-10-08 01:15:00 UTC,42148,Giants,Cubs,Wrigley Field,IL,1,0,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+909aaaf2-63c7-4a47-8c01-24fd06a9a7bb,2016,2016-10-18 00:08:00 UTC,49507,Indians,Blue Jays,Rogers Centre,ON,2,4,9,closed
+9dc592e4-a5c8-4222-a48e-d518053244d6,2016,2016-10-17 00:08:00 UTC,42384,Dodgers,Cubs,Wrigley Field,IL,0,1,9,closed
+9dc592e4-a5c8-4222-a48e-d518053244d6,2016,2016-10-17 00:08:00 UTC,42384,Dodgers,Cubs,Wrigley Field,IL,0,1,9,closed
+9dc592e4-a5c8-4222-a48e-d518053244d6,2016,2016-10-17 00:08:00 UTC,42384,Dodgers,Cubs,Wrigley Field,IL,0,1,9,closed
+9dc592e4-a5c8-4222-a48e-d518053244d6,2016,2016-10-17 00:08:00 UTC,42384,Dodgers,Cubs,Wrigley Field,IL,0,1,9,closed
+9dc592e4-a5c8-4222-a48e-d518053244d6,2016,2016-10-17 00:08:00 UTC,42384,Dodgers,Cubs,Wrigley Field,IL,0,1,9,closed
+9dc592e4-a5c8-4222-a48e-d518053244d6,2016,2016-10-17 00:08:00 UTC,42384,Dodgers,Cubs,Wrigley Field,IL,0,1,9,closed
+9dc592e4-a5c8-4222-a48e-d518053244d6,2016,2016-10-17 00:08:00 UTC,42384,Dodgers,Cubs,Wrigley Field,IL,0,1,9,closed
+9dc592e4-a5c8-4222-a48e-d518053244d6,2016,2016-10-17 00:08:00 UTC,42384,Dodgers,Cubs,Wrigley Field,IL,0,1,9,closed
+9dc592e4-a5c8-4222-a48e-d518053244d6,2016,2016-10-17 00:08:00 UTC,42384,Dodgers,Cubs,Wrigley Field,IL,0,1,9,closed
+9dc592e4-a5c8-4222-a48e-d518053244d6,2016,2016-10-17 00:08:00 UTC,42384,Dodgers,Cubs,Wrigley Field,IL,0,1,9,closed
+9dc592e4-a5c8-4222-a48e-d518053244d6,2016,2016-10-17 00:08:00 UTC,42384,Dodgers,Cubs,Wrigley Field,IL,0,1,9,closed
+9dc592e4-a5c8-4222-a48e-d518053244d6,2016,2016-10-17 00:08:00 UTC,42384,Dodgers,Cubs,Wrigley Field,IL,0,1,9,closed
+9dc592e4-a5c8-4222-a48e-d518053244d6,2016,2016-10-17 00:08:00 UTC,42384,Dodgers,Cubs,Wrigley Field,IL,0,1,9,closed
+9dc592e4-a5c8-4222-a48e-d518053244d6,2016,2016-10-17 00:08:00 UTC,42384,Dodgers,Cubs,Wrigley Field,IL,0,1,9,closed
+9dc592e4-a5c8-4222-a48e-d518053244d6,2016,2016-10-17 00:08:00 UTC,42384,Dodgers,Cubs,Wrigley Field,IL,0,1,9,closed
+9dc592e4-a5c8-4222-a48e-d518053244d6,2016,2016-10-17 00:08:00 UTC,42384,Dodgers,Cubs,Wrigley Field,IL,0,1,9,closed
+9dc592e4-a5c8-4222-a48e-d518053244d6,2016,2016-10-17 00:08:00 UTC,42384,Dodgers,Cubs,Wrigley Field,IL,0,1,9,closed
+9dc592e4-a5c8-4222-a48e-d518053244d6,2016,2016-10-17 00:08:00 UTC,42384,Dodgers,Cubs,Wrigley Field,IL,0,1,9,closed
+9dc592e4-a5c8-4222-a48e-d518053244d6,2016,2016-10-17 00:08:00 UTC,42384,Dodgers,Cubs,Wrigley Field,IL,0,1,9,closed
+9dc592e4-a5c8-4222-a48e-d518053244d6,2016,2016-10-17 00:08:00 UTC,42384,Dodgers,Cubs,Wrigley Field,IL,0,1,9,closed
+9dc592e4-a5c8-4222-a48e-d518053244d6,2016,2016-10-17 00:08:00 UTC,42384,Dodgers,Cubs,Wrigley Field,IL,0,1,9,closed
+9dc592e4-a5c8-4222-a48e-d518053244d6,2016,2016-10-17 00:08:00 UTC,42384,Dodgers,Cubs,Wrigley Field,IL,0,1,9,closed
+9dc592e4-a5c8-4222-a48e-d518053244d6,2016,2016-10-17 00:08:00 UTC,42384,Dodgers,Cubs,Wrigley Field,IL,0,1,9,closed
+9dc592e4-a5c8-4222-a48e-d518053244d6,2016,2016-10-17 00:08:00 UTC,42384,Dodgers,Cubs,Wrigley Field,IL,0,1,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+9fa301e6-d5a3-4209-839c-7717d9c3698c,2016,2016-10-19 20:08:00 UTC,48800,Indians,Blue Jays,Rogers Centre,ON,0,3,9,closed
+b6e4ea88-b9b2-4f8d-82ba-3cd51e0fd0a6,2016,2016-10-16 00:08:00 UTC,42376,Dodgers,Cubs,Wrigley Field,IL,8,4,9,closed
+b6e4ea88-b9b2-4f8d-82ba-3cd51e0fd0a6,2016,2016-10-16 00:08:00 UTC,42376,Dodgers,Cubs,Wrigley Field,IL,8,4,9,closed
+b6e4ea88-b9b2-4f8d-82ba-3cd51e0fd0a6,2016,2016-10-16 00:08:00 UTC,42376,Dodgers,Cubs,Wrigley Field,IL,8,4,9,closed
+b6e4ea88-b9b2-4f8d-82ba-3cd51e0fd0a6,2016,2016-10-16 00:08:00 UTC,42376,Dodgers,Cubs,Wrigley Field,IL,8,4,9,closed
+b6e4ea88-b9b2-4f8d-82ba-3cd51e0fd0a6,2016,2016-10-16 00:08:00 UTC,42376,Dodgers,Cubs,Wrigley Field,IL,8,4,9,closed
+b6e4ea88-b9b2-4f8d-82ba-3cd51e0fd0a6,2016,2016-10-16 00:08:00 UTC,42376,Dodgers,Cubs,Wrigley Field,IL,8,4,9,closed
+b6e4ea88-b9b2-4f8d-82ba-3cd51e0fd0a6,2016,2016-10-16 00:08:00 UTC,42376,Dodgers,Cubs,Wrigley Field,IL,8,4,9,closed
+b6e4ea88-b9b2-4f8d-82ba-3cd51e0fd0a6,2016,2016-10-16 00:08:00 UTC,42376,Dodgers,Cubs,Wrigley Field,IL,8,4,9,closed
+b6e4ea88-b9b2-4f8d-82ba-3cd51e0fd0a6,2016,2016-10-16 00:08:00 UTC,42376,Dodgers,Cubs,Wrigley Field,IL,8,4,9,closed
+b6e4ea88-b9b2-4f8d-82ba-3cd51e0fd0a6,2016,2016-10-16 00:08:00 UTC,42376,Dodgers,Cubs,Wrigley Field,IL,8,4,9,closed
+b6e4ea88-b9b2-4f8d-82ba-3cd51e0fd0a6,2016,2016-10-16 00:08:00 UTC,42376,Dodgers,Cubs,Wrigley Field,IL,8,4,9,closed
+b6e4ea88-b9b2-4f8d-82ba-3cd51e0fd0a6,2016,2016-10-16 00:08:00 UTC,42376,Dodgers,Cubs,Wrigley Field,IL,8,4,9,closed
+b6e4ea88-b9b2-4f8d-82ba-3cd51e0fd0a6,2016,2016-10-16 00:08:00 UTC,42376,Dodgers,Cubs,Wrigley Field,IL,8,4,9,closed
+b6e4ea88-b9b2-4f8d-82ba-3cd51e0fd0a6,2016,2016-10-16 00:08:00 UTC,42376,Dodgers,Cubs,Wrigley Field,IL,8,4,9,closed
+b6e4ea88-b9b2-4f8d-82ba-3cd51e0fd0a6,2016,2016-10-16 00:08:00 UTC,42376,Dodgers,Cubs,Wrigley Field,IL,8,4,9,closed
+b6e4ea88-b9b2-4f8d-82ba-3cd51e0fd0a6,2016,2016-10-16 00:08:00 UTC,42376,Dodgers,Cubs,Wrigley Field,IL,8,4,9,closed
+b6e4ea88-b9b2-4f8d-82ba-3cd51e0fd0a6,2016,2016-10-16 00:08:00 UTC,42376,Dodgers,Cubs,Wrigley Field,IL,8,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+bac7845d-32ae-4202-b21f-84af42bfb092,2016,2016-10-14 00:08:00 UTC,43936,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+c6949116-bd88-4b54-959d-46794a55a4b1,2016,2016-10-07 00:08:00 UTC,37763,Red Sox,Indians,Progressive Field,OH,5,4,9,closed
+c6949116-bd88-4b54-959d-46794a55a4b1,2016,2016-10-07 00:08:00 UTC,37763,Red Sox,Indians,Progressive Field,OH,5,4,9,closed
+c6949116-bd88-4b54-959d-46794a55a4b1,2016,2016-10-07 00:08:00 UTC,37763,Red Sox,Indians,Progressive Field,OH,5,4,9,closed
+c6949116-bd88-4b54-959d-46794a55a4b1,2016,2016-10-07 00:08:00 UTC,37763,Red Sox,Indians,Progressive Field,OH,5,4,9,closed
+c6949116-bd88-4b54-959d-46794a55a4b1,2016,2016-10-07 00:08:00 UTC,37763,Red Sox,Indians,Progressive Field,OH,5,4,9,closed
+c6949116-bd88-4b54-959d-46794a55a4b1,2016,2016-10-07 00:08:00 UTC,37763,Red Sox,Indians,Progressive Field,OH,5,4,9,closed
+c6949116-bd88-4b54-959d-46794a55a4b1,2016,2016-10-07 00:08:00 UTC,37763,Red Sox,Indians,Progressive Field,OH,5,4,9,closed
+c6949116-bd88-4b54-959d-46794a55a4b1,2016,2016-10-07 00:08:00 UTC,37763,Red Sox,Indians,Progressive Field,OH,5,4,9,closed
+c6949116-bd88-4b54-959d-46794a55a4b1,2016,2016-10-07 00:08:00 UTC,37763,Red Sox,Indians,Progressive Field,OH,5,4,9,closed
+c6949116-bd88-4b54-959d-46794a55a4b1,2016,2016-10-07 00:08:00 UTC,37763,Red Sox,Indians,Progressive Field,OH,5,4,9,closed
+c6949116-bd88-4b54-959d-46794a55a4b1,2016,2016-10-07 00:08:00 UTC,37763,Red Sox,Indians,Progressive Field,OH,5,4,9,closed
+c6949116-bd88-4b54-959d-46794a55a4b1,2016,2016-10-07 00:08:00 UTC,37763,Red Sox,Indians,Progressive Field,OH,5,4,9,closed
+c6949116-bd88-4b54-959d-46794a55a4b1,2016,2016-10-07 00:08:00 UTC,37763,Red Sox,Indians,Progressive Field,OH,5,4,9,closed
+c6949116-bd88-4b54-959d-46794a55a4b1,2016,2016-10-07 00:08:00 UTC,37763,Red Sox,Indians,Progressive Field,OH,5,4,9,closed
+c6949116-bd88-4b54-959d-46794a55a4b1,2016,2016-10-07 00:08:00 UTC,37763,Red Sox,Indians,Progressive Field,OH,5,4,9,closed
+c6949116-bd88-4b54-959d-46794a55a4b1,2016,2016-10-07 00:08:00 UTC,37763,Red Sox,Indians,Progressive Field,OH,5,4,9,closed
+c6949116-bd88-4b54-959d-46794a55a4b1,2016,2016-10-07 00:08:00 UTC,37763,Red Sox,Indians,Progressive Field,OH,5,4,9,closed
+c6949116-bd88-4b54-959d-46794a55a4b1,2016,2016-10-07 00:08:00 UTC,37763,Red Sox,Indians,Progressive Field,OH,5,4,9,closed
+c6949116-bd88-4b54-959d-46794a55a4b1,2016,2016-10-07 00:08:00 UTC,37763,Red Sox,Indians,Progressive Field,OH,5,4,9,closed
+c6949116-bd88-4b54-959d-46794a55a4b1,2016,2016-10-07 00:08:00 UTC,37763,Red Sox,Indians,Progressive Field,OH,5,4,9,closed
+c6949116-bd88-4b54-959d-46794a55a4b1,2016,2016-10-07 00:08:00 UTC,37763,Red Sox,Indians,Progressive Field,OH,5,4,9,closed
+c6949116-bd88-4b54-959d-46794a55a4b1,2016,2016-10-07 00:08:00 UTC,37763,Red Sox,Indians,Progressive Field,OH,5,4,9,closed
+c6949116-bd88-4b54-959d-46794a55a4b1,2016,2016-10-07 00:08:00 UTC,37763,Red Sox,Indians,Progressive Field,OH,5,4,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+c7c45139-0266-48de-93b3-d9b589961112,2016,2016-10-05 00:08:00 UTC,49934,Orioles,Blue Jays,Rogers Centre,ON,5,2,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d0992c0e-f771-4da5-be4e-42a8568f7c50,2016,2016-10-07 17:08:00 UTC,48019,Blue Jays,Rangers,Globe Life Park in Arlington,TX,3,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+d22d9712-ca8d-4aa9-b513-4264d19659d0,2016,2016-10-11 01:38:00 UTC,43571,Cubs,Giants,AT&T Park,CA,6,5,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+f93496a2-6c7a-4050-8903-705187ec00a0,2016,2016-10-07 21:38:00 UTC,43915,Dodgers,Nationals,Nationals Park,DC,3,4,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+fe9d59fa-b016-41dc-90b2-3a6759c75004,2016,2016-10-12 00:40:00 UTC,43166,Cubs,Giants,AT&T Park,CA,5,6,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+04a6af00-7df7-49d0-9bd0-1ffbb76b8e22,2016,2016-10-06 20:38:00 UTC,47434,Blue Jays,Rangers,Globe Life Park in Arlington,TX,1,10,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed
+d5fc15f0-36bf-4c69-beba-858dd18b8e7e,2016,2016-10-21 00:08:00 UTC,54449,Cubs,Dodgers,Dodger Stadium,CA,4,8,9,closed

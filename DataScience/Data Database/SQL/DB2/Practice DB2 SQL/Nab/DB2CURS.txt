@@ -1,0 +1,1044 @@
+*--------------------------------------------------------------*  10/07/00010000
+*                                                              *  COBDB200020000
+*                                                              *     LV000030000
+*    APPLICATION:    COBOL DB2 PROGRAM                         *     CL*00040000
+*    ------------                                              *     CL*00050000
+*                                                              *     CL*00060000
+*                                                              *     CL*00070000
+*    PROJECT NO.:    M16                                       *     CL*00080000
+*    ------------                                              *     CL*00090000
+*                                                              *     CL*00100000
+*                                                              *     CL*00110000
+*    PROGRAM NAME:   COBDB2                                    *     CL*00120000
+*    -------------                                             *     CL*00130000
+*                                                              *     CL*00140000
+*                                                              *     CL*00150000
+*    MODULE ID:      COBDB2                                    *     CL*00160000
+*    ----------                                                *     CL*00170000
+*                                                              *     CL*00180000
+*                                                              *     CL*00190000
+*    AUTHOR:         P DINESH                                  *     CL*00200000
+*    -------                                                   *     CL*00210000
+*                                                              *     CL*00220000
+*                                                              *     CL*00230000
+*    DATE WRITTEN:   03/07/13.                                 *     CL*00240000
+*    -------------                                             *     CL*00250000
+*                                                              *     CL*00260000
+*                                                              *     CL*00270000
+*                                                              *     CL*00280000
+*                                                              *     CL*00290000
+*                                                              *     CL*00300000
+*--------------------------------------------------------------*     CL*00310000
+     EJECT                                                           CL*00320000
+*--------------------------------------------------------------*     CL*00330000
+*                                                              *     CL*00340000
+*    PROGRAM AIM:                                              *     CL*00350000
+*    ------------                                              *     CL*00360000
+*                                                              *     CL*00370000
+*                                                              *     CL*00380000
+*      THIS PROGRAM EXTRACTS THE INFORMATION FROM THE DB2      *     CL*00390000
+*    TABLE (SRVC_PARM_MNGUNIT)  BASED ON THE MP-ID AND SERVICE *     CL*00400000
+*    TYPE PROVIDED.                                            *     CL*00410000
+*                                                              *     CL*00420000
+*                                                              *     CL*00430000
+*                                                              *     CL*00440000
+*    MODULE AIM:                                               *     CL*00450000
+*    -----------                                               *     CL*00460000
+*                                                              *     CL*00470000
+*                                                              *     CL*00480000
+*      SAME AS THE PROGRAM AIM.                                *     CL*00490000
+*                                                              *     CL*00500000
+*                                                              *     CL*00510000
+*--------------------------------------------------------------*     CL*00520000
+     EJECT                                                           CL*00530000
+*--------------------------------------------------------------*     CL*00540000
+*                                                              *     CL*00550000
+*    DATABASE(S) :                                             *     CL*00560000
+*    -------------                                             *     CL*00570000
+*                                                              *     CL*00580000
+*       DT01013 -  SRVC_PARM_MNGUNIT                           *     CL*00590000
+*                                                              *     CL*00600000
+*                                                              *     CL*00610000
+*    FILES(S) :                                                *     CL*00620000
+*    ----------                                                *     CL*00630000
+*                                                              *     CL*00640000
+*      NONE                                                    *     CL*00650000
+*                                                              *     CL*00660000
+*                                                              *     CL*00670000
+*                                                              *     CL*00680000
+*    REPORTS:                                                  *     CL*00690000
+*    --------                                                  *     CL*00700000
+*                                                              *     CL*00710000
+*                                                              *     CL*00720000
+*    .  RT01013 - GENERATING REPORT FOR THE TABLE DT01013      *     CL100730000
+*                 BASED ON THE   SP_CNTRCT_AREA                *     CL100740000
+*                                                              *     CL*00750000
+*--------------------------------------------------------------*     CL*00760000
+     EJECT                                                           CL*00770000
+*--------------------------------------------------------------*     CL*00780000
+*                                                              *     CL*00790000
+*    CALLED BY MODULE(S):                                      *     CL*00800000
+*    --------------------                                      *     CL*00810000
+*                                                              *     CL*00820000
+*                                                              *     CL*00830000
+*      NONE                                                    *     CL*00840000
+*                                                              *     CL*00850000
+*                                                              *     CL*00860000
+*                                                              *     CL*00870000
+*    MODULE(S) CALLED:                                         *     CL*00880000
+*    -----------------                                         *     CL*00890000
+*                                                              *     CL*00900000
+*                                                              *     CL*00910000
+*      NONE                                                    *     CL*00920000
+*                                                              *     CL*00930000
+*                                                              *     CL*00940000
+*                                                              *     CL*00950000
+*    COMMON USE MODULE(S) CALLED:                              *     CL*00960000
+*    ----------------------------                              *     CL*00970000
+*                                                              *     CL*00980000
+*                                                              *     CL*00990000
+*    . GU0001M0 - DATE MANIPULATION                            *     CL*01000000
+*    . GU0019M0 - DB2 ERROR HANDLER                            *     CL*01010000
+*    . NBCONS   - ISSUE CONSOLE MESSAGE                        *     CL*01020000
+*    . NBCANCEL - CANCEL PROGRAM                               *     CL*01030000
+*                                                              *     CL*01040000
+*                                                              *     CL*01050000
+*                                                              *     CL*01060000
+*    COPYBOOK(S) USED:                                         *     CL*01070000
+*    -----------------                                         *     CL*01080000
+*                                                              *     CL*01090000
+*                                                              *     CL*01100000
+*    . DT01013C  - SRVC_PARM_MNGUNIT COPYBOOK                  *     CL*01110000
+*    . GU0001B1C - GU0001M0 PASSAREA                           *     CL*01120000
+*    . GU0019B1C - GU0019M0 PASSAREA                           *     CL*01130000
+*    . NBCONSC   - NBCONS PASSAREA                             *     CL*01140000
+*    . NBCANCELC - NBCANCEL PASSAREA                           *     CL*01150000
+*                                                              *     CL*01160000
+*--------------------------------------------------------------*     CL*01170000
+     EJECT                                                           CL*01180000
+*--------------------------------------------------------------*     CL*01190000
+*                                                              *     CL*01200000
+*    ERROR HANDLING:                                           *     CL*01210000
+*    ---------------                                           *     CL*01220000
+*                                                              *     CL*01230000
+*                                                              *     CL*01240000
+*    DB2 ERRORS - ARE HANDLED BY COMMON USE MODULE GU0019M0,   *     CL*01250000
+*         WHICH PRODUCES A REPORT DETAILING THE ERROR.         *     CL*01260000
+*                                                              *     CL*01270000
+*                                                              *     CL201280000
+*                                                              *     CL201290000
+*                                                              *     CL*01300000
+*                                                              *     CL*01310000
+*                                                              *     CL*01320000
+*    CONSOLE MESSAGES :                                        *     CL*01330000
+*    ------------------                                        *     CL*01340000
+*                                                              *     CL*01350000
+*                                                              *     CL*01360000
+*   COBDB2-01A - INVALID MPID                                  *     CL201370000
+*                PROFRAM CANCELLED                             ...   CL201380000
+*                                                              *     CL*01390000
+*       ISSUED - WHEN USER PROVIDES INVALID MPID               *     CL201400000
+*                                                              *     CL201410000
+*       ABEND : Y      DUMP : Y       RETURN CODE : 0999       *     CL201420000
+*                                                              *     CL*01430000
+*                                                              *     CL*01440000
+*   COBDB2-02A -  ERROR ACCESSING DB2 TABLE                    *     CL201450000
+*                                                              *     CL201460000
+*                                                              *     CL*01470000
+*       ISSUED - WHEN ERROR OCCURS IN ACCESSING THE DB2 TABLE  *     CL201480000
+*                WITH SQL CODE                                 *     CL201490000
+*       ABEND : Y      DUMP : Y       RETURN CODE : 0999       *     CL201500000
+*                                                              *     CL*01510000
+*                                                              *     CL*01520000
+*                                                              *     CL*01530000
+*--------------------------------------------------------------*     CL*01540000
+     EJECT                                                           CL*01550000
+                                                                     CL*01560000
+ IDENTIFICATION DIVISION.                                            CL*01570000
+**************************                                           CL*01580000
+                                                                     CL*01590000
+                                                                     CL*01600000
+ PROGRAM-ID.    COBDB2.                                              CL*01610000
+*-----------*                                                        CL*01620000
+                                                                     CL*01630000
+                                                                     CL*01640000
+*DATE-COMPILED.                                                      CL*01650000
+*--------------*                                                     CL*01660000
+*                                                                    CL*01670000
+*                                                                    CL*01680000
+                                                                     CL*01690000
+                                                                     CL*01700000
+                                                                     CL*01710000
+ ENVIRONMENT DIVISION.                                               CL*01720000
+***********************                                              CL*01730000
+                                                                     CL*01740000
+ CONFIGURATION SECTION.                                              CL*01750000
+*----------------------*                                             CL*01760000
+                                                                     CL*01770000
+ SOURCE-COMPUTER.   IBM-370.                                         CL*01780000
+ OBJECT-COMPUTER.   IBM-370.                                         CL*01790000
+                                                                     CL*01800000
+                                                                     CL*01810000
+ INPUT-OUTPUT SECTION.                                               CL*01820000
+*---------------------*                                              CL*01830000
+                                                                     CL*01840000
+ FILE-CONTROL.                                                       CL*01850000
+                                                                     CL*01860000
+      SELECT    RT01013     ASSIGN TO REPRT                          CL101870000
+      ORGANIZATION IS       SEQUENTIAL                               CL*01880000
+      ACCESS MODE  IS       SEQUENTIAL                               CL201890000
+      FILE STATUS  IS       RT01013-STATUS-GV.                       CL101900000
+                                                                     CL*01910000
+                                                                     CL*01920000
+ DATA DIVISION.                                                      CL*01930000
+****************                                                     CL*01940000
+                                                                     CL*01950000
+ FILE SECTION.                                                       CL*01960000
+*-------------*                                                      CL*01970000
+                                                                     CL*01980000
+ FD RT01013.                                                         CL101990000
+                                                                     CL*02000000
+  01 FD-REPORT-REC                      PIC    X(80).                CL202010000
+                                                                     CL*02020000
+                                                                     CL*02030000
+     EJECT                                                           CL*02040000
+*--------------------------------------------------------------*     CL*02050000
+*                                                              *     CL*02060000
+*                                                              *     CL*02070000
+*                                                              *     CL*02080000
+*                                                              *     CL*02090000
+*                                                              *     CL*02100000
+*                                                              *     CL*02110000
+*                                                              *     CL*02120000
+*      ***************************************************     *     CL*02130000
+*      ***************************************************     *     CL*02140000
+*      **                                               **     *     CL*02150000
+*      **                                               **     *     CL*02160000
+*      ** W O R K I N G   S T O R A G E   S E C T I O N **     *     CL*02170000
+*      **                                               **     *     CL*02180000
+*      **                                               **     *     CL*02190000
+*      ***************************************************     *     CL*02200000
+*      ***************************************************     *     CL*02210000
+*                                                              *     CL*02220000
+*                                                              *     CL*02230000
+*                                                              *     CL*02240000
+*                                                              *     CL*02250000
+*                                                              *     CL*02260000
+*                                                              *     CL*02270000
+*                                                              *     CL*02280000
+*--------------------------------------------------------------*     CL*02290000
+                                                                     CL*02300000
+ WORKING-STORAGE SECTION.                                            CL*02310000
+                                                                     CL*02320000
+ 01  WORKING-STORAGE-AREA.                                           CL*02330000
+*--------------------------------------------------------------*     CL*02340000
+*                                                              *     CL*02350000
+*   AANNNMNN    F L A G S  /  S W I T C H E S     FOLLOW :     *     CL*02360000
+*                                                              *     CL*02370000
+*--------------------------------------------------------------*     CL*02380000
+                                                                     CL*02390000
+                                                                     CL*02400000
+     03  FILLER                          PIC X(32)  VALUE            CL*02410000
+         '***  COBDB2   FLAGS/SWITCHES ***'.                         CL*02420000
+                                                                     CL*02430000
+                                                                     CL*02440000
+     03  COBDB2-PROCESS-COMPLETE-FLAG  PIC X      VALUE 'N'.         CL102450000
+         88  COBDB2-PROCESS-COMPLETE              VALUE 'Y'.         CL102460000
+                                                                     CL*02470000
+                                                                     CL*02480000
+     03  END-OF-DT01013-CURS-FLAG        PIC X      VALUE 'N'.       CL*02490000
+         88 END-OF-DT01013-CURS                     VALUE 'Y'.       CL*02500000
+                                                                     CL*02510000
+                                                                     CL*02520000
+     EJECT                                                           CL*02530000
+*--------------------------------------------------------------*     CL*02540000
+*                                                              *     CL*02550000
+*    COBDB2     G E N E R A L   V A R I A B L E S   FOLLOW :   *     CL*02560000
+*                                                              *     CL*02570000
+*--------------------------------------------------------------*     CL*02580000
+                                                                     CL*02590000
+                                                                     CL*02600000
+     03  FILLER                          PIC X(32)  VALUE            CL*02610000
+         '** COBDB2   GENERAL VARIABLES **'.                         CL*02620000
+                                                                     CL*02630000
+     03  RT01013-STATUS-GV          PIC 9(02).                       CL102640000
+                                                                     CL*02650000
+     03  CURRENT-DATE-20AN-GV       PIC X(20).                       CL*02660000
+                                                                     CL*02670000
+     03  DATE-DDMMYY-8AN-GV.                                         CL*02680000
+                                                                     CL*02690000
+         05 DD-DATE-DDMMYY-8AN-GV         PIC 9(02).                 CL*02700000
+         05 FILLER                        PIC X(01) VALUE '/'.       CL*02710000
+         05 MM-DATE-DDMMYY-8AN-GV         PIC 9(02).                 CL*02720000
+         05 FILLER                        PIC X(01) VALUE '/'.       CL*02730000
+         05 YY-DATE-DDMMYY-8AN-GV         PIC 9(02).                 CL*02740000
+                                                                     CL*02750000
+                                                                     CL*02760000
+      03  TIME-HHMMSS-8AN-GV.                                        CL*02770000
+          05 HH-TIME-HHMMSS-8AN-GV         PIC 9(02).                CL*02780000
+          05 FILLER                        PIC X(01) VALUE ':'.      CL*02790000
+          05 MM-TIME-HHMMSS-8AN-GV         PIC 9(02).                CL*02800000
+          05 FILLER                        PIC X(01) VALUE ':'.      CL*02810000
+          05 SS-TIME-HHMMSS-8AN-GV         PIC 9(02).                CL*02820000
+                                                                     CL*02830000
+     03  EL06819-SRVC-TYPE-3PD-GV        PIC  9(03)          .       CL*02840000
+                                                                     CL*02850000
+     03  EL06943-MPID-4A-GV              PIC X(04)           .       CL*02860000
+                                                                     CL*02870000
+     03  RT01013-COUNT-GV                PIC 9(06) VALUE ZEROS.      CL*02880000
+                                                                     CL*02890000
+     03  RT01013-COUNT-GV1               PIC 9(06) VALUE ZEROS.      CL*02900000
+                                                                     CL*02910000
+     03  RT01013-COUNT-GV2               PIC 9(06) VALUE ZEROS.      CL*02920000
+     EJECT                                                           CL*02930000
+*--------------------------------------------------------------*     CL*02940000
+*                                                              *     CL*02950000
+*   COBDB2     P R O G R A M   C O N S T A N T S   FOLLOW :    *     CL*02960000
+*                                                              *     CL*02970000
+*--------------------------------------------------------------*     CL*02980000
+                                                                     CL*02990000
+                                                                     CL*03000000
+     03  FILLER                          PIC X(32)  VALUE            CL*03010000
+         '***   COBDB2   CONSTANTS     ***'.                         CL*03020000
+                                                                     CL*03030000
+     03  PROGRAM-NAME-CONST              PIC X(8)   VALUE            CL*03040000
+         'COBDB2'.                                                   CL*03050000
+                                                                     CL*03060000
+     03  MODULE-NAME-CONST               PIC X(8)   VALUE            CL*03070000
+         'COBDB2'.                                                   CL103080000
+                                                                     CL*03090000
+     03  PLAN-NAME-CONST                 PIC X(8)   VALUE            CL103100000
+         'DINESH'.                                                   CL103110000
+                                                                     CL*03120000
+                                                                     CL*03130000
+                                                                     CL*03140000
+                                                                     CL*03150000
+     EJECT                                                           CL*03160000
+*--------------------------------------------------------------*     CL*03170000
+*                                                              *     CL*03180000
+*     COBDB2     C O N S O L E   M E S S A G E S   FOLLOW :    *     CL*03190000
+*                                                              *     CL*03200000
+*--------------------------------------------------------------*     CL*03210000
+                                                                     CL*03220000
+                                                                     CL*03230000
+     03  FILLER                          PIC X(32)  VALUE            CL*03240000
+         '*** COBDB2   CONSOLE MESSAGES **'.                         CL203250000
+                                                                     CL*03260000
+     03  CONS-01A.                                                   CL103270000
+         05  FILLER                      PIC X(11)  VALUE            CL103280000
+             'COBDB2-01A '.                                          CL103290000
+         05  FILLER                      PIC X(12)  VALUE            CL103300000
+             'INVALID MPID'.                                         CL103310000
+         05  EL06943-MP-ID-CONS-01A                                  CL103320000
+                                         PIC X(04).                  CL103330000
+         05  FILLER                      PIC X(33)  VALUE SPACES.    CL103340000
+                                                                     CL*03350000
+                                                                     CL*03360000
+                                                                     CL*03370000
+     03  LINE-01-CONS-02A.                                           CL*03380000
+         05  FILLER                      PIC X(11)  VALUE            CL*03390000
+             'COBDB2-02A '.                                          CL203400000
+         05  FILLER                      PIC X(28)  VALUE            CL203410000
+             'ERROR ACCESSING DB2 TABLE'.                            CL203420000
+         05  SQL-CODE-CONS-O1-CONS-02A                               CL*03430000
+                                         PIC X(10).                  CL*03440000
+                                                                     CL*03450000
+                                                                     CL*03460000
+                                                                     CL*03470000
+                                                                     CL*03480000
+                                                                     CL*03490000
+                                                                     CL103500000
+     03  LINE-01-CONS-99A.                                           CL*03510000
+         05  FILLER                      PIC X(11)  VALUE            CL*03520000
+             'COBDB2-99A'.                                           CL*03530000
+         05  FILLER                      PIC X(27)  VALUE            CL*03540000
+             'INVALID MP ID'.                                        CL*03550000
+                                                                     CL*03560000
+     03  LINE-02-CONS-99A.                                           CL*03570000
+         05  FILLER                      PIC X(11).                  CL*03580000
+         05  FILLER                      PIC X(8)   VALUE            CL*03590000
+             'PROGRAM '.                                             CL*03600000
+         05  PROGRAM-NAME-LINE-02-CONS-99A                           CL*03610000
+                                         PIC X(8).                   CL*03620000
+                                                                     CL*03630000
+                                                                     CL*03640000
+     03  PROGRAM-CANCELLED-CONS.                                     CL*03650000
+         05  FILLER                      PIC X(11)  VALUE SPACES.    CL*03660000
+         05  FILLER                      PIC X(17)  VALUE            CL*03670000
+             'PROGRAM CANCELLED'.                                    CL*03680000
+     EJECT                                                           CL*03690000
+*--------------------------------------------------------------*     CL*03700000
+*                                                              *     CL*03710000
+*          COBDB2     R E P O R T   L I N E S   FOLLOW :       *     CL103720000
+*                                                              *     CL*03730000
+*                                                              *     CL*03740000
+*      REPORT I.D.        :  RT01013                           *     CL103750000
+*                                                              *     CL*03760000
+*      REPORT DESCRIPTION :  GENERATING REPORT OF THE ELEMENT  *     CL103770000
+*                            NUMBERS BASED ON MPID PROVIDED    *     CL103780000
+*                                                              *     CL*03790000
+*      REPORT SEQUENCE    :  1.  EL06943                       *     CL203800000
+*                            2.  EL08074                       *     CL203810000
+*                            3.  EL08170                       *     CL203820000
+*                                                              *     CL203830000
+*                                                              *     CL*03840000
+*--------------------------------------------------------------*     CL*03850000
+                                                                     CL*03860000
+                                                                     CL*03870000
+     03  FILLER                          PIC X(32)  VALUE            CL*03880000
+         '*******  AANNNMNN  REPORT  LINES'.                         CL*03890000
+     03  FILLER                          PIC X(32)  VALUE            CL*03900000
+         ' FOR   REPORT   RTNNNNN  *******'.                         CL*03910000
+                                                                     CL*03920000
+                                                                     CL*03930000
+                                                                     CL*03940000
+*                                                                    CL*03950000
+*    HEADING LINES                                                   CL*03960000
+*                                                                    CL*03970000
+                                                                     CL*03980000
+     03  RT01013-HL-00.                                              CL103990000
+         05  FILLER                      PIC X(05)   VALUE           CL204000000
+             SPACES.                                                 CL204010000
+         05  FILLER                      PIC X(62)   VALUE           CL104020000
+             '**********SRVC_PARM_MNGUNIT TABLE REPORT*********'.    CL104030000
+                                                                     CL104040000
+     03  RT01013-HL-01.                                              CL204050000
+         05  FILLER                      PIC X(72)   VALUE           CL104060000
+             ALL '-'.                                                CL204070000
+                                                                     CL*04080000
+     03  RT01013-HL-02.                                              CL204090000
+         05  FILLER                      PIC X(04)   VALUE           CL204100000
+             SPACES.                                                 CL204110000
+         05  EL06943-RT01013-HL-02       PIC X(07)   VALUE           CL204120000
+             'MP ID'.                                                CL204130000
+         05  FILLER                      PIC X(02)   VALUE           CL204140000
+             SPACES.                                                 CL204150000
+         05  EL08074-RT01013-HL-02       PIC X(14)   VALUE           CL104160000
+             'ELEMENT NUMBER'.                                       CL104170000
+         05  FILLER                      PIC X(03)   VALUE           CL204180000
+             SPACES.                                                 CL204190000
+         05  EL08170-RT01013-HL-02       PIC X(18)   VALUE           CL204200000
+             'PARAMETER STANDARD'.                                   CL*04210000
+                                                                     CL*04220000
+     03  RT01013-HL-03.                                                 04230000
+         05  FILLER                      PIC X(04)   VALUE           CL*04240000
+             SPACES.                                                 CL*04250000
+         05  FILLER                      PIC X(20)   VALUE           CL*04260000
+                 'MANDATORY ELEMENTS'.                               CL*04270000
+                                                                     CL*04280000
+     03  RT01013-HL-04.                                              CL*04290000
+         05  FILLER                      PIC X(02)   VALUE           CL*04300000
+             SPACES.                                                 CL*04310000
+         05  FILLER                      PIC X(30)   VALUE           CL104320000
+                 'NEVER CREATE ELEMENTS'.                            CL104330000
+                                                                     CL*04340000
+     03  RT01013-HL-05.                                              CL*04350000
+         05  FILLER                      PIC X(04)   VALUE           CL204360000
+             SPACES.                                                 CL204370000
+         05  FILLER                      PIC X(20)   VALUE           CL*04380000
+                 'OPTIONAL  ELEMENTS'.                               CL*04390000
+                                                                     CL104400000
+     03  RT01013-HL-06.                                              CL104410000
+         05  FILLER                      PIC X(60)   VALUE           CL104420000
+             ALL SPACES.                                             CL104430000
+                                                                     CL104440000
+     03  RT01013-HL-07.                                              CL104450000
+         05  FILLER                      PIC X(01)  VALUE            CL204460000
+             SPACES.                                                 CL204470000
+         05  FILLER                      PIC X(24)   VALUE           CL204480000
+             ALL '-'.                                                CL104490000
+                                                                     CL104500000
+     03  RT01013-HL-08.                                              CL204510000
+         05  FILLER                      PIC X(60)   VALUE           CL104520000
+             ALL '_'.                                                CL204530000
+                                                                     CL*04540000
+     03  DATE-TIME-RT01013-HL-09.                                    CL*04550000
+         05  FILLER                      PIC X(07) VALUE             CL104560000
+             'DATE : '.                                              CL*04570000
+         05 DATE-DDMMYY-RT01013-HL-09    PIC X(08).                  CL*04580000
+         05  FILLER                      PIC X(40) VALUE             CL204590000
+             SPACES.                                                 CL204600000
+         05  FILLER                      PIC X(07) VALUE             CL204610000
+             'TIME : '.                                              CL*04620000
+         05 TIME-HHMMSS-RT01013-HL-09    PIC X(08).                  CL*04630000
+*                                                                    CL*04640000
+*    DETAIL LINES                                                    CL*04650000
+*                                                                    CL*04660000
+                                                                     CL*04670000
+     03  RT01013-DL-01.                                              CL104680000
+         05  FILLER                      PIC X(04)  VALUE SPACES.    CL204690000
+         05  EL06943-RT01013-DL-01       PIC X(04)              .    CL104700000
+         05  FILLER                      PIC X(08)  VALUE SPACES.    CL104710000
+         05  EL08074-RT01013-DL-01       PIC X(07)              .    CL104720000
+         05  FILLER                      PIC X(08)  VALUE SPACES.    CL104730000
+         05  EL08170-RT01013-DL-01       PIC X(25)              .    CL104740000
+                                                                     CL104750000
+                                                                     CL*04760000
+                                                                     CL104770000
+                                                                     CL*04780000
+                                                                     CL104790000
+                                                                     CL*04800000
+                                                                     CL*04810000
+     EJECT                                                           CL*04820000
+*--------------------------------------------------------------*     CL*04830000
+*                                                              *     CL*04840000
+*   COBDB2      I N P U T / O U T P U T   A R E A S    FOLLOW: *     CL*04850000
+*                                                              *     CL*04860000
+*--------------------------------------------------------------*     CL*04870000
+                                                                     CL*04880000
+                                                                     CL*04890000
+     03  FILLER                          PIC X(32)  VALUE            CL*04900000
+         '** COBDB2   INPUT OUTPUT AREA **'.                         CL*04910000
+                                                                     CL*04920000
+                                                                     CL*04930000
+ 01  DT01013-PASSAREA.                                               CL*04940000
+ ++INCLUDE DT01013C                                                  CL*04950000
+     EJECT                                                           CL*04960000
+*--------------------------------------------------------------*     CL*04970000
+*                                                              *     CL*04980000
+* COBDB2    C O M M O N  U S E  M O D U L E  P A S S A R E A S *     CL*04990000
+*                                                              *     CL*05000000
+*--------------------------------------------------------------*     CL*05010000
+                                                                     CL*05020000
+ 01  CUM-PASSAREAS.                                                  CL*05030000
+                                                                     CL*05040000
+     03  FILLER                          PIC X(32)  VALUE            CL*05050000
+         '*** COBDB2   C.U.M. PASSAREAS **'.                         CL*05060000
+                                                                     CL*05070000
+ ++INCLUDE NBCANCELC                                                 CL*05080000
+ ++INCLUDE NBCONSC                                                   CL*05090000
+                                                                     CL*05100000
+ ++INCLUDE GU0019B1C                                                 CL105110000
+                                                                     CL*05120000
+ 01  NBLIST-PASSAREA.                                                CL*05130000
+ ++INCLUDE NBLISTC                                                   CL*05140000
+     EJECT                                                           CL*05150000
+                                                                     CL*05160000
+ ++INCLUDE SQLCAB1C                                                  CL*05170000
+                                                                     CL*05180000
+*--------------------------------------------------------------*     CL*05190000
+*                                                              *     CL*05200000
+*                                                              *     CL*05210000
+*                                                              *     CL*05220000
+*                                                              *     CL*05230000
+*                                                              *     CL*05240000
+*                                                              *     CL*05250000
+*                                                              *     CL*05260000
+*                                                              *     CL*05270000
+*      ***************************************************     *     CL*05280000
+*      ***************************************************     *     CL*05290000
+*      **                                               **     *     CL*05300000
+*      **    P R O C E D U R E     D I V I S I O N      **     *     CL*05310000
+*      **                                               **     *     CL*05320000
+*      ***************************************************     *     CL*05330000
+*      ***************************************************     *     CL*05340000
+*                                                              *     CL*05350000
+*                                                              *     CL*05360000
+*                                                              *     CL*05370000
+*                                                              *     CL*05380000
+*                                                              *     CL*05390000
+*                                                              *     CL*05400000
+*                                                              *     CL*05410000
+*                                                              *     CL*05420000
+*--------------------------------------------------------------*     CL*05430000
+                                                                     CL*05440000
+                                                                     CL*05450000
+     EJECT                                                           CL*05460000
+ PROCEDURE DIVISION.                                                 CL105470000
+*******************                                                  CL*05480000
+                                                                     CL*05490000
+ 0000-COBDB2-MAINLINE.                                               CL*05500000
+*************************                                            CL*05510000
+                                                                     CL*05520000
+*       ********************************************************     CL*05530000
+*       *                                                      *     CL*05540000
+*       *  CONTROLLING PARAGRAPH FOR MODULE COBDB2.            *     CL*05550000
+*       *  IT PERFORMS THE FOLLOWING FUNCTIONS:                *     CL*05560000
+*       *                                                      *     CL*05570000
+*       *  - PERFORMS INITIAL TASKS (OPENS OUTPUT FILE)        *     CL*05580000
+*       *                                                      *     CL*05590000
+*       *  - PERFORMS PROCESSING OF TABLE DT01013              *     CL*05600000
+*       *                                                      *     CL*05610000
+*       *  - PERFORMS FINAL TASKS (CLOSE OUTPUR FILE)          *     CL*05620000
+*       *                                                      *     CL*05630000
+*       ********************************************************     CL*05640000
+                                                                     CL205650000
+                                                                     CL205660000
+     PERFORM 1000-INITIALISE                                         CL*05670000
+     PERFORM 2000-COBDB2-PROCESSING                                  CL105680000
+     PERFORM 6000-FINALIZE-PARA                                      CL105690000
+                                                                     CL*05700000
+     GOBACK                                                          CL*05710000
+     .                                                               CL*05720000
+     EJECT                                                           CL*05730000
+ 1000-INITIALISE.                                                    CL*05740000
+******************                                                   CL*05750000
+                                                                     CL*05760000
+*       ********************************************************     CL*05770000
+*       *                                                      *     CL*05780000
+*       *  - INITIALISE REPORT BY PRINTING HEADER              *     CL*05790000
+*       *                                                      *     CL*05800000
+*       *  - OPEN DB2 CURSOR                                   *     CL*05810000
+*       *                                                      *     CL*05820000
+*       *  - FETCH FIRST ROW FROM DB2 CURSOR.  IF END OF       *     CL*05830000
+*       *    CURSOR, SET PROCESSING FLAG                       *     CL*05840000
+*       *                                                      *     CL*05850000
+*       ********************************************************     CL*05860000
+                                                                     CL*05870000
+     ACCEPT EL06943-MPID-4A-GV                                       CL205880000
+     ACCEPT EL06819-SRVC-TYPE-3PD-GV                                 CL205890000
+                                                                     CL205900000
+     OPEN OUTPUT    RT01013                                          CL205910000
+                                                                     CL205920000
+     EVALUATE TRUE                                                   CL205930000
+        WHEN  RT01013-STATUS-GV = '00'                               CL205940000
+              CONTINUE                                               CL205950000
+        WHEN  OTHER                                                  CL205960000
+              DISPLAY RT01013-STATUS-GV                              CL205970000
+     END-EVALUATE                                                    CL205980000
+                                                                     CL105990000
+                                                                     CL206000000
+     PERFORM 1100-INITIALISE-RT01013                                 CL106010000
+     .                                                               CL*06020000
+                                                                     CL*06030000
+     EJECT                                                           CL*06040000
+                                                                     CL*06050000
+ 1100-INITIALISE-RT01013.                                            CL106060000
+*************************                                            CL*06070000
+                                                                     CL*06080000
+*       ********************************************************     CL*06090000
+*       *                                                      *     CL*06100000
+*       *   -  PRINT THE HEADER RECORD ON THE FIRST PAGE       *     CL*06110000
+*       *                                                      *     CL*06120000
+*       *   -  SET THE PREVIOUS VALUE USED FOR CONTROL BREAK   *     CL*06130000
+*       *      PROCESSING TO HIGH VALUES FOR FIRST DETAIL      *     CL*06140000
+*       *                                                      *     CL*06150000
+*       ********************************************************     CL*06160000
+                                                                     CL*06170000
+     MOVE  FUNCTION CURRENT-DATE      TO CURRENT-DATE-20AN-GV        CL*06180000
+     MOVE  CURRENT-DATE-20AN-GV(3:2)  TO YY-DATE-DDMMYY-8AN-GV       CL*06190000
+     MOVE  CURRENT-DATE-20AN-GV(5:2)  TO MM-DATE-DDMMYY-8AN-GV       CL*06200000
+     MOVE  CURRENT-DATE-20AN-GV(7:2)  TO DD-DATE-DDMMYY-8AN-GV       CL*06210000
+     MOVE  DATE-DDMMYY-8AN-GV         TO DATE-DDMMYY-RT01013-HL-09   CL*06220000
+                                                                     CL*06230000
+     MOVE  CURRENT-DATE-20AN-GV(9:2)  TO HH-TIME-HHMMSS-8AN-GV       CL*06240000
+     MOVE  CURRENT-DATE-20AN-GV(11:2) TO MM-TIME-HHMMSS-8AN-GV       CL*06250000
+     MOVE  CURRENT-DATE-20AN-GV(13:2) TO SS-TIME-HHMMSS-8AN-GV       CL*06260000
+     MOVE  TIME-HHMMSS-8AN-GV         TO TIME-HHMMSS-RT01013-HL-09   CL*06270000
+                                                                     CL*06280000
+                                                                     CL*06290000
+                                                                     CL*06300000
+     WRITE FD-REPORT-REC FROM RT01013-HL-00                          CL106310000
+     WRITE FD-REPORT-REC FROM RT01013-HL-01                          CL106320000
+     WRITE FD-REPORT-REC FROM DATE-TIME-RT01013-HL-09                CL*06330000
+     WRITE FD-REPORT-REC FROM RT01013-HL-01                          CL106340000
+                                                                     CL*06350000
+     .                                                               CL106360000
+     EJECT                                                           CL106370000
+ 2000-COBDB2-PROCESSING.                                             CL*06380000
+*****************E                                                   CL106390000
+                                                                     CL*06400000
+*       ********************************************************     CL*06410000
+*       *                                                      *     CL*06420000
+*       *  CONTROLLING PARAGRAPH FOR PROCESSING ASSOCIATED WITH*     CL*06430000
+*       *  THIS MODULE.  IT PERFORMS THE FOLLOWING FUNCTIONS : *     CL*06440000
+*       *                                                      *     CL*06450000
+*       *  - OPENS THE CURSOR.                                 *     CL*06460000
+*       *                                                      *     CL*06470000
+*       *  - FETCH THE RECORDS FOR DT01013                     *     CL*06480000
+*       *                                                      *     CL*06490000
+*       *  - CLOSE CURSOR DT01013-CRSR                         *     CL*06500000
+*       *                                                      *     CL*06510000
+*       *                                                      *     CL*06520000
+*       ********************************************************     CL*06530000
+                                                                     CL*06540000
+                                                                     CL*06550000
+                                                                     CL*06560000
+     PERFORM 8000-SELECT-DT01013-PARA                                CL206570000
+     PERFORM 8100-OPEN-DT01013-CURSOR                                CL*06580000
+     PERFORM 8200-FETCH-DT01013-CURSOR   UNTIL SQLCODE = 100         CL106590000
+     IF END-OF-DT01013-CURS                                          CL106600000
+         MOVE 'Y' TO COBDB2-PROCESS-COMPLETE-FLAG                    CL106610000
+     END-IF                                                          CL106620000
+     .                                                               CL*06630000
+                                                                     CL*06640000
+     EJECT                                                           CL*06650000
+*                                                              *     CL*06660000
+ 6000-FINALIZE-PARA.                                                 CL*06670000
+********************                                                 CL*06680000
+                                                                     CL*06690000
+*       ********************************************************     CL*06700000
+*       *                                                      *     CL*06710000
+*       *    - CLOSES THE CURSOR DT01013-CRSR                  *     CL*06720000
+*       *                                                      *     CL*06730000
+*       *    - CLOSES THE REPORT RT01013                       *     CL*06740000
+*       *                                                      *     CL*06750000
+*       ********************************************************     CL*06760000
+                                                                     CL*06770000
+     PERFORM 8300-CLOSE-DT01013-CURSOR                               CL*06780000
+     PERFORM 8890-CLOSE-RT01013                                      CL*06790000
+     .                                                               CL*06800000
+     EJECT                                                           CL*06810000
+*--------------------------------------------------------------*     CL*06820000
+*                                                              *     CL*06830000
+*                                                              *     CL*06840000
+*                                                              *     CL*06850000
+*                                                              *     CL*06860000
+*                                                              *     CL*06870000
+*                                                              *     CL*06880000
+*                                                              *     CL*06890000
+*                                                              *     CL*06900000
+*      ***************************************************     *     CL*06910000
+*      ***************************************************     *     CL*06920000
+*      **                                               **     *     CL*06930000
+*      **                                               **     *     CL*06940000
+*      **    I N P U T / O U T P U T   S E C T I O N    **     *     CL*06950000
+*      **                                               **     *     CL*06960000
+*      **                                               **     *     CL*06970000
+*      ***************************************************     *     CL*06980000
+*      ***************************************************     *     CL*06990000
+*                                                              *     CL*07000000
+*                                                              *     CL*07010000
+*                                                              *     CL*07020000
+*                                                              *     CL*07030000
+*                                                              *     CL*07040000
+*                                                              *     CL*07050000
+*                                                              *     CL*07060000
+*                                                              *     CL*07070000
+*--------------------------------------------------------------*     CL*07080000
+                                                                     CL*07090000
+     EJECT                                                           CL*07100000
+*       ********************************************************     CL*07110000
+*       * DT01013 - SRVC_PARM_MNGUNIT                          *     CL207120000
+*       *                                                      *     CL207130000
+*       ********************************************************     CL*07140000
+*SKIP2                                                               CL107150000
+                                                                     CL207160000
+ 8000-SELECT-DT01013-PARA.                                           CL207170000
+****************************                                         CL207180000
+                                                                     CL207190000
+*       ********************************************************     CL207200000
+*       *                                                      *     CL207210000
+*       *    - RETRIEVE THE ELEMENT NUMBER BASED ON MP ID      *     CL*07220000
+*       *                                                      *     CL207230000
+*       *    - IF A SEVERE ERROR OCCURS, REPORT THE ERROR      *     CL207240000
+*       *      USING GU0019M0                                  *     CL207250000
+*       *                                                      *     CL207260000
+*       ********************************************************     CL207270000
+                                                                     CL207280000
+        MOVE EL06943-MPID-4A-GV        TO EL06943-DT01013            CL*07290000
+        MOVE EL06819-SRVC-TYPE-3PD-GV  TO  EL06819-DT01013           CL*07300000
+                                                                     CL*07310000
+     EXEC SQL                                                        CL207320000
+             SELECT   DTE_NBR      ,                                 CL207330000
+                     PARM_VAL_STNDD,                                 CL207340000
+                     SP_CNTRCT_CREA                                  CL207350000
+               INTO :EL08074-DT01013,                                CL*07360000
+                    :EL08170-DT01013,                                CL*07370000
+                    :EL09347-DT01013                                 CL*07380000
+             FROM  PD.SRVC_PARM_MNGUNIT                              CL207390000
+             WHERE    MP_ID = :EL06943-DT01013                       CL207400000
+               AND  SRVC_TYPE_CDE= :EL06819-DT01013                  CL207410000
+               FETCH FIRST 1 ROW ONLY                                   07420000
+     END-EXEC                                                        CL207430000
+                                                                     CL207440000
+     EVALUATE TRUE                                                   CL207450000
+         WHEN CALL-SUCCESSFUL                                        CL207460000
+              CONTINUE                                               CL207470000
+         WHEN NOT-FOUND                                              CL*07480000
+              PERFORM  9100-MPID-INVALID-ABEND                       CL*07490000
+         WHEN OTHER                                                  CL207500000
+              CALL 'GU0019A0'                                        CL*07510000
+              PERFORM 9300-DB2-TABLE-ACCES-ERROR                     CL*07520000
+     END-EVALUATE                                                    CL207530000
+     .                                                               CL207540000
+     EJECT                                                           CL207550000
+ 8100-OPEN-DT01013-CURSOR.                                           CL*07560000
+***************************                                          CL*07570000
+                                                                     CL*07580000
+*       ********************************************************     CL*07590000
+*       *                                                      *     CL*07600000
+*       *    - OPEN CURSOR DT01013-CRSR FOR TABLE DT01013      *     CL*07610000
+*       *                                                      *     CL*07620000
+*       *    - IF A SEVERE ERROR OCCURS, REPORT THE ERROR      *     CL*07630000
+*       *      USING GU0019M0                                  *     CL*07640000
+*       *                                                      *     CL*07650000
+*       ********************************************************     CL*07660000
+                                                                     CL*07670000
+                                                                     CL107680000
+                                                                     CL107690000
+                                                                     CL107700000
+                                                                     CL*07710000
+                                                                     CL*07720000
+     EXEC SQL                                                        CL*07730000
+         DECLARE DT01013-CRSR CURSOR  FOR                            CL*07740000
+             SELECT   DTE_NBR      ,                                 CL*07750000
+                     PARM_VAL_STNDD,                                 CL*07760000
+                     SP_CNTRCT_CREA                                  CL*07770000
+             FROM  PD.SRVC_PARM_MNGUNIT                              CL*07780000
+             WHERE    MP_ID = :EL06943-DT01013                       CL*07790000
+               AND  SRVC_TYPE_CDE= :EL06819-DT01013                  CL*07800000
+             ORDER  BY SP_CNTRCT_CREA                                CL*07810000
+     END-EXEC                                                        CL*07820000
+                                                                     CL*07830000
+                                                                     CL*07840000
+     EXEC SQL                                                        CL*07850000
+         OPEN DT01013-CRSR                                           CL*07860000
+     END-EXEC                                                        CL*07870000
+                                                                     CL*07880000
+                                                                     CL*07890000
+     EVALUATE TRUE                                                   CL*07900000
+         WHEN CALL-SUCCESSFUL                                        CL*07910000
+              CONTINUE                                               CL*07920000
+         WHEN OTHER                                                  CL*07930000
+              CALL 'GU0019A0'                                        CL107940000
+              PERFORM 9300-DB2-TABLE-ACCES-ERROR                     CL*07950000
+     END-EVALUATE                                                    CL*07960000
+     .                                                               CL*07970000
+     EJECT                                                           CL*07980000
+ 8200-FETCH-DT01013-CURSOR.                                          CL*07990000
+****************************                                         CL*08000000
+                                                                     CL*08010000
+*       ********************************************************     CL*08020000
+*       *                                                      *     CL*08030000
+*       *    - RETRIEVE NEXT ROW OF CURSOR CURSOR_NAME         *     CL*08040000
+*       *                                                      *     CL*08050000
+*       *    - IF A SEVERE ERROR OCCURS, REPORT THE ERROR      *     CL*08060000
+*       *      USING GU0019M0                                  *     CL*08070000
+*       *                                                      *     CL*08080000
+*       ********************************************************     CL*08090000
+                                                                     CL*08100000
+     EXEC SQL                                                        CL*08110000
+         FETCH DT01013-CRSR                                          CL*08120000
+                           INTO  :EL08074-DT01013,                   CL*08130000
+                                 :EL08170-DT01013,                   CL*08140000
+                                 :EL09347-DT01013                    CL*08150000
+     END-EXEC                                                        CL*08160000
+                                                                     CL*08170000
+     EVALUATE TRUE                                                   CL*08180000
+         WHEN CALL-SUCCESSFUL                                        CL*08190000
+              PERFORM 8400-PROCESS-RT01013-PARA                      CL*08200000
+              CONTINUE                                               CL*08210000
+         WHEN NOT-FOUND                                              CL*08220000
+              MOVE 'Y' TO END-OF-DT01013-CURS-FLAG                   CL108230000
+         WHEN OTHER                                                  CL*08240000
+              CALL 'GU0019A0'                                        CL108250000
+              PERFORM 9300-DB2-TABLE-ACCES-ERROR                     CL*08260000
+     END-EVALUATE                                                    CL*08270000
+     .                                                               CL*08280000
+     EJECT                                                           CL*08290000
+ 8300-CLOSE-DT01013-CURSOR.                                          CL*08300000
+****************************                                         CL*08310000
+                                                                     CL*08320000
+*       ********************************************************     CL*08330000
+*       *                                                      *     CL*08340000
+*       *    - CLOSE THE CURSOR DT01013-CRSR                   *     CL*08350000
+*       *                                                      *     CL*08360000
+*       *    - IF A SEVERE ERROR OCCURS, REPORT THE ERROR      *     CL*08370000
+*       *      USING GU0019M0                                  *     CL*08380000
+*       *                                                      *     CL*08390000
+*       ********************************************************     CL*08400000
+                                                                     CL*08410000
+     EXEC SQL                                                        CL*08420000
+         CLOSE DT01013-CRSR                                          CL*08430000
+     END-EXEC                                                        CL*08440000
+                                                                     CL*08450000
+     EVALUATE TRUE                                                   CL*08460000
+         WHEN CALL-SUCCESSFUL                                        CL*08470000
+              CONTINUE                                               CL*08480000
+         WHEN OTHER                                                  CL*08490000
+              DISPLAY 'CLOSING CURSOR'                               CL108500000
+              PERFORM 9300-DB2-TABLE-ACCES-ERROR                     CL*08510000
+     END-EVALUATE                                                    CL*08520000
+     .                                                               CL*08530000
+     EJECT                                                           CL*08540000
+ 8400-PROCESS-RT01013-PARA.                                          CL208550000
+***************************                                          CL208560000
+     EVALUATE TRUE                                                   CL*08570000
+                                                                     CL*08580000
+         WHEN EL09347-DT01013 = 'M'                                  CL*08590000
+         ADD 1 TO RT01013-COUNT-GV                                   CL*08600000
+         PERFORM  8500-PRINT-RT01013-HEADER                          CL*08610000
+                                                                     CL*08620000
+         WHEN EL09347-DT01013 = 'N'                                  CL*08630000
+         ADD 1 TO RT01013-COUNT-GV1                                  CL*08640000
+         PERFORM  8500-PRINT-RT01013-HEADER                          CL*08650000
+                                                                     CL*08660000
+         WHEN EL09347-DT01013 = 'O'                                  CL*08670000
+         ADD 1 TO RT01013-COUNT-GV2                                  CL*08680000
+         PERFORM  8500-PRINT-RT01013-HEADER                          CL*08690000
+     .                                                               CL208700000
+     EJECT                                                           CL208710000
+                                                                     CL*08720000
+ 8500-PRINT-RT01013-HEADER.                                          CL*08730000
+***************************                                          CL*08740000
+                                                                     CL*08750000
+     IF  RT01013-COUNT-GV = 1                                        CL*08760000
+         WRITE FD-REPORT-REC FROM RT01013-HL-06                      CL108770000
+         WRITE FD-REPORT-REC FROM RT01013-HL-03                      CL*08780000
+         WRITE FD-REPORT-REC FROM RT01013-HL-08                      CL208790000
+         WRITE FD-REPORT-REC FROM RT01013-HL-02                      CL108800000
+         WRITE FD-REPORT-REC FROM RT01013-HL-08                      CL208810000
+     END-IF                                                          CL*08820000
+                                                                     CL*08830000
+     IF  RT01013-COUNT-GV1 = 1                                       CL*08840000
+         WRITE FD-REPORT-REC FROM RT01013-HL-06                      CL108850000
+         WRITE FD-REPORT-REC FROM RT01013-HL-04                      CL*08860000
+         WRITE FD-REPORT-REC FROM RT01013-HL-08                      CL208870000
+         WRITE FD-REPORT-REC FROM RT01013-HL-02                      CL108880000
+         WRITE FD-REPORT-REC FROM RT01013-HL-08                      CL208890000
+     END-IF                                                          CL*08900000
+                                                                     CL*08910000
+     IF  RT01013-COUNT-GV2 = 1                                       CL*08920000
+         WRITE FD-REPORT-REC FROM RT01013-HL-06                      CL108930000
+         WRITE FD-REPORT-REC FROM RT01013-HL-05                      CL*08940000
+         WRITE FD-REPORT-REC FROM RT01013-HL-08                      CL208950000
+         WRITE FD-REPORT-REC FROM RT01013-HL-02                      CL108960000
+         WRITE FD-REPORT-REC FROM RT01013-HL-08                      CL208970000
+     END-IF                                                          CL*08980000
+                                                                     CL108990000
+         PERFORM 8810-WRITE-RT01013-PARA                             CL*09000000
+     .                                                               CL*09010000
+     EJECT                                                           CL*09020000
+                                                                     CL*09030000
+ 8810-WRITE-RT01013-PARA.                                            CL209040000
+***************************                                          CL*09050000
+                                                                     CL209060000
+     MOVE  EL06943-DT01013 TO     EL06943-RT01013-DL-01              CL209070000
+     MOVE  EL08074-DT01013 TO     EL08074-RT01013-DL-01              CL209080000
+     MOVE  EL08170-DT01013 TO     EL08170-RT01013-DL-01              CL209090000
+                                                                     CL209100000
+     WRITE FD-REPORT-REC FROM RT01013-DL-01                          CL209110000
+     .                                                               CL209120000
+     EJECT                                                           CL209130000
+                                                                     CL209140000
+ 8890-CLOSE-RT01013.                                                 CL209150000
+*********************                                                CL209160000
+                                                                     CL209170000
+*       ********************************************************     CL209180000
+*       *                                                      *     CL209190000
+*       *  - CLOSE REPORT RT01013                              *     CL209200000
+*       *                                                      *     CL209210000
+*       ********************************************************     CL209220000
+                                                                     CL209230000
+     CLOSE RT01013                                                   CL209240000
+                                                                     CL209250000
+                                                                     CL209260000
+     .                                                               CL209270000
+     EJECT                                                           CL209280000
+                                                                     CL209290000
+                                                                     CL209300000
+*--------------------------------------------------------------*     CL*09310000
+*                                                              *     CL*09320000
+*                                                              *     CL*09330000
+*                                                              *     CL*09340000
+*                                                              *     CL*09350000
+*                                                              *     CL*09360000
+*                                                              *     CL*09370000
+*                                                              *     CL*09380000
+*                                                              *     CL*09390000
+*      ***************************************************     *     CL*09400000
+*      ***************************************************     *     CL*09410000
+*      **                                               **     *     CL*09420000
+*      **                                               **     *     CL*09430000
+*      **  E R R O R   H A N D L I N G    S E C T I O N **     *     CL*09440000
+*      **                                               **     *     CL*09450000
+*      **                                               **     *     CL*09460000
+*      ***************************************************     *     CL*09470000
+*      ***************************************************     *     CL*09480000
+*                                                              *     CL*09490000
+*                                                              *     CL*09500000
+*                                                              *     CL*09510000
+*                                                              *     CL*09520000
+*                                                              *     CL*09530000
+*                                                              *     CL*09540000
+*                                                              *     CL*09550000
+*                                                              *     CL*09560000
+*--------------------------------------------------------------*     CL*09570000
+                                                                     CL*09580000
+                                                                     CL*09590000
+     EJECT                                                           CL*09600000
+ 9100-MPID-INVALID-ABEND.                                            CL109610000
+****************************                                         CL109620000
+                                                                     CL109630000
+*       ********************************************************     CL109640000
+*       *                                                      *     CL109650000
+*       *    - ISSUE CONSOLE MESSAGE 01A.                      *     CL109660000
+*       *                                                      *     CL109670000
+*       *    - ISSUE PROGRAM CANCELLED MESSAGE.                *     CL109680000
+*       *                                                      *     CL109690000
+*       *    - CANCEL THE PROGRAM WITH A DUMP AND A RETURN     *     CL109700000
+*       *      CODE OF 0999                                    *     CL109710000
+*       *                                                      *     CL109720000
+*       ********************************************************     CL109730000
+                                                                     CL109740000
+     MOVE CONS-01A               TO    NBCONS-MESSAGE                CL109750000
+     CALL 'NBCONS'               USING NBCONS-PASSAREA               CL109760000
+                                                                     CL109770000
+                                                                     CL109780000
+     MOVE PROGRAM-CANCELLED-CONS TO    NBCONS-MESSAGE                CL209790000
+     CALL 'NBCONS'               USING NBCONS-PASSAREA               CL209800000
+                                                                     CL209810000
+     MOVE 0999                   TO    NBCANCEL-RETCODE              CL209820000
+     MOVE 'D'                    TO    NBCANCEL-TYPE                 CL209830000
+     CALL 'NBCANCEL'             USING NBCANCEL-PASSAREA             CL109840000
+     .                                                               CL109850000
+     EJECT                                                           CL109860000
+                                                                     CL*09870000
+                                                                     CL209880000
+ 9300-DB2-TABLE-ACCES-ERROR.                                         CL109890000
+*****************************                                        CL*09900000
+                                                                     CL*09910000
+                                                                     CL*09920000
+                                                                     CL*09930000
+                                                                     CL*09940000
+     MOVE SQLCODE                TO    SQL-CODE-CONS-O1-CONS-02A     CL*09950000
+     MOVE  LINE-01-CONS-02A      TO    NBCONS-MESSAGE                CL*09960000
+     CALL 'NBCONS'               USING NBCONS-PASSAREA               CL*09970000
+                                                                     CL*09980000
+     PERFORM 9900-GU0001M0-ABEND                                     CL*09990000
+                                                                     CL110000000
+     MOVE PROGRAM-CANCELLED-CONS TO    NBCONS-MESSAGE                CL110010000
+     CALL 'NBCONS'               USING NBCONS-PASSAREA               CL*10020000
+                                                                     CL110030000
+     CALL 'NBCANCEL'             USING NBCANCEL-PASSAREA             CL110040000
+     .                                                               CL*10050000
+     EJECT                                                           CL110060000
+                                                                     CL*10070000
+ 9900-GU0001M0-ABEND.                                                CL*10080000
+**********************                                               CL*10090000
+                                                                     CL*10100000
+*       ********************************************************     CL*10110000
+*       *                                                      *     CL*10120000
+*       *    - ISSUE CONSOLE MESSAGE 02A DETAILING             *     CL*10130000
+*       *      PROGRAM AND MODULE WHICH CALLED GU0001M0        *     CL*10140000
+*       *                                                      *     CL*10150000
+*       *    - ISSUE PROGRAM CANCELLED MESSAGE.                *     CL*10160000
+*       *                                                      *     CL*10170000
+*       *    - CANCEL THE PROGRAM WITH A DUMP AND A RETURN     *     CL*10180000
+*       *      CODE OF CCCC                                    *     CL*10190000
+*       *                                                      *     CL*10200000
+*       ********************************************************     CL*10210000
+                                                                     CL*10220000
+                                                                     CL*10230000
+     MOVE PROGRAM-NAME-CONST TO PROGRAM-NAME-LINE-02-CONS-99A        CL*10240000
+     CALL 'NBCONS'           USING NBCONS-PASSAREA                   CL*10250000
+                                                                     CL*10260000
+     CALL 'NBCONS'           USING NBCONS-PASSAREA                   CL*10270000
+     CALL 'GU0019M0' USING GU0019M0-PASSAREA                         CL*10280000
+                                                                     CL*10290000
+     .                                                               CL*10300000
+     EJECT                                                           CL*10310000
+                                                                     CL*10320000
+                                                                     CL*10330000
+                                                                     CL*10340000
+                                                                     CL*10350000
+                                                                     CL*10360000
+                                                                     CL*10370000
+                                                                     CL*10380000
+                                                                     CL*10390000
+                                                                     CL*10400000
+                                                                     CL*10410000
+                                                                     CL*10420000
+*MODEL: REPORT DB2      (C1119 V02 25/09/96) 03/07/13 01416 LINES    CL*10430000
+

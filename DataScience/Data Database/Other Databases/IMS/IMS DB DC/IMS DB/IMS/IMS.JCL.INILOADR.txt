@@ -1,0 +1,34 @@
+ ****** ***************************** Top of Data *****************************
+ 000100 //INILDR6B JOB 43312,'IMS RUN JCL',                                    
+ 000200 //             CLASS=A,MSGCLASS=X,MSGLEVEL=(1,1),                      
+ 000300 //             NOTIFY=&SYSUID                                          
+ 000310 //STEP1 EXEC PGM=IDCAMS                                                
+ 000320 //SYSPRINT DD SYSOUT=*                                                 
+ 000330 //SYSIN DD *                                                           
+ 000340        DELETE MTPLB06.DATABASE.HOSPDB                                  
+ 000350        DEFINE CLUSTER (NAME(MTPLB06.DATABASE.HOSPDB)           -       
+ 000360               NONINDEXED                                         -     
+ 000370               TRACKS (5,5)                                       -     
+ 000380               VOLUMES (USER01)                                   -     
+ 000390               RECORDSIZE (2041,2041)                             -     
+ 000391               CONTROLINTERVALSIZE (2048))                              
+ 000407 //STEP2 EXEC PGM=DFSRRC00,PARM=(DLI,COBSRC,PATGET,0,,,,,,,,,,N,N)      
+ 000410 //*                   PGM NAME <--|__| |____|--> PSB NAME              
+ 000420 //*                                                                    
+ 000500 //STEPLIB  DD DSN=IMS810.SDFSRESL,DISP=SHR                             
+ 000600 //         DD DISP=SHR,DSN=MTPLB06.IMS.LOADLIB              --> LOADLIB 
+ 000700 //IMS      DD DISP=SHR,DSN=MTPLB06.IMS.DBDLIB              --> DBDLIB   
+ 000800 //         DD DISP=SHR,DSN=MTPLB06.IMS.PSBLIB              --> PSBLIB   
+ 000900 //DFSRESLB DD DISP=SHR,DSN=IMS810.SDFSRESL                              
+ 001000 //DFSVSAMP DD DSN=IMS810.PROCLIB(DFSVSMDB),DISP=SHR                     
+ 001100 //SDFSRESL DD DSN=IMS810.SDFSRESL,DISP=SHR                              
+ 001200 //HOSPDD   DD DSN=MTPLB06.DATABASE.HOSPDB,DISP=OLD                      
+ 001300 //INFILE   DD DSN=MTPLB06.IMS.INFILE,DISP=SHR                           
+ 001400 //OVERFLOW DD DUMMY                                                     
+ 001500 //PROCLIB  DD DSN=IMS810.PROCLIB,DISP=SHR                               
+ 001600 //IEFRDER  DD DSN=IMSLOG,DISP=SHR                                       
+ 001700 //SYSOUT DD SYSOUT=*                                                    
+ 001800 /*                                                                      
+ 001900 //                                                                      
+ ****** **************************** Bottom of Data ****************************
+                                                                                

@@ -1,0 +1,13 @@
+>>> from words import *                                                         
+>>> help(fetch_words)                                                           
+Help on function fetch_words in module words:                                   
+                                                                                
+fetch_words(url)                                                                
+    Fetch a list of words from a URL.                                           
+                                                                                
+    Args:                                                                       
+        url: The URL of a UTF-8 text document.                                  
+                                                                                
+    Returns:                                                                    
+        A list of strings containing the words from                             
+        the document.                                                           

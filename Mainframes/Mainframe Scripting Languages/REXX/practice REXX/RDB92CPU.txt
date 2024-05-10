@@ -1,0 +1,146 @@
+/* REXX TO extract jobnames from the b92 search                         00010000
+** reads start and end times and durations are listed here              00020000
+** reads cpu consumption and runtime of the job                         00020100
+*/                                                                      00021000
+                                                                        00022000
+/* nani code to hardcode datasets*/                                     00030000
+b92d = 'CDKVPGE.FIX.SANDEEPN.B92.SEARCH'                                00031000
+OUT = 'CDKVPGE.FIX.SANDEEPN.TRANS.NDMOUT'                               00031100
+/*lst = 'CDKVPGE.FIX.SANDEEPN.LIST1'*/                                  00031200
+"ALLOC FI(b92d) DA('"b92d"') SHR "                                      00033000
+"ALLOC FI(OUT) DA('"OUT"') SHR "                                        00033100
+                                                                        00033200
+/*lst is used to add type of job*/                                      00033300
+/*"ALLOC FI(lst) DA('"lst"') SHR "*/                                    00033400
+/* nani code to hardcode datasets end */                                00034300
+                                                                        00034400
+/* B92D IS AN INPUT FILE TO THIS REXX WHICH HAS REQUIRED B92 DATA */    00035000
+"execio * diskr b92d (stem b92d. finis"                                 00040000
+/*"execio * diskr LST (stem LST. finis"*/                               00050000
+                                                                        00250000
+/*  TO GET THE YESTERDAYS DATE */                                       00260000
+/* CURRDT WILL HOLD TODAYS DATE */                                      00270000
+CURRDT = DATE(E)                                                        00280000
+say "current date " currdt                                              00290000
+/* CONVERT EUROPEAN DATE DD/MM/YY TO BASE (NUMERIC DATE) */             00300000
+CURRDTE = DATE('BASE',CURRDT,'EUROPEAN')                                00310000
+/* to get yesterday's date */                                           00320000
+CURRDTE = CURRDTE - 1                                                   00330000
+/* CONVERT BASE DATE BACK TO EUROPEAN DATE */                           00340000
+YSTRDT = DATE('EUROPEAN',CURRDTE,'BASE')                                00350000
+dt = substr(ystrdt,1,2)                                                 00360000
+mn = substr(ystrdt,4,2)                                                 00370000
+yr = substr(ystrdt,7,2)                                                 00380000
+ystrday = 20||yr||'-'||mn||'-'||dt                                      00390000
+ystrday1 = dt||'-'||mn||'-'||'20'||yr                                   00400000
+say "yesterday date " ystrday                                           00410000
+/*standard wordings that do not change i.e constants */                 00420000
+jobsep="J E S 2  J O B  L O G"                                          00531100
+s="- STARTED - TIME="                                                   00531200
+E="- ENDED - TIME="                                                     00531300
+patmark = "IEF403I "                                                    00531400
+tf = ":" /*Time Format*/                                                00531600
+rt = "TOTAL ELAPSED TIME="                                              00531700
+cpuc = "TOTAL CPU TIME="                                                00531800
+job=""                                                                  00531900
+starttime=""                                                            00532000
+endtime=""                                                              00532100
+st=""                                                                   00532200
+et=""                                                                   00533000
+/* PROCESS THE B92A FILE WHICH HAS ABENDED JOBS INFO EXTRACTED */       00540000
+A0 = 0                                                                  00550000
+A1 = 0                                                                  00560000
+CC1 = 0                                                                 00570000
+/*COUNTERS*/                                                            00571000
+jobcnt=0                                                                00580000
+J=0                                                                     00581000
+/*nani start of b92d read file*/                                        01221000
+DO k=1 TO b92d.0                                                        01230000
+   I = STRIP(B92D.K)                                                    01250000
+   /*Initialise the contents of the jobs */                             01250100
+   IF pos(jobsep,i) > 0 then                                            01251000
+   do                                                                   01251100
+     LOCST=0                                                            01251200
+     LOCET=0                                                            01251300
+     JOB=""                                                             01251400
+     STARTTIME=""                                                       01251500
+     ENDTIME=""                                                         01251600
+     ST=""                                                              01251700
+     ET=""                                                              01251800
+ /* WROTE LIKE THIS TO AVOID REPEATEDLY READING POS FOR EVERY LN*/      01251900
+ /*check for the start time*/                                           01252000
+     DO UNTIL LOCST > 0                                                 01252100
+        K=K+1                                                           01252200
+        I = STRIP(B92D.K)                                               01252300
+        LOCSt = POS(s,I)                                                01252400
+        IF LOCST > 0 THEN                                               01252500
+        do                                                              01252600
+           parse var i (patmark) job (s) starttime .                    01252700
+           JOB=STRIP(JOB)                                               01252800
+           st=substr(starttime,1,2)||tf||,                              01252900
+              substr(starttime,4,2)||tf||substr(starttime,7,2)          01253000
+         /*SAY "JOB="JOB "START TIME= " STARTTIME "st=" st*/            01253100
+        end                                                             01253200
+     END                                                                01253300
+ /*check for the end time*/                                             01253400
+     DO UNTIL LOCet > 0                                                 01253500
+        K=K+1                                                           01253600
+        I = STRIP(B92D.K)                                               01253700
+        LOCet = POS(E,I)                                                01253800
+        IF LOCET > 0 THEN                                               01253900
+        do                                                              01254000
+           jobcnt = jobcnt + 1                                          01254100
+           parse var i . (E) ENDtime .                                  01254200
+           endtime=strip(endtime)                                       01254300
+           et=substr(endtime,1,2)||tf||,                                01254400
+              substr(endtime,4,2)||tf||substr(endtime,7,2)              01254500
+        /* SAY "END TIME" Et*/                                          01254600
+        end                                                             01254700
+     END                                                                01254800
+ /*check for the cpu consumption and run time*/                         01254900
+     lpcnt=0                                                            01255000
+     DO UNTIL LOCrt > 0 | lpcnt=100                                     01255100
+        lpcnt =  lpcnt + 1                                              01255200
+        K=K+1                                                           01255300
+        I = STRIP(B92D.K)                                               01255400
+        LOCrt = POS(rt,I)                                               01255500
+        IF LOCrt > 0 THEN                                               01255700
+        do                                                              01255800
+           jobcnt = jobcnt + 1                                          01255900
+           parse var i . (cpuc) cpucons (rt) runtime .                  01256000
+           cpucons=strip(cpucons)                                       01256100
+           runtime=strip(runtime)                                       01256200
+         /*SAY "run TIME " runtime "CPU TIME "CPUCONS*/                 01256300
+        end                                                             01256400
+     END                                                                01256500
+   /*SAY "JOB="JOB "START TIME= " STARTTIME "END TIME" ENDTIME*/        01256700
+     /*writing the contents of the job in output file*/                 01256800
+     J=J+1                                                              01256900
+     OUT.J= job ||',' || ST','|| ET','|| runtime','||cpucons            01257000
+     END/* end of if case of finding the job */                         01257100
+END                                                                     01257200
+/*nani end of  do WHILE B92 READ */                                     01257300
+say "Total no of jobs =" jobcnt                                         01257400
+OUT.0=J                                                                 01257500
+/*writing of the job type                                               01257600
+DO I=1 TO OUT.0                                                         01257700
+   parse var OUT.I JOBOUT1 ',' .                                        01257800
+ /*SAY "JOBOUT1=" JOBOUT1 */                                            01257900
+   CNT=0                                                                01258000
+   N=0                                                                  01258100
+   DO until JOBOUT1=JOBLST1 | cnt =20                                   01258200
+      CNT=CNT+1                                                         01258300
+      N=N+1                                                             01258400
+      parse var LST.N JOBLST1 ' ' . ' ' TYPEJ                           01258500
+      IF JOBOUT1=JOBLST1 THEN                                           01258600
+      DO                                                                01258700
+         OUT.I=OUT.I || TYPEJ                                           01258800
+      END                                                               01258900
+   END                                                                  01259000
+END                                                                     01259100
+*/                                                                      01259200
+"execio * diskw out (stem OUT. finis"                                   01259300
+"FREE FI(b92d)"                                                         01259400
+"free fi (OUT)"                                                         01259500
+/*"free fi (lst)"*/                                                     01259600
+

@@ -1,0 +1,17 @@
+Plans can still have one or more DBRMs directly bound into them. However, with the implementation of packages, a plan can include, in addition to the DBRMs, a list of packages called PKLIST (package list). DB2 can access packages only through this package list. When binding a plan
+
+
+location_name, collection_id. Package_id.
+
+B)COLLECTION ID:
+--------------
+The collection_id is a qualifier that denotes a logical grouping of packages. When binding a package, you must always specify the collection_id 
+
+BIND PACKAGE (COL1)    BIND PACKAGE (COL1)   BIND PACKAGE (COL2)
+MEMBER (PROGA) ...     MEMBER (PROGB) ...    MEMBER (PROGB)...
+
+C)PACKAGE ID:
+------------
+c)Package_id
+
+The package_id is a qualifier that is automatically generated from the name of the DBRM input at bind package time.

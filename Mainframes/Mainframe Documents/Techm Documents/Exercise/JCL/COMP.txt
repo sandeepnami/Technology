@@ -1,0 +1,78 @@
+//UGBCMPIL JOB CCS,'COMPILE JCL',                                       00010000
+//             MSGCLASS=X,MSGLEVEL=(1,1),                               00020000
+//             CLASS=A,NOTIFY=&SYSUID                                   00030000
+//COMPILE OUTPUT GROUPID=COMPILE                                        00040000
+//COMPTRN OUTPUT GROUPID=COMPTRN                                        00050000
+//*---------------------------------------------------------------*     00060000
+//* PROCEDURE TO COMPILE AND LINK  BATCH COBOL PROGRAMS                 00070000
+//*---------------------------------------------------------------*     00080000
+//TRBCBTCH PROC LINK=IEWL,                        SINGLE LINK    (IEWL) 00090000
+//*            APPL='TBC',                            APPLIC MODULE     00100000
+//             SRCIN='DNDVPGE.SANDEEPN.SRCLIB'                          00110000
+//*                                                                     00120000
+//COMPILE EXEC PGM=IGYCRCTL,                                            00166000
+//             PARM=(APOST,AWO,COMPILE,DYNAM,FASTSRT,LIB,MAP,NOADV,     00166100
+//             OFFSET,RES,XREF,'TRUNC(BIN)',RENT,'OPT(FULL)',           00166200
+//             'LANG(UE)')                                              00166300
+//STEPLIB  DD  DSN=IGY.SIGYCOMP,                                        00170000
+//             DISP=SHR                                                 00180000
+//SYSIN    DD  DSN=&SRCIN(&PRGM),                                       00190000
+//             DISP=SHR                                                 00200000
+//*COPY BOOK LOCATIONS                                                  00210000
+//SYSLIB   DD  DSN=DNDVPGE.SANDEEPN.SRCLIB,                             00230000
+//             DISP=SHR                                                 00230100
+//         DD  DSN=PDKVPGE.SRCLIB,                                      00231000
+//             DISP=SHR                                                 00240000
+//         DD  DSN=PNDVPGE.SRCLIB,                                      00250000
+//             DISP=SHR                                                 00260000
+//SYSLIN   DD  DSN=&&LOADSET,                                           00310000
+//             DISP=(NEW,PASS,DELETE),                                  00320000
+//             UNIT=VIO,                                                00330000
+//             SPACE=(CYL,(10,5),RLSE),                                 00340000
+//             LRECL=80,                                                00350000
+//             BLKSIZE=6320,                                            00360000
+//             RECFM=U                                                  00370000
+//SYSPRINT DD  SYSOUT=*,                                                00380000
+//             OUTPUT=*.COMPILE                                         00390000
+//SYSPUNCH DD  DUMMY,                                                   00400000
+//             BLKSIZE=80                                               00410000
+//SYSUT1   DD  UNIT=VIO,                                                00420000
+//             SPACE=(CYL,(5,5),RLSE)                                   00430000
+//SYSUT2   DD  UNIT=VIO,                                                00440000
+//             SPACE=(CYL,(5,5),RLSE)                                   00450000
+//SYSUT3   DD  UNIT=VIO,                                                00460000
+//             SPACE=(CYL,(5,5),RLSE)                                   00470000
+//SYSUT4   DD  UNIT=VIO,                                                00480000
+//             SPACE=(CYL,(5,5),RLSE)                                   00490000
+//SYSUT5   DD  UNIT=VIO,                                                00500000
+//             SPACE=(CYL,(5,5),RLSE)                                   00510000
+//SYSUT6   DD  UNIT=VIO,                                                00520000
+//             SPACE=(CYL,(5,5),RLSE)                                   00530000
+//SYSUT7   DD  UNIT=VIO,                                                00540000
+//             SPACE=(CYL,(5,5),RLSE)                                   00550000
+//*                                                                     00560000
+//LINK    EXEC PGM=&LINK,                                               00570000
+//             COND=(4,LT,COMPILE),                                     00580000
+//             PARM='LET,LIST,MAP,XREF'                                 00590000
+//SYSLIB   DD  DSN=DNDVPGE.SANDEEPN.LOADLIB,                            00600000
+//             DISP=SHR                                                 00610000
+//         DD  DSN=CEE.SCEELKED,                                        00620000
+//             DISP=SHR                                                 00630000
+//SYSLIN   DD  DSN=&&LOADSET,                                           00640000
+//             DISP=(OLD,DELETE,DELETE)                                 00650000
+//SYSLMOD  DD  DSN=DNDVPGE.SANDEEPN.LOADLIB(&PRGM),                     00660000
+//             DISP=SHR                                                 00670000
+//SYSPRINT DD  SYSOUT=*,                                                00680000
+//             OUTPUT=*.COMPILE                                         00690000
+//SYSUT1   DD  UNIT=VIO,                                                00700000
+//             SPACE=(CYL,(1,1),RLSE)                                   00710000
+//*                                                                     00720000
+//DELETE  EXEC PGM=IEFBR14,                                             00730000
+//             COND=(0,EQ,LINK)                                         00740000
+//*YSLIN   DD DSN=&&LOADSET,DISP=(OLD,DELETE,DELETE)                    00910000
+//SYSLIN   DD  DSN=&&LOADSET                                            00920000
+//TRBCBTCH PEND                                                         00930000
+//*THE COBOL PGM NAME IS ENTERED HERE                                   00940000
+//PGMST   EXEC TRBCBTCH,                                                00950000
+//             PRGM=COBACPT                                             00960000
+

@@ -1,0 +1,9 @@
+>>> convert("two nine".split())                                                 
+Conversion succeeded! x = 29                                                    
+29                                                                              
+>>> convert("elephant".split())                                                 
+Conversion failed!                                                              
+-1                                                                              
+>>> convert(451)                                                                
+Conversion failed!                                                              
+-1                                                                              

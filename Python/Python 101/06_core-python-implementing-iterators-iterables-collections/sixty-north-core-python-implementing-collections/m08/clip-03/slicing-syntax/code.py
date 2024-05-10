@@ -1,0 +1,5 @@
+items = seq[start:stop]
+items = seq[start:stop:step]
+items = seq[:stop]
+items = seq[start:]
+items = seq[:]

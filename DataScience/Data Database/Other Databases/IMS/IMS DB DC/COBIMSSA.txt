@@ -1,0 +1,107 @@
+      *SAMPLE IMS COBOL PGM                                             01060003
+       IDENTIFICATION DIVISION.                                         01070000
+       PROGRAM-ID.    COBOLIMS.                                         01110000
+      *                                                                 01160003
+       ENVIRONMENT DIVISION.                                            01180000
+       CONFIGURATION SECTION.                                           01220000
+       SOURCE-COMPUTER.   IBM-370.                                      01250000
+       OBJECT-COMPUTER.   IBM-370.                                      01260000
+       INPUT-OUTPUT SECTION.                                            01270000
+       DATA DIVISION.                                                   01330000
+       WORKING-STORAGE SECTION.                                         01420000
+      ** * * * * * * * * * * * * * * * * * * * * * * * * * * * * *      01450003
+      *DL/I CALL FUNCTIONS                                              01460003
+      ** * * * * * * * * * * * * * * * * * * * * * * * * * * * * *      01470003
+       01 WS-GU   PIC X(04) VALUE 'GU '.                                01480003
+       01 WS-GN   PIC X(04) VALUE 'GN '.                                01490003
+       01 WS-GNP  PIC X(04) VALUE 'GNP '.                               01500003
+       01 WS-GHU  PIC X(04) VALUE 'GHU '.                               01510003
+       01 WS-GHN  PIC X(04) VALUE 'GHN '.                               01520003
+       01 WS-GHNP PIC X(04) VALUE 'GHNP'.                               01530003
+       01 WS-REPL PIC X(04) VALUE 'REPL'.                               01540003
+       01 WS-ISRT PIC X(04) VALUE 'ISRT'.                               01550003
+       01 WS-INIT PIC X(04) VALUE 'INIT'.                               01560003
+       01 WS-ROLB PIC X(04) VALUE 'ROLB'.                               01570003
+       01 WS-DLET PIC X(04) VALUE 'DLET'.                               01580003
+       01 WS-CHKP PIC X(04) VALUE 'CHKP'.                               01590003
+      ** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *    01600003
+      *SEGMENT LAYOUTS - USED AS IOAREAS IN CALLS                       01610003
+      ** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *    01620003
+       01 CA01-SEGMENT.                                                 01630003
+          10 CA01-CS0694 PICTURE S9(4) COMP VALUE +179.                 01640003
+          10 CA01-KYCA01.                                               01670003
+             15 CA01-WS0001.                                            01680003
+                20 CA01-FI0178 PICTURE X(10) VALUE SPACE.               01690003
+                20 CA01-CS0189 PICTURE X(20) VALUE SPACE.               01710003
+                20 FILLER PICTURE X(2000)                               01720003
+       01 CADB-AIB.                                                     01730003
+          02 CADB-AIBID PIC X(8) VALUE                                  01740003
+          02 CADB-AIBLEN PIC 9(9) COMP.                                 01750003
+          02 CADB-AIBRSFUNC PIC X(8).                                   01760003
+          02 CADB-AIBRSNM1-PCB-NAME PIC X(8).                           01770003
+          02 CADB-AIBRSNM2 PIC X(8).                                    01780003
+          02 CADB-AIBRESV1 PIC X(8).                                    01790003
+          02 CADB-AIBOALEN PIC 9(9) COMP.                               01800003
+          02 CADB-AIBOAUSE PIC 9(9) COMP.                               01810003
+          02 CADB-AIBRESV2 PIC X(12).                                   01820003
+          02 CADB-AIBRETRN PIC 9(9) COMP.                               01830003
+          02 CADB-AIBREASN PIC 9(9) COMP.                               01840003
+          02 CADB-AIBERRXT PIC 9(9) COMP.                               01850003
+          02 CADB-AIBRESA1-PCB-ADDR POINTER.                            01860003
+       LINKAGE SECTION.                                                 02040000
+       01 CADB-PCB.                                                     02080003
+          02 CADB-PCB-DBDNAME PIC X(08).                                02090003
+          02 CADB-PCB-SEGMENT-LEVEL PIC X(02).                          02100003
+          02 CADB-PCB-STATUS-CODE PIC X(02).                            02110003
+          02 CADB-PCB-PROCOPT PIC X(04).                                02120003
+          02 CADB-PCB-RESERVED PIC S9(05)                               02130003
+          02 CADB-PCB-SEGMENT-NAME PIC X(08).                           02140003
+          02 CADB-PCB-KEY-LEN PIC S9(05)                                02150003
+          02 CADB-PCB-NUMBER-OF-SENSEGS PIC S9(05)                      02160003
+          02 CADB-PCB-KFBAREA.                                          02170003
+             03 CADB-PCB-KEY OCCURS 0 TO 128                            02180003
+                DEPENDING ON CADB-PCB-KEY-LEN PIC X.                    02190003
+       PROCEDURE DIVISION.                                              02450000
+                                                                        02470000
+           ENTRY 'DLITCBL' USING IO-PCB                                 02480000
+                                 DD358-PCB                              02490000
+                                 ALT-PCB                                02500000
+                                 DM634-PCB                              02510000
+                                 DD635-PCB.                             02520000
+                                                                        02530000
+       0000-MAINLINE.                                                   02540000
+           DISPLAY 'SAMPLE COBOL IMS CODE'                              02550003
+           DISPLAY 'CODE BEGINS'                                        02560003
+           MOVE 'CADBP01' TO CADB-AIBRSNM1-PCB-NAM                      02570003
+           MOVE LENGTH OF CADB-AIB TO CADB-AIBLEN                       02580003
+           MOVE LENGTH OF CA01-SEGMENT TO CADB-AIBOALEN                 02590003
+           MOVE 'KEYVALUE' TO CA01-Q-BANK-NUM                           02600003
+           MOVE 'KEYVALUE'' TO CA01-Q-CUST-NUM                          02610003
+           DISPLAY 'CA01-SSA-ROOT....'                                  02620003
+           DISPLAY CA01-SSA-ROOT                                        02630003
+      *                                                                 02631003
+           CALL 'CEETDLI' USING WS-GU                                   02640003
+                                CADB-AIB                                02650003
+                                CA01-SEGMENT                            02660003
+                                CA01-SSA-ROOT                           02670003
+      *                                                                 02671003
+           MOVE CADB-AIBRETRN TO WS-AIBRETRN                            02680003
+           MOVE CADB-AIBREASN TO WS-AIBREASN                            02690003
+           DISPLAY 'CADB-AIBRETRN..' WS-AIBRETRN                        02700003
+           DISPLAY 'CADB-AIBREASN..' WS-AIBREASN                        02710003
+           DISPLAY 'CADB-PCB-STATUS-CODE..' CADB-PCB-STATUS-COD         02720003
+           DISPLAY 'CA01-FI0178...' CA01-FI0178                         02730003
+           DISPLAY 'CA01-CS0189...' CA01-CS0189                         02740003
+           DISPLAY 'CA01-LN3174...' CA01-LN3174                         02750003
+           IF WS-AIBRETRN = SPACES                                      02760003
+           DISPLAY'FOUND'                                               02770003
+           ELSE                                                         02780003
+           DISPLAY 'NOT FOUND'                                          02790003
+           END-IF                                                       02800003
+      *                                                                 02801003
+           CALL 'CEETDLI' USING WS-ROLB                                 02810003
+           CADB-PCB                                                     02820003
+           .                                                            02830003
+           DISPLAY 'CODE ENDS'                                          02840003
+           GOBACK                                                       02850003
+

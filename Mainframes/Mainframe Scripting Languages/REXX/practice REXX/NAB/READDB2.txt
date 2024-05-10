@@ -1,0 +1,57 @@
+/*REXX TO connect to db2 and write a sql query                   
+*/                                                               
+/* DEFINING SUBSYSTEM */                                         
+SUBSYS = "DB2"                                                   
+/* DEFINING THE QUERY */                                         
+QUERY = "SELECT MP_ID,AF_ALW_AC_GRP",                            
+           "FROM SGAF.BUALW_AC_TYPE",                            
+           "WHERE AF_ALW_AC_GRP='SUBS01'"                        
+                                                                 
+/* HOST CMD ENV AVAILABLE ? */                                   
+ADDRESS TSO "SUBCOM DSNREXX"                                     
+IF RC THEN                                                       
+S_RC = RXSUBCOM('ADD','DSNREXX','DSNREXX')                       
+                                                                 
+ADDRESS DSNREXX "CONNECT" SUBSYS                                 
+   IF SQLCODE <> 0 THEN                                          
+      say SQLCA                                                  
+                                                                 
+ADDRESS DSNREXX "EXECSQL DECLARE  C1 CURSOR FOR S1"              
+   IF SQLCODE <> 0 THEN                                          
+      CALL SQLCA                                                 
+ADDRESS DSNREXX "EXECSQL PREPARE  S1 FROM :QUERY"                
+IF SQLCODE <> 0 THEN                                             
+   CALL SQLCA                                                    
+                                                                 
+ADDRESS DSNREXX "EXECSQL DESCRIBE S1 INTO :OUTPUT"               
+IF SQLCODE <> 0 THEN                                             
+   CALL SQLCA                                                    
+                                                                 
+ADDRESS DSNREXX "EXECSQL OPEN C1"                                
+IF SQLCODE <> 0 THEN CALL SQLCA                                  
+                                                                 
+/*SAY "fetching of cursor starts here"*/                         
+DO UNTIL(SQLCODE <> 0)                                           
+ /*ADDRESS DSNREXX "EXECSQL FETCH C1 USING DESCRIPTOR :OUTPUT"*/ 
+   ADDRESS DSNREXX "EXECSQL FETCH C1 into :MP_ID,:AF_ALW_AC_GRP"    
+   IF SQLCODE = 0 THEN                                              
+     DO                                                             
+        say MP_ID                                                   
+        say AF_ALW_AC_GRP                                           
+   /*   DO I = 1 TO OUTPUT.SQLD                                     
+           SAY "  > COLUMN NUMBER: " I                              
+           SAY "    COLUMN NAME:   " OUTPUT.I.SQLNAME               
+           SAY "    COLUMN TYPE:   " OUTPUT.I.SQLTYPE               
+           SAY "    COLUMN VALUE:  " OUTPUT.I.SQLDATA               
+        END */                                                      
+   END                                                              
+   ELSE                                                             
+   DO                                                               
+      SAY "SQLCODE FOR FETCHING THE CURSOR" SQLCODE                 
+   END                                                              
+END                                                                 
+                                                                    
+ADDRESS DSNREXX "EXECSQL CLOSE C1"                                  
+ADDRESS DSNREXX "EXECSQL COMMIT"                                    
+ADDRESS DSNREXX "DISCONNECT"                                        
+EXIT                                                                

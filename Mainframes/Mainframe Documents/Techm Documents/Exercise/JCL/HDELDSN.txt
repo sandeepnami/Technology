@@ -1,0 +1,14 @@
+//UGBDELDS JOB 345,'DELETE DSN',                                        00010033
+//             MSGCLASS=X,MSGLEVEL=(1,1),                               00020000
+//             CLASS=2,NOTIFY=&SYSUID                                   00030000
+//*                                                                     00030100
+//STEP1   EXEC PGM=IKJEFT01,                                            00030300
+//             PARM='HDELTEST'                                          00030433
+//SYSTSPRT DD  SYSOUT=*                                                 00030500
+//SYSUDUMP DD  SYSOUT=D,                                                00030600
+//             FLASH=F003                                               00030700
+//SYSPROC  DD  DSN=DNDVPGE.SANDEEPN.REXXWRK,                            00030800
+//             DISP=SHR                                                 00030900
+//SYSTSIN  DD  DUMMY,                                                   00031000
+//             BLKSIZE=80                                               00032000
+

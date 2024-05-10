@@ -1,0 +1,10 @@
+uiz"                                                                            
+>>> data = norsk.encode('utf8')                                                 
+>>> data                                                                        
+b'Jeg begynte \xc3\xa5 fort\xc3\xa6re en sandwich mens jeg kj\xc3\xb8rte taxi p\
+xc3\xa5 vei til quiz'                                                           
+>>> norwegian = data.decode('utf8')                                             
+>>> norwegian == norsk                                                          
+True                                                                            
+>>> norwegian                                                                   
+'Jeg begynte å fortære en sandwich mens jeg kjørte taxi på vei til quiz'        

@@ -1,0 +1,17 @@
+...     menu.append("spam")                                                     
+...     return menu                                                             
+...                                                                             
+>>> breakfast = ['bacon', 'eggs']                                               
+>>> add_spam(breakfast)                                                         
+['bacon', 'eggs', 'spam']                                                       
+>>> lunch = ['baked beans']                                                     
+>>> add_spam(lunch)                                                             
+['baked beans', 'spam']                                                         
+>>> add_spam()                                                                  
+['spam']                                                                        
+>>> add_spam()                                                                  
+['spam', 'spam']                                                                
+>>> add_spam()                                                                  
+['spam', 'spam', 'spam']                                                        
+>>> add_spam()                                                                  
+['spam', 'spam', 'spam', 'spam']                                                

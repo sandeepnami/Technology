@@ -1,0 +1,42 @@
+000100 IDENTIFICATION DIVISION.                                         00010000
+000110 PROGRAM-ID. DATDIFF.                                             00011000
+000200 DATA DIVISION.                                                   00020000
+000300 WORKING-STORAGE SECTION.                                         00030000
+000400 01 WORK-AREA.                                                    00040000
+000500     03  W-SYS-DATE    PIC   9(08).                               00050000
+000600     03  W-ACC-DATE    PIC   9(08) VALUE 20010604.                00060003
+000700     03  T-REM-DAYS    PIC   9(04).                               00070000
+000800     03  W-NO-MONTHS   PIC   9(02) VALUE ZEROS.                   00080007
+000810     03  W-DAY-DIFF    PIC   9(08).                               00081009
+000820     03  W-NO-YEARS    PIC   9(02) VALUE ZEROS.                   00082007
+000830     03  W-TEMP        PIC   9(04) VALUE ZEROS.                   00083010
+000840     03  W-TEMP-31DYS  PIC   9(04) VALUE ZEROS.                   00084010
+000900 PROCEDURE DIVISION.                                              00090000
+001000     ACCEPT W-SYS-DATE FROM DATE YYYYMMDD.                        00100000
+001010     DISPLAY W-SYS-DATE.                                          00101008
+001020     DISPLAY W-ACC-DATE.                                          00102008
+001100     COMPUTE W-DAY-DIFF = FUNCTION INTEGER-OF-DATE(W-SYS-DATE) -  00110008
+001200                          FUNCTION INTEGER-OF-DATE(W-ACC-DATE).   00120008
+001210     DISPLAY W-DAY-DIFF.                                          00121007
+001300     DIVIDE W-DAY-DIFF BY 365 GIVING W-NO-YEARS                   00130010
+001400                              REMAINDER T-REM-DAYS.               00140010
+001410     DISPLAY W-NO-YEARS.                                          00141010
+001500     DIVIDE T-REM-DAYS BY 30 GIVING W-NO-MONTHS                   00150010
+001600                              REMAINDER T-REM-DAYS.               00160010
+001601     DISPLAY W-NO-MONTHS.                                         00160110
+001612     DIVIDE W-NO-YEARS BY 4 GIVING W-TEMP.                        00161214
+001613     COMPUTE T-REM-DAYS = T-REM-DAYS - W-TEMP.                    00161314
+001614     DISPLAY T-REM-DAYS.                                          00161412
+001700     IF W-NO-MONTHS > 12                                          00170010
+001800           ADD 1 TO W-NO-YEARS                                    00180010
+001900           SUBTRACT 12 FROM W-NO-MONTHS                           00190010
+002000     END-IF.                                                      00200010
+002010  2000-DAYS-PARA.                                                 00201011
+002100     IF T-REM-DAYS > 30                                           00210010
+002200            ADD 1 TO W-NO-MONTHS                                  00220010
+002300            SUBTRACT 30 FROM T-REM-DAYS                           00230010
+002310*           PERFORM 2000-DAYS-PARA                                00231015
+002400     END-IF.                                                      00240010
+002410      DISPLAY W-NO-YEARS "YEARS" W-NO-MONTHS "MONTHS" T-REM-DAYS. 00241010
+002420      STOP RUN.                                                   00242007
+

@@ -1,0 +1,14 @@
+//UELT228R JOB 'SATYAM',CLASS=A,NOTIFY=&SYSUID,REGION=0M,TIME=NOLIMIT   00010099
+//******************************************************                00011000
+//*      IMS MESSAGE FORMAT COMPILE JCL                *                00012000
+//******************************************************                00013000
+//PROCLIB JCLLIB ORDER=SATYAM.TRNG.PROCLIB                              00020099
+//*                                                                     00024099
+//*MSPROC EXEC DLIBATCH,                                                00031099
+//IMSPROC EXEC IMS91DLI,                                                00032099
+//             MBR=CMDCODD,                                             00040099
+//             PSB=PSB3041A                                             00060099
+//*OUTDD   DD   DSN=UELT228.ELTP1026.IMSRPRT,DISP=SHR                   00070099
+//*ILEOUT  DD DSN=UELT071.TRNG.STUDENT.OUTPUT,DISP=SHR                  00110099
+//                                                                      00120099
+

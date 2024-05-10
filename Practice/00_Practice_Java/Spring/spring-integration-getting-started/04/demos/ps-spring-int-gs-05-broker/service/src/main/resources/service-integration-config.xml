@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/integration https://www.springframework.org/schema/integration/spring-integration.xsd
+            http://www.springframework.org/schema/integration/amqp https://www.springframework.org/schema/integration/amqp/spring-integration-amqp.xsd">
+
+    <!-- Inbound channel adapter which receives messages from RabbitMQ -->
+    <int-amqp:inbound-channel-adapter queue-names="globomantics.registrationRequest" channel="fromRabbit"/>
+
+    <int:channel id="fromRabbit"/>
+
+    <!-- Transformer to convert the message payload from a string containing JSON to an AttendeeRegistration object -->
+    <int:json-to-object-transformer input-channel="fromRabbit" output-channel="registrationRequest" type="com.pluralsight.demo.model.AttendeeRegistration"/>
+
+    <int:channel id="registrationRequest"/>
+
+    <!-- Service activator to execute registrationService.register(...) -->
+    <int:service-activator input-channel="registrationRequest" ref="registrationService" method="register"/>
+
+</beans>

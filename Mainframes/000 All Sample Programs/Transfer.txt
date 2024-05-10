@@ -1,0 +1,4 @@
+HostOS 1 
+Local0 "C:\Documents and Settings\P732083\My Documents\Sandeep\Technical -Curr\Exercise\DB2\NAB\COBDBSAM.txt" Direction0 1 Host0 "'SDAF.P732083.NAMI.COBOL.LIBRARY(COBDBSAM)'" Scheme0 "C:\Program Files\National\AttachmateExtraSessions\Schemes\Text Default.eis"
+Local1 "C:\Documents and Settings\P732083\My Documents\Sandeep\Technical -Curr\Exercise\DB2\NAB\DB2CURS.txt" Direction1 1 Host1 "'SDAF.P732083.NAMI.COBOL.LIBRARY(DB2CURS)'" Scheme1 "C:\Program Files\National\AttachmateExtraSessions\Schemes\Text Default.eis"
+

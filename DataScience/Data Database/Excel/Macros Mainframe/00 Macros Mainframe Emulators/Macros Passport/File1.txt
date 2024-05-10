@@ -1,0 +1,10 @@
+[TransferList]
+Header=Zephyr Transfer List
+xfer0=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\Rexx\TRMAI814.txt,0,'CDKVPGE.SMTPTST.REXX(TRMAI814)',<TSO Text Default>
+xfer1=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\Rexx\CTRLMPSU.txt,0,'ECHVPGE.MSAT.PAVANI.REXX(CTRLMPSU)',<TSO Text Default>
+xfer2=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\Rexx\ctrlmpre.txt,0,'ECHVPGE.MSAT.PAVANI.REXX(ctrlmpre)',<TSO Text Default>
+xfer3=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\Rexx\TRMAI814.txt,0,'DNDVPGE.SANDEEPN.SMTP.REXX(TRMAI814)',<TSO Text Default>
+xfer4=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\Rexx\TRMAI817.txt,0,'DNDVPGE.SANDEEPN.SMTP.REXX(TRMAI817)',<TSO Text Default>
+xfer5=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\Rexx\TRMAI823.txt,0,'DNDVPGE.SANDEEPN.SMTP.REXX(TRMAI823)',<TSO Text Default>
+xfer6=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\Rexx\PDSRENA.txt,0,'DNDVPGE.SANDEEPN.REGREF.REXX(PDSRENA)',<TSO Text Default>
+xfer7=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\Rexx\REXXOPCA.txt,0,'DNDVPGE.SANDEEPN.REGREF.REXX(REXXOPCA)',<TSO Text Default>

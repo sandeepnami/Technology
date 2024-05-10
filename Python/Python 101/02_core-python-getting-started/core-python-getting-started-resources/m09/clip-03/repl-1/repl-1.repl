@@ -1,0 +1,14 @@
+...                        'Brazil': 'Brasília',                                
+...                        'Morocco': 'Rabat',                                  
+...                        'Sweden': 'Stockholm' }                              
+>>> capital_to_country = {capital: country for country, capital in country_to_ca
+pital.items()}                                                                  
+>>> from pprint import pprint as pp                                             
+>>> pp(capital_to_country)                                                      
+{'Brasília': 'Brazil',                                                          
+ 'London': 'United Kingdom',                                                    
+ 'Rabat': 'Morocco',                                                            
+ 'Stockholm': 'Sweden'}                                                         
+>>> words = ["hi", "hello", "foxtrot", "hotel"]                                 
+>>> { x[0]: x for x in words }                                                  
+{'h': 'hotel', 'f': 'foxtrot'}                                                  

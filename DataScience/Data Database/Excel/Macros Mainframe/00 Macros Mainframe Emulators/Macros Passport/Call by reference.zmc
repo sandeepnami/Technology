@@ -1,0 +1,10 @@
+Sub ZMain
+	Dim  ret
+	Prompt "Transaction Failed - Please Fix To Continue.", 0, "Attention"
+
+End Sub
+
+Sub Prompt( sMsg, nType, sTitle )
+            Set ws = CreateObject( "wscript.shell" )
+            ws.popup sMsg, 0, sTitle, 4096 + nType
+End Sub 

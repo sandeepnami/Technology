@@ -1,0 +1,171 @@
+000100 IDENTIFICATION DIVISION.                                         00010000
+000200 PROGRAM-ID. 'DB2SING2'.                                          00020000
+000300* SAMPLE PROGRAM FOR DB2 EMBEDDED SQL                             00030000
+000400* DOES A SINGLETON SELECT FROM ORG                                00040000
+000410* SHOWS HOW TO HANDLE NULLS AND VARIABLE                          00050000
+000500 ENVIRONMENT DIVISION.                                            00060000
+000600 INPUT-OUTPUT SECTION.                                            00070000
+000700 FILE-CONTROL.                                                    00080000
+000800 DATA DIVISION.                                                   00090000
+000900 FILE SECTION.                                                    00100000
+001000 WORKING-STORAGE SECTION.                                         00110000
+001100*  REGULAR WORKING STORAGE THINGS GO HERE AS ALWAYS               00120000
+001110 01  OBP_OFFER_CODE        PIC X(6).                              00130005
+001130                                                                  00150000
+001200 01  ERR-MESS-DATA.                                               00160000
+001300     05  ERR-MESS-LEN      PIC S9(4)   BINARY VALUE +960.         00170000
+001400     05  ERR-MESS-TEXT     PIC X(120) OCCURS 8 TIMES              00180000
+001500         INDEXED BY ERR-INDEX.                                    00190000
+001600 01  ERR-TEXT-LEN          PIC S9(9) BINARY VALUE +120.           00200000
+001700                                                                  00210000
+001800 01  DISPLAY-SQLCODE       PIC Z(9)-.                             00220000
+001900                                                                  00230001
+002000     EXEC SQL                                                     00240001
+002100            INCLUDE SQLCA                                         00250001
+002200     END-EXEC.                                                    00260001
+002300                                                                  00270001
+002400     EXEC SQL                                                     00280001
+002500            INCLUDE OBPCONF                                       00290002
+002600     END-EXEC.                                                    00300001
+002700                                                                  00310001
+002800 PROCEDURE DIVISION.                                              00320001
+003830     DISPLAY 'PROGRAM STARTED'                                    00460003
+003900*    JUST GET ONE ROW, PAYING NO ATTENTION TO NULLS OR VARIABLE   00470001
+004200     MOVE 'NCS001' TO GV1                                         00500003
+004500     EXEC SQL                                                     00530001
+004600         SELECT OBP_OFFER_CODE,VARBL_FXD_IND,AC_OFFSET_IND        00540003
+004700          INTO :GV1,:GV2,:GV3                                     00550003
+004800          FROM PDR.MP_OBP_CONFIG                                  00560004
+004900          WHERE OBP_OFFER_CODE='NCS001'                           00570003
+005000     END-EXEC                                                     00590001
+005100                                                                  00600001
+005200     EVALUATE TRUE                                                00610001
+005300        WHEN SQLCODE = 0                                          00620001
+005400             DISPLAY 'SUCCESSFUL SELECT'                          00640001
+005500             DISPLAY 'OBP_OFFER_CODE=' GV1 ' VARBL_FXD_IND=' GV2  00650003
+005600                ' AC_OFFSET_IND='GV3                              00660003
+005700        WHEN SQLCODE = +100                                       00670001
+005800             DISPLAY 'NOTFOUND'                                   00680001
+005900             DISPLAY GV1                                          00690003
+006000        WHEN SQLCODE > 0 OR SQLWARN0 = 'W'                        00700001
+006100             PERFORM WARNING-PARAGRAPH                            00710001
+006200        WHEN SQLCODE < 0 GO TO ERROR-EXIT                         00720001
+006300     END-EVALUATE.                                                00730001
+006700     GOBACK.                                                      02020001
+006800                                                                  02030001
+006900 ERROR-EXIT.                                                      02040001
+007000                                                                  02050001
+007100     MOVE SQLCODE TO DISPLAY-SQLCODE.                             02060001
+007200     DISPLAY 'SQLCODE FOLLOWS' DISPLAY-SQLCODE                    02070001
+007300     EVALUATE TRUE                                                02080001
+007400       WHEN SQLCODE = 0                                           02090001
+007500*           DISPLAY 'SUCCESSFUL EXECUTION'                        02100001
+007600            CONTINUE                                              02110001
+007700       WHEN SQLCODE = +100                                        02120001
+007800*           DISPLAY 'NOT FOUND'                                   02130001
+007900            CONTINUE                                              02140001
+008000       WHEN SQLCODE = -180                                        02150001
+008100            DISPLAY 'BAD DATA IN DATE/TIME/TIMESTAMP'             02160001
+008200       WHEN SQLCODE = -181                                        02170001
+008300            DISPLAY 'BAD DATA IN DATE/TIME/TIMESTAMP'             02180001
+008400       WHEN SQLCODE = -305                                        02190001
+008500            DISPLAY 'NO NULL INDICATOR'                           02200001
+008600       WHEN SQLCODE = -311                                        02210001
+008700            DISPLAY 'LENGTH OF VARIABLE WRONG'                    02220001
+008800       WHEN SQLCODE = -501                                        02230001
+008900            DISPLAY 'CURSOR NOT OPEN ON FETCH'                    02240001
+009000       WHEN SQLCODE = -530                                        02250001
+009100            DISPLAY 'RI INS/UPD'                                  02260001
+009200       WHEN SQLCODE = -532                                        02270001
+009300            DISPLAY 'RI DELETE'                                   02280001
+009400       WHEN SQLCODE = -803                                        02290001
+009500            DISPLAY 'DUP ROW '                                    02300001
+009600       WHEN SQLCODE = -805                                        02310001
+009700            DISPLAY 'DBRM NOT FOUND IN PLAN'                      02320001
+009800       WHEN SQLCODE = -811                                        02330001
+009900            DISPLAY 'MORE THAN 1 ROW ON SELECT INTO '             02340001
+010000       WHEN SQLCODE = -818                                        02350001
+010100            DISPLAY 'TIMESTAMP MISMATCH, LOAD MOD/PLAN'           02360001
+010200       WHEN SQLCODE = -904                                        02370001
+010300            DISPLAY 'UNAVAIL RESOURCE'                            02380001
+010400       WHEN SQLCODE = -911                                        02390001
+010500            DISPLAY 'DEADLOCK/TIMEOUT, ROLLBACK DONE'             02400001
+010600       WHEN SQLCODE = -913                                        02410001
+010700            DISPLAY 'DEADLOCK/TIMEOUT VICTIM, NO ROLLBACK'        02420001
+010800       WHEN OTHER                                                 02430001
+010900            DISPLAY 'SEVERE SQL ERROR'                            02440001
+011000       END-EVALUATE                                               02450001
+011100                                                                  02460001
+011200     CALL 'DSNTIAR' USING SQLCA ERR-MESS-DATA ERR-TEXT-LEN        02470001
+011300                                                                  02480001
+011400     PERFORM ERROR-EXIT-PRINT-ERROR                               02490001
+011500           VARYING ERR-INDEX FROM 1 BY 1 UNTIL ERR-INDEX > 8      02500001
+011600                                                                  02510001
+011700*    IN REAL LIFE YOU WOULD CALL AN ABORT ROUTINE                 02520001
+011800     EXEC SQL                                                     02530001
+011900         ROLLBACK                                                 02540001
+012000     END-EXEC                                                     02550001
+012100     GOBACK.                                                      02560001
+012200                                                                  02570001
+012300 ERROR-EXIT-PRINT-ERROR.                                          02580001
+012400     IF ERR-MESS-TEXT(ERR-INDEX) NOT = SPACES                     02590001
+012500     THEN DISPLAY  ERR-MESS-TEXT(ERR-INDEX).                      02600001
+012600                                                                  02610001
+012700 WARNING-PARAGRAPH.                                               02620001
+012800     IF SQLWARN1 = 'W'                                            02630001
+012900        THEN DISPLAY 'CHARACTER DATA TRUNCATED'                   02640001
+013000             'SQLWARN1 = W'                                       02650001
+013100     END-IF                                                       02660001
+013200                                                                  02670001
+013300     IF SQLWARN2 = 'W'                                            02680001
+013400        THEN DISPLAY 'A FUNCTION HANDLED A NULL BY IGNORING IT'   02690001
+013500             'SQLWARN2 = W'                                       02700001
+013600     END-IF                                                       02710001
+013700                                                                  02720001
+013800     IF SQLWARN3 = 'W'                                            02730001
+013900        THEN DISPLAY 'THE NUMBER OF HOST VARIABLES IS LESS  '     02740001
+014000             'THAN THE NUMBER OF COLUMNS SELECTED  '              02750001
+014100             'SQLWARN3 = W'                                       02760001
+014200     END-IF                                                       02770001
+014300                                                                  02780001
+014400     IF SQLWARN4 = 'W'                                            02790001
+014500        THEN DISPLAY 'A DYNAMIC SQL UPDATE/DELETE DOES NOT  '     02800001
+014600             'CONTAIN A WHERE CLAUSE  '                           02810001
+014700             'SQLWARN4 = W'                                       02820001
+014800     END-IF                                                       02830001
+014900                                                                  02840001
+015000     IF SQLWARN5 = 'W'                                            02850001
+015100        THEN DISPLAY 'DYNAMIC SQL DOES NOT CONTAIN VALID SQL'     02860001
+015200             'SQLWARN5 = W'                                       02870001
+015300     END-IF                                                       02880001
+015400                                                                  02890001
+015500     IF SQLWARN6 = 'W'                                            02900001
+015600        THEN DISPLAY 'DATE/TIMESTAMP ARITHMETIC '                 02910001
+015700             'PRODUCES AN INVALID DATE EX: NOV 31'                02920001
+015800             'IT IS CHANGED TO LAST DAY OF MONTH EX: NOV 30'      02930001
+015900             'SQLWARN6 = W'                                       02940001
+016000     END-IF                                                       02950001
+016100                                                                  02960001
+016200     IF SQLWARN7 = 'W'                                            02970001
+016300        THEN DISPLAY 'CHARACTER DATA TRUNCATED '                  02980001
+016400             'POSSIBLE LOW ORDER TRUNCATION      '                02990001
+016500             'SQLWARN7 = W'                                       03000001
+016600     END-IF                                                       03010001
+016700                                                                  03020001
+016800     IF SQLWARN8 = 'W'                                            03030001
+016900        THEN DISPLAY 'A CHARACTER COULD NOT BE CONVERTED '        03040001
+017000             'SQLWARN8 = W'                                       03050001
+017100     END-IF                                                       03060001
+017200                                                                  03070001
+017300     IF SQLWARN9 = 'W'                                            03080001
+017400        THEN DISPLAY 'ARITHMETIC DATA ERRORS FOUND'               03090001
+017500             'WHILE DOING A COUNT(DISTINCT)      '                03100001
+017600             'SQLWARN9 = W'                                       03110001
+017700     END-IF                                                       03120001
+017800                                                                  03130001
+017900     IF SQLWARNA = 'W'                                            03140001
+018000        THEN DISPLAY 'CHARACTER CONVERSION ERROR'                 03150001
+018100             'IN SQLCA OR SQLDA. THE CODE WILL BE INVALID'        03160001
+018200             'SQLWARNA = W'                                       03170001
+018300     END-IF.                                                      03180001
+

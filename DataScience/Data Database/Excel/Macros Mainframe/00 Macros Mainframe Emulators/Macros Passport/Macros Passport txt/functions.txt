@@ -1,0 +1,20 @@
+Sub ZMain
+Dim  ret,PrNoOld 
+PrNoOld =111
+
+testResult = 10 Mod 5
+MsgBox "10 Mod 5 = "  & testResult 
+
+if  10 Mod 5 = 0 then
+MsgBox "Mod in if working" 
+End if
+
+ret = IsNumeric(PrNoOld )
+Prompt " IsNumeric PrNoOld =" &ret, 0, "Attention"
+
+End Sub
+
+Sub Prompt( sMsg, nType, sTitle )
+            Set ws = CreateObject( "wscript.shell" )
+            ws.popup sMsg, 0, sTitle, 4096 + nType
+End Sub 

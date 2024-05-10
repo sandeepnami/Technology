@@ -1,0 +1,17 @@
+//UGBRUN1  JOB (DEV01,CMS),'NANI RUN',
+//             MSGCLASS=X,CLASS=1,
+//             NOTIFY=&SYSUID
+//JOBLIB   DD  DSN=DNDVPGE.SANDEEPN.LOADLIB,
+//             DISP=SHR
+//*
+//STEP001 EXEC PGM=COBCALL                                              ZHCZH892
+//SYSOUT   DD  SYSOUT=*                                                 ZHCZH892
+//SYSPRINT DD  SYSOUT=*                                                 ZHCZH892
+//SYSUDUMP DD  SYSOUT=*                                                 ZHCZH892
+//SYSABEND DD  SYSOUT=*                                                 ZHCZH892
+//SYSDBOUT DD  SYSOUT=*                                                 ZHCZH892
+//SYSIN    DD  *
+S0
+/*
+//
+

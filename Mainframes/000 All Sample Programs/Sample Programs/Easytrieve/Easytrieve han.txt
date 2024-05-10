@@ -1,0 +1,127 @@
+//#T53VXV0  JOB  (9999,0206,3),'12221 RG2   ',CLASS=X,               
+//           MSGCLASS=X,NOTIFY=&SYSUID,REGION=0M                     
+//*                                                                  
+//*ROUTE XEQ SMASYS2                                                 
+//JOBLIB    DD   DSN=NDVR.AFC.PPY.PRD.LPRODLIB,DISP=SHR              
+//          DD   DSN=NDVR.AFC.PPY.PRD.NOSOURCE.LPRODLIB,DISP=SHR     
+//          DD   DSN=SYS1.CEE.SCEERUN,DISP=SHR                       
+//*         DD   DSN=LNKLST.CAI.EZTPLUS.R640311.CAILIB,DISP=SHR      
+//*                                                                  
+//DELDEF   EXEC PGM=EQQDELDS                                         
+//*******************************************************************
+//*                 CODE START                                      *
+//*******************************************************************
+//*                                                                  
+//STEP01A EXEC  EZTPLUS                                              
+//FILEA     DD  DSN=PPY.RG2.H156901.F41001(0),DISP=SHR               
+//FILEB     DD  DSN=&&HANINDX,DISP=(,PASS),UNIT=DISK,                
+//            SPACE=(TRK,(10,10),RLSE)                               
+//SYSIN     DD *               GENERATED STATEMENT                   
+FILE FILEA                                                           
+REC-IN     01 132 A               
+POL-LOB    01 03 A                
+POL-LOB-1  01 01 A                
+BR-AGENT   04 04 P                
+POL-STATE  08 02 A                
+POL-ZIP    10 03 P                
+PAY-BY     13 01 A                
+POL-NO     14 07 A                
+INDX-TYPE  21 01 A                
+POL-LOC    22 02 N                
+POL-MCO    24 02 N                
+PIF-ADDR   26 06 A                
+SYMBOL     32 03 A                
+SYMBOL-1   32 01 A                
+EFF-EXP-P  35 09 P                
+U-W-5TH    61 01 A                
+POL-MOD   128 02 N                
+OUT-CNT    W    05 N 0            
+AGENCY1    W    07 N 0            
+BRANCH    AGENCY1         02 N    
+TEMP      AGENCY1    +02  01 N    
+AGENCY-4  AGENCY1    +03  04 N                                  
+*                                                               
+FILE  FILEB  FB(016 0)                                          
+REC-OUT      01 16 A                                            
+OUT-LOC      01 02 N                                            
+OUT-REC-KY   03 14 A                                            
+OUT-POL-NO   03 07 A                                            
+OUT-POL-SYM  10 03 A                                            
+OUT-POL-MCO  13 02 N                                            
+OUT-POL-MOD  15 02 N                                            
+*                                                               
+JOB  INPUT FILEA                                                
+*                                                               
+*IF POL-LOB   = 'ACA' 'ACC' 'ACV' 'ACJ' 'AFA' 'AFC' 'AFJ' 'AFV' 
+*ELSE                                                           
+*   GOTO JOB                                                    
+*END-IF                                                         
+*                                                               
+    OUT-LOC     =  POL-LOC                                           
+    OUT-POL-NO  =  POL-NO                                            
+    OUT-POL-SYM =  SYMBOL                                            
+    OUT-POL-MCO =  POL-MCO                                           
+    OUT-POL-MOD =  POL-MOD                                           
+    OUT-CNT     =  OUT-CNT  +  1                                     
+    PUT  FILEB                                                       
+//*                                                                  
+//*******************************************************************
+//*         SORT THE FILTERED FILE ON POLICY NUMBER AND MOD         *
+//*******************************************************************
+//*                                                                  
+//STEP01S   EXEC PGM=SORT                                            
+//SYSPRINT  DD   SYSOUT=*                                            
+//SYSOUT    DD   SYSOUT=*                                            
+//SYSUDUMP  DD   SYSOUT=0                                            
+//SORTLIB   DD   DSN=SYS1.SORTLIB,DISP=SHR                           
+//SORTIN    DD   DSN=&&HANINDX,DISP=(OLD,PASS)                       
+//SORTOUT   DD   DSN=&&SPIFKEYS,DISP=(,PASS),UNIT=DISK,              
+//          SPACE=(CYL,(19,19),RLSE)                                 
+//SORTWK01  DD   UNIT=DISK,SPACE=(CYL,(50))                          
+//SORTWK02  DD   UNIT=DISK,SPACE=(CYL,(50))                           
+//SORTWK03  DD   UNIT=DISK,SPACE=(CYL,(50))                           
+//SORTWK04  DD   UNIT=DISK,SPACE=(CYL,(50))                           
+//SORTWK05  DD   UNIT=DISK,SPACE=(CYL,(50))                           
+//SORTWK06  DD   UNIT=DISK,SPACE=(CYL,(50))                           
+//SYSIN     DD   *                                                    
+    SORT FIELDS=(3,14,A),FORMAT=BI                                    
+/*                                                                    
+//*                                                                   
+//******************************************************************* 
+//*     MATCH SORTED POLICIES TO PIF INDEX RECORDS AND WRITE        * 
+//*              MATCHED RECORDS ONTO OUTPUT (32 BYTE)              * 
+//******************************************************************* 
+//*                                                                   
+//STEP01M   EXEC PGM=MAS0110M                               * MAS0110M
+//SYSPRINT  DD   SYSOUT=*                                             
+//SYSOUT    DD   SYSOUT=*                                             
+//SYSOUX    DD   SYSOUT=*                                             
+//SYSUDUMP  DD   SYSOUT=0                                             
+//EZTVFM    DD   UNIT=DISK,SPACE=(CYL,(50))                           
+//FILEA     DD   DSN=PPY.RG2.WDW0401.F16001(0),DISP=SHR              
+//FILE2     DD   DSN=&&SPIFKEYS,DISP=(OLD,PASS)                      
+//FILEB     DD   DSN=&&PIFINDX,DISP=(,PASS),UNIT=DISK,               
+//          SPACE=(CYL,(90,90),RLSE)                                 
+//SYSIN     DD   * GENERATED STATEMENT                               
+//*                                                                  
+//*******************************************************************
+//*        READS 32 CH INDEX EXTRACTED FROM PIF INDEX               *
+//*                 READ ON-LINE PIF DIRECTLY                       *
+//*        WRITES 02 & THE OTHER SEGMENTS SPECIFIED IN PARMFILE     *
+//*******************************************************************
+//*                                                                  
+//STEP01H   EXEC PGM=HMM9000                                *HMM9000 
+//INDEX32C  DD   DSN=&&PIFINDX,DISP=(OLD,PASS)                       
+//PIFMSTR   DD   DSN=PPYVSAM.RG2.PIFMSTR.F00010,DISP=SHR             
+//PIFMST2   DD   DSN=PPYVSAM.RG2.PIFMST2.F00010,DISP=SHR             
+//PARMIN    DD   DSN=PPY.RG2.DATCTRL.FD01(P53140M),DISP=SHR          
+//GTAMLIB   DD   DSN=PPYVSAM.SUP.GTAM53.F00013,DISP=SHR              
+//PIFSEGOT  DD   DSN=TST.M53.VXV.RG2.PULLSEG.T200108,                
+//          DISP=(NEW,CATLG),UNIT=DISK,                              
+//          SPACE=(CYL,(100,100),RLSE),   
+//          DCB=(RECFM=FB,LRECL=452)      
+//SYSOUT    DD   SYSOUT=*                 
+//SYSUDUMP  DD   SYSOUT=*                 
+//SYSPRINT  DD   SYSOUT=*                 
+//SEGMPARM  DD   *                        
+  SEGMPARM 02 MAX ST                                                                                           

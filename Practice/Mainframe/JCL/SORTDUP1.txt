@@ -1,0 +1,15 @@
+//UGBSORTD JOB 000,'REMOVE DUPS',                                       00010000
+//             MSGCLASS=X,CLASS=2,                                      00020000
+//             NOTIFY=&SYSUID                                           00030000
+//*TO FIND THE REC COUNT AND WRITE INTO NEW FILE                        00031000
+//CTRCDS  EXEC PGM=SORT                                                 00032000
+//SYSOUT   DD  SYSOUT=*                                                 00033000
+//SORTIN   DD  DSN=ADKVPGE.REFRSH.ACCTS,                                00034000
+//             DISP=SHR                                                 00034100
+//SORTOUT  DD  DSN=ADKVPGE.REFRSH.ACCTS,                                00035000
+//             DISP=OLD                                                 00035100
+//SYSIN    DD  *                                                        00036000
+  SORT FIELDS=(1,22,CH,A)                                               00037000
+  SUM FIELDS=NONE                                                       00038000
+/*                                                                      00039000
+

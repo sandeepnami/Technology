@@ -1,0 +1,216 @@
+000100 IDENTIFICATION DIVISION.                                         00010000
+000200 PROGRAM-ID. TABPS.                                               00020001
+000201 AUTHOR. ELP 1026.                                                00020135
+000202 DATE-WRITTEN. 17-SEP-2012.                                       00020235
+000203 DATE-COMPILED.                                                   00020335
+000210                                                                  00021023
+000220******************************************************************00022034
+000230*                                                                 00023034
+000240* TITLE   :  INSERTING RECORDS FROM PS FILE TO TABLE.             00024034
+000250*                                                                 00025034
+000260* LOGIC   :  CHECK EACH RECORD FROM INPUT FILE AND PERFORM        00026034
+000270*            NECCESARY VALIDATIONS AND INSERT INTO TABLE          00027034
+000280* FILES USED:                                                     00028034
+000290*_________________________________________________________________00029034
+000291* LOGICAL           PHYSICAL           OPENING          PURPOSE   00029134
+000292* NAME               NAME               MODE            SERVED    00029234
+000293*_________________________________________________________________00029334
+000294* M01-INPUT-FILE     INFILE             INPUT           READING   00029434
+000295*                                                        RECORDS  00029534
+000296*________________________________________________________________ 00029634
+000297******************************************************************00029734
+000298                                                                  00029834
+000300 ENVIRONMENT DIVISION.                                            00030001
+000310                                                                  00031023
+000400 INPUT-OUTPUT SECTION.                                            00040001
+000410                                                                  00041023
+000500 FILE-CONTROL.                                                    00050002
+000600     SELECT M01-INPUT-FILE                                        00060003
+000700     ASSIGN TO INFILE                                             00070003
+000800            ORGANIZATION IS SEQUENTIAL                            00080021
+000900            ACCESS MODE IS SEQUENTIAL                             00090021
+001000            FILE STATUS IS W-FST-OF-INPUT.                        00100021
+001100 DATA DIVISION.                                                   00110003
+001110                                                                  00111023
+001200 FILE SECTION.                                                    00120003
+001210                                                                  00121023
+001300 FD M01-INPUT-FILE                                                00130003
+001400            RECORD CONTAINS 30 CHARACTERS                         00140021
+001500            BLOCK CONTAINS 0 RECORDS                              00150021
+001600            RECORDING MODE IS F.                                  00160021
+001601                                                                  00160134
+001610******************************************************************00161034
+001620*------------------INPUT RECORD STRUCTURE-----------------------  00162034
+001630***************************************************************** 00163034
+001640                                                                  00164034
+001700 01 M01-INPUT-REC.                                                00170011
+001800     03  M01-I-SHIFT                   PIC        9(02).          00180003
+001900     03  M01-I-SHIFT-START-TIME        PIC        9(02).          00190003
+002000     03  M01-I-SHIFT-END-TIME          PIC        9(02).          00200003
+002100     03  M01-I-NO-OF-LOOMS             PIC        9(04).          00210003
+002200     03  M01-X-REMARKS                 PIC        X(20).          00220003
+002210                                                                  00221023
+002300 WORKING-STORAGE SECTION.                                         00230003
+002310                                                                  00231023
+002400 01 WORK-AREA.                                                    00240003
+002500     03  W-FST-OF-INPUT                PIC        X(02).          00250003
+002510     03  W-FLA-EOF                     PIC        X(03).          00251004
+002520     88  C-END-OF-FILE                              VALUE         00252018
+002521                                                   "END".         00252118
+002530     03  W-FLA-FOR-INT                 PIC        9 VALUE 0.      00253005
+002540     03  W-FLA-FOR-CHA                 PIC        9 VALUE 0.      00254005
+002541     03  W-I-COUNT                     PIC        9(02).          00254107
+002542     03  W-I-LENGTH                    PIC        9(02).          00254207
+002543                                                                  00254324
+002547                                                                  00254724
+002548     EXEC SQL                                                     00254817
+002549         INCLUDE SQLCA                                            00254917
+002550     END-EXEC.                                                    00255017
+002551     EXEC SQL                                                     00255106
+002560         INCLUDE MACS228                                          00256006
+002570     END-EXEC.                                                    00257006
+002580                                                                  00258021
+002600 PROCEDURE DIVISION .                                             00260032
+002610                                                                  00261021
+002700 0000-MAIN-PARA.                                                  00270003
+002710                                                                  00271021
+002800     PERFORM 1000-FILE-OPEN-PARA  THRU 1000-FILE-OPEN-EXIT.       00280022
+002900     PERFORM 2000-FILE-READ-PARA  THRU 2000-FILE-READ-EXIT        00290022
+002910                                   UNTIL  C-END-OF-FILE.          00291022
+003000     PERFORM 9000-FILE-CLOSE-PARA THRU 9000-FILE-CLOSE-EXIT.      00300022
+003100     PERFORM 9999-EXIT-PARA.                                      00310021
+003110                                                                  00311021
+003120******************************************************************00312034
+003130*---M01-INPUT-FILE IS OPENED IN INPUT MODE AND STATUS IS CHECKED  00313034
+003140******************************************************************00314034
+003150                                                                  00315034
+003200 1000-FILE-OPEN-PARA.                                             00320004
+003210                                                                  00321021
+003300     OPEN INPUT M01-INPUT-FILE.                                   00330004
+003400     EVALUATE TRUE                                                00340004
+003500        WHEN W-FST-OF-INPUT = 00                                  00350005
+003600             CONTINUE                                             00360005
+003700        WHEN OTHER                                                00370005
+003800             PERFORM 9999-EXIT-PARA                               00380024
+003900     END-EVALUATE.                                                00390005
+003910                                                                  00391021
+003920 1000-FILE-OPEN-EXIT.                                             00392022
+003921                                                                  00392122
+003930     EXIT.                                                        00393022
+003940                                                                  00394022
+003950******************************************************************00395034
+003960*------RECORDS ARE READ SEQUENTIALLY FROM INPUT FILE AFTER        00396034
+003970*      CHECKING THE STATUS                                        00397034
+003980******************************************************************00398034
+003990                                                                  00399034
+004000 2000-FILE-READ-PARA.                                             00400005
+004010                                                                  00401021
+004100     READ M01-INPUT-FILE                                          00410005
+004200        AT END                                                    00420005
+004300          SET C-END-OF-FILE TO TRUE                               00430005
+004400        NOT AT END                                                00440005
+004500          EVALUATE TRUE                                           00450005
+004600            WHEN W-FST-OF-INPUT = 00                              00460005
+004700               PERFORM 3000-VALIDATE-PARA THRU 3000-VALIDATE-EXIT 00470022
+004800            WHEN OTHER                                            00480005
+004900               PERFORM 9999-EXIT-PARA                             00490022
+005000          END-EVALUATE                                            00500005
+005100     END-READ.                                                    00510005
+005110                                                                  00511021
+005120 2000-FILE-READ-EXIT.                                             00512022
+005130                                                                  00513022
+005140     EXIT.                                                        00514022
+005150                                                                  00515022
+005160******************************************************************00516034
+005170*----INPUT RECORDS ARE FETCHED AND IF THEY SATISFY VALIDATIONS    00517034
+005180*    FLAGS ARE SET                                                00518034
+005190***************************************************************** 00519034
+005191                                                                  00519134
+005200 3000-VALIDATE-PARA.                                              00520022
+005210                                                                  00521021
+005300     IF M01-I-SHIFT              IS NUMERIC AND                   00530005
+005400        M01-I-SHIFT-START-TIME   IS NUMERIC AND                   00540005
+005500        M01-I-SHIFT-END-TIME     IS NUMERIC AND                   00550005
+005600        M01-I-NO-OF-LOOMS        IS NUMERIC THEN                  00560005
+006010           MOVE 1                         TO  W-FLA-FOR-INT       00601007
+006100     END-IF.                                                      00610007
+006110                                                                  00611021
+006200     IF M01-X-REMARKS            IS  NUMERIC                      00620012
+006300           PERFORM 9999-EXIT-PARA                                 00630024
+006310     ELSE                                                         00631012
+006320           MOVE 1                         TO  W-FLA-FOR-CHA       00632013
+006400     END-IF.                                                      00640007
+006410                                                                  00641021
+006500     EVALUATE TRUE ALSO TRUE                                      00650007
+006600          WHEN W-FLA-FOR-INT = 1 ALSO W-FLA-FOR-CHA = 1           00660008
+006700               PERFORM 3200-INSERT-PARA THRU 3200-INSERT-EXIT     00670022
+006800          WHEN OTHER                                              00680007
+006900               PERFORM 9999-EXIT-PARA                             00690022
+007000     END-EVALUATE.                                                00700007
+007010                                                                  00701021
+007020 3000-VALIDATE-EXIT.                                              00702022
+007030                                                                  00703022
+007040     EXIT.                                                        00704022
+007050                                                                  00705022
+007060******************************************************************00706034
+007070*------INPUT RECORD IS MOVED TO HOST VARIABLES AND INSERTED INTO  00707034
+007080*      TABLE                                                      00708034
+007090******************************************************************00709034
+007091                                                                  00709134
+007100 3200-INSERT-PARA.                                                00710022
+007110                                                                  00711021
+007200       MOVE M01-I-SHIFT               TO  HV-SHIFT.               00720007
+007300       MOVE M01-I-SHIFT-START-TIME    TO  HV-SHIFT-START-TIME.    00730007
+007400       MOVE M01-I-SHIFT-END-TIME      TO  HV-SHIFT-END-TIME.      00740007
+007500       MOVE M01-I-NO-OF-LOOMS         TO  HV-NO-OF-POWER-LOOMS.   00750007
+007510                                                                  00751021
+007600       INSPECT M01-X-REMARKS REPLACING ALL LOW-VALUE BY SPACES.   00760031
+007700       INSPECT FUNCTION REVERSE( M01-X-REMARKS )                  00770031
+007800            TALLYING W-I-COUNT FOR LEADING SPACES.                00780031
+007810                                                                  00781031
+007900       COMPUTE W-I-LENGTH = LENGTH OF M01-X-REMARKS - W-I-COUNT.  00790031
+007910                                                                  00791021
+008100       MOVE M01-X-REMARKS                   TO  HV-REMARKS-TEXT.  00810029
+008200       MOVE W-I-LENGTH                      TO  HV-REMARKS-LEN.   00820032
+008300                                                                  00830032
+008401       EXEC SQL                                                   00840126
+008402          INSERT INTO UELT228.SHIFT_TABLE                         00840226
+008403          VALUES(:HV-SHIFT,:HV-SHIFT-START-TIME,                  00840326
+008404                 :HV-SHIFT-END-TIME,:HV-NO-OF-POWER-LOOMS,        00840426
+008405                 :HV-REMARKS)                                     00840526
+008406       END-EXEC.                                                  00840626
+008407                                                                  00840721
+008410       MOVE ZEROS                     TO HV-REMARKS-LEN.          00841021
+008411       MOVE ZEROS                     TO W-I-COUNT.               00841121
+008420       MOVE SPACES                    TO HV-REMARKS-TEXT.         00842021
+008430                                                                  00843021
+008440 3200-INSERT-EXIT.                                                00844022
+008450                                                                  00845022
+008460       EXIT.                                                      00846022
+008470                                                                  00847022
+008480******************************************************************00848034
+008490*---------FILE HAS BEEN CLOSED AND EXCEPTIONS ARE CHECKED         00849034
+008491***************************************************************** 00849134
+008492                                                                  00849234
+008500 9000-FILE-CLOSE-PARA.                                            00850011
+008510                                                                  00851021
+008600       CLOSE M01-INPUT-FILE.                                      00860011
+008610       EVALUATE TRUE                                              00861021
+008620         WHEN W-FST-OF-INPUT = 00                                 00862021
+008630             CONTINUE                                             00863021
+008640         WHEN OTHER                                               00864021
+008650             PERFORM 9999-EXIT-PARA                               00865021
+008660       END-EVALUATE.                                              00866021
+008670                                                                  00867021
+008680 9000-FILE-CLOSE-EXIT.                                            00868022
+008690                                                                  00869022
+008691       EXIT.                                                      00869122
+008692                                                                  00869222
+008693******************************************************************00869334
+008694*-----------------EXITING OF TABPS PROGRAM----------------------* 00869434
+008695****************************************************************  00869534
+008696                                                                  00869634
+008900 9999-EXIT-PARA.                                                  00890021
+009000                                                                  00900021
+009100       EXIT PROGRAM.                                              00910030
+

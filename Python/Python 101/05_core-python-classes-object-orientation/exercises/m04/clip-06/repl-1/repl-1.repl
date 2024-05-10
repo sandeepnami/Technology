@@ -1,0 +1,21 @@
+>>> from simple_list import *                                                   
+>>> IntList.__mro__                                                             
+(<class 'simple_list.IntList'>, <class 'simple_list.SimpleList'>, <class 'object
+'>)                                                                             
+>>> SortedIntList.__mro__                                                       
+(<class 'simple_list.SortedIntList'>, <class 'simple_list.IntList'>, <class 'sim
+ple_list.SortedList'>, <class 'simple_list.SimpleList'>, <class 'object'>)      
+>>> list.__mro__                                                                
+(<class 'list'>, <class 'object'>)                                              
+>>> int.__mro__                                                                 
+(<class 'int'>, <class 'object'>)                                               
+>>> class NoBaseClass: pass                                                     
+...                                                                             
+>>> NoBaseClass.__bases__                                                       
+(<class 'object'>,)                                                             
+>>> dir(object)                                                                 
+['__class__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge
+__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', 
+'__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr_
+_', '__setattr__', '__sizeof__', '__str__', '__subclasshook__']                 
+>>>                                                                             

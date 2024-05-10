@@ -1,0 +1,26 @@
+Sub ZMain()
+
+Dim fso, tf,msg_file
+Set fso = CreateObject("Scripting.FileSystemObject")
+
+msg_file = "D:\MSAT\sn95502\sandeep\imp\Macros\Macros Passport\sms_msg.txt"
+
+ '  Set tf = fso.OpenAsTextStream(msg_file, True)  'func not supported in passport
+   
+  Set tf = fso.CreateTextFile(msg_file, True)
+   ' Write a line with a newline character.
+
+   tf.WriteLine("Data is opened and written")
+
+   ' Write three newline characters to the file.        
+
+   tf.WriteBlankLines(3)
+
+   ' Write a line.
+
+   tf.Write ("This is a test.")
+
+   tf.Close
+
+End Sub
+ 

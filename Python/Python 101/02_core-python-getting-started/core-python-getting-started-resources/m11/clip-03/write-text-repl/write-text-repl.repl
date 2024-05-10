@@ -1,0 +1,158 @@
+$ python                                                                        
+Python 3.8.0 (default, Dec 20 2019, 15:53:45)                                   
+[Clang 10.0.1 (clang-1001.0.46.4)] on darwin                                    
+Type "help", "copyright", "credits" or "license" for more information.          
+>>> f = open('wasteland.txt', mode='wt', encoding='utf-8')                      
+>>> help(f)                                                                     
+Help on TextIOWrapper object:                                                   
+                                                                                
+class TextIOWrapper(_TextIOBase)                                                
+ |  TextIOWrapper(buffer, encoding=None, errors=None, newline=None, line_bufferi
+ng=False, write_through=False)                                                  
+ |                                                                              
+ |  Character and line based layer over a BufferedIOBase object, buffer.        
+ |                                                                              
+ |  encoding gives the name of the encoding that the stream will be             
+ |  decoded or encoded with. It defaults to locale.getpreferredencoding(False). 
+ |                                                                              
+ |  errors determines the strictness of encoding and decoding (see              
+ |  help(codecs.Codec) or the documentation for codecs.register) and            
+ |  defaults to "strict".                                                       
+ |                                                                              
+ |  newline controls how line endings are handled. It can be None, '',          
+ |  '\n', '\r', and '\r\n'.  It works as follows:                               
+ |                                                                              
+ |  * On input, if newline is None, universal newlines mode is                  
+ |    enabled. Lines in the input can end in '\n', '\r', or '\r\n', and         
+ |    these are translated into '\n' before being returned to the               
+ |    caller. If it is '', universal newline mode is enabled, but line          
+ |    endings are returned to the caller untranslated. If it has any of         
+ |    the other legal values, input lines are only terminated by the given      
+ |    string, and the line ending is returned to the caller untranslated.       
+ |                                                                              
+ |  * On output, if newline is None, any '\n' characters written are            
+ |    translated to the system default line separator, os.linesep. If           
+ |    newline is '' or '\n', no translation takes place. If newline is any      
+ |    of the other legal values, any '\n' characters written are translated     
+ |    to the given string.                                                      
+ |                                                                              
+ |  If line_buffering is True, a call to flush is implied when a call to        
+ |  write contains a newline character.                                         
+ |                                                                              
+ |  Method resolution order:                                                    
+ |      TextIOWrapper                                                           
+ |      _TextIOBase                                                             
+ |      _IOBase                                                                 
+ |      builtins.object                                                         
+ |                                                                              
+ |  Methods defined here:                                                       
+ |                                                                              
+ |  __init__(self, /, *args, **kwargs)                                          
+ |      Initialize self.  See help(type(self)) for accurate signature.          
+ |                                                                              
+ |  __next__(self, /)                                                           
+ |      Implement next(self).                                                   
+ |                                                                              
+ |  __repr__(self, /)                                                           
+ |      Return repr(self).                                                      
+ |                                                                              
+ |  close(self, /)                                                              
+ |      Flush and close the IO object.                                          
+ |                                                                              
+ |      This method has no effect if the file is already closed.                
+ |                                                                              
+ |  detach(self, /)                                                             
+ |      Separate the underlying buffer from the TextIOBase and return it.       
+ |                                                                              
+ |      After the underlying buffer has been detached, the TextIO is in an      
+ |      unusable state.                                                         
+ |                                                                              
+ |  fileno(self, /)                                                             
+ |      Returns underlying file descriptor if one exists.                       
+ |                                                                              
+ |      OSError is raised if the IO object does not use a file descriptor.      
+ |                                                                              
+ |  flush(self, /)                                                              
+ |      Flush write buffers, if applicable.                                     
+ |                                                                              
+ |      This is not implemented for read-only and non-blocking streams.         
+ |                                                                              
+ |  isatty(self, /)                                                             
+ |      Return whether this is an 'interactive' stream.                         
+ |                                                                              
+ |      Return False if it can't be determined.                                 
+ |                                                                              
+ |  read(self, size=-1, /)                                                      
+ |      Read at most n characters from stream.                                  
+ |                                                                              
+ |      Read from underlying buffer until we have n characters or we hit EOF.   
+ |      If n is negative or omitted, read until EOF.                            
+ |                                                                              
+ |  readable(self, /)                                                           
+ |      Return whether object was opened for reading.                           
+ |                                                                              
+ |      If False, read() will raise OSError.                                    
+ |                                                                              
+ |  readline(self, size=-1, /)                                                  
+ |      Read until newline or EOF.                                              
+ |                                                                              
+ |      Returns an empty string if EOF is hit immediately.                      
+ |                                                                              
+ |  reconfigure(self, /, *, encoding=None, errors=None, newline=None, line_buffe
+ring=None, write_through=None)                                                  
+ |      Reconfigure the text stream with new parameters.                        
+ |                                                                              
+ |      This also does an implicit stream flush.                                
+ |                                                                              
+ |  seek(self, cookie, whence=0, /)                                             
+ |      Change stream position.                                                 
+ |                                                                              
+ |      Change the stream position to the given byte offset. The offset is      
+ |      interpreted relative to the position indicated by whence.  Values       
+ |      for whence are:                                                         
+ |                                                                              
+ |      * 0 -- start of stream (the default); offset should be zero or positive 
+ |      * 1 -- current stream position; offset may be negative                  
+ |      * 2 -- end of stream; offset is usually negative                        
+ |                                                                              
+ |      Return the new absolute position.                                       
+ |                                                                              
+ |  seekable(self, /)                                                           
+ |      Return whether object supports random access.                           
+ |                                                                              
+ |      If False, seek(), tell() and truncate() will raise OSError.             
+ |      This method may need to do a test seek().                               
+ |                                                                              
+ |  tell(self, /)                                                               
+ |      Return current stream position.                                         
+ |                                                                              
+ |  truncate(self, pos=None, /)                                                 
+ |      Truncate file to size bytes.                                            
+ |                                                                              
+ |      File pointer is left unchanged.  Size defaults to the current IO        
+ |      position as reported by tell().  Returns the new size.                  
+ |                                                                              
+ |  writable(self, /)                                                           
+ |      Return whether object was opened for writing.                           
+ |                                                                              
+ |      If False, write() will raise OSError.                                   
+ |                                                                              
+ |  write(self, text, /)                                                        
+ |      Write string to stream.                                                 
+ |      Returns the number of characters written (which is always equal to      
+ |      the length of the string).                                              
+ |                                                                              
+ |  ----------------------------------------------------------------------      
+ |  Static methods defined here:                                                
+ |                                                                              
+                                                                                
+>>> f.write('What are the roots that clutch, ')                                 
+32                                                                              
+>>> f.write('what branches grow\n')                                             
+19                                                                              
+>>> f.write('Out of this stony rubbish? ')                                      
+27                                                                              
+>>> f.close()                                                                   
+>>> exit()                                                                      
+$ ls -l wasteland.txt                                                           
+-rw-r--r--  1 abingham  staff  78 Apr 15 13:33 wasteland.txt                    

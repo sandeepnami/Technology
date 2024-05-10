@@ -1,0 +1,197 @@
+000100 ID DIVISION.                                                     00010000
+000200 PROGRAM-ID. CS2MAIN.                                             00020014
+000300 DATA DIVISION.                                                   00030000
+000400 WORKING-STORAGE SECTION.                                         00040001
+000410         EXEC SQL                                                 00041000
+000420           INCLUDE USER228                                        00042015
+000430         END-EXEC.                                                00043000
+000440         EXEC SQL                                                 00044000
+000450           INCLUDE SQLCA                                          00045000
+000460         END-EXEC.                                                00046000
+000461         COPY LOGS28.                                             00046113
+000462         COPY DFHAID.                                             00046201
+000463         COPY DFHBMSCA.                                           00046301
+000470 01 WORKING-AREA.                                                 00047000
+000480    03 WS-G-COMMAREA.                                             00048000
+000490       05 WS-X-USERID                    PIC   X(10).             00049002
+000493    03 WS-RESP                           PIC   S9(9) COMP.        00049301
+000495    03 W-I-CTR                           PIC   S9(2) COMP.        00049505
+000496    03 W-I-CTR2                          PIC   X(2).              00049605
+000497    03 WS-X-PROG                         PIC   X(8).              00049705
+000498    03 WS-I-VALID                        PIC   9(2).              00049805
+000499    03 WS-X-UID                          PIC   X(10).             00049905
+000500    03 WS-X-PWD                          PIC   X(4).              00050005
+000501    03 W-DATE.                                                    00050105
+000502       05 W-DD                           PIC     99.              00050205
+000503       05 FILLER                         PIC     X   VALUE "/".   00050305
+000504       05 W-MM                           PIC     99.              00050405
+000505       05 FILLER                         PIC     X   VALUE "/".   00050505
+000506       05 W-YY                           PIC     99.              00050605
+000507    03 W-TIME.                                                    00050705
+000510       05 W-HH                           PIC     99.              00051005
+000520       05 FILLER                         PIC     X   VALUE ":".   00052005
+000530       05 W-MMM                          PIC     99.              00053005
+000540       05 FILLER                         PIC     X   VALUE ":".   00054005
+000550       05 W-SS                           PIC     99.              00055005
+000600 LINKAGE SECTION.                                                 00060000
+000610 01 DFHCOMMAREA.                                                  00061000
+000620    03 LS-USERID                         PIC   X(10).             00062002
+000700 PROCEDURE DIVISION.                                              00070000
+000710 0000-START-PARA.                                                 00071000
+000720       EVALUATE TRUE                                              00072000
+000721          WHEN EIBCALEN = 0                                       00072112
+000722              PERFORM 2000-SEND-PARA                              00072200
+000723          WHEN EIBAID = DFHPF6 OR EIBAID = DFHENTER               00072305
+000724              MOVE "YOU PRESSED ENTER" TO MSGO                    00072404
+000726              PERFORM 3000-RCV-PARA                               00072605
+000727*             PERFORM 2000-SEND-PARA                              00072705
+000728          WHEN EIBAID = DFHPF12 OR EIBAID = DFHPF3                00072805
+000729              PERFORM 9000-EXIT-PARA                              00072905
+000730          WHEN EIBAID = DFHPF5                                    00073005
+000731              PERFORM 2000-SEND-PARA                              00073105
+000732          WHEN OTHER                                              00073205
+000733              PERFORM 9999-ERR-PARA                               00073305
+000734       END-EVALUATE.                                              00073405
+000735 2000-SEND-PARA.                                                  00073505
+000736      MOVE LOW-VALUES TO MPLOGNI, MPLOGNO.                        00073614
+000737      EXEC CICS ASKTIME                                           00073705
+000738       ABSTIME(W-TIME)                                            00073805
+000739      END-EXEC.                                                   00073905
+000740      EXEC CICS FORMATTIME                                        00074005
+000741      ABSTIME(W-TIME)                                             00074105
+000742      DDMMYY(W-DATE)                                              00074205
+000743      DATESEP                                                     00074305
+000750      TIME(W-TIME)                                                00075000
+000760      TIMESEP                                                     00076000
+000770      END-EXEC.                                                   00077000
+000780      MOVE W-TIME TO TIMEO.                                       00078000
+000790      MOVE W-DATE TO DATEO.                                       00079000
+000792      EXEC CICS SEND                                              00079200
+000793            MAP('MPLOGN')                                         00079314
+000794            MAPSET('LOGS28')                                      00079413
+000795            RESP(WS-RESP)                                         00079500
+000796            ERASE                                                 00079600
+000797      END-EXEC.                                                   00079700
+000798      EXEC CICS RETURN                                            00079800
+000799       TRANSID('IM21')                                            00079916
+000800       COMMAREA(WS-G-COMMAREA)                                    00080001
+000810       LENGTH(LENGTH OF WS-G-COMMAREA)                            00081004
+000820      END-EXEC.                                                   00082000
+000830      EVALUATE TRUE                                               00083000
+000840        WHEN WS-RESP = DFHRESP(NORMAL)                            00084000
+000850          CONTINUE                                                00085000
+000860        WHEN OTHER                                                00086000
+000870               PERFORM 9999-ERR-PARA                              00087000
+000880           END-EVALUATE.                                          00088000
+000890 3000-RCV-PARA.                                                   00089000
+000891      MOVE 0 TO WS-I-VALID.                                       00089105
+000892      EXEC CICS RECEIVE                                           00089200
+000893            MAP('MPLOGN')                                         00089314
+000894            MAPSET('LOGS28')                                      00089413
+000895            RESP(WS-RESP)                                         00089500
+000896      END-EXEC.                                                   00089600
+000900      EVALUATE TRUE                                               00090000
+000901        WHEN WS-RESP = DFHRESP(NORMAL)                            00090100
+000902           PERFORM 4000-PROCESS-PARA                              00090200
+000903        WHEN WS-RESP = DFHRESP(LENGERR)                           00090304
+000904              MOVE "LENGTH ERROR" TO MSGO                         00090405
+000905              PERFORM 9999-ERR-PARA                               00090500
+000906        WHEN WS-RESP = DFHRESP(MAPFAIL)                           00090604
+000907              MOVE "PLEASE ENTER VALID DATA" TO MSGO              00090700
+000908              PERFORM 2000-SEND-PARA                              00090823
+000909              PERFORM 7000-SEND-MSG-PARA                          00090900
+000910        WHEN WS-RESP = DFHRESP(PGMIDERR)                          00091004
+000911              MOVE "PROGRM ERROR" TO MSGO                         00091105
+000912              PERFORM 9999-ERR-PARA                               00091200
+000913        END-EVALUATE.                                             00091304
+000914 4000-PROCESS-PARA.                                               00091400
+000915       MOVE USERIDI TO WS-X-UID.                                  00091505
+000916       MOVE PASSWDI TO WS-X-PWD.                                  00091605
+000922        PERFORM 4500-VALIDATION-PARA.                             00092205
+000923        IF WS-I-VALID > 0                                         00092305
+000924          PERFORM 4600-NEXT-VALIDN-PARA                           00092405
+000925        END-IF                                                    00092505
+000926        IF WS-I-VALID = 2                                         00092605
+000927          MOVE "MATCHES" TO MSGO                                  00092705
+000928          PERFORM 4750-NAVIGATION-PARA                            00092809
+000929        ELSE                                                      00092905
+000930        MOVE "INVALID CREDENTIALS" TO MSGO.                       00093006
+000931        PERFORM 7000-SEND-MSG-PARA.                               00093105
+000932 4500-VALIDATION-PARA.                                            00093200
+000933       IF USERIDL NOT = 0 AND PASSWDL NOT = 0                     00093301
+000934           ADD 1 TO WS-I-VALID.                                   00093405
+000935 4600-NEXT-VALIDN-PARA.                                           00093505
+000936           IF WS-I-VALID = 1                                      00093605
+000937           MOVE WS-X-UID TO HV-USER-ID                            00093705
+000938           MOVE WS-X-PWD TO HV-PASSWORD                           00093805
+000939           EXEC SQL                                               00093905
+000940           SELECT COUNT(*)                                        00094020
+000941                INTO :W-I-CTR                                     00094105
+000942                FROM UELT228.BNKLOGIN8                            00094216
+000943                WHERE                                             00094301
+000944                USER_ID=:HV-USER-ID                               00094401
+000945                AND                                               00094501
+000946                PASSWORD=:HV-PASSWORD                             00094601
+000947           END-EXEC                                               00094705
+000948           EVALUATE TRUE                                          00094805
+000949           WHEN W-I-CTR > 0                                       00094905
+000950             ADD 1 TO WS-I-VALID                                  00095005
+000951           WHEN OTHER                                             00095105
+000952            CONTINUE                                              00095205
+000953           END-EVALUATE                                           00095305
+000954           ELSE                                                   00095405
+000955             CONTINUE                                             00095505
+000956          END-IF.                                                 00095605
+000957          MOVE WS-I-VALID TO W-I-CTR2.                            00095705
+000958 4750-NAVIGATION-PARA.                                            00095800
+000959      EXEC CICS HANDLE CONDITION                                  00095904
+000960      PGMIDERR(8000-PROGRAM-NOT-FOUND-PARA)                       00096004
+000961      ERROR(9999-ERR-PARA)                                        00096104
+000962      END-EXEC.                                                   00096204
+000963      MOVE USERIDI TO WS-X-USERID.                                00096301
+000964      EXEC CICS XCTL                                              00096401
+000965        PROGRAM('CS2P62')                                         00096522
+000966        COMMAREA(WS-G-COMMAREA)                                   00096601
+000967        LENGTH(LENGTH OF WS-G-COMMAREA)                           00096701
+000968      END-EXEC.                                                   00096801
+000969 4999-SHOW-INVALID-ID-PARA.                                       00096904
+000970*     MOVE "ID AND PASSWORD DO NOT MATCH" TO MSGO.                00097005
+000971*     MOVE PASSWDI TO MSGO.                                       00097105
+000972      MOVE W-I-CTR2 TO MSGO.                                      00097205
+000973      PERFORM 7000-SEND-MSG-PARA.                                 00097304
+000974 7000-SEND-MSG-PARA.                                              00097400
+000975      EXEC CICS SEND                                              00097501
+000976        MAP('MPLOGN')                                             00097614
+000977        MAPSET('LOGS28')                                          00097713
+000978        RESP(WS-RESP)                                             00097801
+000979      END-EXEC.                                                   00097901
+000980       EXEC CICS RETURN                                           00098001
+000981           TRANSID('IM21')                                        00098116
+000982       END-EXEC.                                                  00098201
+000983 8000-PROGRAM-NOT-FOUND-PARA.                                     00098300
+000984     MOVE "PROGRAM NOT FOUND" TO MSGO.                            00098401
+000985     EXEC CICS SEND                                               00098501
+000986       MAP('MPLOGN')                                              00098614
+000987       MAPSET('LOGS28')                                           00098713
+000988       RESP(WS-RESP)                                              00098801
+000989     END-EXEC.                                                    00098901
+000990      EXEC CICS RETURN                                            00099001
+000991          TRANSID('IM21')                                         00099116
+000992      END-EXEC.                                                   00099201
+000993 9000-EXIT-PARA.                                                  00099301
+000994      EXEC CICS SEND                                              00099401
+000995       CONTROL                                                    00099501
+000996       ERASE                                                      00099601
+000997      END-EXEC.                                                   00099701
+000998      EXEC CICS RETURN                                            00099810
+000999      END-EXEC.                                                   00099901
+001000 9999-ERR-PARA.                                                   00100000
+001100      EXEC CICS SEND                                              00110000
+001200        MAP('MPLOGN')                                             00120014
+001300        MAPSET('LOGS28')                                          00130013
+001400        RESP(WS-RESP)                                             00140000
+001500      END-EXEC.                                                   00150000
+001600       EXEC CICS RETURN                                           00160000
+001700           TRANSID('IM21')                                        00170016
+001800       END-EXEC.                                                  00180000
+

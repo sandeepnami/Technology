@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="64f52053-4e0e-4361-89ce-3d9c2223c083" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Enum" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1VFtJaCld584A7h96J41YVap5jU" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.pluralsight.calcengine" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="com.pluralsight.calcengine.Main" />
+      <module name="CalcEngine" />
+      <option name="PROGRAM_PARAMETERS" value="multiply 35 five" />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="64f52053-4e0e-4361-89ce-3d9c2223c083" name="Default Changelist" comment="" />
+      <created>1576860599485</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1576860599485</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="264" y="0" key="#Project_Structure" timestamp="1588368207122">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="264" y="0" key="#Project_Structure/3840.0.1280.660/0.0.2560.1400@0.0.2560.1400" timestamp="1588368207122" />
+    <state x="3972" y="0" key="#Project_Structure/3840.0.1280.660/0.0.2560.1400@3840.0.1280.660" timestamp="1586971036422" />
+    <state x="1385" y="89" key="FileChooserDialogImpl" timestamp="1587567507631">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1385" y="89" key="FileChooserDialogImpl/3840.0.1280.660/0.0.2560.1400@0.0.2560.1400" timestamp="1587567507631" />
+    <state width="819" height="210" key="GridCell.Tab.0.bottom" timestamp="1587572266067">
+      <screen x="3840" y="0" width="1280" height="660" />
+    </state>
+    <state width="1712" height="391" key="GridCell.Tab.0.bottom/3840.0.1280.660/0.0.2560.1400@0.0.2560.1400" timestamp="1587567641181" />
+    <state width="819" height="210" key="GridCell.Tab.0.bottom/3840.0.1280.660/0.0.2560.1400@3840.0.1280.660" timestamp="1587572266067" />
+    <state width="1210" height="202" key="GridCell.Tab.0.bottom/3840.0.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1583872869304" />
+    <state width="819" height="210" key="GridCell.Tab.0.center" timestamp="1587572266067">
+      <screen x="3840" y="0" width="1280" height="660" />
+    </state>
+    <state width="1712" height="391" key="GridCell.Tab.0.center/3840.0.1280.660/0.0.2560.1400@0.0.2560.1400" timestamp="1587567641181" />
+    <state width="819" height="210" key="GridCell.Tab.0.center/3840.0.1280.660/0.0.2560.1400@3840.0.1280.660" timestamp="1587572266067" />
+    <state width="1210" height="202" key="GridCell.Tab.0.center/3840.0.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1583872869304" />
+    <state width="819" height="210" key="GridCell.Tab.0.left" timestamp="1587572266067">
+      <screen x="3840" y="0" width="1280" height="660" />
+    </state>
+    <state width="1712" height="391" key="GridCell.Tab.0.left/3840.0.1280.660/0.0.2560.1400@0.0.2560.1400" timestamp="1587567641181" />
+    <state width="819" height="210" key="GridCell.Tab.0.left/3840.0.1280.660/0.0.2560.1400@3840.0.1280.660" timestamp="1587572266067" />
+    <state width="1210" height="202" key="GridCell.Tab.0.left/3840.0.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1583872869304" />
+    <state width="819" height="210" key="GridCell.Tab.0.right" timestamp="1587572266067">
+      <screen x="3840" y="0" width="1280" height="660" />
+    </state>
+    <state width="1712" height="391" key="GridCell.Tab.0.right/3840.0.1280.660/0.0.2560.1400@0.0.2560.1400" timestamp="1587567641181" />
+    <state width="819" height="210" key="GridCell.Tab.0.right/3840.0.1280.660/0.0.2560.1400@3840.0.1280.660" timestamp="1587572266067" />
+    <state width="1210" height="202" key="GridCell.Tab.0.right/3840.0.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1583872869304" />
+    <state x="4059" y="-1" width="840" height="1034" key="search.everywhere.popup" timestamp="1587569872309">
+      <screen x="3840" y="0" width="1280" height="660" />
+    </state>
+    <state x="4059" y="-1" width="840" height="1034" key="search.everywhere.popup/3840.0.1280.660/0.0.2560.1400@3840.0.1280.660" timestamp="1587569872309" />
+  </component>
+</project>

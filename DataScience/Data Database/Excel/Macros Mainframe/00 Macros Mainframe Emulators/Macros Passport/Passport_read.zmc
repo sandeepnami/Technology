@@ -1,0 +1,32 @@
+Sub ZMain
+    
+
+Dim PrNoOld, PrNoCurr
+Set Sys = CreateObject("PASSPORT.System")
+
+'selects the currently active session
+
+    Set Sess = Sys.ActiveSession
+
+'selects the screen object
+
+    Set MyScreen = Sess.Screen
+
+'selects the area (Start Row, End Row, Start Column, End Column)
+
+    Set MyArea = MyScreen.Area(6, 6, 6, 12)
+
+MyArea.Select     
+
+    MyScreen.Copy
+    MsgBox MyArea.Value,0,"value"
+    PrNoCurr = MyArea.Value
+
+'modify the row and column below to move cursor to another location
+
+'    MyScreen.MoveTo 24, 7
+
+'    MyScreen.Paste
+
+End Sub
+ 

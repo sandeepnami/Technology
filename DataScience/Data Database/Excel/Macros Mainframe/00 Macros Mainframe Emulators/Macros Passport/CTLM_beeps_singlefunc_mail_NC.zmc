@@ -1,0 +1,86 @@
+Sub ZMain
+Dim PrNoOld, PrNoCurr,ret,R1,C1,C2,R2, login_flag,to_addr,cc_addr
+'permissible abend count
+abend_cnt = 0
+
+to_addr = "sandeep_nami@mahindrasatyam.com;Gopalakrishna_Mudha@mahindrasatyam.com"
+cc_addr = "sandeep_nami@mahindrasatyam.com;Gopalakrishna_Mudha@mahindrasatyam.com"
+
+Set Sys = CreateObject("PASSPORT.System")
+
+
+Set Sess = Sys.ActiveSession
+
+
+Set MyScreen = Sess.Screen
+
+
+For count_time = 1 to 360
+     end_notok = refresh_ctlm(myscreen)
+     if Len(end_notok) <> 0 then 
+            if end_notok > abend_cnt Then
+	get_beep()
+	subject = "High Risk CTLM Abends"
+	msg = "Total Abends in P3 Lpar = " &end_notok 
+	outlook_send msg,subject,to_addr,cc_addr        
+         END If     
+  END If  
+  ret = wait(180)	
+Next
+
+
+End Sub
+
+
+'********************refresh ctlm function	 ********************
+Function refresh_ctlm(myscreen)
+
+Set MyArea = MyScreen.Area(2, 15, 2, 17)
+MyArea.Select     
+MyScreen.Copy
+MyArea.Value = "REF"
+SendHostKeys ("<ENTER>")
+ret = wait(3)
+
+
+Set MyArea = MyScreen.Area(3, 60, 3, 65)
+
+MyArea.Select     
+MyScreen.Copy
+end_notok = TRIM(MyArea.Value)
+
+type_end_notok = IsNumeric( end_notok  )
+refresh_ctlm = end_notok
+
+End Function
+
+'********************beep function	 ********************
+Function get_beep()
+	For loopvar = 1 To 20
+	        Beep
+	        ret = wait(1)
+                     Next        
+END Function 
+
+
+'********************outlook_send ********************
+Sub outlook_send( msg, subject,to_addr,cc_addr )
+Dim  ret
+
+Set otlApp = CreateObject("Outlook.Application")
+Set otlNewMail = otlApp.CreateItem(olMailItem)
+
+With otlNewMail
+.SentOnBehalfOfName = "VisionPlus_Servicedesk@mahindrasatyam.com"
+.To = to_addr
+.CC = cc_addr
+.Subject = subject 
+.body = "Hi," & Chr(13) & "There is an abend in CTLM "  & Chr(13)  & msg 
+.Display
+ .send
+END With
+
+End Sub
+
+
+

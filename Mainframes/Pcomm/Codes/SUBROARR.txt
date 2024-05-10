@@ -1,0 +1,32 @@
+/*REXX -- call subroutine and pass ARRAY AS ARGUMENT */                 00010001
+                                                                        00020000
+INDD1="TST.M53.RZA.RG0.WDD7000.DMGPADEC.UAT0121"                        00022001
+INDD2="TST.M53.RZA.RG0.WDD7000.DMGPADEC.INT0121"                        00023001
+                                                                        00024001
+"ALLOC FI(INDD1) DA('"INDD1"') SHR "                                    00025001
+"ALLOC FI(INDD2) DA('"INDD2"') SHR "                                    00026001
+                                                                        00027001
+"EXECIO * DISKR INDD1(STEM INARR1. FINIS"                               00028001
+"EXECIO * DISKR INDD2(STEM INARR2. FINIS"                               00029001
+"FREE F(INDD1)"                                                         00029101
+"FREE F(INDD2)"                                                         00029201
+                                                                        00029301
+TRACE A                                                                 00029401
+                                                                        00029501
+CALL PASSARR INARR1                                                     00030001
+                                                                        00060000
+EXIT                                                                    00070000
+                                                                        00080000
+PASSARR:                                                                00090001
+/* compute area of a circle from its radius */                          00100000
+   ARG ARRNAME                                                          00110001
+   SAY "ARRNAME= " ARRNAME                                              00111001
+   ARGARR.1 = "INITIALISE ARRAY"                                        00111101
+   SAY "INARR1.66=" || SUBSTR(INARR1.66,1,80)                           00111201
+   SAY "INARR1.=" || INARR1.                                            00111301
+   SAY "INARR1.0=" || INARR1.0                                          00111401
+   INTERPRET ARGARR. = "ARRNAME"."                                      00112001
+   INTERPRET "SAY ARRLENG= "ARRNAME".0"                                 00113001
+   SAY "ARGARR.66=" || SUBSTR(ARGARR.66,1,80)                           00130001
+   RETURN                                                               00140000
+

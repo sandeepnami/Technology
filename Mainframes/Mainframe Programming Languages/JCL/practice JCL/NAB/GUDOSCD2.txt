@@ -1,0 +1,255 @@
+//*-------------------------------------------------------------------*
+//*                                                                   *
+//*              ***  PROCEDURE NAME:- GUDOSCD2  ***                  *
+//*                                                                   *
+//*   *** STANDARD ENVIRONMENT - COBOL FOR MVS DB2 RENT COMPILE ***   *
+//*                                                                   *
+//* ***  NB:- COPYBOOKS RESOLVED FROM BOTH PANVALET AND PDS LIBS  *** *
+//*
+//*-------------------------------------------------------------------*
+//*                                                                   *
+//*  METHOD OF USE:                                                   *
+//*  ==============                                                   *
+//*                                                                   *
+//*        //COMPILE  EXEC  PROC=GUDOSCD2,DB2DBRM=XXNNNMNN,           *
+//*        //         DBRMLIB='??????????.DBRMLIB'                    *
+//*        //*                                                        *
+//*        //EXPNDPAN.SYSIN DD *                                      *
+//*        ++WRITE WORK,XXNNNMNN                                      *
+//*        /*                                                         *
+//*                                                                   *
+//*                                                                   *
+//*  NOTES:                                                           *
+//*  ======                                                           *
+//*        1.  COPY CODE IS INCLUDED INTO THE SOURCE PROGRAM BY       *
+//*           WAY OF ++INCLUDE STATEMENTS IN THE SOURCE. EXECUTION OF *
+//*           THE INITIAL PAN#1 STEP RESULTS IN EXPANSION OF THE      *
+//*           SOURCE DECK TO ITS FULL LENGTH (EXCEPT FOR MQ).         *
+//*                                                                   *
+//*        2.  NOTE THAT THE "LIB" OPTION IS ACTIVE, BUT IS ONLY FOR  *
+//*           THE INCLUSION OF MQ SERIES COPYBOOKS.                   *
+//*                                                                   *
+//*        3.  STEP FIXGU19 WILL ONLY WORK CORRECTLY WHEN THE CALL    *
+//*           TO GU0019A0 IS IN THE SAME PARAGRAPH AS THE DB2 SQL.    *
+//*                                                                   *
+//*        4.  GENERATION OF AN OBJECT DECK IS CONDITIONAL UPON A     *
+//*           SUCCESSFULL COMPILATION.                                *
+//*                                                                   *
+//*        5.  GIVEN THE ABOVE, THE OBJECT DECK IS ONLY TEMPORARY &   *
+//*           IS PASSED TO A LINKEDIT STEP IF SUPPLIED.               *
+//*                                                                   *
+//*        6.  COMPILING THE COBOL MODULE AS "REENTRANT" DOES NOT     *
+//*           MAKE THE RESULTING LOAD MODULE "REENTRANT". TO MAKE     *
+//*           THE LOAD MODULE REENTRANT SPECIFY THE 'RENT' PARAMETER  *
+//*           ON THE LINKEDIT STEP.                                   *
+//*                                                                   *
+//*        7.  TO WORK WITH DEVN, UNITN, LINKN AND TESTN DATASETS     *
+//*           ADD ",RLSE=N" TO THE EXEC STEP.                         *
+//*                                                                   *
+//*        8.  IF YOU DO NOT HAVE A TESTN DATASET THEN ALSO SPECIFY   *
+//*           ",ENV3=LINK" ON THE EXEC STEP.                          *
+//*                                                                   *
+//*-------------------------------------------------------------------*
+//*
+//GUDOSCD2 PROC APPLID='PROG',       /* APPLICATION ID               */
+//*
+//             CURRENV='DEV',        /* CURRENT ENVIRONMENT          */
+//             ENV1='UNIT',          /* ENVIRONMENT AFTER CURRENV    */
+//             ENV2='LINK',          /* ENVIRONMENT AFTER ENV1       */
+//             ENV3='TEST',          /* ENVIRONMENT AFTER ENV2       */
+//             ENV4='TST',           /* ENVIRONMENT AFTER ENV3       */
+//             ENV5='PREIMP',        /* ENVIRONMENT AFTER ENV4       */
+//*
+//             RLSE=,                /* SPECIFY PHASED ENV NBR       */
+//*
+//             DB2DBRM=,             /* DB2 DATABASE REQUESTOR MODULE*/
+//*
+//             DBRMLIB='PROG.DEV.DBRMLIB',  /* DBRM LIBRARY          */
+//*
+//             DB2PARM=,             /* DB2 PRE COMPILE PARAMETER    */
+//*
+//             HOLD=YES,             /* HOLD LISTINGS ? - YES        */
+//*
+//             CLASS1='A',           /* OUTPUT CLASS FOR 'SYSPRINT'  */
+//             FORMAT1='TWOUP',      /* OUTPUT FORMAT FOR 'SYSPRINT' */
+//*
+//             CLASS2='*',           /* OUTPUT CLASS FOR 'SYSPUNCH'  */
+//             FORMAT2='TWOUP',      /* OUTPUT FORMAT FOR 'SYSPUNCH' */
+//*
+//             CLASS3='T',           /* OUTPUT CLASS FOR 'SYSUDUMP'  */
+//             FORMAT3='TWOUP',      /* OUTPUT FORMAT FOR 'SYSUDUMP' */
+//*
+//             CLASS4='*',           /* OUTPUT CLASS FOR 'SYSTERM'   */
+//             FORMAT4='TWOUP',      /* OUTPUT FORMAT FOR 'SYSTERM'  */
+//*
+//             COBOPT=               /* ADDITIONAL COMPILER OPTIONS  */
+//*
+//*-------------------------------------------------------------------*/
+//*                                                                   */
+//*        ***  OBTAIN COBOL SOURCE MODULE FROM PANVALET  ***         */
+//*                                                                   */
+//* ***  NB:- SOURCE MODULE IS EXPANDED BY WAY OF ++INCLUDE CARDS *** */
+//*                                                                   */
+//*-------------------------------------------------------------------*/
+//*
+//EXPNDPAN EXEC PGM=PAN#1,PARM='OPEN=INP'
+//*
+//ONEUP        OUTPUT FORMDEF=0101,PAGEDEF=P0003
+//TWOUP        OUTPUT FORMDEF=F0002,PAGEDEF=P0014
+//TWOSHADE     OUTPUT FORMDEF=F0013,PAGEDEF=P0014
+//*
+//PANDD1   DD  DSN=&APPLID..&CURRENV.&RLSE..SOURCE.LIBRARY,DISP=SHR
+//*
+//PANDD13  DD  DSN=&APPLID..&CURRENV.&RLSE..COPY.LIBRARY,DISP=SHR
+//PANDD14  DD  DSN=&APPLID..&ENV1.&RLSE..COPY.LIBRARY,DISP=SHR
+//PANDD15  DD  DSN=&APPLID..&ENV2.&RLSE..COPY.LIBRARY,DISP=SHR
+//PANDD16  DD  DSN=&APPLID..&ENV3.&RLSE..COPY.LIBRARY,DISP=SHR
+//PANDD17  DD  DSN=&APPLID..&ENV4..COPY.LIBRARY,DISP=SHR
+//PANDD18  DD  DSN=&APPLID..&ENV5..COPY.LIBRARY,DISP=SHR
+//PANDD19  DD  DSN=&APPLID..PROD.COPY.LIBRARY,DISP=SHR
+//*
+//PANDD2   DD  DSN=&&CBLSRCE,
+//             DISP=(NEW,PASS,DELETE),
+//             UNIT=SYSDA,
+//             SPACE=(CYL,(5,1),RLSE),
+//             DCB=(BLKSIZE=23440)
+//*
+//SYSPRINT DD  SYSOUT=&CLASS1,OUTPUT=*.&FORMAT1,HOLD=&HOLD
+//SYSPUNCH DD  SYSOUT=&CLASS2,OUTPUT=*.&FORMAT2,HOLD=&HOLD
+//SYSUDUMP DD  SYSOUT=&CLASS3,OUTPUT=*.&FORMAT3,HOLD=&HOLD
+//*
+//*-------------------------------------------------------------------*
+//*       DELETE THE DBRMLIB TEMP DATASET AS PART OF PAN STEP         *
+//*-------------------------------------------------------------------*
+//*
+//DBRMLIB  DD  DSN=&&DBRMLIB,DISP=(MOD,DELETE),
+//             UNIT=SYSDA,SPACE=(TRK,(0))
+//*
+//*-------------------------------------------------------------------*
+//*                                                                   *
+//*           ***  DB2 PRE-COMPILE OF SPECIFIED MODULE  ***           *
+//*                                                                   *
+//*-------------------------------------------------------------------*
+//*
+//PRECMPLE EXEC PGM=DSNHPC,
+//           COND=(4,LT,EXPNDPAN),
+//           PARM='HOST(IBMCOB),APOST,SOURCE,XREF,&DB2PARM'
+//*
+//STEPLIB  DD   DSN=SYS1.DB2.DSNLOAD,DISP=SHR
+//ONEUP        OUTPUT FORMDEF=0101,PAGEDEF=P0003
+//TWOUP        OUTPUT FORMDEF=F0002,PAGEDEF=P0014
+//TWOSHADE     OUTPUT FORMDEF=F0013,PAGEDEF=P0014
+//*
+//SYSIN    DD  DSN=&&CBLSRCE,DISP=(OLD,DELETE,DELETE)
+//*
+//SYSLIB   DD  DUMMY
+//*
+//SYSUT1   DD  UNIT=SYSDA,SPACE=(CYL,(5,1))
+//SYSUT2   DD  UNIT=SYSDA,SPACE=(CYL,(5,1))
+//*
+//SYSCIN   DD  DSN=&&DSNHIN,
+//             DISP=(MOD,PASS),
+//             UNIT=SYSDA,
+//             SPACE=(CYL,(5,1))
+//*
+//DBRMLIB  DD  DSN=&&DBRMLIB(&DB2DBRM),DISP=(,PASS),
+//             UNIT=SYSDA,SPACE=(TRK,(15,5,5)),
+//             DCB=(RECFM=FB,LRECL=80,BLKSIZE=6160)
+//*
+//SYSPRINT DD  DSN=&&SYSOUT,DISP=(NEW,PASS,DELETE),
+//             UNIT=SYSDA,SPACE=(TRK,(20,5))
+//*
+//*
+//SYSTERM  DD  SYSOUT=&CLASS4,OUTPUT=*.&FORMAT4,HOLD=&HOLD
+//SYSUDUMP DD  DUMMY
+//*
+//*-------------------------------------------------------------------*
+//*                                                                   *
+//*           ***  DB2 PRE-COMPILE PRINT  ***                         *
+//*                                                                   *
+//* ***  NB:- THIS WILL PRINT THE PRECOMPILE LISTING IF A RETURN  *** *
+//* ***  CODE GREATER THAN 4 IS RETURNED ON THE FIRST PRECOMPILE. *** *
+//*                                                                   *
+//*                                                                   *
+//*-------------------------------------------------------------------*
+//*
+//PRCOMPRT EXEC PGM=IEBGENER,                                           00043
+//             COND=(4,GE,PRECMPLE)                                     00044
+//*                                                                     00045
+//ONEUP        OUTPUT FORMDEF=0101,PAGEDEF=P0003
+//TWOUP        OUTPUT FORMDEF=F0002,PAGEDEF=P0014
+//TWOSHADE     OUTPUT FORMDEF=F0013,PAGEDEF=P0014
+//PRECMPL  DD  DSN=&&DSNHIN,DISP=(OLD,DELETE,DELETE)
+//*                                                                     00045
+//SYSPRINT DD  SYSOUT=&CLASS2,OUTPUT=*.&FORMAT2,HOLD=&HOLD
+//SYSUT1   DD  DSN=&&SYSOUT,DISP=(OLD,DELETE)                           00047
+//SYSUT2   DD  SYSOUT=&CLASS1,OUTPUT=*.&FORMAT1,HOLD=&HOLD
+//*                                                                     00049
+//SYSIN     DD DUMMY                                                    00050
+//*                                                                     00051
+//*
+//*-------------------------------------------------------------------*
+//*                                                                   *
+//*           ***  UPDATE GU0019A0 CALLS                ***           *
+//*                                                                   *
+//*-------------------------------------------------------------------*
+//*
+//FIXGU19  EXEC PGM=SM056BA0
+//STEPLIB  DD DSN=CUMOD.PROD.CEE.LOAD.LIBRARY,DISP=SHR
+//*        DD DSN=SYS1.SCEERUN,DISP=SHR
+//DSNHIN   DD DSN=&&DSNHIN,DISP=(OLD,DELETE,DELETE)
+//DSNHOUT  DD DSN=&&DSNHOUT,
+//            DISP=(NEW,PASS),
+//            UNIT=SYSDA,
+//            SPACE=(CYL,(5,2),RLSE)
+//PRELIST  DD DSN=&&SYSOUT,DISP=(OLD,DELETE)
+//*
+//*
+//*-------------------------------------------------------------------*
+//*                                                                   *
+//*                ***  COMPILE SPECIFIED MODULE  ***                 *
+//*                                                                   *
+//*-------------------------------------------------------------------*
+//*
+//*
+//COMPILE EXEC PGM=IGYCRCTL,REGION=4096K,
+// PARM=('RENT,NUMPROC(MIG),LIB,&COBOPT.')
+//*
+//ONEUP        OUTPUT FORMDEF=0101,PAGEDEF=P0003
+//TWOUP        OUTPUT FORMDEF=F0002,PAGEDEF=P0014
+//TWOSHADE     OUTPUT FORMDEF=F0013,PAGEDEF=P0014
+//*
+//STEPLIB  DD  DSNAME=SYS1.SIGYCOMP,DISP=SHR
+//*
+//SYSLIB   DD  DSNAME=SYS1.SCSQCOBC,DISP=SHR
+//*
+//SYSPRINT DD  SYSOUT=&CLASS1,OUTPUT=*.&FORMAT1,HOLD=&HOLD
+//SYSPUNCH DD  DUMMY
+//SYSUDUMP DD  DUMMY
+//*
+//SYSIN    DD  DSN=&&DSNHOUT,DISP=(OLD,DELETE,DELETE)
+//*
+//SYSLIN   DD  DSNAME=&&OBJECT,UNIT=SYSDA,DCB=(BLKSIZE=3200),
+//             DISP=(MOD,PASS),SPACE=(TRK,(40,10),RLSE)
+//*
+//SYSUT1   DD  UNIT=SYSDA,SPACE=(CYL,(1,1))
+//SYSUT2   DD  UNIT=SYSDA,SPACE=(CYL,(1,1))
+//SYSUT3   DD  UNIT=SYSDA,SPACE=(CYL,(1,1))
+//SYSUT4   DD  UNIT=SYSDA,SPACE=(CYL,(1,1))
+//SYSUT5   DD  UNIT=SYSDA,SPACE=(CYL,(1,1))
+//SYSUT6   DD  UNIT=SYSDA,SPACE=(CYL,(1,1))
+//SYSUT7   DD  UNIT=SYSDA,SPACE=(CYL,(1,1))
+//*
+//*
+//*-------------------------------------------------------------------*
+//*          IEBGENER TO SAVE DBRM SOURCE IF COMPILE OK               *
+//*-------------------------------------------------------------------*
+//*
+//SAVEDBRM EXEC PGM=IEBGENER,
+//            COND=((4,LT,PRECMPLE),(4,LT,COMPILE))
+//SYSIN    DD  DUMMY
+//SYSPRINT DD  DUMMY
+//SYSUT1   DD  DSN=&&DBRMLIB(&DB2DBRM),DISP=(OLD,DELETE,DELETE)
+//SYSUT2   DD  DSN=&DBRMLIB(&DB2DBRM),DISP=SHR
+//*
+

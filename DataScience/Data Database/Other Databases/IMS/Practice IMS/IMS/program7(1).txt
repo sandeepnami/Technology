@@ -1,0 +1,150 @@
+***********************inserting item segment at second level*****************************
+
+
+       IDENTIFICATION DIVISION.                                         00010000
+       PROGRAM-ID. PROGSAN2.                                            00020027
+       ENVIRONMENT DIVISION.                                            00030000
+       DATA DIVISION.                                                   00040000
+       WORKING-STORAGE SECTION.                                         00050000
+       01 WS-IO-AREA.                                                   00060000
+          05 WS-VENDSEG-IO-AREA.                                        00070000
+             10 WS-VENDID                          PIC X(5).            00080000
+             10 WS-VENDNAME                        PIC X(15).           00090000
+             10 WS-VENDADDR                        PIC X(20).           00100000
+          05 WS-ITEMSEG-IO-AREA.                                        00110000
+             10 WS-ITEMID                          PIC X(10).           00120000
+             10 WS-ITEMNAME                        PIC X(20).           00130000
+             10 WS-ITEMVAL                         PIC X(05).           00140000
+          05 WS-LOCSEG-IO-AREA.                                         00150000
+             10 WS-LOCID                           PIC X(10).           00160000
+             10 WS-LOCNAME                         PIC X(20).           00170000
+             10 WS-ITEMQTY                         PIC  X(5).           00180015
+      ************************************************************      00190000
+      *              DLI FUNCTIONS DEFINITIONS                          00200000
+      ************************************************************      00210000
+       01 DLI-FUNC.                                                     00220000
+            05 DLI-GU           PIC X(04)     VALUE 'GU'.               00230104
+            05 DLI-GHU          PIC X(04)     VALUE 'GHU'.              00230204
+            05 DLI-GN           PIC X(04)     VALUE 'GN'.               00230304
+            05 DLI-GHN          PIC X(04)     VALUE 'GHN'.              00230404
+            05 DLI-GNP          PIC X(04)     VALUE 'GNP'.              00230504
+            05 DLI-GHNP         PIC X(04)     VALUE 'GHNP'.             00230604
+            05 DLI-ISRT         PIC X(04)     VALUE 'ISRT'.             00230704
+            05 DLI-DLET         PIC X(04)     VALUE 'DLET'.             00230804
+            05 DLI-REPL         PIC X(04)     VALUE 'REPL'.             00230904
+            05 DLI-CHKP         PIC X(04)     VALUE 'CHKP'.             00231004
+            05 DLI-XRST         PIC X(04)     VALUE 'XRST'.             00231104
+            05 DLI-PCB          PIC X(04)     VALUE 'PCB'.              00231204
+      ************************************************************      00240000
+      *                IMS STATUS CODES                                 00250000
+      ************************************************************      00260000
+       01 QUAL-VENDSEG-SSA.                                             00270000
+          05  VENDSEG-NAME                PIC X(08) VALUE 'VENDSEG '.   00280000
+          05  FILLER                      PIC X(01) VALUE '('.          00290004
+          05  FILLER                      PIC X(08) VALUE 'VENDID  '.   00300004
+          05  FILLER                      PIC X(02) VALUE '='.          00310004
+          05  VENDID-VAL                  PIC X(05) VALUE SPACES.       00320019
+          05  FILLER                      PIC X(01) VALUE ')'.          00330004
+       01 QUAL-ITEMSEG-SSA.                                             00340000
+          05  ITEMSEG-NAME                PIC X(08) VALUE 'ITEMSEG '.   00350004
+          05  FILLER                      PIC X(01) VALUE '('.          00360004
+          05  FILLER                      PIC X(08) VALUE 'ITEMID  '.   00370004
+          05  FILLER                      PIC X(02) VALUE '='.          00380004
+          05  ITEMID-VAL                  PIC X(10) VALUE SPACES.       00390020
+          05  FILLER                      PIC X(01) VALUE ')'.          00400004
+       01 QUAL-LOCSEG-SSA.                                              00401003
+          05  LOCSEG-NAME                 PIC X(08) VALUE 'LOCSEG '.    00402003
+          05  FILLER                      PIC X(01) VALUE '('.          00403004
+          05  FILLER                      PIC X(08) VALUE 'LOCID  '.    00404004
+          05  FILLER                      PIC X(02) VALUE '='.          00405004
+          05  LOCID-VAL                   PIC X(10) VALUE SPACES.       00406020
+          05  FILLER                      PIC X(01) VALUE ')'.          00407004
+       01 UNQUAL-VENDSEG-SSA.                                           00410000
+          05 VENDSEG-NAME                 PIC X(08) VALUE 'VENDSEG '.   00420004
+          05 FILLER                       PIC X(01) VALUE SPACE.        00430004
+       01 UNQUAL-ITEMSEG-SSA.                                           00440000
+          05 ITEMSEG-SEG                  PIC X(08) VALUE 'ITEMSEG '.   00450004
+          05 FILLER                       PIC X(01) VALUE SPACE.        00460004
+       01 UNQUAL-LOCSEG-SSA.                                            00470003
+          05 LOCSEG-NAME                  PIC X(08) VALUE 'LOCSEG  '.   00480004
+          05 FILLER                       PIC X(01) VALUE SPACE.        00490004
+       LINKAGE SECTION.                                                 00500000
+      ***************************************************               00510000
+      *             DB-PCB-MASK DEFINITION FOR DC PART                  00520000
+      *************************************************                 00530000
+      *                                                                 00540000
+       01 DB-PCB-MASK.                                                  00550000
+          05 DB-PCB-DBD-NAME      PIC X(8).                             00560000
+          05 DB-PCB-SEGMENT-LEVEL PIC X(2).                             00570000
+          05 DB-PCB-STATUS-CODE   PIC X(2).                             00580000
+          05 DB-PCB-PROC-OPT      PIC X(4).                             00590000
+          05 FILLER               PIC S9(5) COMP.                       00600000
+          05 DB-PCB-SEG-NAME      PIC X(8).                             00610000
+          05 DB-PCB-KEY-LEN       PIC S9(5) COMP.                       00620000
+          05 DB-PCB-NUM-SEN-SEGS  PIC S9(5) COMP.                       00630000
+          05 DB-PCB-KEY           PIC X(25).                            00640000
+      *------------------                                               00650000
+       PROCEDURE DIVISION.                                              00660000
+      *------------------                                               00670000
+       0000-MAIN-PARA.                                                  00680000
+           ENTRY 'DLITCBL' USING DB-PCB-MASK.                           00690000
+           MOVE SPACES TO DB-PCB-STATUS-CODE.                           00700000
+           PERFORM 1000-INITIALIZE-PARA.                                00710000
+           PERFORM 2000-REPL.                                           00720020
+                                                                        00721028
+                                                                        00730000
+           GOBACK.                                                      00740000
+      /                                                                 00750000
+      *--------------------                                             00760000
+       1000-INITIALIZE-PARA.                                            00770000
+      *---------------------                                            00780000
+            INITIALIZE WS-VENDSEG-IO-AREA.                              00790000
+       1000-INITIALIZE-PARA-X.                                          00800000
+           EXIT.                                                        00810000
+      /                                                                 00820000
+      *------------------                                               00830000
+       2000-REPL.                                                       00840020
+      *------------------                                               00850000
+            MOVE 'GSM44'           TO  VENDID-VAL.                      00861030
+            PERFORM  4000-GETTDATA                                      00881019
+                THRU 4000-GETTDATA-X.                                   00891019
+            PERFORM  5000-INSERT-PARA.                                  00892028
+       2000-GET-PARA-X.                                                 00900000
+           EXIT.                                                        00910000
+      /                                                                 00920000
+      *------------------                                               01090006
+       4000-GETTDATA.                                                   01100006
+      *------------------                                               01110006
+           DISPLAY DB-PCB-STATUS-CODE "  " WS-VENDID                    01111010
+           CALL 'CBLTDLI' USING DLI-GHU                                 01120020
+                                DB-PCB-MASK                             01130006
+                                WS-VENDSEG-IO-AREA                      01140006
+                                QUAL-VENDSEG-SSA.                       01150019
+           IF DB-PCB-STATUS-CODE = SPACES                               01160006
+              DISPLAY "VENDER SEGMENT SUCCESSFULLY RETRIVED "           01170006
+              DISPLAY WS-VENDID " " WS-VENDNAME " " WS-VENDADDR         01180006
+           ELSE                                                         01190006
+              DISPLAY "VENDER SEGMENT RETRIVED FAILED ... "             01200006
+              DISPLAY DB-PCB-STATUS-CODE "  " WS-VENDID                 01210006
+           END-IF.                                                      01220006
+       4000-GETTDATA-X.                                                 01230006
+           EXIT.                                                        01240006
+       5000-INSERT-PARA.                                                01250028
+           MOVE WS-VENDID          TO VENDID-VAL.                       01251028
+           MOVE 'I0000002'         TO WS-ITEMID.                        01260030
+           MOVE 'CHOCOBAR  '       TO WS-ITEMNAME.                      01270030
+           MOVE '200'              TO WS-ITEMVAL.                       01280030
+           CALL 'CBLTDLI' USING DLI-ISRT                                01290028
+                                DB-PCB-MASK                             01300028
+                                WS-ITEMSEG-IO-AREA                      01310028
+                                QUAL-VENDSEG-SSA                        01311028
+                                UNQUAL-ITEMSEG-SSA.                     01320028
+           IF DB-PCB-STATUS-CODE = SPACES                               01330028
+              DISPLAY "VENDER SEGMENT SUCCESSFULLY INSERTED "           01340029
+              DISPLAY WS-VENDID " " WS-VENDNAME " " WS-VENDADDR         01350028
+                      WS-ITEMID " " WS-ITEMNAME " " WS-ITEMVAL          01351028
+           ELSE                                                         01360028
+              DISPLAY "VENDER SEGMENT RETRIVED FAILED ... "             01370028
+              DISPLAY DB-PCB-STATUS-CODE "  " WS-VENDID                 01380028
+           END-IF.                                                      01390028
+

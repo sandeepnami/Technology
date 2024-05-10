@@ -1,0 +1,30 @@
+//UELA003A JOB 'UNLOAD',CLASS=A,MSGCLASS=X,NOTIFY=&SYSUID,   
+//         MSGLEVEL=(1,1),REGION=0M,TIME=1440                
+//STEP1 EXEC PGM=IEFBR14                                     
+//DSNAME1 DD DSN=UELA003.DB2A.CNTL.UNL0,                     
+//        DISP=(MOD,DELETE,DELETE),SPACE=(TRK,(1,1),RLSE)    
+//DSNAME2 DD DSN=UELA003.DB2A.UNLD.EMP1,                     
+//        DISP=(MOD,DELETE,DELETE),SPACE=(TRK,(1,1),RLSE)    
+//UNLD   EXEC PGM=IKJEFT01,DYNAMNBR=100                      
+//STEPLIB  DD DSN=DSN810.RUNLIB.LOAD,DISP=SHR                
+//         DD DISP=SHR,DSN=SYS1.DSN810.SDSNEXIT              
+//         DD DISP=SHR,DSN=DSN810.SDSNLOAD                   
+//SYSPRINT  DD SYSOUT=*                                      
+//SYSTSPRT  DD SYSOUT=*                                      
+//SYSTSIN   DD *                                             
+ DSN SYSTEM(DB2A)                                            
+ RUN  PROGRAM(DSNTIAUL) PLAN(DSNTIAUL)                       
+ END
+//SYSPUNCH  DD DSN=UELA003.DB2A.CNTL.UNL0,   
+//             SPACE=(TRK,(5,5),RLSE),       
+//             UNIT=SYSDA,                   
+//             DISP=(,CATLG,DELETE)          
+//SYSREC00  DD DSN=UELA003.DB2A.UNLD.EMP1,   
+//             DISP=(,CATLG,DELETE),         
+//             DCB=(BLKSIZE=8192),           
+//             SPACE=(TRK,(150,15),RLSE),    
+//             UNIT=SYSDA                    
+//SYSIN DD *                                 
+  "UELA003"."EMP1"                           
+/*                                           
+//                                                                                                    

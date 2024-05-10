@@ -1,0 +1,37 @@
+//UGBIDCAM JOB AF-1055,'COUNTREC',
+//             MSGCLASS=X,MSGLEVEL=(1,1),
+//             CLASS=P,NOTIFY=&SYSUID
+//*TO CREATE VSAM KE FILE
+//CREATE  EXEC PGM=IDCAMS
+//SYSPRINT DD  SYSOUT=*
+//SYSIN    DD  *
+  DEFINE CLUSTER(                                                      -
+      NAME(SDCA.TESTBED.MEVSAM.FL04702.DT2709)                         -
+      CYLINDERS(45 10)                                                 -
+      CONTROLINTERVALSIZE(4096)                                        -
+      NOERASE                                                          -
+      FREESPACE(10 10)                                                 -
+      NOIMBED                                                          -
+      INDEXED                                                          -
+      KEYS(9 0)                                                        -
+      RECORDSIZE(14 14)                                                -
+      NOREPLICATE                                                      -
+      NOREUSE                                                          -
+      )DATA(                                                           -
+              NAME(SDCA.TESTBED.MEVSAM.FL04702.DT2709.DATA)-
+      )INDEX(     -
+              NAME(SDCA.TESTBED.MEVSAM.FL04702.DT2709.INDEX)-
+      )
+/*
+//*TO COPY SELECTED NO OF RECORDS
+//COPY001   EXEC  PGM=IDCAMS
+//SYSOUT    DD    SYSOUT=*
+//SYSPRINT  DD    SYSOUT=*
+//INDD      DD    DSN=SDCA.TESTBED.MEVSAM.FL04702,DISP=SHR
+//OUTDD     DD    DSN=SDCA.TESTBED.MEVSAM.FL04702.DT2709,DISP=OLD
+//SYSIN     DD    *
+ REPRO INFILE(INDD)-
+ OUTFILE(OUTDD)-
+ COUNT(100000)
+/*
+

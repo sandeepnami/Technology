@@ -1,0 +1,95 @@
+//P732083A JOB IN-1INC-IN,'TOOLBOX',CLASS=P,
+//             MSGCLASS=X,NOTIFY=P732083
+//*
+//*
+//*
+//**************************************************************
+//*
+//* *** WARNING ***  *** WARNING ***  *** WARNING ***
+//*
+//* THIS JOB WILL DELETE/DEFINE (WIPE OUT) THE DATA PRESENTLY
+//* HELD ON DD358VX
+//*
+//**************************************************************
+//*
+//*
+//*
+//**************************************************************
+//*  STOP DATABASE AREAS                                       *
+//**************************************************************
+//*
+//STOP     EXEC NBTSTBMP,OPT=W,PSB=PGMS63,MBR=PGMS63
+//SYSPRINT DD   SYSOUT=*
+//SYSIN    DD   *
+LIST
+*
+*         STOP DATABASE AREAS DD358VX
+*
+AXS STOAREA DATA=(DD358VX1)
+AXS STOAREA DATA=(DD358VX2)
+AXS STOAREA DATA=(DD358VX3)
+AXS STOAREA DATA=(DD358VX4)
+/*
+//*
+//*----------DELAY-STEP------------------------------------------------
+//DELAY    EXEC  NBTSTMVS,MBR=GU0085M0
+//* THE INPUT CARD TO THIS STEP IS IN THE FORMAT HHMMSSTH
+//GU0085M0 DD  *
+00001500
+/*
+//*
+//*******************************************
+//*     DELETE/DEFINE DATABASES             *
+//*******************************************
+//*
+//IDCAMS2 EXEC PGM=IDCAMS
+//SYSPRINT DD  SYSOUT=*
+//X37IGN   DD  DUMMY
+//SYSIN    DD  DSN=IMSTEST.DATA(DD358VX1),DISP=SHR
+//         DD  DSN=IMSTEST.DATA(DD358VX2),DISP=SHR
+//         DD  DSN=IMSTEST.DATA(DD358VX3),DISP=SHR
+//         DD  DSN=IMSTEST.DATA(DD358VX4),DISP=SHR
+//*
+//**********************************************************
+//*
+//* INITIALISE DD358 DATABASES
+//*
+//**********************************************************
+//*
+//INIT     EXEC PGM=DBFUMIN0
+//STEPLIB  DD  DSN=SYS1.IMSTEST.RESLIB,DISP=SHR
+//ACBLIB   DD  DSN=IMSTEST.ACBLIB(DD358VX),DISP=SHR
+//SYSPRINT DD  SYSOUT=*
+//DD358VX1 DD DSN=SDCM.IMSV.AF.DD358VX1.CONTRACT,
+//   DISP=SHR,AMP=('BUFND=60,BUFNI=10')
+//DD358VX2 DD DSN=SDCM.IMSV.AF.DD358VX2.CONTRACT,
+//   DISP=SHR,AMP=('BUFND=60,BUFNI=10')
+//DD358VX3 DD DSN=SDCM.IMSV.AF.DD358VX3.CONTRACT,
+//   DISP=SHR,AMP=('BUFND=60,BUFNI=10')
+//DD358VX4 DD DSN=SDCM.IMSV.AF.DD358VX4.CONTRACT,
+//   DISP=SHR,AMP=('BUFND=60,BUFNI=10')
+//*
+//* USE 'ALL' IN COL 1 IF ENTIRE DEDB IS TO BE PRE-FORMATTED
+//CONTROL  DD  *
+ALL
+/*
+//*
+//*****************************************************************
+//*  START DB AREAS                                               *
+//*****************************************************************
+//*
+//START    EXEC NBTSTBMP,OPT=W,PSB=PGMS63,MBR=PGMS63
+//SYSPRINT DD   SYSOUT=*
+//SYSIN    DD   *
+LIST
+*
+*       START DATABASE AREAS DD358VX
+*
+AXS STADB   DATA=(DD358VX)
+AXS STAAREA DATA=(DD358VX1)
+AXS STAAREA DATA=(DD358VX2)
+AXS STAAREA DATA=(DD358VX3)
+AXS STAAREA DATA=(DD358VX4)
+/*
+//
+

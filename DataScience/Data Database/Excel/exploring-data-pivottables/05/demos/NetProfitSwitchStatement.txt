@@ -1,0 +1,1 @@
+=SUMX( Sales20172019, Sales20172019[Price] * SWITCH (Sales20172019[City], "New York", 0.2,"Houston", 0.3, "Los Angeles", 0.25, 0.35 ) )

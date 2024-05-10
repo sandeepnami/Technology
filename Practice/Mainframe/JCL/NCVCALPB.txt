@@ -1,0 +1,19 @@
+//UGBSORT1 JOB (000000),'BAKUP OF NCVCALP',                             00010039
+//             MSGCLASS=X,MSGLEVEL=(1,1),                               00020000
+//             CLASS=2,NOTIFY=&SYSUID                                   00030000
+//*                                                                     00030139
+//SORT001 EXEC PGM=SORT                                                 00030200
+//SYSOUT   DD  SYSOUT=*                                                 00030300
+//SYSPRINT DD  SYSOUT=*                                                 00030400
+//*NCVCALP RECORD WITH JUST CURR PROCDATE IS BACKED UP                  00030540
+//*NANI PROD DATASET IS USED HERE IN SHR MODE                           00030641
+//SORTIN   DD  DSN=PDKVPGE.TRM.NCVCALP.KE,                              00030741
+//             DISP=SHR                                                 00030800
+//SORTOUT  DD  DSN=CDKVPGE.SANDEEPN.TRM.NCVCALP.SE.BAK1,                00031141
+//             DISP=OLD                                                 00031239
+//SYSIN    DD  *                                                        00031300
+ SORT FIELDS=COPY                                                       00031439
+ INCLUDE COND=((1,2,BI,EQ,0),AND,(3,2,BI,EQ,0),AND,(5,1,CH,EQ,C'C'),    00031540
+          AND,(6,4,PD,EQ,0))                                            00031640
+/*                                                                      00033000
+

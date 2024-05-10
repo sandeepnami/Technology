@@ -1,0 +1,95 @@
+//*-----------------------------------------------------------------+
+//*            CAMS JCL PROC FOR BMP PROGRAMS (MVS)                 |
+//*                                                                 |
+//*       NOTE: THIS STEP BASED ON PROCEDURE NBTSTBMP               |
+//*                                                                 |
+//*  REQUIRED PARMS ARE  MBR=           LOAD MODULE TO BE EXECUTED  |
+//*                      PSB=           PSB TO BE USED FOR RUN      |
+//*                      BUFFER=VN      WHERE N IS BUFFER NUMBER    |
+//*                                                                 |
+//*  AMENDMENT HISTORY                                              |
+//*                                                                 |
+//*  26-02-2001  XXX  CREATED                                       |
+//*  28-06-2001  AXT  REMOVE BUFFER CEE LOADLIB.                    |
+//*                                                                 |
+//*-----------------------------------------------------------------+
+//*
+//       PROC  MBR=,SOUT='*',OPT=W,SPIE=0,TEST=0,RGN=4096K,
+//             PSB=,PRLD=,STIMER=,CKPTID=,IN=,OUT=,DIRCA=000,SSM=,
+//             PARDLI=1,CPUTIME=,NBA=10,OBA=15,IMSID=IMST,AGN=ATIMSGEN,
+//             BUFFER=V0,PCMVRSN=,RLSE=,
+//             ENV1=DEV,ENV2=TEST,ENV3=PREIMP
+//*
+//BMPRUN  EXEC PGM=DFSRRC00,REGION=&RGN,TIME=1440,PERFORM=1,
+//             PARM=(BMP,&MBR,&PSB,&IN,&OUT,
+//             &OPT&SPIE&TEST&DIRCA,&PRLD,&STIMER,&CKPTID,
+//             &PARDLI,&CPUTIME,&NBA,&OBA,&IMSID,&AGN,&SSM)
+//*
+//STEPLIB  DD  DSN=SYS1.IMSTEST.RESLIB,DISP=SHR
+//         DD  DSN=SYS1.IMSTEST.RESLIB,DISP=SHR
+//         DD  DSN=SYS1.IMSTEST.DBALIB,DISP=SHR
+//         DD  DSN=MEDEV.TABLES.LINKLIB.V0,DISP=SHR
+//         DD  DSN=SDCM.BUFFER.AF8000&BUFFER..LOADLIB,DISP=SHR
+//         DD  DSN=CUMOD.&ENV1.&RLSE..CEE.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=CUMOD.&ENV2.&RLSE..CEE.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=CUMOD.&ENV3..CEE.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=CUMOD.PROD.CEE.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=PROG.&ENV1.&RLSE..OS.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=PROG.&ENV2.&RLSE..OS.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=PROG.&ENV3..OS.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=PROG.PROD.OS.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=PROG.&ENV1.&RLSE..IMS.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=PROG.&ENV2.&RLSE..IMS.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=PROG.&ENV3..IMS.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=PROG.PROD.IMS.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=IMSTEST.UTILITY.ONLINE.LOADLIB,DISP=SHR
+//         DD  DSN=IMSTEST.DBTOOLS.LOADLIB,DISP=SHR
+//         DD  DSN=SYS1.DB2.DSNLOAD,DISP=SHR
+//         DD  DSN=SYS1.BMC.FEP.LOAD,DISP=SHR
+//*
+//*--------------------   IMS DATASETS   -----------------
+//*
+//DFSESL   DD  DSN=SYS1.DB2.DSNLOAD,DISP=SHR
+//         DD  DSN=SYS1.IMSTEST.RESLIB,DISP=SHR
+//PROCLIB  DD  DSN=IMSTEST.PROCLIB,DISP=SHR
+//RMODLIB  DD  DSN=SYS1.IMSTEST.DBALIB,DISP=SHR
+//         DD  DSN=SYS1.IMSTEST.RESLIB,DISP=SHR
+//ACBLIB   DD  DSN=IMSTEST.ACBLIB,DISP=SHR
+//IMSUDUMP DD  DUMMY
+//IMS      DD  DSN=IMSTEST.PSBLIB,DISP=SHR
+//         DD  DSN=IMSTEST.DBDLIB,DISP=SHR
+//*
+//*--------------------   NAB DATASETS   -----------------
+//*
+//PRINT01  DD  SYSOUT=*
+//PRINT99  DD  SYSOUT=*
+//FNB103   DD  DSN=TSTVSAM.NB.NBBCINFO,DISP=SHR
+//FNB66    DD  DSN=NB.NBC.DATE.INFO,DISP=SHR
+//*FNB69   DD  DSN=NB.NBC.TESTING.SPECIALS,DISP=SHR
+//NB00M34  DD  DSN=IMSTEST.DATA(STATNO),DISP=SHR
+//SNAP     DD  SYSOUT=*
+//*
+//*--------------------   SYS DATASETS   -----------------
+//*
+//SYSDBOUT DD  SYSOUT=&SOUT
+//SYSOUT   DD  SYSOUT=*
+//SYSPRINT DD  SYSOUT=*
+//SYSUDUMP DD  SYSOUT=&SOUT,DCB=(LRECL=121,RECFM=VBA,BLKSIZE=3129),
+//             SPACE=(125,(2500,100),RLSE,,ROUND)
+//*
+//*--------------------   CAMS DATASETS   ----------------
+//*
+//FL03334  DD  DSN=SDCM.PCMVSAM.COMPNENT.VALIDATN.V&PCMVRSN,DISP=SHR
+//FL03336  DD  DSN=SDCM.PCMVSAM.EVENT.HISTORY.V&PCMVRSN,DISP=SHR
+//FL03344  DD  DSN=SDCM.PCM.SYSTEM.CONTROL.V&PCMVRSN,DISP=SHR
+//FL03357  DD  DSN=SDCM.PCMVSAM.EVENT.PREDECSR.V&PCMVRSN,DISP=SHR
+//FL03431  DD  DSN=SDCM.PCMVSAM.CURRENT.PROCESS.EVENT.V&PCMVRSN,
+//         DISP=SHR
+//*
+//*   NBOSDATE DD  DSN=SDCM.PCM.NBOSDATE.V&PCMVRSN,DISP=SHR
+//*   PROCDATE DD  DSN=SDCM.PCM.PROCDATE.V&PCMVRSN,DISP=SHR
+//*
+//PDUMP    DD  SYSOUT=&SOUT
+//PROGRAM  DD  DSN=&&&MBR,DISP=(NEW,DELETE)
+//*
+

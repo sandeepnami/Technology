@@ -1,0 +1,28 @@
+//UELA003A JOB 'LOAD',CLASS=A,MSGCLASS=X,NOTIFY=&SYSUID,       
+//         MSGLEVEL=(1,1),REGION=0M,TIME=1440                  
+//STEP1 EXEC DSNUPROC,SYSTEM=DB2A,                             
+//           UID='TEMP',UTPROC=''                              
+//SYSERR   DD DSN=UELA003.DB2.LOAD.ERR,                        
+//           DISP=(MOD,DELETE,CATLG),                          
+//           UNIT=SYSDA,SPACE=(TRK,(200,20))                   
+//SYSDISC  DD DSN=UELA003.DB2.LOAD.DISC,                       
+//           DISP=(MOD,DELETE,CATLG),                          
+//           UNIT=SYSDA,SPACE=(TRK,(200,20))                   
+//SYSMAP   DD DSN=UELA003.DB2.LOAD.MAP,                        
+//           DISP=(MOD,DELETE,CATLG),                          
+//           UNIT=SYSDA,SPACE=(TRK,(200,20))                   
+//SYSREC   DD DSN=UELA003.DB2.LOAD,DISP=SHR                    
+//SYSUT1   DD DSN=UELA003.CHK3.STEP1.VAS.SYSUT1,               
+//           DISP=(MOD,DELETE,CATLG),                          
+//           UNIT=SYSDA,SPACE=(TRK,(200,20))                   
+//SORTOUT  DD DSN=UELA003.CHK3.STEP1.VAS.SORTOUT,              
+//           DISP=(MOD,DELETE,CATLG),                          
+//           UNIT=SYSDA,SPACE=(TRK,(20,20))                    
+//SYSIN DD *                                                   
+    LOAD DATA INDDN(SYSREC) RESUME YES ENFORCE NO              
+        INTO TABLE UELA003.LOADEMP                             
+          (EMP_ID   POSITION(1) INTEGER EXTERNAL(4),           
+           EMP_NAME  POSITION(5) CHAR(20),                     
+           EMP_ADDR POSITION(25) CHAR(30))                     
+/*                                                             
+//                                                             

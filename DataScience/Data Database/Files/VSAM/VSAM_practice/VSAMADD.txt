@@ -1,0 +1,123 @@
+      *VSAM FILE INSERTION RECORDS FROM SE FILE INTO EXISTING KSDS      00001027
+      *VSAM FILE UPDATION OF RECS FROM SE FILE INTO EXISTING KSDS       00002028
+       IDENTIFICATION DIVISION.                                         00010001
+       PROGRAM-ID. VSAMADDR.                                            00020027
+      *                                                                 00020112
+       ENVIRONMENT DIVISION.                                            00021001
+       CONFIGURATION SECTION.                                           00022001
+       INPUT-OUTPUT SECTION.                                            00023022
+       FILE-CONTROL.                                                    00024022
+           SELECT VSAM-IN ASSIGN TO FL04702                             00025022
+                  ORGANIZATION IS INDEXED                               00026022
+      *           ACCESS MODE  IS SEQUENTIAL                            00026127
+                  ACCESS MODE  IS RANDOM                                00026227
+                  RECORD KEY   IS EL05857-RC06897-FL04702R              00026327
+                  FILE STATUS  IS FL04702-STATUS.                       00026427
+      *                                                                 00026527
+           SELECT FILE-IN ASSIGN TO INDDSE                              00026627
+               FILE STATUS IS INDDSE-STATUS.                            00026727
+      *                                                                 00027012
+       DATA DIVISION.                                                   00030001
+       FILE SECTION.                                                    00030222
+       FD  VSAM-IN.                                                     00030322
+       01  FL04702R-RECORD.                                             00030422
+          05  EL05857-RC06897-FL04702R    PIC S9(17)      COMP-3.       00030522
+          05  EL13859-RC06897-FL04702R    PIC S9(9)       COMP-3.       00030622
+                                                                        00030722
+       FD FILE-IN.                                                      00030822
+      *RECL=14                                                          00030922
+       01 INDDSE-DATA.                                                  00031022
+           05  INDDSE-EL05857    PIC S9(17)      COMP-3.                00032022
+           05  INDDSE-EL13859    PIC S9(9)       COMP-3.                00033022
+      *                                                                 00034022
+       WORKING-STORAGE SECTION.                                         00040001
+       01 WS-RECORD.                                                    00040122
+          05  WS-EL05857                     PIC S9(17)      COMP-3.    00040222
+          05  WS-EL13859                     PIC S9(9)       COMP-3.    00040322
+                                                                        00040422
+       01 FL04702-STATUS         PIC X(2).                              00041022
+          88  WS-FL04702-SUCCESS VALUE '00'.                            00042022
+          88  WS-FL04702-EOF     VALUE '10'.                            00043022
+                                                                        00043122
+       01 INDDSE-STATUS         PIC X(2).                               00044022
+          88  WS-INDDSE-SUCCESS VALUE '00'.                             00045022
+          88  WS-INDDSE-EOF     VALUE '10'.                             00046022
+                                                                        00102022
+       01 WS-EOF-FL04702        PIC X(1).                               00102122
+          88 WS-EOF-FL04702-NO  VALUE 'N'.                              00102222
+          88 WS-EOF-FL04702-YES VALUE 'Y'.                              00102322
+                                                                        00102522
+       01 WS-EOF-INDDSE         PIC X(1).                               00102622
+          88  WS-EOF-INDDSE-NO  VALUE 'N'.                              00102722
+          88  WS-EOF-INDDSE-YES VALUE 'Y'.                              00102822
+      *                                                                 00103022
+       PROCEDURE DIVISION.                                              00110001
+       MAIN-PARA.                                                       00130012
+           PERFORM FL04702-OPEN                                         00140022
+           PERFORM INDDSE-OPEN                                          00141022
+           READ FILE-IN                                                 00142022
+                 AT END MOVE 'Y' TO WS-EOF-INDDSE                       00143022
+           END-READ                                                     00144022
+           PERFORM UNTIL WS-EOF-INDDSE-YES                              00145022
+              MOVE INDDSE-EL05857 TO EL05857-RC06897-FL04702R           00146025
+              MOVE INDDSE-EL13859 TO EL13859-RC06897-FL04702R           00146125
+              DISPLAY INDDSE-DATA                                       00146325
+      *INSERT RECORDS                                                   00146428
+      *       PERFORM WRITE-RANDOM                                      00147029
+      *UPDATE RECORDS                                                   00147128
+              PERFORM UPDATE-PARA                                       00148028
+              INITIALIZE INDDSE-DATA                                    00150425
+              READ FILE-IN                                              00150525
+                 AT END MOVE 'Y' TO WS-EOF-INDDSE                       00150625
+              END-READ                                                  00150725
+           END-PERFORM                                                  00151025
+           CLOSE FILE-IN VSAM-IN                                        00160022
+           STOP RUN.                                                    00185021
+      *                                                                 00185128
+       FL04702-OPEN.                                                    00186022
+           INITIALIZE FL04702-STATUS WS-RECORD WS-EOF-FL04702           00186122
+      *SINCE WE WANT TO APPEND RECORDS WE OPEN VSAM IN EXTEND MODE      00186222
+      *ALSO EXTEND IS USED WHEN ACCESS MODE IS SEQUENCIAL               00186327
+      *    OPEN EXTEND VSAM-IN                                          00187027
+      *I-O MUST BE USED WHEN ACCESS MODE IS RANDOM                      00187128
+           OPEN I-O VSAM-IN                                             00187227
+           IF WS-FL04702-SUCCESS                                        00188022
+              DISPLAY "SUCCESSFULLY OPENED THE FILE FL04702"            00189023
+           ELSE                                                         00189122
+              DISPLAY "FAILED TO OPEN THE FILE FL04702"                 00189222
+              PERFORM EXIT-PARA                                         00189322
+           END-IF.                                                      00190022
+       INDDSE-OPEN.                                                     00191022
+           INITIALIZE INDDSE-STATUS WS-RECORD WS-EOF-INDDSE             00192022
+      *SINCE WE WANT TO JUST RESAD RECORDS INPUT MODE IS USED           00193022
+           OPEN INPUT FILE-IN                                           00194022
+           IF WS-INDDSE-SUCCESS                                         00195022
+              DISPLAY "SUCCESSFULLY OPENED THE FILE INDDSE"             00196023
+           ELSE                                                         00197022
+              DISPLAY "FAILED TO OPEN THE FILE INDDSE"                  00198022
+              PERFORM EXIT-PARA                                         00199022
+           END-IF.                                                      00199122
+       WRITE-RANDOM.                                                    00199228
+           WRITE FL04702R-RECORD                                        00199327
+               INVALID KEY                                              00199427
+                 DISPLAY "FILE STATUS WRITE" FL04702-STATUS             00199527
+                 DISPLAY "INVALID KEY " EL05857-RC06897-FL04702R        00199627
+                 DISPLAY "BUID " EL13859-RC06897-FL04702R               00199727
+      *HERE REWRITE IS FOR UPDATE JUST IN CASE THE FILED IS DUP         00199827
+                 REWRITE FL04702R-RECORD                                00199927
+                  INVALID KEY                                           00200027
+                    DISPLAY "REWRITE REALLY BAD DATA" FL04702-STATUS    00200127
+                 END-REWRITE                                            00200227
+               NOT INVALID KEY                                          00200327
+                  DISPLAY "INSERTION SUCCESS "                          00200427
+                           EL05857-RC06897-FL04702R                     00200527
+           END-WRITE.                                                   00200627
+       UPDATE-PARA.                                                     00200827
+      * USE REWRITE IF KSDS NEEDS TO BE UPDATED                         00200927
+              REWRITE FL04702R-RECORD                                   00201027
+               INVALID KEY                                              00201127
+                 DISPLAY "REWRITE REALLY BAD DATA" FL04702-STATUS       00201227
+              END-REWRITE.                                              00201327
+       EXIT-PARA.                                                       00202022
+           STOP RUN.                                                    00210022
+

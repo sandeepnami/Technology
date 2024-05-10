@@ -1,0 +1,553 @@
+000100 IDENTIFICATION DIVISION.                                         00010000
+000200 PROGRAM-ID. ELPELE01.                                            00020074
+000201 AUTHOR. ELP 1026.                                                00020176
+000202 DATE-WRITTEN. 17-SEP-2012.                                       00020273
+000203 DATE-COMPILED.                                                   00020373
+000204                                                                  00020473
+000210******************************************************************00021053
+000220*                                                                 00022053
+000230* TITLE         : ELECTRICITY CONSUMPTION PROCESSING              00023053
+000231*                                                                 00023161
+000240* FUNCTIONALITY : GENERATING A REPORT ON ELECTRICITY              00024053
+000250*                 CONSUMPTION OF POWER LOOMS IN TEXTILE           00025053
+000260*                 MANUFACTURING UNIT RUNNING ON 3 DIFFERENT SHIFTS00026053
+000261*                                                                 00026161
+000270* LOGIC         :INSERTING RECORDS FROM PS FILE TO TABLE AND      00027061
+000271*                CALCULATING PROFIT FROM PREVIOUS RATES AND       00027161
+000272*                CURRENT RATES BY FETCHING RECORDS FROM DATABASE  00027261
+000273*                FOR 3 DIFFERENT SHIFTS AND GENERATING REPORT     00027361
+000274*                                                                 00027461
+000280* FILES USED    :                                                 00028053
+000290*_________________________________________________________________00029053
+000291*  LOGICAL        PHYSICAL           OPENING       PURPOSE        00029153
+000292*   NAME            NAME              MODE          SERVED        00029253
+000293*_________________________________________________________________00029353
+000294*  R01-OUTFILE     CSREPT             OUTPUT      GENERATING      00029461
+000295*                                                  PROFIT         00029561
+000296*                                                  REPORT         00029661
+000298*_________________________________________________________________00029853
+000302******************************************************************00030253
+000303                                                                  00030353
+000304 ENVIRONMENT DIVISION.                                            00030400
+000310                                                                  00031053
+000400 INPUT-OUTPUT SECTION.                                            00040000
+000410                                                                  00041053
+000500 FILE-CONTROL.                                                    00050000
+000510      COPY SEQUEN1.                                               00051067
+001010                                                                  00101053
+001100 DATA DIVISION.                                                   00110042
+001110                                                                  00111053
+001200 FILE SECTION.                                                    00120000
+001210                                                                  00121053
+001300 FD R01-OUTFILE                                                   00130000
+001400         RECORD CONTAINS 132 CHARACTERS                           00140053
+001500         BLOCK CONTAINS 0 RECORDS                                 00150053
+001600         RECORDING MODE IS F.                                     00160053
+001700 01 R01-X-OUT-REC               PIC       X(132).                 00170031
+001710                                                                  00171053
+001800 WORKING-STORAGE SECTION.                                         00180000
+001810                                                                  00181053
+001820******************************************************************00182061
+001830*--------------------OUTPUT RECORD STRUCTURE---------------------*00183061
+001840******************************************************************00184061
+001850                                                                  00185061
+001860         COPY RECSTRC.                                            00186069
+002720******************************************************************00272061
+002730*-------------HELPING VARIABLES USED FOR COMPUTATIONS------------*00273061
+002740******************************************************************00274061
+002750                                                                  00275061
+002800 01 HELPING-VARIABLES.                                            00280052
+002900     03 H-I-OLD-RATE            PIC       9(06)V99 VALUE ZEROS.   00290077
+002910     03 H-I-TOTAL-OLD-RATE      PIC       9(06)V99 VALUE ZEROS.   00291052
+002920     03 H-I-TOTAL-4RSRAT-SH1    PIC       9(06)V99 VALUE ZEROS.   00292052
+002921     03 H-I-TOTAL-4RSRAT-SH2    PIC       9(06)V99 VALUE ZEROS.   00292152
+002922     03 H-I-TOTAL-4RSRAT-SH3    PIC       9(06)V99 VALUE ZEROS.   00292252
+002930     03 H-I-TOTAL-2RSRAT-SH1    PIC       9(06)V99 VALUE ZEROS.   00293052
+002940     03 H-I-TOTAL-2RSRAT-SH2    PIC       9(06)V99 VALUE ZEROS.   00294052
+002950     03 H-I-TOTAL-2RSRAT-SH3    PIC       9(06)V99 VALUE ZEROS.   00295052
+003000     03 H-I-NEW-RATE-4RS        PIC       9(06)V99 VALUE ZEROS.   00300077
+003100     03 H-I-NEW-RATE-2RS        PIC       9(06)V99 VALUE ZEROS.   00310077
+003110     03 H-I-PROFIT              PIC       9(06)V99 VALUE ZEROS.   00311077
+003111     03 H-TEMP                  PIC       S9(09) COMP-3.          00311178
+003120 01 WORK-AREA.                                                    00312052
+003200     03 W-FST-INFILE            PIC       X(02)    VALUE SPACES.  00320077
+003210     03 W-I-NEW-START-TIME      PIC       9(02)    VALUE 22.      00321060
+003220     03 W-I-NEW-END-TIME        PIC       9(02)    VALUE 06.      00322060
+003230     03 W-I-UNIT-PER-HOUR       PIC       9(01)    VALUE 5.       00323060
+003240     03 W-I-OLD-COST-PER-HR     PIC       9(01)    VALUE 4.       00324060
+003250     03 W-I-NEW-COST-PER-HR     PIC       9(01)    VALUE 2.       00325060
+003252                                                                  00325263
+003260 01 W-I-SHIFT                   PIC       9(01).                  00326060
+003270     88 C-GENERAL-SHIFT                      VALUE     1.         00327048
+003280     88 C-EVENING-SHIFT                      VALUE     2.         00328048
+003290     88 C-NIGHT-SHIFT                        VALUE     3.         00329048
+003291 01 W-I-SQL                     PIC       X(03).                  00329154
+003292     88 C-END-OF-TABLE                       VALUE  "END".        00329254
+003293                                                                  00329354
+003300     EXEC SQL                                                     00330000
+003400         INCLUDE SQLCA                                            00340000
+003500     END-EXEC.                                                    00350000
+003600     EXEC SQL                                                     00360000
+003700         INCLUDE MACS228                                          00370000
+003800     END-EXEC.                                                    00380000
+003900     EXEC SQL                                                     00390000
+004000         DECLARE ELE-CSR CURSOR FOR                               00400001
+004100                      SELECT SHIFT,                               00410004
+004200                             SHIFT_START_TIME,                    00420004
+004300                             SHIFT_END_TIME,                      00430004
+004400                             NO_OF_POWER_LOOMS,                   00440004
+004500                             REMARKS                              00450004
+004600                       FROM UELT228.SHIFT_TABLE                   00460000
+004700     END-EXEC.                                                    00470000
+004701                                                                  00470152
+004702******************************************************************00470259
+004703*********---------- DECLARING HEADING-------********************* 00470359
+004704******************************************************************00470459
+004705 01 W-G-HEADINGS.                                                 00470531
+004706     03 W-X-HEADING1.                                             00470631
+004707        05   FILLER            PIC  X(15).                        00470731
+004708        05   FILLER            PIC  X(14)                         00470852
+004709                          VALUE "SHIFT TIMINGS".                  00470952
+004710        05   FILLER            PIC  X(51).                        00471031
+004711        05   FILLER            PIC  X(16)                         00471133
+004712                          VALUE "NO. OF LOOMS RUN".               00471252
+004713        05   FILLER            PIC  X(36).                        00471333
+004714     03 W-X-HEADING2.                                             00471432
+004715        05   FILLER            PIC  X(48).                        00471531
+004716        05   FILLER            PIC  X(20)                         00471631
+004717                          VALUE "EXISTING (OLD) RATES".           00471733
+004718        05   FILLER            PIC  X(29).                        00471831
+004719        05   FILLER            PIC  X(09) VALUE "NEW RATES".      00471931
+004720        05   FILLER            PIC  X(25).                        00472031
+004721     03 W-X-HEADING3.                                             00472132
+004722        05   FILLER            PIC  X(44).                        00472235
+004723        05   FILLER            PIC  X(04) VALUE "NO'S".           00472331
+004724        05   FILLER            PIC  X(10).                        00472435
+004725        05   FILLER            PIC  X(10) VALUE "TOTAL COST".     00472531
+004726        05   FILLER            PIC  X(05).                        00472635
+004727        05   FILLER            PIC  X(04) VALUE "NO'S".           00472732
+004728        05   FILLER            PIC  X(10).                        00472835
+004729        05   FILLER            PIC  X(10) VALUE "TOTAL COST".     00472932
+004730        05   FILLER            PIC  X(05).                        00473035
+004731        05   FILLER            PIC  X(04) VALUE "NO'S".           00473132
+004732        05   FILLER            PIC  X(10).                        00473235
+004733        05   FILLER            PIC  X(10) VALUE "TOTAL COST".     00473332
+004734        05   FILLER            PIC  X(06).                        00473432
+004735     03 W-X-HEADING4.                                             00473532
+004736        05   FILLER            PIC  X(57).                        00473632
+004737        05   FILLER            PIC  X(12) VALUE                   00473752
+004738                                        "AT RS.4/UNIT".           00473852
+004739        05   FILLER            PIC  X(17).                        00473932
+004740        05   FILLER            PIC  X(12) VALUE                   00474052
+004741                                          "AT RS.4/UNIT".         00474152
+004742        05   FILLER            PIC  X(17).                        00474232
+004743        05   FILLER            PIC  X(12) VALUE                   00474352
+004744                                          "AT RS.2/UNIT".         00474452
+004745        05   FILLER            PIC  X(05).                        00474532
+004746     03 W-X-HYPHEN             PIC  X(132) VALUE ALL "_".         00474632
+004747                                                                  00474752
+004748******************************************************************00474859
+004749*********---------- DECLARING FOOTER-------*********************  00474959
+004750******************************************************************00475059
+004751 01 W-G-FOOTERS.                                                  00475132
+004752     03 W-FOOTER1.                                                00475236
+004753        05   FILLER            PIC  X(20).                        00475336
+004754        05   FILLER            PIC  X(05)  VALUE "TOTAL".         00475452
+004755        05   FILLER            PIC  X(107).                       00475536
+004756     03 W-FOOTER2.                                                00475636
+004757        05   FILLER            PIC  X(53).                        00475736
+004758        05   FILLER            PIC  X(5)   VALUE "(A)".           00475852
+004760        05   W-I-A-TOTAL       PIC  ZZZ9(04).99.                  00476036
+004770        05   FILLER            PIC  X(14).                        00477036
+004771        05   FILLER            PIC  X(5)   VALUE "(B)".           00477152
+004772        05   W-I-B-TOTAL       PIC  ZZZ9(04).99.                  00477236
+004773        05   FILLER            PIC  X(14).                        00477336
+004780        05   FILLER            PIC  X(5)   VALUE "(C)".           00478052
+004790        05   W-I-C-TOTAL       PIC  ZZZ9(04).99.                  00479036
+004791        05   FILLER            PIC  X(04).                        00479136
+004792     03 W-FOOTER3              PIC  X(132) VALUE                  00479236
+004793        "NOTE : POWER CONSUMPTION IS 5 UNITS PER HOUR PER LOOM".  00479336
+004794     03 W-FOOTER4.                                                00479436
+004795        05   FILLER            PIC  X(53).                        00479536
+004796        05   FILLER            PIC  X(23)  VALUE                  00479636
+004797             "PROFIT (A-(B+C)) IS RS.".                           00479736
+004798        05   W-I-PROFIT        PIC  ZZZ9(04).99.                  00479837
+004799        05   FILLER            PIC  X(46).                        00479936
+004800                                                                  00480053
+004810 PROCEDURE DIVISION.                                              00481000
+004820                                                                  00482053
+004900 0000-MAIN-PARA.                                                  00490000
+004910                                                                  00491050
+004920     PERFORM 0500-INSERT-PARA         THRU 0500-INSERT-EXIT.      00492064
+005000     PERFORM 1000-FILE-OPEN-PARA      THRU 1000-FILE-OPEN-EXIT.   00500061
+005010     PERFORM 1100-HEADING-PARA        THRU 1100-HEADING-EXIT.     00501061
+005100     PERFORM 1500-CURSOR-OPEN-PARA    THRU 1500-CURSOR-EXIT.      00510061
+005110     PERFORM 3000-FETCH-PARA          THRU 3000-FETCH-EXIT        00511061
+005111                                  UNTIL C-END-OF-TABLE.           00511154
+005120     PERFORM 6500-PROFIT-PARA         THRU 6500-PROFIT-EXIT.      00512061
+005130     PERFORM 8000-FOOTER-PARA         THRU 8000-FOOTER-EXIT.      00513061
+005200     PERFORM 9000-CUR-FILE-CLOSE-PARA THRU 9000-FILE-CLOSE-EXIT.  00520061
+005210     PERFORM 9999-PROGRAM-EXIT.                                   00521061
+005211                                                                  00521156
+005212******************************************************************00521264
+005213*-----RECORDS ARE INSERT FROM PS FILE TO TABLE USING              00521364
+005214*---- TABPS SUBPROGRAM                                            00521464
+005215******************************************************************00521564
+005216                                                                  00521664
+005217 0500-INSERT-PARA.                                                00521763
+005218     CALL "TABPS".                                                00521865
+005219                                                                  00521963
+005220 0500-INSERT-EXIT.                                                00522066
+005221     EXIT.                                                        00522164
+005222                                                                  00522264
+005223******************************************************************00522356
+005230*--------------OPENING THE FILE IN OUTPUT MODE-------------------*00523056
+005240******************************************************************00524056
+005300 1000-FILE-OPEN-PARA.                                             00530000
+005310                                                                  00531050
+005320                                                                  00532050
+005400     OPEN OUTPUT R01-OUTFILE.                                     00540000
+005410                                                                  00541053
+005500     EVALUATE TRUE                                                00550000
+005600         WHEN W-FST-INFILE = 00                                   00560045
+005700             CONTINUE                                             00570000
+005800         WHEN OTHER                                               00580000
+005900             PERFORM 9999-PROGRAM-EXIT                            00590061
+006000     END-EVALUATE.                                                00600000
+006001                                                                  00600150
+006002                                                                  00600250
+006003 1000-FILE-OPEN-EXIT.                                             00600361
+006005                                                                  00600550
+006006     EXIT                                                         00600650
+006007     .                                                            00600750
+006009******************************************************************00600956
+006010*----------WRITING HEADER IN TO OUTPUT FILE----------------------*00601056
+006011******************************************************************00601156
+006012                                                                  00601256
+006013 1100-HEADING-PARA.                                               00601332
+006014                                                                  00601450
+006020     WRITE R01-X-OUT-REC           FROM   W-X-HYPHEN.             00602032
+006030     WRITE R01-X-OUT-REC           FROM   W-X-HEADING1.           00603032
+006040     WRITE R01-X-OUT-REC           FROM   W-X-HYPHEN.             00604032
+006050     WRITE R01-X-OUT-REC           FROM   W-X-HEADING2.           00605032
+006060     WRITE R01-X-OUT-REC           FROM   W-X-HYPHEN.             00606032
+006070     WRITE R01-X-OUT-REC           FROM   W-X-HEADING3.           00607032
+006080     WRITE R01-X-OUT-REC           FROM   W-X-HEADING4.           00608032
+006090     WRITE R01-X-OUT-REC           FROM   W-X-HYPHEN.             00609032
+006092                                                                  00609250
+006093 1100-HEADING-EXIT.                                               00609361
+006094                                                                  00609450
+006095     EXIT                                                         00609545
+006096     .                                                            00609645
+006097                                                                  00609752
+006098******************************************************************00609856
+006099*-----------------------OPENING THE CURSOR------------------------00609956
+006100******************************************************************00610056
+006101                                                                  00610156
+006110 1500-CURSOR-OPEN-PARA.                                           00611000
+006120                                                                  00612050
+006200     EXEC SQL                                                     00620000
+006300        OPEN ELE-CSR                                              00630000
+006400     END-EXEC.                                                    00640000
+006410                                                                  00641050
+006500     EVALUATE TRUE                                                00650000
+006600        WHEN SQLCODE = 00                                         00660000
+006700          CONTINUE                                                00670000
+006800        WHEN OTHER                                                00680000
+006900          PERFORM 9999-PROGRAM-EXIT                               00690061
+007000     END-EVALUATE.                                                00700000
+007001                                                                  00700150
+007010 1500-CURSOR-EXIT.                                                00701061
+007011                                                                  00701150
+007020     EXIT                                                         00702045
+007030     .                                                            00703045
+007040******************************************************************00704056
+007050*--------------FETCHING RECORD FROM TABLE USING CURSOR----------- 00705056
+007060******************************************************************00706056
+007070                                                                  00707056
+007100 3000-FETCH-PARA.                                                 00710000
+007110                                                                  00711050
+007200     EXEC SQL                                                     00720000
+007300        FETCH ELE-CSR INTO                                        00730000
+007400                           :HV-SHIFT,                             00740000
+007500                           :HV-SHIFT-START-TIME,                  00750000
+007600                           :HV-SHIFT-END-TIME,                    00760000
+007700                           :HV-NO-OF-POWER-LOOMS,                 00770000
+007800                           :HV-REMARKS                            00780000
+007900     END-EXEC.                                                    00790000
+007910                                                                  00791050
+008000     EVALUATE TRUE                                                00800000
+008100         WHEN SQLCODE = 00                                        00810000
+008200               PERFORM 3500-CALC-PARA     THRU 3600-CALC-EXIT     00820046
+008300         WHEN SQLCODE = 100                                       00830000
+008310               MOVE SQLCODE TO H-TEMP                             00831078
+008320               DISPLAY H-TEMP                                     00832078
+008400               SET C-END-OF-TABLE TO TRUE                         00840054
+008500         WHEN OTHER                                               00850000
+008600               PERFORM 9999-PROGRAM-EXIT                          00860061
+008700     END-EVALUATE.                                                00870000
+008701                                                                  00870150
+008710 3000-FETCH-EXIT.                                                 00871061
+008711                                                                  00871150
+008720     EXIT                                                         00872045
+008730     .                                                            00873045
+008731                                                                  00873156
+008740***************************************************************** 00874056
+008750*--------TRANSFERING CONTROL TO SUBPROGRAM & NEW-CALCULATION      00875059
+008760*-------PARA FOR CALCUALTING OLD AND NEW RATES BASED ON SHIFT     00876056
+008770****************************************************************  00877056
+008780                                                                  00878056
+008800 3500-CALC-PARA.                                                  00880027
+008801                                                                  00880152
+008810     MOVE HV-SHIFT TO W-I-SHIFT.                                  00881049
+008900     EVALUATE TRUE                                                00890000
+009000        WHEN C-GENERAL-SHIFT                                      00900048
+009010          CALL "SUBPGM1" USING HV-SHIFT-START-TIME                00901057
+009020                               HV-SHIFT-END-TIME                  00902058
+009030                               HV-NO-OF-POWER-LOOMS               00903058
+009040                               HV-REMARKS                         00904058
+009050                               H-I-OLD-RATE                       00905058
+009100           PERFORM 5000-OLD-CALC-PARA     THRU 5000-OLD-CALC-EXIT 00910061
+009110           PERFORM 5200-NEW-CALC-PARA-SH1 THRU 5200-NEW-CALC-EXIT 00911061
+009200        WHEN C-EVENING-SHIFT                                      00920048
+009210           CALL "SUBPGM1" USING HV-SHIFT-START-TIME               00921057
+009220                                HV-SHIFT-END-TIME                 00922058
+009230                                HV-NO-OF-POWER-LOOMS              00923058
+009240                                HV-REMARKS                        00924058
+009250                                H-I-OLD-RATE                      00925058
+009300           PERFORM 5000-OLD-CALC-PARA     THRU 5000-OLD-CALC-EXIT 00930061
+009310           PERFORM 5400-NEW-CALC-PARA-SH2 THRU 5400-NEW-CALC-EXIT 00931061
+009400        WHEN C-NIGHT-SHIFT                                        00940048
+009410           CALL "SUBPGM1" USING HV-SHIFT-START-TIME               00941057
+009420                                HV-SHIFT-END-TIME                 00942058
+009430                                HV-NO-OF-POWER-LOOMS              00943058
+009440                                HV-REMARKS                        00944058
+009450                                H-I-OLD-RATE                      00945058
+009500           PERFORM 5000-OLD-CALC-PARA     THRU 5000-OLD-CALC-EXIT 00950061
+009510           PERFORM 5600-NEW-CALC-PARA-SH3 THRU 5600-NEW-CALC-EXIT 00951061
+009520        WHEN OTHER                                                00952026
+009530           PERFORM 9999-PROGRAM-EXIT                              00953061
+009600     END-EVALUATE.                                                00960000
+009601                                                                  00960152
+009610 3600-CALC-EXIT.                                                  00961045
+009611                                                                  00961152
+009620     EXIT                                                         00962045
+009630     .                                                            00963045
+009640                                                                  00964052
+009650***************************************************************** 00965056
+009660*---CALUCULATION OF COST USING OLD RATES FOR ALL 3 SHIFTS-------* 00966056
+009670***************************************************************** 00967056
+009680                                                                  00968056
+009700 5000-OLD-CALC-PARA.                                              00970000
+009701                                                                  00970152
+009702     MOVE HV-NO-OF-POWER-LOOMS      TO W01-I-NO-OF-LOOMS1.        00970245
+009710     MOVE HV-REMARKS-TEXT           TO W01-X-SHIFT-TIMINGS.       00971045
+009720                                                                  00972050
+010030                                                                  01003052
+010100     ADD H-I-OLD-RATE               TO H-I-TOTAL-OLD-RATE.        01010052
+010101                                                                  01010152
+010110     MOVE H-I-OLD-RATE              TO W01-I-OLD-RATE.            01011052
+010210     MOVE SPACES                    TO HV-REMARKS.                01021050
+010211                                                                  01021152
+010212 5000-OLD-CALC-EXIT.                                              01021261
+010213                                                                  01021352
+010214     EXIT                                                         01021446
+010215     .                                                            01021546
+010216                                                                  01021652
+010217******************************************************************01021756
+010218*-----CALCULATION OF COST USING NEW RATES FOR SHIFT1-------------*01021856
+010219******************************************************************01021956
+010220                                                                  01022056
+010221 5200-NEW-CALC-PARA-SH1.                                          01022145
+010222                                                                  01022252
+010230     MOVE HV-NO-OF-POWER-LOOMS      TO W01-I-NO-OF-LOOMS2         01023050
+010231                                  W01-I-NO-OF-LOOMS3.             01023145
+010232                                                                  01023252
+010250     COMPUTE H-I-TOTAL-4RSRAT-SH1 ROUNDED =                       01025052
+010260                    ( HV-SHIFT-END-TIME - HV-SHIFT-START-TIME ) * 01026019
+010261                    W-I-UNIT-PER-HOUR *                           01026144
+010262                    W-I-OLD-COST-PER-HR *                         01026244
+010270                    HV-NO-OF-POWER-LOOMS                          01027049
+010280                    ON SIZE ERROR                                 01028049
+010281                  PERFORM 5200-NEW-CALC-EXIT.                     01028161
+010282                                                                  01028252
+010290     MOVE ZEROS                       TO H-I-TOTAL-2RSRAT-SH1.    01029052
+010291     MOVE H-I-TOTAL-4RSRAT-SH1        TO W01-I-NEW-RATE-4RS.      01029152
+010292     MOVE H-I-TOTAL-2RSRAT-SH1        TO W01-I-NEW-RATE-2RS.      01029252
+010293     MOVE SPACES                      TO HV-REMARKS.              01029350
+010294                                                                  01029452
+010295     PERFORM 6000-WRITE-PARA THRU 6000-WRITE-EXIT.                01029561
+010296                                                                  01029652
+010297 5200-NEW-CALC-EXIT.                                              01029761
+010298                                                                  01029852
+010299     EXIT                                                         01029946
+010300     .                                                            01030046
+010301******************************************************************01030156
+010302*-----CALCULATION OF COST USING NEW RATES FOR SHIFT2-------------*01030256
+010303******************************************************************01030356
+010304                                                                  01030452
+010305 5400-NEW-CALC-PARA-SH2.                                          01030545
+010306     MOVE HV-NO-OF-POWER-LOOMS        TO W01-I-NO-OF-LOOMS2       01030650
+010307                                         W01-I-NO-OF-LOOMS3.      01030750
+010308                                                                  01030852
+010309     COMPUTE H-I-TOTAL-4RSRAT-SH2 ROUNDED =                       01030952
+010310                    ( W-I-NEW-START-TIME - HV-SHIFT-START-TIME ) *01031023
+010311                    W-I-UNIT-PER-HOUR *                           01031144
+010312                    W-I-OLD-COST-PER-HR *                         01031244
+010313                    HV-NO-OF-POWER-LOOMS                          01031349
+010314                    ON SIZE ERROR                                 01031449
+010315                    PERFORM 5400-NEW-CALC-EXIT.                   01031561
+010316     COMPUTE H-I-TOTAL-2RSRAT-SH2 ROUNDED =                       01031652
+010317                    ( HV-SHIFT-END-TIME - W-I-NEW-START-TIME ) *  01031723
+010318                    W-I-UNIT-PER-HOUR *                           01031844
+010319                    W-I-NEW-COST-PER-HR *                         01031944
+010320                    HV-NO-OF-POWER-LOOMS                          01032049
+010321                    ON SIZE ERROR                                 01032149
+010322                    PERFORM 5400-NEW-CALC-EXIT.                   01032261
+010323                                                                  01032352
+010324     MOVE H-I-TOTAL-4RSRAT-SH2         TO  W01-I-NEW-RATE-4RS.    01032452
+010325     MOVE H-I-TOTAL-2RSRAT-SH2         TO  W01-I-NEW-RATE-2RS.    01032552
+010326     MOVE SPACES                       TO  HV-REMARKS.            01032629
+010327                                                                  01032752
+010328     PERFORM 6000-WRITE-PARA THRU 6000-WRITE-EXIT.                01032861
+010329 5400-NEW-CALC-EXIT.                                              01032961
+010330                                                                  01033052
+010331     EXIT                                                         01033146
+010332     .                                                            01033246
+010333******************************************************************01033356
+010334*-----CALCULATION OF COST USING NEW RATES FOR SHIFT3-------------*01033456
+010335******************************************************************01033556
+010336                                                                  01033652
+010337 5600-NEW-CALC-PARA-SH3.                                          01033745
+010338                                                                  01033852
+010339     MOVE HV-NO-OF-POWER-LOOMS         TO W01-I-NO-OF-LOOMS2      01033950
+010340                                          W01-I-NO-OF-LOOMS3.     01034050
+010341                                                                  01034152
+010342     COMPUTE H-I-TOTAL-4RSRAT-SH3 ROUNDED =                       01034252
+010343                    ( W-I-NEW-END-TIME - HV-SHIFT-START-TIME ) *  01034325
+010344                    W-I-UNIT-PER-HOUR *                           01034444
+010345                    W-I-OLD-COST-PER-HR *                         01034544
+010346                    HV-NO-OF-POWER-LOOMS                          01034649
+010347                    ON SIZE ERROR                                 01034749
+010348                    PERFORM 5600-NEW-CALC-EXIT.                   01034861
+010349     COMPUTE H-I-TOTAL-2RSRAT-SH3 ROUNDED =                       01034952
+010350                    ( HV-SHIFT-END-TIME - W-I-NEW-END-TIME ) *    01035025
+010351                    W-I-UNIT-PER-HOUR *                           01035144
+010352                    W-I-NEW-COST-PER-HR *                         01035244
+010353                    HV-NO-OF-POWER-LOOMS                          01035349
+010354                    ON SIZE ERROR                                 01035449
+010355                    PERFORM 5600-NEW-CALC-EXIT.                   01035561
+010356                                                                  01035652
+010357     MOVE H-I-TOTAL-4RSRAT-SH3         TO W01-I-NEW-RATE-4RS.     01035752
+010358     MOVE H-I-TOTAL-2RSRAT-SH3         TO W01-I-NEW-RATE-2RS.     01035852
+010359     MOVE SPACES TO HV-REMARKS.                                   01035924
+010360                                                                  01036052
+010361     PERFORM 6000-WRITE-PARA           THRU 6000-WRITE-EXIT.      01036161
+010362 5600-NEW-CALC-EXIT.                                              01036261
+010363                                                                  01036352
+010364     EXIT                                                         01036446
+010365     .                                                            01036546
+010366                                                                  01036652
+010367******************************************************************01036756
+010368*-------------WRITING IN TO OUTPUT FILE--------------------------*01036856
+010369******************************************************************01036956
+010370                                                                  01037056
+010371 6000-WRITE-PARA.                                                 01037146
+010380                                                                  01038052
+010500     WRITE R01-X-OUT-REC               FROM W01-G-OUT-STRUC.      01050050
+010501                                                                  01050152
+010502 6000-WRITE-EXIT.                                                 01050261
+010503                                                                  01050352
+010504     EXIT                                                         01050446
+010505     .                                                            01050546
+010506                                                                  01050652
+010507******************************************************************01050756
+010508*------CALCULATING PROFIT FROM OLD AND NEW RATES ----------------*01050856
+010509***************************************************************** 01050956
+010510 6500-PROFIT-PARA.                                                01051036
+010511                                                                  01051152
+010520     COMPUTE H-I-NEW-RATE-4RS ROUNDED  = H-I-TOTAL-4RSRAT-SH1 +   01052052
+010530                                         H-I-TOTAL-4RSRAT-SH2 +   01053052
+010540                                         H-I-TOTAL-4RSRAT-SH3     01054052
+010541                                ON SIZE ERROR                     01054150
+010542                               PERFORM 6500-PROFIT-EXIT.          01054261
+010550     COMPUTE H-I-NEW-RATE-2RS  ROUNDED = H-I-TOTAL-2RSRAT-SH1 +   01055052
+010560                                         H-I-TOTAL-2RSRAT-SH2 +   01056052
+010570                                         H-I-TOTAL-2RSRAT-SH3     01057052
+010571                                ON SIZE ERROR                     01057150
+010572                                PERFORM 6500-PROFIT-EXIT.         01057261
+010573                                                                  01057352
+010580     MOVE H-I-TOTAL-OLD-RATE           TO W-I-A-TOTAL.            01058052
+010590     MOVE H-I-NEW-RATE-4RS             TO W-I-B-TOTAL.            01059052
+010591     MOVE H-I-NEW-RATE-2RS             TO W-I-C-TOTAL.            01059152
+010592                                                                  01059252
+010593     COMPUTE H-I-PROFIT       =  H-I-TOTAL-OLD-RATE -             01059352
+010594                                ( H-I-NEW-RATE-4RS +              01059452
+010595                                  H-I-NEW-RATE-2RS ).             01059552
+010596                                                                  01059652
+010597     MOVE   H-I-PROFIT                 TO  W-I-PROFIT.            01059752
+010598                                                                  01059852
+010599 6500-PROFIT-EXIT.                                                01059961
+010600                                                                  01060052
+010601     EXIT                                                         01060146
+010602     .                                                            01060246
+010603                                                                  01060352
+010604****************************************************************  01060456
+010605*-----------WRITING FOOTER INTO OUTPUT FILE--------------------*  01060556
+010606****************************************************************  01060656
+010607                                                                  01060756
+010608 8000-FOOTER-PARA.                                                01060836
+010609                                                                  01060952
+010610     WRITE R01-X-OUT-REC               FROM W-X-HYPHEN.           01061050
+010611     WRITE R01-X-OUT-REC               FROM W-FOOTER1.            01061150
+010612     WRITE R01-X-OUT-REC               FROM W-X-HYPHEN.           01061250
+010613     WRITE R01-X-OUT-REC               FROM W-FOOTER2.            01061350
+010614     WRITE R01-X-OUT-REC               FROM W-X-HYPHEN.           01061450
+010615     WRITE R01-X-OUT-REC               FROM W-FOOTER3.            01061550
+010616     WRITE R01-X-OUT-REC               FROM W-X-HYPHEN.           01061650
+010617     WRITE R01-X-OUT-REC               FROM W-FOOTER4.            01061750
+010618                                                                  01061852
+010619 8000-FOOTER-EXIT.                                                01061961
+010620                                                                  01062052
+010621     EXIT                                                         01062146
+010622     .                                                            01062246
+010623                                                                  01062352
+010624***************************************************************** 01062456
+010625*----------CLOSING THE CURSOR AND OUTPUT FILE-------------------* 01062556
+010626***************************************************************** 01062656
+010627                                                                  01062756
+010628 9000-CUR-FILE-CLOSE-PARA.                                        01062846
+010630                                                                  01063052
+010700     EXEC SQL                                                     01070000
+010800        CLOSE ELE-CSR                                             01080000
+010900     END-EXEC.                                                    01090000
+010901                                                                  01090172
+010910         EVALUATE TRUE                                            01091072
+010920            WHEN SQLCODE = 00                                     01092072
+010930              CONTINUE                                            01093072
+010940            WHEN OTHER                                            01094072
+010950              PERFORM 9999-PROGRAM-EXIT                           01095072
+010960         END-EVALUATE.                                            01096072
+010970                                                                  01097072
+011000     CLOSE R01-OUTFILE.                                           01100001
+011001                                                                  01100172
+011002     EVALUATE W-FST-INFILE                                        01100254
+011003        WHEN  00                                                  01100354
+011004           CONTINUE                                               01100454
+011005        WHEN OTHER                                                01100554
+011006           PERFORM 9999-PROGRAM-EXIT                              01100661
+011007     END-EVALUATE.                                                01100754
+011008                                                                  01100872
+011010 9000-FILE-CLOSE-EXIT.                                            01101061
+011011                                                                  01101152
+011020     EXIT                                                         01102046
+011030     .                                                            01103046
+011040                                                                  01104052
+011050******************************************************************01105056
+011060*---------------------EXITING THE PROGRAM------------------------ 01106056
+011070******************************************************************01107056
+011080                                                                  01108056
+011100 9999-PROGRAM-EXIT.                                               01110061
+011110                                                                  01111052
+011300     STOP RUN.                                                    01130000
+

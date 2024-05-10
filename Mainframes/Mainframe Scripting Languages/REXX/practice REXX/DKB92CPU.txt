@@ -1,0 +1,42 @@
+//UGBB92ST JOB (000000),'B92 SEARCH TIME',
+//             MSGCLASS=X,CLASS=2,
+//             NOTIFY=&SYSUID
+//*********************************************************************
+//*             PROCESS HISTORY MANAGER (BETA 92 - V4R2)              *
+//*           (C) COPYRIGHT BETA SYSTEMS SOFTWARE AG, 2005            *
+//* ----------------------------------------------------------------- *
+//*    THIS JOB SEARCHES FOR THE MULTIPLE JOBS IN THE B92 IN THE      *
+//*    AND GETS THE START  AND END TIMINGS                        *
+//*********************************************************************
+//*
+//B92SRCH1 EXEC PGM=BST01RFF,
+//             COND=(4,LT),
+//             REGION=6144K,
+//             PARM=('S=92,B01LST=00,B92LST=03','PGM=B92PRINT')
+//STEPLIB  DD  DSN=BETA.BSA.LOAD,
+//             DISP=SHR
+//         DD  DSN=BETA.B92.LOAD,
+//             DISP=SHR
+//SFFPARM  DD  DSN=LSE.BETA.PARMLIB,
+//             DISP=SHR
+//B92DEF   DD  DUMMY
+//B92LOG   DD  SYSOUT=*
+//SFMFDUMP DD  SYSOUT=*
+//SYSUDUMP DD  SYSOUT=*
+//OMSPRINT DD  SYSOUT=*
+//*PARM SEARCHES FOR THE SPECIFIED JOB
+//*IN THE PARMLIB
+//*SYSIN    DD  DSN=DNDVPGE.SANDEEPN.PARMWRK(ODS814A1),
+//*             DISP=SHR
+//SYSIN    DD  *
+PRINT
+ SDATE(11-06-2013)
+ STIME(15:00:00)
+ PDATE(12-06-2013)
+ PTIME(15:00:00)
+ JOBNAME(PDK*)
+ DDNAME1(JESMSGLG)
+ DATASET(CDKVPGE.FIX.SANDEEPN.B92.SEARCH)
+ DISPOSITION(OLD)
+ MESSAGE(LONG)
+

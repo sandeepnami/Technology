@@ -1,0 +1,7 @@
+//UELT228C JOB 'SATYAM',CLASS=A,NOTIFY=&SYSUID,REGION=0M                00010091
+//************************************************                      00020000
+//* THIS IS A SAMPLE OF JOB - PSBGEN                                    00030000
+//************************************************                      00040000
+//PSBGEN   EXEC PROC=PSBGEN,MBR=PSB3041A,SOUT='*'                       00050097
+//C.SYSIN  DD DSN=UELT228.ELTP1026.IMSDBD(PSB3041A),DISP=SHR            00060097
+

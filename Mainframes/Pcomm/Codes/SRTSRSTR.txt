@@ -1,0 +1,25 @@
+//#T54SRT0 JOB (9999,8517,3),'1300M /BMP',CLASS=X,                      JOB05242
+//     MSGCLASS=X,NOTIFY=&SYSUID,REGION=0M                              00002001
+//*                                                                     00008003
+//DELDEF   EXEC PGM=EQQDELDS                                            00008003
+//*                                                                     0000000
+//S140093S EXEC PGM=SORT,REGION=0M
+//SYSPRINT DD SYSOUT=*
+//SYSUDUMP DD SYSOUT=X
+//SYSOUT   DD SYSOUT=*
+//SORTLIB  DD DSN=SYS1.SORTLIB,DISP=SHR
+//SORTIN   DD DSN=TST.M54.VXK.WDD1707.F14075.RG1.DEVAVP,DISP=SHR
+//SORTOF01 DD DSN=TST.M54.VXK.SORTFILE.ADI.DEVAP1,
+//            DISP=(,CATLG,DELETE),
+//            UNIT=DISK,
+//            SPACE=(CYL,(250,75),RLSE),
+//            DCB=(RECFM=VB,LRECL=678)
+//SORTWK01 DD UNIT=DISK,SPACE=(CYL,(50))
+//SORTWK02 DD UNIT=DISK,SPACE=(CYL,(50))
+//SORTWK03 DD UNIT=DISK,SPACE=(CYL,(50))
+//* GIVING FULL RECORD SEARCH FROM BEG TO END ADD 4 TO MAX REC FOR VB
+//SYSIN    DD *
+  SORT FIELDS=COPY
+  OUTFIL FILES=01,INCLUDE=(1,678,SS,EQ,C'SB04')
+//*                                                                     0000000
+

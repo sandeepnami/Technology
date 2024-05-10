@@ -1,0 +1,7 @@
+'Vi er så glad for å høre og lære om Python!'                                   
+>>> "Vi er s\u00e5 glad for \u00e5 h\xf8re og l\u00e6re om Python!"             
+'Vi er så glad for å høre og lære om Python!'                                   
+>>> '\xe5'                                                                      
+'å'                                                                             
+>>> '\345'                                                                      
+'å'                                                                             

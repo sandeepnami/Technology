@@ -1,0 +1,245 @@
+//P732083A JOB IN-1INC-IN,'TOOLBOX',CLASS=P,
+//             MSGCLASS=X,NOTIFY=P732083
+//*
+//*
+//*
+//*------------------------------------------------------------*
+//*  STOP DATABASE AREAS                                       *
+//*------------------------------------------------------------*
+//*
+//STOP     EXEC NBTSTBMP,OPT=W,PSB=PGMS63,MBR=PGMS63
+//SYSPRINT DD   SYSOUT=*
+//SYSIN    DD   *
+LIST
+*
+*         STOP DATABASE AREAS DD358VX
+*
+AXS STOAREA DATA=(DD358VX1)
+AXS STOAREA DATA=(DD358VX2)
+AXS STOAREA DATA=(DD358VX3)
+AXS STOAREA DATA=(DD358VX4)
+/*
+//*
+//*----------DELAY-STEP------------------------------------------------
+//DELAY    EXEC  NBTSTMVS,MBR=GU0085M0
+//* THE INPUT CARD TO THIS STEP IS IN THE FORMAT HHMMSSTH
+//GU0085M0 DD  *
+00001500
+/*
+//*
+//P732083A JOB IN-1INC-IN,'TOOLBOX',CLASS=P,
+//             MSGCLASS=X,NOTIFY=P732083
+//*
+//*
+//*
+//*-------------------------------------------------------------------*
+//*        DELETE UNLOAD FILES                                        *
+//*-------------------------------------------------------------------*
+//DELETE   EXEC PGM=IDCAMS
+//SYSUDUMP DD SYSOUT=*
+//ASMDUMP  DD SYSOUT=*
+//SYSPRINT DD SYSOUT=*
+//SYSIN    DD *
+           DELETE SDAF.PP40399.DD358VX.SEGDATA.LASTPDTE PURGE
+    SET MAXCC=0
+/*
+//*
+//*-----------------------------------------------------------------
+//*        UNLOAD  DEDB
+//*-----------------------------------------------------------------
+//UNLOAD   EXEC PGM=HFPMAIN0,REGION=0M
+//STEPLIB  DD  DSN=SYS1.DBTOOLS.LOADLIB,DISP=SHR
+//         DD  DSN=SYS1.IMSTEST.RESLIB,DISP=SHR
+//         DD  DSN=SYS1.IMSTEST.DBALIB,DISP=SHR
+//NEWACB   DD  DSN=IMSTEST.ACBLIB,DISP=SHR
+//IMSACB   DD  DSN=IMSTEST.ACBLIB,DISP=SHR
+//SYSPRINT DD  SYSOUT=*
+//DURAUDIT DD  SYSOUT=*
+//SYSUDUMP DD  SYSOUT=*
+//*
+//*
+//DD358VX1 DD DSN=SDCM.IMSV.AF.DD358VX1.CONTRACT,
+//     DISP=SHR
+//DD358VX2 DD DSN=SDCM.IMSV.AF.DD358VX2.CONTRACT,
+//     DISP=SHR
+//DD358VX3 DD DSN=SDCM.IMSV.AF.DD358VX3.CONTRACT,
+//     DISP=SHR
+//DD358VX4 DD DSN=SDCM.IMSV.AF.DD358VX4.CONTRACT,
+//     DISP=SHR
+//*
+//DURD001O DD DSN=SDAF.PP40399.DD358VX.SEGDATA.LASTPDTE,
+//            DISP=(NEW,CATLG,DELETE),UNIT=DPROG,
+//            SPACE=(CYL,(20,20),RLSE)
+//*
+//*
+//HFPSYSIN DD  *
+UNLOAD DBDNAME=DD358VX,
+   IAREA=ALL,
+   ITASKCTL=1,
+   COMPRESS=NO
+ FILECTL
+   OAREA=ALL,
+   DDNAME=DURD001O
+/*
+//*
+//*   **************************************************************
+//*   *                                                            *
+//*   *  CHANGE PROCESSING DATE IN UNLOAD FILE.                    *
+//*   *                                                            *
+//*   **************************************************************
+//*
+//REFORMAT EXEC PGM=EZTPA00,REGION=6M
+//STEPLIB  DD DSN=SYS1.DBTOOLS.LOADLIB,DISP=SHR
+//         DD DSN=SYS1.IMSTEST.DBALIB,DISP=SHR
+//         DD DSN=SYS1.IMSTEST.RESLIB,DISP=SHR
+//*
+//SYSPRINT DD SYSOUT=*
+//SYSOUT   DD SYSOUT=*
+//*
+//PANDD1   DD DUMMY
+//EZTVFM   DD UNIT=SYSDA,SPACE=(CYL,(50,50),RLSE)
+//SORTWK01 DD UNIT=SYSDA,SPACE=(CYL,(50,50),RLSE)
+//SORTWK02 DD UNIT=SYSDA,SPACE=(CYL,(50,50),RLSE)
+//SORTWK03 DD UNIT=SYSDA,SPACE=(CYL,(50,50),RLSE)
+//*
+//UR7DATA  DD DSN=SDAF.PP40399.DD358VX.SEGDATA.LASTPDTE,
+//            DISP=SHR,DCB=BUFNO=30
+//DURD001O DD DSN=&WORKFL,
+//            DISP=(NEW,PASS,DELETE),
+//            SPACE=(CYL,(2,2),RLSE),UNIT=DPERM
+//ACBLIB   DD DSN=IMSTEST.ACBLIB,DISP=SHR
+//UR7CTL   DD *
+DBDNAME=DD358
+/*
+//UR7RPT   DD SYSOUT=*
+//UR6RPT   DD SYSOUT=*
+//ACBLIB   DD DSN=IMSTEST.ACBLIB,DISP=SHR
+//UR6PRINT DD SYSOUT=*
+//UR6AUDIT DD SYSOUT=*
+//UR6CTL   DD *
+FILECTL=1,ALL
+OUTDD=NO
+/*
+//ABNLDUMP DD DUMMY
+//SYSUDUMP DD SYSOUT=*
+//SYSIN    DD *
+LIST ON
+PARM DEBUG   (NOXREF NOCLIST NODMAP)
+NEWPAGE
+*==============*
+* FILE SECTION
+*==============*
+FILE INFILE
+INFILE-REC          1 80 A
+*=========================*
+* WORKING STORAGE SECTION
+*=========================*
+FABEUR6-PARM1                    W    16   A
+FABEUR6-FUNCTION   FABEUR6-PARM1      4    A
+FABEUR6-PARM2                    W    4096 A
+FABEUR6-DBDNAME    FABEUR6-PARM2      8    A
+FABEUR6-SEGNAME    FABEUR6-PARM2      8    A
+FABEUR6-SEGDATA    FABEUR6-PARM2      4096 A
+FABEUR6-EL06652    FABEUR6-PARM2 +116 5    P 0
+FABEUR7-PARM1                    W    4    A
+FABEUR7-FUNCTION   FABEUR7-PARM1      4    A
+FABEUR7-PARM2                    W    2    A
+FABEUR7-STATUS     FABEUR7-PARM2      2    A
+FABEUR7-PARM3                    W    4096 A
+FABEUR7-SEGDATA     FABEUR7-PARM3     4096 A
+NEWPAGE
+JOB INPUT NULL START START-PROC
+FABEUR7-FUNCTION = 'GET '
+FABEUR6-FUNCTION = 'PUT '
+CALL FABEUR7 USING                +
+                  (FABEUR7-PARM1, +
+                   FABEUR7-PARM2, +
+                   FABEUR7-PARM3)
+DO WHILE FABEUR7-STATUS = '  '
+   FABEUR6-SEGDATA = FABEUR7-SEGDATA
+   IF FABEUR6-SEGNAME = 'SE1067P'
+      FABEUR6-EL06652 = 20140710
+   END-IF
+   CALL FABEUR6 USING                +
+                     (FABEUR6-PARM1, +
+                      FABEUR6-PARM2)
+   CALL FABEUR7 USING                +
+                     (FABEUR7-PARM1, +
+                      FABEUR7-PARM2, +
+                      FABEUR7-PARM3)
+END-DO
+FABEUR7-FUNCTION = 'EOF '
+CALL FABEUR7 USING +
+                  (FABEUR7-PARM1)
+FABEUR6-FUNCTION = 'EOF '
+CALL FABEUR6 USING +
+                  (FABEUR6-PARM1)
+STOP
+NEWPAGE
+START-PROC. PROC
+FABEUR7-FUNCTION = 'INIT'
+CALL FABEUR7 USING +
+                  (FABEUR7-PARM1)
+FABEUR6-FUNCTION = 'INIT'
+FABEUR6-DBDNAME = 'DD358VX'
+CALL FABEUR6 USING +
+                  (FABEUR6-PARM1, +
+                   FABEUR6-PARM2)
+END-PROC
+//*
+//*
+//*******************************************
+//*     DELETE/DEFINE DATABASES             *
+//*******************************************
+//IDCAMS2 EXEC PGM=IDCAMS
+//SYSPRINT DD  SYSOUT=*
+//X37IGN   DD  DUMMY
+//SYSIN    DD  DSN=IMSTEST.DATA(DD358VX1),DISP=SHR
+//         DD  DSN=IMSTEST.DATA(DD358VX2),DISP=SHR
+//         DD  DSN=IMSTEST.DATA(DD358VX3),DISP=SHR
+//         DD  DSN=IMSTEST.DATA(DD358VX4),DISP=SHR
+//*
+//************************************
+//*       RELOAD DD358 ALL AREAS     *
+//************************************
+//HFPMAIN EXEC PGM=HFPMAIN0,REGION=0M
+//STEPLIB  DD  DSN=SYS1.DBTOOLS.LOADLIB,DISP=SHR
+//         DD  DSN=SYS1.IMSTEST.RESLIB,DISP=SHR
+//         DD  DSN=SYS1.IMSTEST.DBALIB,DISP=SHR
+//SYSPRINT DD  SYSOUT=*
+//DURAUDIT DD  SYSOUT=*
+//DAXPRINT DD  SYSOUT=*
+//IMSACB   DD DSN=IMSTEST.ACBLIB,DISP=SHR
+//IAREA001 DD  DSN=&WORKFL,DISP=(OLD,DELETE,DELETE)
+//DD358VX1 DD DSN=SDCM.IMSV.AF.DD358VX1.CONTRACT,
+//            DISP=OLD,AMP=(AMORG,'BUFND=30')
+//DD358VX2 DD DSN=SDCM.IMSV.AF.DD358VX2.CONTRACT,
+//            DISP=OLD,AMP=(AMORG,'BUFND=30')
+//DD358VX3 DD DSN=SDCM.IMSV.AF.DD358VX3.CONTRACT,
+//            DISP=OLD,AMP=(AMORG,'BUFND=30')
+//DD358VX4 DD DSN=SDCM.IMSV.AF.DD358VX4.CONTRACT,
+//            DISP=OLD,AMP=(AMORG,'BUFND=30')
+//HFPSYSIN DD  *
+RELOAD DBD=DD358VX,
+       OAREA=ALL,
+       IAREA=DD358VX1
+/*
+//*----------------------------------------------------------------
+//*  START DB AREAS
+//*----------------------------------------------------------------
+//*
+//START    EXEC NBTSTBMP,OPT=W,PSB=PGMS63,MBR=PGMS63
+//SYSPRINT DD   SYSOUT=*
+//SYSIN    DD   *
+LIST
+*
+*       START DATABASE AREAS DD358VX
+*
+AXS STADB   DATA=(DD358VX)
+AXS STAAREA DATA=(DD358VX1)
+AXS STAAREA DATA=(DD358VX2)
+AXS STAAREA DATA=(DD358VX3)
+AXS STAAREA DATA=(DD358VX4)
+/*
+//
+

@@ -1,0 +1,40 @@
+//P709421A  JOB (AF-1055-AF996),'JOB DESC',                             JOB11595
+//            MSGCLASS=X,MSGLEVEL=(1,1),
+//            CLASS=W,REGION=4096K,                                     NXZ25_SX
+// NOTIFY=P709421                                                       NXZ25_SX
+//*
+/*ROUTE PRINT MDP10004
+/*JOBPARM R=RBS,COPIES=1
+//*
+//*
+//*
+//********************************************************************
+//*        EXECUTE PRGM1
+//********************************************************************
+//PRGM1  EXEC AFTSMBMP,MBR=NEWIMS,
+//         PSB=AF100BVD,
+//         SSM=AFVZ,PCMVRSN=0,
+//         OBA=10,RLSE=
+//*
+//STEPLIB  DD  DSN=MEDEV.TABLES.LINKLIB.VX,DISP=SHR
+//         DD  DSN=SDCM.PP37410A.BUFFER.LOADLIB.D130422,DISP=SHR
+//         DD  DSN=SDAF.P732083.NAMI.LOADLIB,DISP=SHR
+//         DD  DSN=SYS1.BMC.FEP.LOAD,DISP=SHR
+//         DD  DSN=SYS1.IMSTEST.DBALIB,DISP=SHR
+//         DD  DSN=SYS1.IMSTEST.RESLIB,DISP=SHR
+//IMS      DD  DSN=IMSTEST.PSBLIB,DISP=SHR
+//         DD  DSN=IMSTEST.DBDLIB,DISP=SHR
+//         DD  DSN=SDCM.AF.IMSTEST.PSBLIB,DISP=SHR
+//HG113112 DD  DUMMY
+//*
+//*
+//NBOSDATE DD *
+22/04/13
+//PROCDATE DD *
+0322/04/2013
+//*
+//*
+//SYSPRINT DD  SYSOUT=*
+//SYSOUT   DD  SYSOUT=*
+//*
+

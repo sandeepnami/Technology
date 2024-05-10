@@ -1,0 +1,22 @@
+>>> format(q)                                                                   
+'7.748091e-05'                                                                  
+>>> format(q, "f")                                                              
+'0.000077'                                                                      
+>>> format(q, ".7f")                                                            
+'0.0000775'                                                                     
+>>> format(q, ".11f")                                                           
+'0.00007748091'                                                                 
+>>> format(q, "+.11f")                                                          
+'+0.00007748091'                                                                
+>>> format(q, ">+20.11f")                                                       
+'      +0.00007748091'                                                          
+>>> format("Format this!", ">+20.11f")                                          
+Traceback (most recent call last):                                              
+  File "<stdin>", line 1, in <module>                                           
+ValueError: Unknown format code 'f' for object of type 'str'                    
+>>> f"The conductance quantum is {q}"                                           
+'The conductance quantum is 7.748091e-05'                                       
+>>> f"The conductance quantum is {q:.6f}"                                       
+'The conductance quantum is 0.000077'                                           
+>>> f"The conductance quantum is {q:.2e}"                                       
+'The conductance quantum is 7.75e-05'                                           

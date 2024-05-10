@@ -1,0 +1,17 @@
+-----------------------------------------
+PRIMARY KEY
+
+Whenever you define a PRIMARY or UNIQUE key on a column, DB2 creates a unique index to enforce uniqueness on the column
+
+------------------------------------------
+What are indexes?
+An index is an ordered list of the key values of a column or columns of a table. 
+There are two reasons why you might create an index:
+
+· To ensure uniqueness of values in a column or columns.
+· To improve performance of queries against the table. The DB2 optimizer will use indexes to improve performance when performing queries, or to present results of a query in the order of the index.
+
+Indexes can be defined as unique or nonunique. 
+Nonunique indexes allow duplicate key values; 
+Unique indexes allow only one occurrence of a key value in the list.
+------------------------------------------

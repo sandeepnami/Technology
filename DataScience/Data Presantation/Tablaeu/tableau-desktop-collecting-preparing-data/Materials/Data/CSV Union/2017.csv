@@ -1,0 +1,23 @@
+﻿Order Date,Ship Date,Ship Mode,Customer ID,Customer Name,Segment,Country,City,State,Postal Code,Region,Product ID,Category,Sub-Category,Product Name,Sales,Quantity,Discount,Profit
+11/8/17,11/11/17,Second Class,CG-12520,Claire Gute,Consumer,United States,Henderson,Kentucky,42420,South,FUR-BO-10001798,Furniture,Bookcases,Bush Somerset Collection Bookcase,261.96,2,0,41.9136
+11/8/17,11/11/17,Second Class,CG-12520,Claire Gute,Consumer,United States,Henderson,Kentucky,42420,South,FUR-CH-10000454,Furniture,Chairs,"Hon Deluxe Fabric Upholstered Stacking Chairs, Rounded Back",731.94,3,0,219.582
+6/12/17,6/16/17,Second Class,DV-13045,Darrin Van Huff,Corporate,United States,Los Angeles,California,90036,West,OFF-LA-10000240,Office Supplies,Labels,Self-Adhesive Address Labels for Typewriters by Universal,14.62,2,0,6.8714
+12/5/17,12/10/17,Standard Class,IM-15070,Irene Maddox,Consumer,United States,Seattle,Washington,98103,West,OFF-BI-10003656,Office Supplies,Binders,Fellowes PB200 Plastic Comb Binding Machine,407.976,3,0.2,132.5922
+12/9/17,12/13/17,Standard Class,KB-16585,Ken Black,Corporate,United States,Fremont,Nebraska,68025,Central,OFF-AR-10000246,Office Supplies,Art,Newell 318,19.46,7,0,5.0596
+12/9/17,12/13/17,Standard Class,KB-16585,Ken Black,Corporate,United States,Fremont,Nebraska,68025,Central,OFF-AP-10001492,Office Supplies,Appliances,"Acco Six-Outlet Power Strip, 4' Cord Length",60.34,7,0,15.6884
+1/16/17,1/20/17,Second Class,EH-13945,Eric Hoffmann,Consumer,United States,Los Angeles,California,90049,West,OFF-BI-10001634,Office Supplies,Binders,Wilson Jones Active Use Binders,11.648,2,0.2,4.2224
+1/16/17,1/20/17,Second Class,EH-13945,Eric Hoffmann,Consumer,United States,Los Angeles,California,90049,West,TEC-AC-10003027,Technology,Accessories,Imation 8GB Mini TravelDrive USB 2.0 Flash Drive,90.57,3,0,11.7741
+12/8/17,12/10/17,First Class,GH-14485,Gene Hale,Corporate,United States,Richardson,Texas,75080,Central,TEC-PH-10004977,Technology,Phones,GE 30524EE4,1097.544,7,0.2,123.4737
+12/8/17,12/10/17,First Class,GH-14485,Gene Hale,Corporate,United States,Richardson,Texas,75080,Central,FUR-FU-10003664,Furniture,Furnishings,"Electrix Architect's Clamp-On Swing Arm Lamp, Black",190.92,5,0.6,-147.963
+7/17/17,7/22/17,Standard Class,RA-19885,Ruben Ausman,Corporate,United States,Los Angeles,California,90049,West,OFF-ST-10003479,Office Supplies,Storage,"Eldon Base for stackable storage shelf, platinum",77.88,2,0,3.894
+3/11/17,3/13/17,First Class,ON-18715,Odella Nelson,Corporate,United States,Eagan,Minnesota,55122,Central,TEC-AC-10000171,Technology,Accessories,"Verbatim 25 GB 6x Blu-ray Single Layer Recordable Disc, 25/Pack",45.98,2,0,19.7714
+3/11/17,3/13/17,First Class,ON-18715,Odella Nelson,Corporate,United States,Eagan,Minnesota,55122,Central,OFF-BI-10003291,Office Supplies,Binders,Wilson Jones Leather-Like Binders with DublLock Round Rings,17.46,2,0,8.2062
+6/20/17,6/25/17,Standard Class,LH-16900,Lena Hernandez,Consumer,United States,Dover,Delaware,19901,East,TEC-AC-10002167,Technology,Accessories,Imation 8gb Micro Traveldrive Usb 2.0 Flash Drive,45,3,0,4.95
+6/20/17,6/25/17,Standard Class,LH-16900,Lena Hernandez,Consumer,United States,Dover,Delaware,19901,East,TEC-PH-10003988,Technology,Phones,"LF Elite 3D Dazzle Designer Hard Case Cover, Lf Stylus Pen and Wiper For Apple Iphone 5c Mini Lite",21.8,2,0,6.104
+12/11/17,12/17/17,Standard Class,JM-15265,Janet Molinari,Corporate,United States,New York City,New York,10024,East,OFF-FA-10000304,Office Supplies,Fasteners,Advantus Push Pins,15.26,7,0,6.2566
+12/11/17,12/17/17,Standard Class,JM-15265,Janet Molinari,Corporate,United States,New York City,New York,10024,East,TEC-PH-10002447,Technology,Phones,AT&T CL83451 4-Handset Telephone,1029.95,5,0,298.6855
+6/17/17,6/18/17,First Class,TB-21055,Ted Butterfield,Consumer,United States,Troy,New York,12180,East,OFF-ST-10000604,Office Supplies,Storage,Home/Office Personal File Carts,208.56,6,0,52.14
+6/17/17,6/18/17,First Class,TB-21055,Ted Butterfield,Consumer,United States,Troy,New York,12180,East,OFF-PA-10001569,Office Supplies,Paper,Xerox 232,32.4,5,0,15.552
+6/17/17,6/18/17,First Class,TB-21055,Ted Butterfield,Consumer,United States,Troy,New York,12180,East,FUR-CH-10003968,Furniture,Chairs,Novimex Turbo Task Chair,319.41,5,0.1,7.098
+6/17/17,6/18/17,First Class,TB-21055,Ted Butterfield,Consumer,United States,Troy,New York,12180,East,OFF-PA-10000587,Office Supplies,Paper,"Array Parchment Paper, Assorted Colors",14.56,2,0,6.9888
+6/17/17,6/18/17,First Class,TB-21055,Ted Butterfield,Consumer,United States,Troy,New York,12180,East,TEC-AC-10002167,Technology,Accessories,Imation 8gb Micro Traveldrive Usb 2.0 Flash Drive,30,2,0,3.3

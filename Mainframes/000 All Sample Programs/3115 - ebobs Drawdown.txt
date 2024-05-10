@@ -1,0 +1,20 @@
+3115 - drawdown
+
+3115 Drawdown (Loan) Accounts
+give the account from which drawdown is performed
+LHOM(LHSL)3081 843038664
+
+** Drawdown   Details **
+Availabel limit - 1000000
+Drawdown Amount =equl to available llimit
+Proceeds to A/C(NTNA Acc) - 083047 843033257
+Drawdown Date   : 11072014 (Processing date)              
+Contract Offered: 11072014 (Processing date)                             
+Contract Signed : 11072014 (Processing date)              
+
+** Additional  Credit Commitment Details **
+
+
+** Standard  Instalment  Details **
+
+Next Due       : 11072015 (future date)

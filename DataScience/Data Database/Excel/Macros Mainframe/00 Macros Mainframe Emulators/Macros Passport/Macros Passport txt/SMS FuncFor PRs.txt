@@ -1,0 +1,296 @@
+Sub ZMain()
+ 
+to_phone = "9052298330,9441156635,9052219615,8801306611,8790803366,9704873666"
+
+to_addr = "sandeep_nami@mahindrasatyam.com"
+cc_addr = "sandeep_nami@mahindrasatyam.com"
+
+Set Sys = CreateObject("PASSPORT.System")
+
+'selects the currently active session
+Set Sess = Sys.ActiveSession
+
+'selects the screen object
+Set MyScreen = Sess.Screen
+PRDIFF = 4
+
+'Build msg for the email
+msg=""
+For count_msg= 1 to  PRDIFF 
+row_pr= 6+(count_msg-1)
+Set MyArea = MyScreen.Area(row_pr, 6, row_pr, 79)
+MyArea.Select     
+MyScreen.Copy
+msg = msg & Chr(13) & MyArea.Value
+
+Next
+
+'MsgBox "Msg= " &msg
+'send sms via passport
+response = send_sms( msg,to_phone  )
+
+if  IsNumeric( response ) = false Then
+
+  msg = "Error in sending sms" & Chr(13) & response
+ subject =  "High Risk SMS send Fail"
+  outlook_send msg,subject,to_addr,cc_addr
+ 
+END IF 
+End Sub 
+
+
+'********************Send message thru API ubaid.tk********************
+Function send_sms( msg, to_phone )
+Dim HttpReq 
+  Set HttpReq  = CreateObject("Microsoft.XMLHTTP")
+  Dim uname, pwd, provider, sms_api, request_str, surl
+ 'total supported providers ny ubaid api 
+ Dim count_providers
+  count_providers = 6
+  ReDim Provider_list(count_providers)
+  Provider_list(1) = "fullonsms"
+  Provider_list(2) = "site2sms"
+  Provider_list(3) = "indiarocks"
+  Provider_list(4) = "smsabc"
+  Provider_list(5) = "ultoo"
+  Provider_list(6) = "youmint"
+
+for i = 1 to count_providers 
+  uname = "9052298330"
+   pwd = "namiin"
+  'List of Providers : site2sms ,Ultoo , fullonsms
+  provider = Provider_list(i)
+
+'nani comment this after testing harcoding provider
+'provider = "ultoo"
+
+  'character limitation
+  max_msg_len = 90
+  'please note that space is equivalent to %20
+  'msg = "Hello World from passport"
+  'length of msg
+   msg_len = Len(msg)
+   'MsgBox "length of Msg= " & msg_len
+
+   If msg_len > max_msg_len Then
+    msg = Mid(msg, 1, max_msg_len)
+	'MsgBox "First 100 chars is = " &msg
+	msg = msg & Chr(13) & "Please check the mail for rest of the PRs "
+	'MsgBox "Updated msg = " &msg
+   end if 
+'msg = URLEncode(msg)
+
+'nani comment check if urlencode is needed then only use it
+'msg = URLEncodeNew(msg)
+
+  
+  'multiple phone no's are seperated by comma in ubaid
+  'to_phone = "9052298330,9441156635,9052219615,8801306611,8790803366"
+  'to_phone = "9441156635,9908159485"
+  'to_phone = "9052298330
+  'List of API's
+  sms_api = "http://ubaid.tk/sms/sms.aspx"  '---
+  'sms_api = "http://madsacsoft.com/mad/sms/smsapi.php"  '---not working
+    
+  'for ubaid    -working
+  request_str = "uid=" & uname & "&pwd=" & pwd & "&msg=" & msg & "&phone=" & to_phone & "&provider=" & provider
+
+  'for madsacsoft -- Not working
+  'request_str = "usr=" & uname & "&pwd=" & pwd & "&msg=" & msg & "&to=" & to_phone & "&site=" & provider
+
+  surl = sms_api & "?" & request_str
+  
+  'Working Url
+  'URL = "http://XMLSampleServer/CatalogServer.asp"
+  
+
+'***** All junk for refrence purpose******
+  '160by2 sms
+  'URL = "http://madsacsoft.com/mad/sms/smsapi.php?usr=9052298330&pwd=sandeep429&site=160by2&mes=Hello_World&to=9052298330;8790803366;9441156635;"
+  'URL = "http://ubaid.tk/sms/sms.aspx?uid=9052298330&pwd=sandeep429&msg=Hello_world&phone=9052298330&provider=160by2"
+  'URL = "http://ubaid.tk/sms/sms.aspx?uid=9052298330&pwd=D0nt5h@renami&msg=Hello_world&phone=9052298330&provider=160by2"
+  
+  'WaytoSMS
+  'URL=http://ubaid.tk/sms/sms.aspx?uid=" + uid + "&pwd=" + password + "&msg=" + message + "&phone=" + no + "&provider=way2sms");
+  'URL = "http://ubaid.tk/sms/sms.aspx?uid=9052298330&pwd=sandeep&msg=Hello_world&phone=9052298330&provider=way2sms"
+  'Ultoo
+  'URL = "http://ubaid.tk/sms/sms.aspx?uid=9052298330&pwd=D0nt5h@renami&msg=Hello_world&phone=9052298330&provider=Ultoo"
+ '***** All junk for refrence purpose******
+ 
+  'MsgBox "url= " & surl
+  HttpReq.Open "GET", surl, False
+  HttpReq.Send
+  'MsgBox "ResponseText= " & HttpReq.ResponseText
+  'MsgBox "Status= " & HttpReq.Status
+  Status = HttpReq.Status
+  response = HttpReq.ResponseText
+  If Status = 503 Then
+    'MsgBox "The URL = " & surl & "Failed to open"
+  End If
+
+'********Debugging messages comment it in mainfunction******  
+if  IsNumeric( response ) Then
+Select Case response
+   Case 1
+      MsgBox "SMS sent" & Provider
+    Case -1
+        MsgBox "Server Error" & Provider
+    Case -2
+        MsgBox "Invalid Username" & Provider
+    Case -3
+        MsgBox "Invalid message text" & Provider
+    Case -4
+        MsgBox "Login Failed" & Provider
+    Case -5
+        MsgBox "IP Blocked" & Provider
+    Case -7
+        MsgBox "There is a Captcha which cannot be bypassed" & Provider
+    Case -11
+        MsgBox "Unsupported Provider" & Provider
+    Case Else
+        MsgBox "Some unknown error occured please cross check sms api site" & Provider
+End Select
+	MsgBox "Some unknown error occured please cross check sms api site FOR "  & Provider
+Else 
+
+End if
+'********End of Debugging messages comment it in mainfunction******  
+
+'validating if message is sent or not
+if   IsNumeric( response ) then
+	if response = 1 then
+		MsgBox "msg Sent from "  & Provider
+		Exit For
+	End if 
+End If
+Next
+send_sms = response
+
+
+End Function 
+
+
+
+
+'********************Url encode ********************
+Public Function URLEncode(StringToEncode) 
+
+Dim TempAns ,UsePlusRatherThanHexForSpace
+Dim CurChr
+UsePlusRatherThanHexForSpace = false
+CurChr = 1
+Do Until CurChr - 1 = Len(StringToEncode)
+'  Select Case Asc(Mid(StringToEncode, CurChr, 1))
+'    'Case 48 To 57, 65 To 90, 97 To 122
+'    Case 48 To 57
+'      TempAns = TempAns & Mid(StringToEncode, CurChr, 1)
+'    Case 32
+'      If UsePlusRatherThanHexForSpace = True Then
+'        TempAns = TempAns & "+"
+'      Else
+'        TempAns = TempAns & "%" & Hex(32)
+'      End If
+'   Case Else
+'         TempAns = TempAns & "%" & _
+'              Format(Hex(Asc(Mid(StringToEncode, _
+'              CurChr, 1))), "00")
+'End Select
+
+'*******This if else is replacement of above select becoz of selects incopatability with passport
+'case value
+case_val=Asc(Mid(StringToEncode, CurChr, 1))
+If (case_val >= 48 And case_val <= 57)  or (case_val >= 65 And case_val <= 90)  or (case_val >= 97 And case_val <= 122)  then
+	TempAns = TempAns & Mid(StringToEncode, CurChr, 1)
+Elseif  case_val = 32 Then
+	If UsePlusRatherThanHexForSpace = True Then
+       		TempAns = TempAns & "+"
+      	Else
+       		 TempAns = TempAns & "%" & Hex(32)
+      	End If
+Else
+	'MsgBox "Curr_char= " &CurChr
+	'MsgBox "String= " &Mid(StringToEncode, CurChr, 1)
+	'MsgBox "aSCII OF  String= " &Asc(Mid(StringToEncode, CurChr, 1))
+	'MsgBox "hEXX OF  String= " & Hex(Asc(Mid(StringToEncode, CurChr, 1)))
+	'MsgBox "Format OF  String= " & Format(Hex(Asc(Mid(StringToEncode, CurChr, 1))), "00")
+	TempAns = TempAns & "%" & _
+            	      Right(Hex(Asc(Mid(StringToEncode, _
+            	      CurChr, 1))), 2)
+End If
+
+  CurChr = CurChr + 1
+Loop
+
+URLEncode = TempAns
+End Function
+
+
+'********************Url encode New version********************
+Public Function URLEncodeNew(StringVal) 
+
+StringLen = Len(StringVal)
+
+If StringLen > 0 Then
+    'ReDim result(StringLen) As String
+    'Dim i As Long, CharCode As Integer
+    'Dim Char As String, Space As String
+    SpaceAsPlus = false
+    ReDim result(StringLen)
+
+    If SpaceAsPlus = true Then 
+	Space1 = "+" 
+    Else 
+	Space1 = "%20"
+    End if
+
+    For i = 1 To StringLen
+       Char = Mid(StringVal, i, 1)
+      Case_val = Asc(Char)
+     
+     ' Select Case CharCode
+      '  Case 97 To 122, 65 To 90, 48 To 57, 45, 46, 95, 126
+       '   result(i) = Char
+        'Case 32
+        '  result(i) = Space
+       ' Case 0 To 15
+       '   result(i) = "%0" & Hex(CharCode)
+       ' Case Else
+       '   result(i) = "%" & Hex(CharCode)
+      'End Select
+'*******This if else is replacement of above select becoz of selects incopatability with passport
+       If (case_val >= 48 And case_val <= 57)  or (case_val >= 65 And case_val <= 90)  or (case_val >= 97 And case_val <= 122) or _
+	(case_val = 45) or (case_val = 45) or (case_val = 46) or (case_val = 95)OR (case_val = 126)  then
+	result(i) = Char
+       Elseif  case_val = 32 Then
+	result(i) = Space1
+      Elseif  case_val >= 0 And case_val <= 15 Then
+	result(i) = "%0" & Hex(CharCode)
+      Else
+                      result(i) = "%" & Hex(CharCode)
+     End If
+
+    Next 
+    URLEncodeNew = Join(result, "")
+  End If
+
+End Function
+
+'********************outlook_send ********************
+Sub outlook_send( msg, subject,to_addr,cc_addr )
+Dim  ret
+
+Set otlApp = CreateObject("Outlook.Application")
+Set otlNewMail = otlApp.CreateItem(olMailItem)
+
+With otlNewMail
+.SentOnBehalfOfName = "VisionPlus_Servicedesk@mahindrasatyam.com"
+.To = to_addr
+.CC = cc_addr
+.Subject = subject 
+.body = "Hi," & Chr(13) & "There is a PR raised and PR info is "  & Chr(13)  & msg 
+'.Attachments.Add fName
+.Display
+ .send
+END With
+
+End Sub

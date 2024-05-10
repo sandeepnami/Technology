@@ -1,0 +1,35 @@
+//UELT228C JOB NOTIFY=&SYSUID,REGION=0M                                 00010063
+//* COBOL + DB2 + CICS                                                  00020003
+//*  ASSUMED THAT IPPGM = DBRM = LOAD MODULE NAME ARE SAME              00030002
+//*                                                                     00040002
+//PROCLIB JCLLIB ORDER='ELTP.HYD.VENKAT.PROCLIB'                        00050062
+//*                                                                     00060002
+//STEP1 EXEC PROC=DB2CICSC,                                             00070002
+//           INLIB='UELT228.ELTP1026.CICS',     <=INPUT PGM PATH        00080064
+//           SRCLIB='ELTP.HYD.DB2.DCLLIB',      <=INCLUDE/DCL LIB       00090064
+//           COPYLIB='UELT228.ELTP1026.COPYMAP', <=COPYLIB              00091064
+//           DBRMLIB='ELTP.HYD.DB2.DBRMLIB',     <= DBRM SOURCE PATH    00100061
+//           RPLLIB='ELTP.HYD.CICSA1.LOADLIB',      <= CICS LOAD LIB    00110064
+//           MEM=CS2P08                           <= NAME OF IP & DBRM  00120099
+//LKED.SYSIN DD *                                                       00130002
+   NAME CS2P08(R)                               <= NAME OF LOAD MODULE  00150099
+//*                                                                     00160002
+//PACKBND EXEC PGM=IKJEFT01,REGION=4096K,                               00170002
+//         DYNAMNBR=75                                                  00180002
+//STEPLIB  DD DSN=DSN810.SDSNLOAD,DISP=SHR                              00190002
+//         DD DSN=SYS1.DSN810.SDSNEXIT,DISP=SHR                         00200002
+//         DD DSN=DSN810.RUNLIB.LOAD,DISP=SHR                           00210002
+//DBRMLIB  DD DSN=ELTP.HYD.DB2.DBRMLIB,DISP=SHR   <= DBRM LIBRARY       00220061
+//SYSTSPRT DD SYSOUT=*                                                  00230002
+//SYSPRINT DD SYSOUT=*                                                  00240002
+//SYSUDUMP DD SYSOUT=*                                                  00250002
+//SYSTSIN  DD *                                                         00260002
+  DSN SYSTEM(DB2A)                                                      00270005
+  BIND PACKAGE(ADMTCOL1) MEM(CS2P08) -                                  00280099
+  LIBRARY('ELTP.HYD.DB2.DBRMLIB')-                                      00290061
+  OWNER(GELTP) QUALIFIER(ELTP) -                                        00291075
+  ACTION(REPLACE) CURRENTDATA(NO) DEGREE(1) ENCODING(EBCDIC) -          00300002
+  EXPLAIN(NO) FLAG(I) ISOLATION(CS) NOREOPT(VARS) -                     00310002
+  RELEASE(DEALLOCATE) SQLERROR(NOPACKAGE) VALIDATE(BIND)                00320002
+/*                                                                      00330002
+

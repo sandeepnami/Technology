@@ -1,0 +1,54 @@
+/* REXX TO COPY PDS MEMBERS INTO ANOTHER FILE                           00010000
+** THIS IS ALSO EXAMPLE FOR USING CALLING ANOTHER REXX                  00011000
+** THIS IS MEMBER READS MEMBERS OF THE PDS(LIB ) AND COMPARES WITH LIB2 00012000
+** THIS RETURNS COMMON MEMBERS OF BOTH THE PDS                          00012100
+*/                                                                      00013000
+/*NANI SAMPLE EXAMPLES                                                  00014000
+LIB="CHGMAN.LV231.STG.#000316.MSC"                                      00020000
+LIB2="PNDVPSC.V823.SRCLIB"                                              00020100
+                                                                        00020200
+OUTDD="CDKVPGE.FIX.SANDEEPN.IN1.SE"                                     00021000
+OUTDD2="CDKVPGE.FIX.SANDEEPN.IN2.SE"                                    00021100
+*/                                                                      00021300
+                                                                        00021400
+LIB="CHGMAN.DK011.STG.#000984.MSC"                                      00021500
+LIB2="PDKVPGE.SRCLIB"                                                   00021600
+                                                                        00021700
+OUTDD="CDKVPGE.FIX.SANDEEPN.IN1.SE"                                     00021800
+OUTDD2="CDKVPGE.FIX.SANDEEPN.IN2.SE"                                    00021900
+"ALLOC FI(OUTDD) DA('"OUTDD"') SHR "                                    00022000
+"ALLOC FI(OUTDD2) DA('"OUTDD2"') SHR "                                  00022100
+/*READ MEMBERS OF THE PDS*/                                             00023000
+X = OUTTRAP('PDS.')                                                     00030000
+"LISTDS '"LIB"' MEMBERS"                                                00040000
+X=OUTTRAP('OFF')                                                        00050000
+                                                                        00050100
+X = OUTTRAP('PDS2.')                                                    00050200
+"LISTDS '"LIB2"' MEMBERS"                                               00050300
+X=OUTTRAP('OFF')                                                        00050400
+                                                                        00050500
+J = 0                                                                   00051000
+DO I = 7 TO PDS.0                                                       00060000
+    DO K = 7 TO PDS2.0                                                  00060100
+       IF PDS2.K = PDS.I THEN                                           00060200
+       DO                                                               00060300
+          J = J+1                                                       00060400
+          OUT.J = STRIP(PDS.I)                                          00060500
+          OUT2.J = STRIP(PDS2.K)                                        00060600
+      /*  SAY "LIB1 MEMBER NAME IS" PDS.I                               00060700
+          SAY "LIB2 MEMBER NAME IS" PDS2.K */                           00060800
+          DD.J = LIB  ||"("OUT.J")"                                     00060900
+          DD2.J = LIB2 ||"("OUT2.J")"                                   00061000
+       END                                                              00061100
+    END                                                                 00062000
+END                                                                     00081000
+DD.0=J                                                                  00081100
+DD2.0=J                                                                 00081200
+                                                                        00081300
+"EXECIO" DD.0 "DISKW OUTDD (STEM DD. FINIS"                             00082000
+"EXECIO" DD2.0 "DISKW OUTDD2 (STEM DD2. FINIS"                          00082100
+                                                                        00083000
+"FREE FI(OUTDD)"                                                        00085000
+"FREE FI(OUTDD2)"                                                       00086000
+EXIT(0)                                                                 00100000
+

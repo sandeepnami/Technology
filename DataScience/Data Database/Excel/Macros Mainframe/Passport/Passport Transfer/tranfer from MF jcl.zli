@@ -1,0 +1,29 @@
+[TransferList]
+Header=Zephyr Transfer List
+xfer0=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\RESTORE.txt,0,'DNDVPGE.SANDEEPN.JCLLIB(RESTORE)',<TSO Text Default>
+xfer1=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\SORTCSV.txt,0,'DNDVPGE.SANDEEPN.JCLLIB(SORTCSV)',<TSO Text Default>
+xfer2=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\SORTINCL.txt,0,'DNDVPGE.SANDEEPN.JCLLIB(SORTINCL)',<TSO Text Default>
+xfer3=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\SORTOMIT.txt,0,'DNDVPGE.SANDEEPN.JCLLIB(SORTOMIT)',<TSO Text Default>
+xfer4=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\CLVMSMTP.txt,0,'DNDVPGE.SANDEEPN.SMTP.JCL(CLVMSMTP)',<TSO Text Default>
+xfer5=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\UGBGSMTP.txt,0,'DNDVPGE.SANDEEPN.SMTP.JCL(UGBGSMTP)',<TSO Text Default>
+xfer6=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\B92SFILE.txt,0,'DNDVPGE.SANDEEPN.JCLLIB(B92SFILE)',<TSO Text Default>
+xfer7=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\FDRABR.txt,0,'DNDVPGE.SANDEEPN.JCLLIB(FDRABR)',<TSO Text Default>
+xfer8=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\PLVC1B41.txt,0,'DNDVPGE.SANDEEPN.JCLLIB(PLVC1B41)',<TSO Text Default>
+xfer9=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\SLC13Z0.txt,0,'DNDVPGE.SANDEEPN.JCLLIB(SLC13Z0)',<TSO Text Default>
+xfer10=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\CRTVARPS.txt,0,'DNDVPGE.SANDEEPN.JCLLIB(CRTVARPS)',<TSO Text Default>
+xfer11=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\CRTPS.txt,0,'DNDVPGE.SANDEEPN.JCLLIB(CRTPS)',<TSO Text Default>
+xfer12=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\CRVSAM.txt,0,'DNDVPGE.SANDEEPN.JCLLIB(CRVSAM)',<TSO Text Default>
+xfer13=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\IDCKE2SE.txt,0,'DNDVPGE.SANDEEPN.JCLLIB(IDCKE2SE)',<TSO Text Default>
+xfer14=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\NCVCALPB.txt,0,'DNDVPGE.SANDEEPN.JCLLIB(NCVCALPB)',<TSO Text Default>
+xfer15=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\HDELDSN.txt,0,'DNDVPGE.SANDEEPN.JCLLIB(HDELDSN)',<TSO Text Default>
+xfer16=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\SETRC.txt,0,'DNDVPGE.SANDEEPN.JCLLIB(SETRC)',<TSO Text Default>
+xfer17=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\ZIP390.txt,0,'DNDVPGE.SANDEEPN.JCLLIB(ZIP390)',<TSO Text Default>
+xfer18=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\COMP.txt,0,'DNDVPGE.SANDEEPN.JCLLIB($COMP)',<TSO Text Default>
+xfer19=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\RUN.txt,0,'DNDVPGE.SANDEEPN.JCLLIB($RUN)',<TSO Text Default>
+xfer20=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\CRSORTC3.txt,0,'DNDVPGE.SANDEEPN.JCLLIB(CRSORTC3)',<TSO Text Default>
+xfer21=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\CRSORTC4.txt,0,'DNDVPGE.SANDEEPN.JCLLIB(CRSORTC4)',<TSO Text Default>
+xfer22=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\SORTDUP1.txt,0,'DNDVPGE.SANDEEPN.JCLLIB(SORTDUP1)',<TSO Text Default>
+xfer23=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\LDKMAYBE.txt,0,'DNDVPGE.SANDEEPN.JCLLIB(LDKMAYBE)',<TSO Text Default>
+xfer24=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\TAKECIC1.txt,0,'DNDVPGE.SANDEEPN.JCLLIB(TAKECIC1)',<TSO Text Default>
+xfer25=D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\jcl\WAIT1.txt,0,'DNDVPGE.SANDEEPN.JCLLIB(WAIT1)',<TSO Text Default>
+

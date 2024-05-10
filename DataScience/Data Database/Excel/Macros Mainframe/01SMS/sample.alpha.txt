@@ -1,0 +1,8 @@
+<?php
+//sms sending(way2sms) script by alfredfrancis.in
+include("alfa.sms.php");
+if(alfasms("8089617433","testing alfasms @ "))
+{
+echo "SMS send sucessfully";
+}
+?>

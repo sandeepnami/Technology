@@ -1,0 +1,3 @@
+HostOS 1 
+Local0 "C:\Documents and Settings\P732083\My Documents\Sandeep\Technical -Curr\Exercise\JCL\SORTOMIT.txt" Direction0 1 Host0 "'SDAF.P732083.NAMI.JCL.CNTL(SAMPHELL)'" Scheme0 "C:\Program Files\National\AttachmateExtraSessions\Schemes\Text Default.eis" 
+Local1 "C:\Documents and Settings\P732083\My Documents\Sandeep\Technical -Curr\Exercise\JCL\$COMPDB2.txt" Direction1 1 Host1 "'SDAF.P732083.NAMI.JCL.CNTL($COMPDB2)'" Scheme1 "C:\Program Files\National\AttachmateExtraSessions\Schemes\Text Default.eis" 

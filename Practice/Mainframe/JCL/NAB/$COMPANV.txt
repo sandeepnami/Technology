@@ -1,0 +1,29 @@
+//COMPILE1 JOB (TS-1055-N),'COMLNKM0',                                  JOB31040
+//         CLASS=P,                                                     00020000
+//         MSGCLASS=X,                                                  00030000
+//         NOTIFY=&SYSUID,                                              00040000
+//         REGION=0M                                                    00050000
+//*                                                                     00060000
+//*-------------------------------------------------------------------* 00070000
+//*        Cobol compile of module : AFADPTER                           00080000
+//*-------------------------------------------------------------------* 00090000
+//STEP010  EXEC PROC=GUDOSCBL                                           00100000
+//*                                                                     00110000
+//PANDD1  DD DSN=SDAF.PP41475.SOURCE.LIBRARY,DISP=SHR                   00120001
+//PANDD13 DD DSN=PROG.UNIT8.COPY.LIBRARY,DISP=SHR                       00130000
+//PANDD14 DD DSN=PROG.DEV8.COPY.LIBRARY,DISP=SHR                        00131001
+//*                                                                     00140000
+//EXPNDPAN.SYSIN DD *                                                   00150000
+++WRITE WORK,CA416M00                                                   00160001
+//*                                                                     00170000
+//*-------------------------------------------------------------------* 00180000
+//*        Link AFADPTER                                                00190000
+//*-------------------------------------------------------------------* 00200000
+//STEP020  EXEC PROC=GUDOSLNK,                                          00210000
+//         LOADMOD=CA416M00                                             00220001
+//*                                                                     00230000
+//SYSIN    DD   *                                                       00240000
+  ENTRY CA416M00                                                        00250001
+//LKED.SYSLMOD DD DSN=SDAF.P732083.NAMI.LOADLIB(&LOADMOD),              00260001
+//         DISP=SHR                                                     00270000
+

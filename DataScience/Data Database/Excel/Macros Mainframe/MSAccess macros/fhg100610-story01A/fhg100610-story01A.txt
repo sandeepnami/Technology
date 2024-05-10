@@ -1,0 +1,130 @@
+Option Explicit
+'
+' Place this code in the "ThisOutlookSession" class module
+'
+' The code will:
+'
+' Monitor the Inbox
+' Check for the existence of a specific kind of e-mail with an attachment
+' Save the attachment
+' Upload the attachment to a database table
+' Move the processed e-mail to a "processed" folder
+'
+'
+Private WithEvents olInboxItems As Items
+
+'
+' Application_Startup() is a reserved function that will automatically
+' be called when Outlook starts.
+'
+Private Sub Application_Startup()
+    Set olInboxItems = Session.GetDefaultFolder(olFolderInbox).Items
+End Sub
+
+'
+' This event is fired when the Inbox receives a new message
+' (it can also be fired when manually moving a message from
+'  another folder back to the inbox)
+'
+Private Sub olInboxItems_ItemAdd(ByVal Item As Object)
+
+    On Error Resume Next
+ 
+    Dim olMailItem As MailItem
+    Dim strAttachmentName As String
+    '
+    ' Only inspect mail items
+    ' Ignore appointments, meetings, tasks, etc.
+    '
+    If TypeOf Item Is MailItem Then
+        Set olMailItem = Item
+        '
+        ' Check if e-mail is one we want to process automatically
+        ' a) Test for one attachment
+        ' b) Test for specific subject line
+        '
+        If olMailItem.Attachments.Count = 1 _
+        And InStr(olMailItem.Subject, "My Import") > 0 Then
+            strAttachmentName = olMailItem.Attachments.Item(1).FileName
+            olMailItem.Attachments.Item(1).SaveAsFile "c:\tmp\" + strAttachmentName
+            '
+            ' Using the strongly typed ADO Classes require the
+            ' ActiveX Data Objects 2.1 or higher library
+            ' to be referenced in the project
+            '
+            Dim connDB As ADODB.Connection, rsDB As ADODB.Recordset
+            Set connDB = New ADODB.Connection
+            Set rsDB = New ADODB.Recordset
+
+            Dim strRowData As String, varFieldData As Variant
+            Dim c As Integer
+            '
+            ' Open Connection to IBM i using ODBC Data Source
+            '
+            connDB.Open "DSN=iSeries_400", "MyUser", "MyPassword"
+            '
+            ' Open DB2 for i Table
+            '
+            rsDB.CursorLocation = adUseClient
+            rsDB.Open "MYLIB.MY_IMPORT", connDB, adOpenDynamic, _
+                                         adLockOptimistic, adCmdTable
+            '
+            ' Open CSV file attachment and copy data to DB2 table
+            '
+            Dim FileNo As Integer
+            FileNo = FreeFile()
+            
+            Open "c:\tmp\" + strAttachmentName For Input Access Read As FileNo
+            While Not EOF(1)
+                Line Input #1, strRowData
+                If Not EOF(1) Then
+                    rsDB.AddNew
+                    varFieldData = Split(strRowData, ",")
+                    For c = 0 To UBound(varFieldData)
+                        rsDB(c).Value = varFieldData(c)
+                    Next
+                    rsDB.Update
+                End If
+            Wend
+            Close FileNo
+           
+            rsDB.Close
+            connDB.Close
+           
+            Set rsDB = Nothing
+            Set connDB = Nothing
+            '
+            ' Once complete, move mail item to OK/Errors folder
+            ' This code assumes the folders already exist
+            ' and are subfolders of the Inbox folder
+            '
+            ' In older versions of Outlook, olDestFolder
+            ' should be declared as type MAPIFolder
+            ' instead of Folder
+            '
+            Dim olDestFolder As Folder, strFolderName As String
+            If Err.Number Then
+                strFolderName = "Processed_Errors"
+            Else
+                strFolderName = "Processed_OK"
+            End If
+            '
+            ' Display Message
+            '
+            Set olDestFolder = Session.GetDefaultFolder(olFolderInbox).Folders(strFolderName)
+            If Err.Number Then
+                olMailItem.Move olDestFolder
+                MsgBox Err.Description + strFolderName + vbCrLf + "Check the error folder", _
+                       vbCritical, "Automated e-Mail processing unsuccessful"
+            Else
+                olMailItem.Move olDestFolder
+                MsgBox "Message has been processed and placed in " + strFolderName, _
+                        vbInformation, "Automated e-Mail processing successful"
+            End If
+        End If
+    End If
+    Set Item = Nothing
+    Set olMailItem = Nothing
+End Sub
+
+

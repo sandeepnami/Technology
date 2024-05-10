@@ -1,0 +1,31 @@
+>>> blue_eyes={'Olivia','harry','lily','jack','amelia'}
+>>> blond_hair = {'Harry', 'Jack', 'Amelia', 'Mia', 'Joshua'}                   
+>>> smell_hcn = {'Harry', 'Amelia'}                                             
+>>> taste_ptc = {'Harry', 'Lily', 'Amelia', 'Lola'}                             
+>>> o_blood = {'Mia', 'Joshua', 'Lily', 'Olivia'}                               
+>>> b_blood = {'Amelia', 'Jack'}                                                
+>>> a_blood = {'Harry'}                                                         
+>>> ab_blood = {'Joshua', 'Lola'}                                               
+>>> blue_eyes.union(blond_hair)                                                 
+{'Jack', 'Lily', 'Amelia', 'Harry', 'Olivia', 'Mia', 'Joshua'}                  
+>>> blue_eyes.union(blond_hair) == blond_hair.union(blue_eyes)                  
+True                                                                            
+>>> blue_eyes.intersection(blond_hair)                                          
+{'Harry', 'Amelia', 'Jack'}                                                     
+>>> blue_eyes.intersection(blond_hair) == blond_hair.intersection(blue_eyes)    
+True                                                                            
+>>> blond_hair.difference(blue_eyes)                                            
+{'Joshua', 'Mia'}                                                               
+>>> blond_hair.difference(blue_eyes) == blue_eyes.difference(blond_hair)        
+False                                                                           
+>>> blond_hair.symmetric_difference(blue_eyes)                                  
+{'Mia', 'Olivia', 'Joshua', 'Lily'}                                             
+>>> blond_hair.symmetric_difference(blue_eyes) == blue_eyes.symmetric_difference
+(blond_hair)                                                                    
+True                                                                            
+>>> smell_hcn.issubset(blond_hair)                                              
+True                                                                            
+>>> taste_ptc.issuperset(smell_hcn)                                             
+True                                                                            
+>>> a_blood.isdisjoint(o_blood)                                                 
+True                                                                            

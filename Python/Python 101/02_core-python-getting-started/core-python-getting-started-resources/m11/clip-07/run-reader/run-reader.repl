@@ -1,0 +1,18 @@
+Traceback (most recent call last):                                              
+  File "series.py", line 18, in <module>                                        
+    main(sys.argv[1])                                                           
+  File "series.py", line 14, in main                                            
+    series = read_series(filename)                                              
+  File "series.py", line 8, in read_series                                      
+    a = int(line.strip())                                                       
+ValueError: invalid literal for int() with base 10: 'oops'                      
+$ echo "oops" >> recaman.dat                                                    
+$ python series.py recaman.dat                                                  
+Traceback (most recent call last):                                              
+  File "series.py", line 18, in <module>                                        
+    main(sys.argv[1])                                                           
+  File "series.py", line 14, in main                                            
+    series = read_series(filename)                                              
+  File "series.py", line 8, in read_series                                      
+    a = int(line.strip())                                                       
+ValueError: invalid literal for int() with base 10: 'oops'                      

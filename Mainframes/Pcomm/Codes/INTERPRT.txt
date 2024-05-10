@@ -1,0 +1,23 @@
+/*REXX -- call subroutine and pass ARRAY AS ARGUMENT                    00010000
+USING INTERPRET                                    */                   00020000
+INDD1="TST.M53.RZA.RG0.WDD7000.DMGPADEC.UAT0823"                        00022000
+                                                                        00024000
+"ALLOC FI(INDD1) DA('"INDD1"') SHR "                                    00025000
+                                                                        00027000
+"EXECIO * DISKR INDD1(STEM INARR1. FINIS"                               00028000
+"FREE F(INDD1)"                                                         00029100
+                                                                        00029300
+DATA = "NAMI"                                                           00029400
+INTERPRET DATA "= 4"                                                    00029500
+SAY "NAMI=" NAMI                                                        00029600
+                                                                        00060000
+DATA = "NAMIARR"                                                        00060100
+ARRNAME="INARR1"                                                        00060200
+/*DEBUGGING IN REXX  FOR INTERPRET USE TRACE WITH I OR R*/              00060300
+  TRACE I                                                               00060400
+/* THE VARIABLES THAT NEED TO BE INTERPRETED MUST BE IN OUT OF QUOTES*/ 00060500
+INTERPRET  'TEMP = 'ARRNAME'.'66                                        00060600
+SAY "NEWREF.66=" ||  TEMP                                               00060700
+                                                                        00060800
+EXIT                                                                    00070000
+

@@ -1,0 +1,2 @@
+https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/beyond-hiring-how-companies-are-reskilling-to-address-talent-gaps
+https://www.weforum.org/agenda/2022/11/digital-skills-labour-market-future/

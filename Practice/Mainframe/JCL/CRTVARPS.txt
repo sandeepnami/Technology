@@ -1,0 +1,30 @@
+//UGBCRVPS JOB 345,'CREATE VAR PS',                                     00010000
+//             MSGCLASS=X,MSGLEVEL=(1,1),                               00020000
+//             CLASS=2,NOTIFY=&SYSUID                                   00030000
+//* LRECL = BLKSIZE                                                     00030111
+//STEPFB  EXEC PGM=IEFBR14                                              00030600
+//DD1      DD  DSN=CDKVPGE.FIX.SANDEEPN.IN1.SE,                         00030700
+//             DISP=(NEW,CATLG,DELETE),                                 00030800
+//             UNIT=SYSDA,                                              00030900
+//             SPACE=(TRK,(5,5),RLSE),                                  00031000
+//             LRECL=80,                                                00031100
+//             BLKSIZE=80,                                              00031211
+//             RECFM=F                                                  00031300
+//                                                                      00031400
+//*PLEASE NOTE THAT BLKSIZE=LRECL+4 , 4 FOR STORING THE LENTH OF REC    00031500
+//**FOR VARIABLE BLOCK                                                  00031700
+//*            RECFM=V                                                  00031800
+//SYSPRINT DD  SYSOUT=*                                                 00031900
+//SYSIN    DD  DUMMY                                                    00032000
+//*                                                                     00032100
+//STEPVB  EXEC PGM=IEFBR14                                              00033000
+//DD1      DD  DSN=CDKVPGE.FIX.SANDEEPN.IN1.SE,                         00040000
+//             DISP=(NEW,CATLG,DELETE),                                 00110500
+//             UNIT=SYSDA,                                              00110600
+//             SPACE=(TRK,(5,5),RLSE),                                  00110700
+//             LRECL=100,                                               00110800
+//             BLKSIZE=104,                                             00111000
+//             RECFM=V                                                  00111100
+//SYSPRINT DD  SYSOUT=*                                                 00111200
+//SYSIN    DD  DUMMY                                                    00111300
+

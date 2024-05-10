@@ -1,0 +1,56 @@
+Sub ZMain
+Dim ret	
+end_check = "Commands:"
+LIBRARY="ADKVPGE.CTLM.SCHEDULE"
+ODATE="051113"
+
+'List of Tables
+Table = ARRAY("ARD040","ARISTION","ASM","ASMM","ASMREST","AT5UPRO","BEFBK1M","BEFBK2M","BKUPM","BLCRAPP","BLFRAPP","BLOCKUPD","CARDMT","CARDPR","CBR","CICSCA","CICSCH","CICSUP","CLC","CMSBKOUT","CMSFTHOM","CMSM","CMSMAIN","CMSMBKP","CMSREST","CMSRISK","CMSSEG1","CMSSEG2","COLLS","CONV","CPR","CPRU","C11Z1","DDB2","DDB3","DUPAUTH","DWH","EXTRACTS","FAS","FDRREPT","FD67","FULLBKUP","GIRO","GLEXT","GL6090","INS","ITSREST","LTS","MBS","NDM","NSATRM15","OPRECOV","ORNGTS","PDSBKUP","PDSBM","POSTCOMP","PRBMTH","REISSUE","RKI","SSC","START","STMT","STMTNDM","TRMRCV","TRMRST1","TRMRST2","TRMRST3","TRM15","TSHI","TTCI","TTDD","TTGI","TTII","TTRI","TTSI","TTXX","VLS","VLSM","VLS15","VLS2","WEBEXTR","XD53","XD67")
+WAIT_TIME=5
+
+Set Sys = CreateObject("PASSPORT.System")
+'selects the currently active session
+Set Sess = Sys.ActiveSession
+'selects the screen object
+Set MyScreen = Sess.Screen
+
+For N = LBound(Table ) To UBound(Table)
+	SendHostKeys ("<HOME>")
+	ret = wait(wait_time)
+	SendHostKeys ("M")
+	ret = wait(wait_time)
+	SendHostKeys ("<PF7>")
+	ret = wait(wait_time)
+	
+                  'ret=MsgBox(Table(N)) 
+	SendHostKeys ("F "& Table(N))
+	SendHostKeys ("<ENTER>")
+	ret = wait(wait_time)
+	
+	row = GetCursorRow ( )
+	Set MyArea = MyScreen.Area(row,3, row, 3)
+	'O for ordering the table in CTLM
+	MyArea.Select     
+	MyScreen.Copy
+	MyArea.Value = "O"
+	SendHostKeys ("<ENTER>")
+	ret = wait(wait_time)
+
+	Set MyArea = MyScreen.Area(row,35, row, 35)
+	MyArea.Select     
+	MyScreen.Copy
+	MyArea.Value = "Y"
+	Set MyArea = MyScreen.Area(row,43, row, 48)
+	MyArea.Select     
+	MyScreen.Copy
+	MyArea.Value = ODATE
+	
+	SendHostKeys ("<ENTER>")
+	ret = wait(10)
+
+	SendHostKeys ("<PF3>")
+	ret = wait(wait_time)
+Next 
+
+End Sub
+ 

@@ -1,0 +1,23 @@
+//UGBKE2SE JOB (DEV01,CMS),'KE TO SE',
+//             MSGCLASS=X,CLASS=1,
+//             NOTIFY=&SYSUID
+//*
+//STEPID1 EXEC PGM=IDCAMS
+//*COBOL PROGRAM TO SORT FILES
+//SYSPRINT DD  SYSOUT=A                                                 ZHCZH892
+//VSAM1    DD  DSN=PDKVPGE.CMS.AMRH.S1.KE,                              ZHCZH892
+//             DISP=SHR
+//SEQ1     DD  DSN=CDKVPGE.SANDEEPN.AMRH.S1.SE,                         ZHCZH892
+//             DISP=(NEW,CATLG),                                        ZHCZH892
+//             UNIT=SYSDA,
+//             SPACE=(TRK,(10,10)),                                     ZHCZH892
+//             LRECL=272,
+//             BLKSIZE=272,
+//             RECFM=FB                                                C
+//                                                                      ZHCZH892
+//SYSIN    DD  *
+ REPRO -
+  INFILE(VSAM1) -
+  OUTFILE(SEQ1)
+/*
+

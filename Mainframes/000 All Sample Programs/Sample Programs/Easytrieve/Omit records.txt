@@ -1,0 +1,77 @@
+//#T53VXVS  JOB  (9999,0206,3),'PAY SERVICE',CLASS=X,                
+//           MSGCLASS=X,NOTIFY=&SYSUID,REGION=0M                     
+//*                                                                  
+//*ROUTE XEQ SMASYS2                                                 
+//JOBLIB    DD   DSN=NDVR.AFC.PPY.PRD.LPRODLIB,DISP=SHR              
+//          DD   DSN=NDVR.AFC.PPY.PRD.NOSOURCE.LPRODLIB,DISP=SHR     
+//          DD   DSN=SYS1.CEE.SCEERUN,DISP=SHR                       
+//*         DD   DSN=LNKLST.CAI.EZTPLUS.R640311.CAILIB,DISP=SHR      
+//*                                                                  
+//****************************************************************** 
+//*        STEP02 IS TO OBTAIN WC POLICIES MA LOC WITH EFF 11/01/12* 
+//*        AND AFTER                                               * 
+//****************************************************************** 
+//STEP02    EXEC EZTPLUS                                             
+//SYSPRINT  DD   SYSOUT=*                                            
+//SYSOUT    DD   SYSOUT=*                                            
+//SYSOUX    DD   SYSOUT=*                                            
+//SYSUDUMP  DD   SYSOUT=0                                            
+//EZTVFM    DD  SPACE=(CYL,(500,50),RLSE)                            
+//FILEA     DD   DSN=TST.M53.VXV.RG0.PULLSEG.T210119,DISP=SHR        
+//*         DD   DSN=TST.M53.SZP.RG5.PULLSEG.T012919,DISP=SHR 
+//*         DD   DSN=TST.M53.SZP.RG4.PULLSEG.T012919,DISP=SHR 
+//*         DD   DSN=TST.M53.SZP.RG3.PULLSEG.T012919,DISP=SHR 
+//*         DD   DSN=TST.M53.SZP.RG2.PULLSEG.T012919,DISP=SHR 
+//*         DD   DSN=TST.M53.SZP.RG1.PULLSEG.T012919,DISP=SHR 
+//*         DD   DSN=TST.M53.SZP.RG0.PULLSEG.T012919,DISP=SHR 
+//FILEB     DD   DSN=TST.M53.VXV.ACTLX.LX.RG0,                
+//          DISP=(NEW,CATLG,DELETE),                          
+//          UNIT=DISK,SPACE=(CYL,(100,10),RLSE),              
+//          DCB=(RECFM=FB,LRECL=050)                          
+//*FILEC     DD   DSN=PPYVSAM.SUP.ACCTMSTR.F00003,DISP=SHR    
+//*                                                           
+//SYSIN     DD *               GENERATED STATEMENT            
+FILE FILEA                                                    
+SEG-IN-452       001 452 A                                    
+SEG-ID           001 02  A                                    
+SEG-ID-GU        001 04  A                                    
+SEG-COMM         003 02  A                                    
+*                                                             
+*PMS SEGEMT 02 FOR EASYTRIEVE PLUS                            
+PIF-02-COMMENT        003   002   A             
+PIF-02-SYMBOL         003   003   A             
+PIF-POLICY-NUMBER     006   007   A             
+PIF-MODULE            013   002   A             
+PIF-EFFECTIVE-DATE    021   008   A             
+PIF-LOB               076   003   A             
+*                                               
+FILE  FILEB                                     
+OUT-REC          001 050 A                      
+OUT-SYMBOL       OUT-REC            003   A     
+OUT-POLICY       OUT-REC     +003   007   A     
+OUT-MOD          OUT-REC     +010   002   A     
+OUT-LOB          OUT-REC     +012   003   A     
+                                                
+*                                               
+                                                
+ VALID-POL-SW  W  1  A VALUE ' '                
+ VALID-POL-45  W  1  A VALUE 'N'                
+*                                               
+JOB INPUT FILEA                                 
+*                                      
+*                                      
+  IF SEG-ID EQ  '02' +                 
+  AND (PIF-EFFECTIVE-DATE LE 20200101 +
+  AND  PIF-EFFECTIVE-DATE GE 20190101) 
+    OUT-REC         = SPACES           
+    OUT-SYMBOL      = PIF-02-SYMBOL    
+    OUT-POLICY      = PIF-POLICY-NUMBER
+    OUT-MOD         = PIF-MODULE       
+    OUT-LOB         = PIF-LOB          
+   END-IF                              
+*                                      
+  IF SEG-ID-GU  EQ  '03LX'             
+       PUT FILEB                       
+   END-IF                              
+                                       
+*                                      

@@ -1,0 +1,11 @@
+>>> time.ctime()                                                                
+'Wed Apr 15 13:31:54 2020'                                                      
+>>> def show_default(arg=time.ctime()):                                         
+...     print(arg)                                                              
+...                                                                             
+>>> show_default()                                                              
+Wed Apr 15 13:31:54 2020                                                        
+>>> show_default()                                                              
+Wed Apr 15 13:31:54 2020                                                        
+>>> show_default()                                                              
+Wed Apr 15 13:31:54 2020                                                        

@@ -1,0 +1,22 @@
+EMP table (SAL)- VALUE IN DB IS 100
+------------------------------------
+	USER1	            :   USER2
+------------------------------------------
+                            :
+T1--    SELECT SAL FROM     :
+        EMP		    :
+                            :
+                            :
+T2--    UPDATE SAL=SAL*10   :
+                            :
+                            :
+T3--			    :	SELECT SAL FROM EMP
+                            :
+                            :
+T4--			    :	UPDATE SAL=SAL*20
+                            :
+T5--	COMMIT              :
+                            :
+T6--	              	    :   COMMIT
+----------------------------------------------------------
+        

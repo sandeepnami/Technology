@@ -1,0 +1,7 @@
+ECHO OFF
+START chrome "D:\Users\db2admin\AppData\Local\Google\Chrome\Application\chrome.exe"
+START  explorer "F:\Technical\Mainframes\db2"
+START  explorer "D:\Users\db2admin\Dropbox\Technical\Mainframe Notes\DB2"
+START  explorer "D:\Program Files\Notepad++\notepad++.exe"
+START CMD "%windir%\system32\cmd.exe"
+START IBMDATA "D:\Program Files\IBM\DS4.1.0.1\eclipse.exe" -product com.ibm.datastudio.consolidated.product.ide

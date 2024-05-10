@@ -1,0 +1,13 @@
+//UGBTAKEC JOB (00000000),'CICS CLOSE',
+//             USER=&SYSUID,MSGCLASS=X,
+//             CLASS=2
+//********************************************************************
+//* FILE CLOSE E.G: MMS1                                          *
+//*------------------------------------------------------------------*
+//********************************************************************
+//*
+//*CLOSE   EXEC PGM=IEFBR14
+//* F CICSRUN,'CEMT SET FILE(ADKVPGE.MBS.MMS1.IAM) CLOSE'
+//CLOSE   EXEC PGM=IEFBR14
+// F CICSRUN,'CEMT I FI(*) DSN(ADKVPGE.MBS.MMS1.IAM) '
+

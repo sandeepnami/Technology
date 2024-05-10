@@ -1,0 +1,6 @@
+00001SANDEEP KUMAR NAMI            INSURANCE BU   0000120000EMP01
+00002NALINI                        Finance BU     0000050000EMP02
+00003Ritika Rukhmini N             School BU      0000000000EMP03
+00004Pradyumna Nami                School BU      0000000000EMP04
+00005Chinna Narasinga Rao Nammy    Sales Tax BU   0000053000EMP05
+00006Bharathi Nammy                Home Maker BU  0000000000EMP06

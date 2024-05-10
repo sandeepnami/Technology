@@ -1,0 +1,46 @@
+1)CREATE TABLE:
+-----------------
+
+CREATE TABLE EMP_TBL
+EMP_NO  	CHAR (5) NOT NULL,
+EMP_NAME 	VARCHAR(20),	
+EMP_JOIN_DATE, 	CHAR(10) 	,
+EMP_SAL  	INT 		,
+Primary key(EMP_no);
+
+2)CREATE DCLGEN:
+-----------------
+
+01 DCLEMPL.
+
+   05 EMP-NO           PIC X(5).
+   05 EMP-NAME  
+      49 EMP-NAME-LEN  PIC S(4)COMP.
+      49 EMP-NAME-TEXT PIC X(20).
+   05 EMP-JOIN-DATE    PIC X(10).
+   05 EMP-SAL          PIC S9(9) COMP.
+
+3)INCLUDE DCLGEN
+-----------------
+
+
+4) INCLUDE SQLCA
+-----------------
+
+5) INSERT 4 ROWS INTO EMPLOYEE TABLE with the following emp_no (E1,E2,E3 and E4)
+   
+6) Through program insert E5 and delete E4.
+--------------------------------------------
+============================================
+============================================
+Additional info:
+--------------------------------------------
+   EVALUATE  SQLCODE                         
+      WHEN ZERO                          
+        Perform para-name                          
+      WHEN 100                            
+        PERFORM para-name          
+      WHEN OTHER                           
+        DISPLAY 'SQLCODE IS = ' SQLCODE  
+   END-EVALUATE.                            
+--------------------------------------------

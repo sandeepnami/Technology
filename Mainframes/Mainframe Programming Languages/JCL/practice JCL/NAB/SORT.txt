@@ -1,0 +1,17 @@
+//UGBSORT1 JOB AF-1055,'SORT ',                                         00010000
+//             MSGCLASS=X,MSGLEVEL=(1,1),                               00020000
+//             CLASS=P,NOTIFY=&SYSUID                                   00030000
+//*                                                                     00030100
+//SORT001 EXEC PGM=SORT                                                 00030200
+//SYSOUT   DD  SYSOUT=*                                                 00030300
+//SYSPRINT DD  SYSOUT=*                                                 00030400
+//*BASIC SORT COPY SORTED FILE IN SAME INPUT                            00030500
+//*NOTE THE INPUT IS DESCENDING ORDER                                   00030600
+//SORTIN   DD  DSN=SDAF.N2.CAMASTER.DISK.IN,                            00030700
+//             DISP=SHR                                                 00030800
+//SORTOUT  DD  DSN=SDAF.N2.CAMASTER.DISK.IN,                            00031100
+//             DISP=OLD                                                 00031200
+//SYSIN    DD  *                                                        00031300
+ SORT FIELDS=(6,3,PD,A,9,5,PD,A)                                        00031505
+/*                                                                      00033000
+

@@ -1,0 +1,48 @@
+//SAMPLE01 JOB AF-1055,'EZY RUN',                                       
+//             MSGCLASS=X,MSGLEVEL=(1,1),                               
+//             CLASS=P,NOTIFY=&SYSUID                                   
+//*                                                                     
+//EZYRUN1  EXEC PGM=EZTPA00                                             
+//SYSPRINT DD   SYSOUT=*                                                
+//SYSOUT   DD   SYSOUT=*                                                
+//PANDD1   DD   DSN=SDAF.P732083.NAMI.COPY.LIBRARY,DISP=SHR             
+//* ENTER COPYBOOK LIBRARY IN PANDD13                                   
+//PANDD13  DD   DSN=SDAF.P732083.NAMI.COPY.LIBRARY,DISP=SHR             
+//*                                                                     
+//FILE1    DD DSN=SDAF.N2.CAMASTER.DISK.IN,DISP=SHR                     
+//FILE2    DD DSN=SDCA.CA.CA953.FL09404.PRODUCT.CONVRSN,DISP=SHR        
+//*                                                                     
+//SYSIN    DD *                                                         
+LIST ON                                                                 
+PARM DEBUG   (NOXREF NOCLIST NODMAP)                                    
+*                                                                       
+FILE FILE1                                                              
+FILEOUT-REC        1  80    A                                           
+FILEOUT-BSB        1   4    N                                           
+FILEOUT-ACCOUNT    5   9    N                                           
+FILEOUT-CURICC    13   5    N                                           
+FILEOUT-NEWICC    18   5    N                                           
+                                                                        
+*                                                                       
+FILE FILE2                                                              
+EL05828-RC02127-FL01940  1   1    A                                     
+EL05164-RC02129-FL01940  2   3    P   0                                 
+EL05857-RC02129-FL01940  5   5    P   0                                 
+EL08011-RC02129-FL01940 76   3    P   0                                 
+                                                                        
+                                                                        
+      *--------------------------------------------------------------*  
+      *      ***************************************************     *  
+      *      ***************************************************     *  
+      *      **                                               **     *  
+      *      **    P R O C E D U R E     D I V I S I O N      **     *  
+      *      **                                               **     *  
+      *      ***************************************************     *  
+      *      ***************************************************     *  
+      *--------------------------------------------------------------*  
+                                                                        
+                                                                        
+           JOB INPUT NULL                                               
+           DISPLAY 'hello world'                                        
+           STOP                                                         
+/*                                                                      

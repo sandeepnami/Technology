@@ -1,0 +1,88 @@
+Helpfactorial(x, /):                                                            
+>>> math.sqrt(81)                                                               
+NAME                                                                            
+    math                                                                        
+Type help() for interactive help, or help(object) for help about object.        
+DESCRIPTIONth)                                                                  
+    This module provides access to the mathematical functions                   
+    defined by the C standard.                                                  
+NAME                                                                            
+FUNCmath.factorial(5)                                                           
+    acos(x, /)                                                                  
+        Return the arc cosine (measured in radians) of x.                       
+    This module provides access to the mathematical functions                   
+    acosh(x, /)the C standard.                                                  
+        Return the inverse hyperbolic cosine of x.                              
+    TIONS                                                                       
+    asin(x, /)                                                                  
+        Return the arc sine (measured in radians) of x.x.                       
+                                                                                
+    asinh(x, /)                                                                 
+        Return the inverse hyperbolic sine of x.x.                              
+    fac(n) / (fac(k) * fac(n - k))                                              
+    atan(x, /)                                                                  
+...skipping... the arc sine (measured in radians) of x.                         
+    factorial(x, /)                                                             
+        Find x!.                                                                
+        Return the inverse hyperbolic sine of x.                                
+        Raise a ValueError if x is negative or non-integral.                    
+    atan(x, /)                                                                  
+    floor(x, /)                                                                 
+        Return the floor of x as an Integral.                                   
+                                                                                
+        This is the largest integer <= x.                                       
+                                                                                
+    fmod(x, y, /)                                                               
+        Return fmod(x, y), according to platform C.                             
+                                                                                
+        x % y may differ.                                                       
+                                                                                
+    frexp(x, /)                                                                 
+        Return the mantissa and exponent of x, as pair (m, e).                  
+                                                                                
+        m is a float and e is an int, such that x = m * 2.**e.                  
+        If x is 0, m and e are both 0.  Else 0.5 <= abs(m) < 1.0.               
+                                                                                
+    fsum(seq, /)                                                                
+        Return an accurate floating point sum of values in the iterable seq.    
+                                                                                
+>>> help(math.factorial)                                                        
+Help on built-in function factorial in module math:                             
+                                                                                
+factorial(x, /)                                                                 
+    Find x!.                                                                    
+                                                                                
+    Raise a ValueError if x is negative or non-integral.                        
+(END)                                                                           
+                                                                                
+>>> math.factorial(5)                                                           
+120                                                                             
+>>> math.factorial(16)                                                          
+20922789888000                                                                  
+>>> n = 5                                                                       
+>>> k = 3                                                                       
+>>> math.factorial(n) / (math.factorial(k) * math.factorial(n - k))             
+10.0                                                                            
+>>> from math import factorial                                                  
+>>> factorial(n) / (factorial(k) * factorial(n - k))                            
+10.0                                                                            
+>>> from math import factorial as fac                                           
+>>> fac(n) / (fac(k) * fac(n - k))                                              
+10.0                                                                            
+>>> fac(n) // (fac(k) * fac(n - k))                                             
+10                                                                              
+>>> 2**31 - 1                                                                   
+2147483647                                                                      
+>>> fac(13)                                                                     
+6227020800                                                                      
+>>> fac(13) > 2**31 - 1                                                         
+True                                                                            
+>>> n = 100                                                                     
+>>> k = 2                                                                       
+>>> fac(n) // (fac(k) * fac(n - k))                                             
+4950                                                                            
+>>> fac(n)                                                                      
+93326215443944152681699238856266700490715968264381621468592963895217599993229915
+608941463976156518286253697920827223758251185210916864000000000000000000000000  
+>>> len(str(fac(n)))                                                            
+158                                                                             

@@ -1,0 +1,10 @@
+3.0                                                                             
+1.414213562373095                                                               
+Traceback (most recent call last):                                              
+  File "roots.py", line 25, in <module>                                         
+    main()                                                                      
+  File "roots.py", line 21, in main                                             
+    print(sqrt(-1))                                                             
+  File "roots.py", line 13, in sqrt                                             
+    guess = (guess + x / guess) / 2.0                                           
+ZeroDivisionError: float division by zero                                       

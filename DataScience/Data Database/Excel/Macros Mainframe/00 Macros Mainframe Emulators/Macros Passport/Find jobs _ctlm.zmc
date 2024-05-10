@@ -1,0 +1,59 @@
+Sub ZMain
+Dim ret, fso, tf,msg_file
+'file handling
+Set fso = CreateObject("Scripting.FileSystemObject")
+msg_file = "D:\GEGDC\sn95502\sandeep\imp\Macros\Macros Passport\sample.txt"
+Set tf = fso.CreateTextFile(msg_file, True)
+
+end_check = "Commands:"
+'List of jobs
+JOB = ARRAY("PCHCDLT1","PCHCDREP","PCHCDRK1","PCHGRZEK","PCHCDFDK","PCHCDMCO","PCHCDSTM","PCHCDST1","PCHC1U31","PCHC1U32","PCHGSTMT","PCHGTCSI","PCHPOSTI","PCHCDCT1","PCHCDGL1","PCHCDRPT","PCHGDDB1","PCHCDBS1","PCHCDCM1","PCHCDEP2","PCHCDES1","PCHCDIA1","PCHCDIS1","PCHCDMB1","PCHCDPO1","PCHCDTX1","PCHCDZK1","PCHGFB93","PCHGPOU2","PCHGU536","PCHG1EN0","PCHINS4A","PCHLYL02","PCHZEK03","PCHCDARS","PCHCDIN1","PCHCDIRR","PCHCDVLM","PCHCONFO","PCHDFEBS","PCHGCMS1","PCHGEMP1","PCHGPREX","PCHGTIP2","PCHGUREP","PCHGU508","PCHMIGRO","PCHSPGLD","PCHSPSTN")
+'Action tobe performed hold or release MH / MR
+'hold jobs
+'action = "H"
+'free jobs
+action= "F"
+
+Set Sys = CreateObject("PASSPORT.System")
+'selects the currently active session
+Set Sess = Sys.ActiveSession
+'selects the screen object
+Set MyScreen = Sess.Screen
+
+
+For N = LBound(JOB ) To UBound(JOB)
+                  'ret=MsgBox(JOB(N)) 
+	SendHostKeys ("<HOME>")
+	ret = wait(3)
+	SendHostKeys ("SH")
+	ret = wait(3)
+	SendHostKeys ("<ENTER>")
+	ret = wait(3)
+
+	Set MyArea = MyScreen.Area(3,12, 3, 19)
+	MyArea.Select     
+	MyScreen.Copy
+'initialise the pgm name with spaces and then write the actual data(8 spaces)
+	MyArea.Value = "        "
+	MyArea.Value =JOB(N)
+	SendHostKeys ("<ENTER>")
+	ret = wait(6)
+
+	SendHostKeys ("M")
+	ret = wait(3)
+	SendHostKeys ("<PF7>")
+	ret = wait(3)
+
+	'Find PROCESS START
+	Set MyArea = MyScreen.Area(4,4, 4, 11)
+	MyArea.Select     
+	MyScreen.Copy
+	if  MyArea.Value = JOB(N) Then
+		tf.WriteLine(JOB(N))
+		'tf.WriteBlankLines(1)
+	end if
+Next 
+tf.Close
+
+End Sub
+ 

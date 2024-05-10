@@ -1,0 +1,6 @@
+ASPROG1  CSECT                                                          00010000
+*THIS PROG IS A SAMPLE PROGRAM TO ST RETURN CODE TO 0                   00020000
+         LA    15,0                    SET REGISTER 15 TO ZERO          00030000
+         BR    14                      RETURN TO MVS                    00040000
+         END   ASPROG1                                                  00050000
+

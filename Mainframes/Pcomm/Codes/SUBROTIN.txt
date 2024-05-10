@@ -1,0 +1,15 @@
+/*REXX -- call subroutine and pass it an argument */                    00010000
+                                                                        00020000
+CALL FindArea 5                                                         00030000
+r = 50                                                                  00040000
+CALL FindArea r                                                         00050000
+                                                                        00060000
+EXIT                                                                    00070000
+                                                                        00080000
+FindArea:                                                               00090000
+/* compute area of a circle from its radius */                          00100000
+   ARG radius                                                           00110000
+   area = 3.141592 * (radius)**2                                        00120000
+   SAY "A circle with a radius of" radius "has an area of" area         00130000
+   RETURN                                                               00140000
+

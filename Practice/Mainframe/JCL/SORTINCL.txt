@@ -1,0 +1,24 @@
+//UGBSORT1 JOB (000000),'SORT INCLU',                                   00010000
+//             MSGCLASS=X,MSGLEVEL=(1,1),                               00020000
+//             CLASS=2,NOTIFY=&SYSUID                                   00030000
+//*                                                                     00030100
+//SORT001 EXEC PGM=SORT                                                 00030200
+//SYSOUT   DD  SYSOUT=*                                                 00030300
+//SYSPRINT DD  SYSOUT=*                                                 00030400
+//*INPUT FILE IS OMITTED OUT SOME RECORDS OUTPUT IS CREATED             00030500
+//*PLZ NOTE THAT IF IN1 IS A VBA FILESO OFFSET 4 IS ADDED               00030600
+//SORTIN   DD  DSN=CDKVPGE.FIX.COMPARE.REPORT39,                        00030700
+//             DISP=SHR                                                 00030800
+//SORTOUT  DD  DSN=CDKVPGE.FIX.COMPARE.REPORT39.NANI.OUT,               00031100
+//             DISP=OLD                                                 00031200
+//SYSIN    DD  *                                                        00031300
+ SORT FIELDS=COPY,STOPAFT=100                                           00031400
+ INCLUDE COND=((11,4,CH,EQ,C'POS.'),AND,(17,4,CH,NE,C'5901'))           00031500
+/*                                                                      00033000
+//                                                                      00033100
+ SORT FIELDS=COPY,STOPAFT=100                                           00033200
+ OUTREC FIELDS=(11,4,17,4)                                              00033300
+//* OUTREC FIELDS=(10,5,16,5)                                           00033400
+//*,OR,(16,4,CH,EQ,C'5901'))                                            00034000
+//*,AND,(15,4,CH,NE,C'5901'))                                           00035000
+

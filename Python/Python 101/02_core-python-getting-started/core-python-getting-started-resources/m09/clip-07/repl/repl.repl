@@ -1,0 +1,61 @@
+...     yield 1                                                                 
+...     yield 2                                                                 
+...     yield 3                                                                 
+...                                                                             
+>>> g = gen123()                                                                
+>>> g                                                                           
+<generator object gen123 at 0x107021120>                                        
+>>> next(g)                                                                     
+1                                                                               
+>>> next(g)                                                                     
+2                                                                               
+>>> next(g)                                                                     
+3                                                                               
+>>> next(g)                                                                     
+Traceback (most recent call last):                                              
+  File "<stdin>", line 1, in <module>                                           
+StopIteration                                                                   
+>>> for v in gen123():                                                          
+...     print(v)                                                                
+...                                                                             
+1                                                                               
+2                                                                               
+3                                                                               
+>>> h = gen123()                                                                
+>>> i = gen123()                                                                
+>>> h                                                                           
+<generator object gen123 at 0x107021e40>                                        
+>>> i                                                                           
+<generator object gen123 at 0x107021f20>                                        
+>>> h is i                                                                      
+False                                                                           
+>>> next(h)                                                                     
+1                                                                               
+>>> next(h)                                                                     
+2                                                                               
+>>> next(i)                                                                     
+1                                                                               
+>>> def gen246():                                                               
+...     print("About to yield 2")                                               
+...     yield 2                                                                 
+...     print("About to yield 4")                                               
+...     yield 4                                                                 
+...     print("About to yield 6")                                               
+...     yield 6                                                                 
+...     print("About to return")                                                
+...                                                                             
+>>> g = gen246()                                                                
+>>> next(g)                                                                     
+About to yield 2                                                                
+2                                                                               
+>>> next(g)                                                                     
+About to yield 4                                                                
+4                                                                               
+>>> next(g)                                                                     
+About to yield 6                                                                
+6                                                                               
+>>> next(g)                                                                     
+About to return                                                                 
+Traceback (most recent call last):                                              
+  File "<stdin>", line 1, in <module>                                           
+StopIteration                                                                   

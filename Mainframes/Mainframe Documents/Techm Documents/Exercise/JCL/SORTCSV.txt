@@ -1,0 +1,27 @@
+//UGBSORT1 JOB (000000),'PARSE DATA',                                   00010000
+//             MSGCLASS=X,MSGLEVEL=(1,1),                               00020000
+//             CLASS=2,NOTIFY=&SYSUID                                   00030000
+//*                                                                     00030100
+//SORT001 EXEC PGM=SORT                                                 00030200
+//SYSOUT   DD  SYSOUT=*                                                 00030300
+//SYSPRINT DD  SYSOUT=*                                                 00030400
+//*INPUT FILE IS CSV FILE COMMA(,) SEPARATED                            00030500
+//SORTIN   DD  *                                                        00030600
+WAYNE,M,-53,-1732,SANDEEP                                               00030700
+SUMMERS,F,+7258,-273,KARTHIK                                            00030800
+KENT,M,+213,-158,METROPOLIS                                             00030900
+PRINCE,F,-164,+1289,GATEWAY                                             00031000
+//SORTOUT  DD  DSN=CDKVPGE.FIX.SANDEEPN.OUT.SE,                         00031100
+//             DISP=SHR                                                 00031200
+//SYSIN    DD  *                                                        00031300
+ SORT FIELDS=COPY                                                       00031400
+ OUTREC PARSE=(%01=(ENDBEFR=C',',FIXLEN=8),                             00031500
+                 %=(ENDBEFR=C','),                                      00031600
+                 %03=(ENDBEFR=C',',FIXLEN=5),                           00031700
+                 %04=(ENDBEFR=C',',FIXLEN=5),                           00031800
+                 %05=(FIXLEN=10)),                                      00031900
+ BUILD=(%01,14:%03,SFF,ADD,%04,SFF,EDIT=(SIIT.T),SIGNS=(,-),            00032000
+             25:%05)                                                    00032100
+ SUM FIELDS=NONE                                                        00032200
+/*                                                                      00033000
+

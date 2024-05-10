@@ -1,0 +1,195 @@
+000100 IDENTIFICATION DIVISION.                                         00010000
+000200 PROGRAM-ID. NWLEAVE.                                             00020082
+000300 ENVIRONMENT DIVISION.                                            00030000
+000400 INPUT-OUTPUT SECTION.                                            00040000
+000500 FILE-CONTROL.                                                    00050001
+000600     SELECT EMP-LEAVE-FILE                                        00060001
+000700     ASSIGN TO EMPLEAVE                                           00070001
+000800     FILE STATUS IS W-IN-STATUS.                                  00080013
+001200     SELECT EMP-REQUEST-FILE                                      00120020
+001300     ASSIGN TO EMPREQ                                             00130028
+001400     FILE STATUS IS W-REQ-STATUS.                                 00140020
+001500 DATA DIVISION.                                                   00150003
+001600 FILE SECTION.                                                    00160003
+001700 FD EMP-LEAVE-FILE                                                00170011
+001710     RECORD CONTAINS 140 CHARACTERS                               00171037
+001720     BLOCK CONTAINS 0 RECORDS                                     00172013
+001730     RECORDING MODE IS F.                                         00173013
+001900 01  EMP-LEV.                                                     00190016
+002000     03 EMPLOYEE-ID            PIC     X(06).                     00200004
+002100     03 NAME                   PIC     X(30).                     00210004
+002200     03 DESIGNATION            PIC     X(10).                     00220004
+002300     03 DOB                    PIC     9(08).                     00230004
+002400     03 DAT-OF-JOIN            PIC     9(08).                     00240004
+002500     03 DAT-OF-PREV-LEAVE      PIC     9(08).                     00250004
+002600     03 CURRENT-LOCATION       PIC     X(30).                     00260004
+002700     03 CONTACT-NUMBER         PIC     9(10).                     00270004
+002800     03 REQUEST-APP-DAT        PIC     9(08).                     00280004
+002900     03 REQ-STATUS             PIC     X(02).                     00290004
+003000     03 REASON-FOR-LEAVE       PIC     X(02).                     00300004
+003100     03 REASON-FOR-REJECT      PIC     X(02).                     00310004
+003200     03 CURRENT-YR-LEAVE-BAL   PIC     9(02).                     00320004
+003300     03 PREV-YR-LEAVE-TRANS    PIC     9(02).                     00330004
+003400     03 FILLER                 PIC     X(12).                     00340052
+004010 FD  EMP-REQUEST-FILE                                             00401020
+004020     RECORD CONTAINS 80 CHARACTERS                                00402020
+004030     BLOCK CONTAINS 0 RECORDS                                     00403020
+004040     RECORDING MODE IS F.                                         00404020
+004050 01  EMP-REQUEST-REC       PIC  X(80).                            00405020
+004100 WORKING-STORAGE SECTION.                                         00410006
+005700 01 WORK-AREA.                                                    00570006
+005800     03 T-EMP-ID                PIC    X(06).                     00580006
+005900     03 T-NO-OF-DYS-APP         PIC    99.                        00590006
+006000     03 T-LEV-STA               PIC    9.                         00600006
+006010     03 W-EOF                   PIC    X  VALUE 'Y'.              00601006
+006020     03 W-IN-STATUS             PIC    X(02).                     00602006
+006030     03 W-ELIG                  PIC    X(01).                     00603016
+006040     03 W-AC-REJ                PIC    X(02).                     00604016
+006041     03 W-PREV-YR-LEAVE-TRANS   PIC    9(02).                     00604125
+006050     03 W-CUR-YR-LEAVE-BAL      PIC    9(02).                     00605018
+006051     03 W-TOTAL-LEAVS-BAL       PIC   S9(02).                     00605154
+006052     03 W-HYPHEN                PIC  X(80) VALUE ALL "-".         00605222
+006060 01  W-EMP-REQUEST-FILE.                                          00606021
+006070     03 W-EMP-ID                PIC    X(06).                     00607021
+006080     03 FILLER                  PIC    X(03).                     00608045
+006090     03 W-EMP-NAME              PIC    X(30).                     00609021
+006091     03 FILLER                  PIC    X(03).                     00609145
+006092     03 W-NO-OF-LVS-AVLBLE      PIC    9(02).                     00609221
+006093     03 FILLER                  PIC    X(03).                     00609345
+006094     03 W-NO-OF-LEVDAYS         PIC    9(02).                     00609421
+006095     03 FILLER                  PIC    X(03).                     00609545
+006096     03 W-ELIGIBILITY           PIC    X(01).                     00609621
+006097     03 FILLER                  PIC    X(03).                     00609745
+006098     03 W-APPLIED-DATE          PIC    X(08).                     00609899
+006105     03 FILLER                  PIC    X(04).                     00610598
+006106     03 W-ACC-OR-REJ            PIC    X(02).                     00610674
+006107     03 FILLER                  PIC    X(10).                     00610790
+006108 01  W-EMP-REJECT-FILE.                                           00610874
+006109     03 W-R-EMP-ID                PIC    X(06).                   00610974
+006110     03 FILLER                    PIC    X(02).                   00611074
+006111     03 W-R-EMP-NAME              PIC    X(30).                   00611174
+006112     03 FILLER                    PIC    X(02).                   00611274
+006113     03 W-R-NO-OF-LVS-AVLBLE      PIC    9(02).                   00611374
+006114     03 FILLER                    PIC    X(02).                   00611474
+006115     03 W-R-LVS-REQ               PIC    9(02).                   00611574
+006116     03 FILLER                    PIC    X(02).                   00611674
+006117     03 W-R-APP-DAT               PIC    X(08).                   00611799
+006124     03 FILLER                    PIC    X(02).                   00612490
+006125     03 W-R-REASON                PIC    X(08).                   00612584
+006126     03 FILLER                    PIC    X(02).                   00612684
+006127     03 W-R-REMARKS               PIC    X(10).                   00612784
+006128     03 FILLER                    PIC    X(02).                   00612898
+006129 01  TEMP-RESULT                  PIC    9(02).                   00612984
+006130 01  W-REQ-STATUS               PIC    X(02).                     00613084
+006131 01  W-OUTPUT-HEADING.                                            00613184
+006132     03 FILLER  PIC  X(80)  VALUE  "EMPID    NAME                 00613284
+006133-    "           AVI  APP  ELIG    DAT     STA".                  00613384
+006134 01  W-R-OUTPUT-HEADING.                                          00613484
+006135     03 FILLER  PIC  X(80)  VALUE  "EMPID    NAME                 00613584
+006136-    "         AVI  APP   DAT      REASON     REMARKS".           00613685
+006142 01 W-DATE-AREA.                                                  00614290
+006143      03  W-SYS-DATE.                                             00614390
+006144         05  YEAR   PIC  9(02).                                   00614492
+006145         05  MONTH  PIC  9(02).                                   00614592
+006146         05  DAT    PIC  9(02).                                   00614692
+006147      03  TEMP-DAT.                                               00614790
+006148         05  DAT    PIC  9(02)/.                                  00614899
+006149         05  MONTH  PIC  9(02)/.                                  00614999
+006150         05  YEAR   PIC  9(02).                                   00615092
+006151 01  W-HEADING-AREA.                                              00615199
+006152      03  W-REQUEST-HEADING        PIC     X(80) VALUE IS         00615299
+006153     "               LEAVE REQUEST DATA    " .                    00615399
+006154      03  W-REJECT-HEADING         PIC     X(80) VALUE IS         00615499
+006155      "              LEAVE REJECT DATA      " .                   00615599
+006160 PROCEDURE DIVISION.                                              00616006
+006200 0000-MAIN-PARA.                                                  00620006
+006300     PERFORM 1000-ACCEPT-PARA.                                    00630006
+006400     PERFORM 2000-OPEN-PARA.                                      00640006
+006500     PERFORM 3000-READ-PARA UNTIL W-EOF = 'N'.                    00650015
+006510     PERFORM 9000-CLOSE-PARA.                                     00651023
+006600     STOP RUN.                                                    00660006
+006700 1000-ACCEPT-PARA.                                                00670015
+006800     ACCEPT T-EMP-ID.                                             00680006
+006900     ACCEPT T-NO-OF-DYS-APP.                                      00690006
+006910     ACCEPT W-SYS-DATE FROM DATE.                                 00691090
+006920     MOVE CORR W-SYS-DATE TO TEMP-DAT.                            00692090
+007000 2000-OPEN-PARA.                                                  00700006
+007100     OPEN I-O  EMP-LEAVE-FILE                                     00710021
+007200          OUTPUT EMP-REQUEST-FILE.                                00720062
+007300     EVALUATE TRUE ALSO TRUE                                      00730021
+007400         WHEN W-IN-STATUS = 00 ALSO W-REQ-STATUS = 00             00740024
+007500             CONTINUE                                             00750031
+007600         WHEN OTHER                                               00760015
+007700             PERFORM 9999-ERROR-CODE                              00770006
+007800     END-EVALUATE.                                                00780006
+007900 3000-READ-PARA.                                                  00790006
+008000     READ EMP-LEAVE-FILE                                          00800016
+008100       AT END MOVE 'N' TO W-EOF                                   00810006
+008200       NOT AT END                                                 00820006
+008300       IF  T-EMP-ID = EMPLOYEE-ID                                 00830007
+008400           PERFORM 4000-PROCESS-PARA                              00840007
+008500       END-IF                                                     00850007
+008600     END-READ.                                                    00860007
+008700 4000-PROCESS-PARA.                                               00870025
+008710     MOVE CURRENT-YR-LEAVE-BAL TO W-CUR-YR-LEAVE-BAL.             00871025
+008720     MOVE PREV-YR-LEAVE-TRANS TO W-PREV-YR-LEAVE-TRANS.           00872025
+008800     IF W-CUR-YR-LEAVE-BAL IS < 13 AND                            00880064
+008900        W-PREV-YR-LEAVE-TRANS IS < 13 THEN                        00890064
+009000          COMPUTE W-TOTAL-LEAVS-BAL = W-CUR-YR-LEAVE-BAL +        00900025
+009100                                W-PREV-YR-LEAVE-TRANS             00910025
+009200     ELSE                                                         00920021
+009300        DISPLAY " CURRENT YEAR AND PREVIOUS YEAR LEAVES SHOULD    00930021
+009400-                "NOT BE GREATER THAN 12 "                        00940025
+009500     END-IF.                                                      00950021
+009600     IF T-NO-OF-DYS-APP < W-TOTAL-LEAVS-BAL                       00960025
+009700        PERFORM 4200-LEAVE-ACCEPTING-PARA                         00970089
+010601          IF T-NO-OF-DYS-APP IS < W-CUR-YR-LEAVE-BAL              01060191
+010610             SUBTRACT T-NO-OF-DYS-APP FROM W-CUR-YR-LEAVE-BAL     01061091
+010700             MOVE W-CUR-YR-LEAVE-BAL TO CURRENT-YR-LEAVE-BAL      01070091
+010701          ELSE                                                    01070191
+010702           SUBTRACT W-CUR-YR-LEAVE-BAL FROM T-NO-OF-DYS-APP GIVING01070268
+010703            TEMP-RESULT                                           01070391
+010704            MOVE ZEROS TO W-CUR-YR-LEAVE-BAL                      01070491
+010705            MOVE W-CUR-YR-LEAVE-BAL TO CURRENT-YR-LEAVE-BAL       01070591
+010706            SUBTRACT TEMP-RESULT FROM W-PREV-YR-LEAVE-TRANS       01070691
+010707            MOVE W-PREV-YR-LEAVE-TRANS TO PREV-YR-LEAVE-TRANS     01070791
+010708          END-IF                                                  01070891
+010710        REWRITE EMP-LEV                                           01071032
+010711     ELSE                                                         01071151
+010712        PERFORM 4100-LEAVE-REJECTION-PARA                         01071289
+010720     END-IF.                                                      01072051
+010730 4100-LEAVE-REJECTION-PARA.                                       01073089
+010731      WRITE EMP-REQUEST-REC FROM W-HYPHEN.                        01073170
+010732      WRITE EMP-REQUEST-REC FROM W-REJECT-HEADING.                01073283
+010740      WRITE EMP-REQUEST-REC FROM W-HYPHEN.                        01074051
+010741      WRITE EMP-REQUEST-REC FROM W-R-OUTPUT-HEADING.              01074151
+010750      WRITE EMP-REQUEST-REC FROM W-HYPHEN.                        01075051
+010760      MOVE T-EMP-ID TO W-R-EMP-ID.                                01076051
+010770      MOVE NAME     TO W-R-EMP-NAME.                              01077051
+010780      MOVE W-TOTAL-LEAVS-BAL TO W-R-NO-OF-LVS-AVLBLE.             01078051
+010790      MOVE T-NO-OF-DYS-APP TO W-R-LVS-REQ.                        01079051
+010791      MOVE TEMP-DAT TO W-R-APP-DAT.                               01079190
+010792      DISPLAY W-R-APP-DAT.                                        01079297
+010793      MOVE "GENERAL" TO W-R-REASON.                               01079399
+010794      MOVE "LESS BAL" TO W-R-REMARKS.                             01079451
+010795      WRITE EMP-REQUEST-REC FROM W-EMP-REJECT-FILE.               01079551
+010796 4200-LEAVE-ACCEPTING-PARA.                                       01079689
+010797      WRITE EMP-REQUEST-REC FROM W-HYPHEN.                        01079789
+010798      WRITE EMP-REQUEST-REC FROM W-REQUEST-HEADING.               01079889
+010799      WRITE EMP-REQUEST-REC FROM W-HYPHEN.                        01079989
+010800      WRITE EMP-REQUEST-REC FROM W-OUTPUT-HEADING.                01080089
+010801      WRITE EMP-REQUEST-REC FROM W-HYPHEN.                        01080189
+010802      MOVE T-EMP-ID TO W-EMP-ID.                                  01080289
+010803      MOVE NAME TO W-EMP-NAME.                                    01080389
+010804      MOVE W-TOTAL-LEAVS-BAL TO W-NO-OF-LVS-AVLBLE.               01080489
+010805      MOVE T-NO-OF-DYS-APP TO W-NO-OF-LEVDAYS.                    01080589
+010806      MOVE "Y" TO W-ELIGIBILITY.                                  01080689
+010807      MOVE TEMP-DAT  TO W-APPLIED-DATE.                           01080790
+010808      MOVE "AC" TO W-ACC-OR-REJ.                                  01080889
+010809      WRITE EMP-REQUEST-REC FROM W-EMP-REQUEST-FILE.              01080989
+010810 9000-CLOSE-PARA.                                                 01081023
+010900       CLOSE EMP-LEAVE-FILE EMP-REQUEST-FILE.                     01090025
+011000 9999-ERROR-CODE.                                                 01100023
+011100       DISPLAY "ERROR IN FILE : " W-IN-STATUS W-REQ-STATUS.       01110023
+011200       STOP RUN.                                                  01120023
+

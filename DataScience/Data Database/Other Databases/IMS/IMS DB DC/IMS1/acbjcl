@@ -1,0 +1,10 @@
+//UELT228C JOB NOTIFY=&SYSUID,REGION=0M                                 00010009
+//***********************************************                       00020000
+//*  THIS IS A SAMPLE OF JOB - ACBGEN                                   00030000
+//***********************************************                       00040000
+//ACBGEN   EXEC PROC=ACBGEN,SOUT='*',COMP='POSTCOMP'                    00050000
+//G.SYSIN  DD *                                                         00060000
+  BUILD PSB=(PSB3041A)                                                  00071015
+  BUILD DBD=(DBD3041A,DBD3051A)                                         00080020
+//                                                                      00090000
+

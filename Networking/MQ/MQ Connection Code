@@ -1,0 +1,74 @@
+Sample parameter infile for MQ request 
+AFC.PC.M.REQ.CREDITSCORE                          QM1P                                      000015000 AFC.PC.M.RPLY.CREDITSCORE
+
+FD  IN-PARM.                               
+01  QUEUE-CTL-REC.                         
+    05 IN-QUEUE-NAME            PIC X(48). 
+    05 FILLER                   PIC X(02). 
+    05 IN-QUEUE-MGR-NAME        PIC X(48). 
+    05 FILLER                   PIC X(02). 
+    05 IN-WAIT                  PIC S9(9). 
+    05 FILLER                   PIC X(01). 
+    05 IN-REPLY-QUEUE-NAME      PIC X(48). 
+    05 FILLER                   PIC X(02). 
+                                           
+
+.....
+......
+
+01  HCONN               PIC S9(9)  BINARY.           
+01  G-HANDLE            PIC S9(9)  BINARY.           
+01  GOPTIONS            PIC S9(9)  BINARY.           
+01  COMPLETION-CODE     PIC S9(9)  BINARY.           
+01  REASON              PIC S9(9)  BINARY.           
+01  IN-BUFFER-LNG       PIC S9(9)  BINARY.           
+01  GET-DATA-LNG        PIC S9(9)  BINARY.           
+01  RSPNSE-QUEUE        PIC X(48).                   
+01  WAIT-INTERVAL       PIC S9(9)  BINARY.           
+01  QUEUE-MANAGER       PIC X(48).                   
+01  WS-FIELDS.                                       
+    05 MQCONN           PIC X(08) VALUE 'CSQBCONN'.  
+    05 MQOPEN           PIC X(08) VALUE 'CSQBOPEN'.  
+    05 MQCOMMIT         PIC X(08) VALUE 'CSQBCOMM'.  
+    05 MQGET            PIC X(07) VALUE 'CSQBGET'.   
+    05 MQCLOSE          PIC X(08) VALUE 'CSQBCLOS'.  
+    05 MQDISC           PIC X(08) VALUE 'CSQBDISC'.  
+    05 MQCMIT           PIC X(08) VALUE 'CSQBCOMM'.  
+    05 INVOICE-EOF      PIC X(01) VALUE 'N'.         
+	05 GET-CORR-ID      PIC X(24) VALUE SPACES.   
+    05 WS-RESPONSE      PIC X(18860).             
+    05 GET-CORREL-ID.                             
+       10 GET-CORREL-CO    PIC X(04).             
+       10 GET-CORREL-AGT   PIC X(10).             
+       10 GET-CORREL-DATE  PIC X(10).             
+    05 ROW-INDX         PIC S999 COMP-3 VALUE +0. 
+    05 LINE-POS         PIC S9(04) COMP-3.        
+    05 INDX             PIC S999 COMP-3 VALUE +0. 
+    05 WS-VALUE-230     PIC S9(09) VALUE +230.    
+
+
+
+
+
+
+
+
+
+
+1000-CONNECT.                                                 
+															   
+	 READ IN-PARM.                                             
+															   
+	 MOVE IN-QUEUE-MGR-NAME TO QUEUE-MANAGER.                  
+	 MOVE IN-REPLY-QUEUE-NAME TO RSPNSE-QUEUE.                 
+	 COMPUTE WAIT-INTERVAL = IN-WAIT.                          
+															   
+	 CALL MQCONN USING QUEUE-MANAGER,                          
+			HCONN, COMPLETION-CODE, REASON.                    
+															   
+	 IF COMPLETION-CODE = MQCC-FAILED                          
+		DISPLAY MQCONN ' ENDED WITH REASON CODE ' REASON       
+		DISPLAY  ' '                                           
+		MOVE +1000 TO LCP-ABND-CODE                            
+		GO TO 9999-ABEND.                                      
+                                                               

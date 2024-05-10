@@ -1,0 +1,26 @@
+//CDKGSMTP JOB (000000),'SMTP TEST',                                    00010000
+//             MSGCLASS=X,NOTIFY=&SYSUID,                               00020000
+//             CLASS=2                                                  00030000
+//VHLQ   SET   VHLQ=CDKVPGE                                             00030200
+//*                                                                     00030300
+//STEP14  EXEC PGM=IKJEFT01,                                            00030400
+//             PARM='TRMAI814'                                          00030500
+//SYSEXEC  DD  DSN=DNDVPGE.SANDEEPN.SMTP.REXX,                          00030600
+//             DISP=SHR                                                 00030700
+//ADDRESS  DD  DSN=CDKVPGE.FIX.ADDR.SE,                                 00030800
+//             DISP=SHR                                                 00030900
+//MESSAGE  DD  DSN=CDKVPGE.FIX.MSG.SE,                                  00031000
+//             DISP=SHR                                                 00031100
+//SUBJECT  DD  DSN=CDKVPGE.FIX.SUB.SE,                                  00032000
+//             DISP=SHR                                                 00033000
+//*ATTACH   DD  *                                                       00034000
+//* FILEDD  "TRANSMISSION_DETAILS.TXT"                                  00035000
+//*FILEDD   DD  DSN=PDKVPGE.FIX.TRANS.NDMOUT,                           00036000
+//*             DISP=SHR                                                00037000
+//SYSPRINT DD  SYSOUT=*                                                 00038000
+//SYSABOUT DD  SYSOUT=*                                                 00039000
+//SYSUDUMP DD  SYSOUT=*                                                 00040000
+//SYSOUT   DD  SYSOUT=*                                                 00050000
+//SYSTSPRT DD  SYSOUT=*                                                 00060000
+//SYSTSIN  DD  DUMMY                                                    00070000
+

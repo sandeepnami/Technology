@@ -1,0 +1,13 @@
+>>> path                                                                        
+'C:\\Users\\Merlin\\Documents\\Spells'                                          
+>>> print(path)                                                                 
+C:\Users\Merlin\Documents\Spells                                                
+>>> str(496)                                                                    
+'496'                                                                           
+>>> str(6.02e23)                                                                
+'6.02e+23'                                                                      
+>>> s = 'parrot'                                                                
+>>> s[4]                                                                        
+'o'                                                                             
+>>> type(s[4])                                                                  
+<class 'str'>                                                                   

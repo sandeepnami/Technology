@@ -1,0 +1,5 @@
+>>> from simple_list import SortedIntList, IntList                              
+>>> SortedIntList.__bases__                                                     
+(<class 'simple_list.IntList'>, <class 'simple_list.SortedList'>)               
+>>> IntList.__bases__                                                           
+(<class 'simple_list.SimpleList'>,)                                             

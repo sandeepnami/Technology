@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="farewellMessage">Things will be familiar now</entry>
+<entry key="welcomeMessage">Welcome back</entry>
+<entry key="isFirstRun">N</entry>
+</properties>

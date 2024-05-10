@@ -1,0 +1,73 @@
+/**************************** REXX *************************************
+** REXX TO FIND THE LATEST VERSION OF THE GIROIN GDG DATASET.         **
+** AUTHOR : sandeep  nami
+** The rexx creates a jcl for comparing two files using fileaid
+** Files list to be compared are given as input with indd1 and indd2
+*/
+
+/*NANI CODE*/
+JDD="DNDVPGE.SANDEEPN.JCLLIB(FILEAIDC)"
+/*list of files (from) to be compared */
+INDD1="CDKVPGE.FIX.SANDEEPN.IN1.SE"
+/*list of files (with) to be compared */
+INDD2="CDKVPGE.FIX.SANDEEPN.IN2.SE"
+
+"ALLOC FI(INDD1) DA('"INDD1"') SHR REU"
+"ALLOC FI(INDD2) DA('"INDD2"') SHR REU"
+"ALLOC FI(JDD) DA('"JDD"') SHR REU"
+"EXECIO * DISKR INDD1 (STEM INDD1. FINIS"
+"EXECIO * DISKR INDD2 (STEM INDD2. FINIS"
+
+J.1="//UGBFAID  JOB 000,'FILE AID',"
+J.2="//             MSGCLASS=X,MSGLEVEL=(0,0),"
+J.3="//             CLASS=2,NOTIFY=&SYSUID"
+J.4="//*JCL TO COMPARE TWO FILES USING FILEAID"
+J.5="//*"
+N = 5
+/*DO I = 1 TO INDD1.0 BY 1*/
+DO I = 1 TO INDD1.0 BY 1
+   STEPN="FACMP"|| I
+   N=N+1
+   J.N="//" || STEPN || " EXEC PGM=FILEAID"
+   N=N+1
+   DSN01=STRIP(INDD1.I)
+   J.N="//DD01     DD  DSN="||DSN01||",DISP=SHR"
+   N=N+1
+   DSN01C=STRIP(INDD2.I)
+   J.N="//DD01C    DD  DSN="||DSN01C||",DISP=SHR"
+   N=N+1
+/* J.N="//SYSLIST  DD  CDKVPGE.FIX.SANDEEPN.out.SE"
+   N=N+1 */
+   J.N="//SYSIN    DD  *"
+   N=N+1
+   J.N="$$DD01 COMPARE"
+   N=N+1
+   J.N="/*"
+END
+J.0 = N
+/*NANI COMMENT
+DO I = 1 TO N BY 1
+   SAY J.I
+END
+  */
+
+/*CREATE A FILE WITH THE CREATED JCL  and submit the jcl
+
+CJCLFILE = TIME('L')
+PARSE VAR CJCLFILE T1 ':' T2 ':' T3 '.' T4
+CJCLFILE = 'CDKVPGE'|| '.X' || T1 || T2 || T3 || '.X' || T4
+say "jcl job file" cjclfile
+"ALLOC F(CJCL) DA("CJCLFILE") NEW REUSE OUTPUT DELETE",
+            "LRECL(80) RECFM(F) SPACE(1,1) TRACKS"
+"EXECIO" J.0 "DISKW CJCL (STEM J. FINIS"
+/*SUBMIT JOB FROM REXX*/
+"SUBMIT" CJCLFILE "NOHOLD"
+
+"FREE F(CJCL)"
+*/
+
+"EXECIO" J.0 "DISKW JDD (STEM J. FINIS"
+
+
+exit 0
+

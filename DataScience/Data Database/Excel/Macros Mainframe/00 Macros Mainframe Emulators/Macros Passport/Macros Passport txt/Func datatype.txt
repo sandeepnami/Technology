@@ -1,0 +1,33 @@
+Sub ZMain
+Dim  ret,PrNoOld 
+
+Set Sys = CreateObject("PASSPORT.System")
+'selects the currently active session
+Set Sess = Sys.ActiveSession
+'selects the screen object
+Set MyScreen = Sess.Screen
+'selects the area (Start Row, End Row, Start Column, End Column)
+'selects the old pr i.e first PR 
+Set MyArea = MyScreen.Area(6, 6, 6, 12)
+'some random selection
+'Set MyArea = MyScreen.Area(19, 48, 19, 57)
+MyArea.Select     
+MyScreen.Copy
+
+PrNoOld = MyArea.Value
+MsgBox "PrNoOld = "  &PrNoOld
+ret = IsNull(PrNoOld )
+Prompt "IsNull PrNoOld =" &ret, 0, "Attention"
+ret = IsEmpty(PrNoOld )
+Prompt "IsEmpty PrNoOld =" &ret, 0, "Attention"
+ret = IsNumeric(PrNoOld )
+Prompt " IsNumeric PrNoOld =" &ret, 0, "Attention"
+if (ret = true )
+
+
+End Sub
+
+Sub Prompt( sMsg, nType, sTitle )
+            Set ws = CreateObject( "wscript.shell" )
+            ws.popup sMsg, 0, sTitle, 4096 + nType
+End Sub 

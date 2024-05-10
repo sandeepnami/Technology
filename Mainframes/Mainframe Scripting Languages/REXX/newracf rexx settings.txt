@@ -1,0 +1,20 @@
+copy 'logon' member from igcfp3 lpar
+
+
+Datasets created
+
+UGBPSAL.BRODCAST.IGCFD1                            NON-VSAM     
+UGBPSAL.BRODCAST.IGCFP3                            NON-VSAM     
+UGBPSAL.ISPF.ISPPROF.IGCFD1                        NON-VSAM     
+UGBPSAL.ISPF.ISPPROF.IGCFP3                        NON-VSAM     
+UGBPSAL.JCLPREP.TABLE                              NON-VSAM     
+UGBPSAL.JCLPREP.WRITE                              NON-VSAM     
+UGBPSAL.JCLPREP.WRITEPDS                           NON-VSAM     
+UGBPSAL.SYSIFD1.SPFLOG1.LIST                       NON-VSAM     
+UGBPSAL.SYSIFD1.SPFTEMP0.CNTL                      NON-VSAM     
+UGBPSAL.SYSIFD1.SPFTEMP1.CNTL                      NON-VSAM     
+UGBPSAL.SYSIFP3.SPFLOG1.LIST                       NON-VSAM     
+UGBPSAL.SYSIFP3.SPFTEMP0.CNTL                      NON-VSAM     
+UGBPSAL.SYSIFP3.SPFTEMP4.CNTL                      NON-VSAM     
+UGBPSAL.SYSIFP3.SPFTEMP4.LIST                      NON-VSAM     
+UGBPSAL                                            ALIAS        

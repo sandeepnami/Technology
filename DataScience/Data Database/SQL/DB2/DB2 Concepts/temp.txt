@@ -1,0 +1,46 @@
+DB2 OBJECTS:
+----------------------------------------------
+1)STORAGE GROUP
+2)DATABASE
+3)TABLESPACE
+   SIMPLE
+   SEGMENTED
+   PARTITIONED
+4)TABLE
+5)VIEW
+6)ALIAS
+7)SYNONYM
+8)INDEX
+9)INDEXSPACE
+---------------------------------------------
+employee table:
+---------------------------------
+emp no  emp-name emp-sal emp-ph
+---------------------------------
+1441     sam       3000   9866666
+1442     Ram       7000   9999888
+--------------------------------------------
+
+
+numeric-
+  integer (smallint,int,bigint)
+  decimal
+  float
+
+string
+ char str - single (char,varchar)
+          - double (graphic,
+ binary str
+
+decimal(5,2)
+
+100.00
+
+-------char---------------------------
+CHAR or CHARACTER is used to store fixed-length character strings up to
+254 bytes
+CHAR (8).
+-------Varchar------------------------
+VARCHAR is used to store varriable-length character strings
+Maximum lenght of varchar is 32,672 bytes.
+-------Varchar------------------------

@@ -1,0 +1,12 @@
+
+                                                                                                    06/30/20                        
+ID      SALESPERSON NAME                        REGION    YEARLY SALES  GENDER     ERROR MESSAGE                                    
+-----   ----------          ----------          --------  -----------              -----------------                                                                                                                                                                    
+A0012   FISHER              PEGGY               SOUTH     085000           F       EMPLOYEE ID WAS NOT NUMERIC                      
+A1520   SMITH               JOE                 NORTH     076000           M       EMPLOYEE ID WAS NOT NUMERIC                      
+A5023   MOUSE               MICKEY              WEST      10Q000           M       EMPLOYEE ID WAS NOT NUMERIC                      
+A5023   MOUSE               MICKEY              WEST      10Q000           M       SALES AMOUNT IS INVALID                          
+A2345   GATES               TERRY               SOUTH     090000           M       EMPLOYEE ID WAS NOT NUMERIC                      
+A4321   SHILLINGS           PATTI               NORTH     123000           F       EMPLOYEE ID WAS NOT NUMERIC                      
+A0123   CAI                 GUORAI              EAST      055000           K       EMPLOYEE ID WAS NOT NUMERIC                      
+A0123   CAI                 GUORAI              EAST      055000           K       INVALID GENDER, SHOULD BE M, F, U                

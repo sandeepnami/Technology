@@ -1,0 +1,13 @@
+//PROCSRCH  JOB  (9999,0205,3),'SRCHFOR',CLASS=X,                       JOB09068
+//          MSGCLASS=X,NOTIFY=&SYSUID,REGION=0M,
+//          TIME=(0,20)
+//*
+//SEARCH  EXEC PGM=ISRSUPC,                                           *
+//            PARM=(SRCHCMP,
+//            'ANYC')
+//NEWDD  DD DISP=SHR,DSN=SYS1.PROCLIBP
+//OUTDD  DD SYSOUT=*
+//SYSIN  DD *
+SRCHFOR  'HDW4000.F12006'
+/*
+

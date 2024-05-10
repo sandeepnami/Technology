@@ -1,0 +1,57 @@
+Sub ZMain
+Dim ret	
+
+'Create Passport Object
+Set Sys = CreateObject("PASSPORT.System")
+'selects the currently active session
+Set Sess = Sys.ActiveSession
+'selects the screen object
+Set MyScreen = Sess.Screen
+
+wait_time = "3"
+'give the test region
+test_region = "P*"
+test_owner = "o*"
+my_region = "UGB*"
+my_owner = "*AC"
+
+'Spool -1
+SendHostKeys ("<HOME>")
+SendHostKeys("S;DA")
+ret = wait(wait_time)
+SendHostKeys ("<ENTER>")
+ret = wait(wait_time)
+SendHostKeys("PRE " &test_region)
+SendHostKeys ("<ENTER>")
+ret = wait(wait_time)
+SendHostKeys("OWNER " &test_owner)
+SendHostKeys ("<ENTER>")
+ret = wait(wait_time)
+
+'CTLM -1
+SendHostKeys ("<HOME>")
+SendHostKeys("START I;CN")
+ret = wait(wait_time)
+SendHostKeys ("<ENTER>")
+ret = wait(wait_time)
+SendHostKeys ("<PF9>")
+ret = wait(wait_time)
+
+'B92 -1
+SendHostKeys ("<HOME>")
+SendHostKeys("START I;B92;;1")
+ret = wait(wait_time)
+SendHostKeys ("<ENTER>")
+ret = wait(wait_time)
+
+'B92 -2
+SendHostKeys ("<HOME>")
+SendHostKeys("START I;B92;;1")
+ret = wait(wait_time)
+SendHostKeys ("<ENTER>")
+ret = wait(wait_time)
+
+
+'EXIT SUB
+End Sub
+ 

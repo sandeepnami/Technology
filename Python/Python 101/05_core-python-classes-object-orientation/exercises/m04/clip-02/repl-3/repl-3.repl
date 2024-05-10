@@ -1,0 +1,14 @@
+>>> from simple_list import *                                                   
+>>> issubclass(IntList, SimpleList)                                             
+True                                                                            
+>>> issubclass(SortedList, SimpleList)                                          
+True                                                                            
+>>> issubclass(SortedList, IntList)                                             
+False                                                                           
+>>> class MyInt(int): pass                                                      
+...                                                                             
+>>> class MyVerySpecialInt(MyInt): pass                                         
+...                                                                             
+>>> issubclass(MyVerySpecialInt, int)                                           
+True                                                                            
+>>>                                                                             

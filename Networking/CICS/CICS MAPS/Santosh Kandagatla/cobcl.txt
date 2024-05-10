@@ -1,0 +1,26 @@
+//COMPCL PROC SUBLIB='ELTP.SLC.PROCLIB'                                 00010013
+//*                                                                     00030000
+//COMPILE  EXEC PGM=IGYCRCTL,REGION=4096K,                              00050000
+//         PARM='RES,LIB,OBJECT,APOST,TEST'                             00070000
+//SYSPRINT DD  SYSOUT=*                                                 00090000
+//SYSLIN   DD  DSN=&&LOADSET,DISP=(MOD,PASS),                           00110000
+//             UNIT=SYSDA,SPACE=(80,(250,100))                          00130000
+//SYSUT1   DD  UNIT=SYSDA,SPACE=(460,(350,100))                         00150000
+//SYSUT2   DD  UNIT=SYSDA,SPACE=(460,(350,100))                         00160014
+//SYSUT3   DD  UNIT=SYSDA,SPACE=(460,(350,100))                         00180014
+//SYSUT4   DD  UNIT=SYSDA,SPACE=(460,(350,100))                         00200014
+//SYSUT5   DD  UNIT=SYSDA,SPACE=(460,(350,100))                         00220014
+//SYSUT6   DD  UNIT=SYSDA,SPACE=(460,(350,100))                         00240014
+//SYSUT7   DD  UNIT=SYSDA,SPACE=(460,(350,100))                         00260017
+//*                                                                     00280000
+//LKED     EXEC PGM=IEWL,REGION=4096K,                                  00300000
+//         PARM='XREF',COND=(4,LT)                                      00310011
+//SYSLIB   DD  DSN=CEE.SCEELKED,DISP=SHR                                00320001
+//         DD  DSN=&SUBLIB,DISP=SHR                                     00321020
+//SYSUT1   DD  UNIT=SYSDA,DCB=BLKSIZE=1024,                             00330001
+//             SPACE=(1024,(200,20))                                    00340001
+//SYSPRINT DD  SYSOUT=*                                                 00350001
+//SYSLIN   DD  DSN=&&LOADSET,DISP=(OLD,DELETE)                          00360001
+//         DD  DDNAME=SYSIN                                             00370001
+//                                                                      00380015
+

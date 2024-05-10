@@ -1,0 +1,22 @@
+[1, 9, 8]                                                                       
+>>> a = ["apple", "orange", "pear"]                                             
+>>> a[1]                                                                        
+'orange'                                                                        
+>>> a[1] = 7                                                                    
+>>> a                                                                           
+['apple', 7, 'pear']                                                            
+>>> b = []                                                                      
+>>> b.append(1.618)                                                             
+>>> b                                                                           
+[1.618]                                                                         
+>>> b.append(1.414)                                                             
+>>> b                                                                           
+[1.618, 1.414]                                                                  
+>>> list("characters")                                                          
+['c', 'h', 'a', 'r', 'a', 'c', 't', 'e', 'r', 's']                              
+>>> c = ['bear',                                                                
+...      'giraffe',                                                             
+...      'elephant',                                                            
+...      'caterpillar',]                                                        
+>>> c                                                                           
+['bear', 'giraffe', 'elephant', 'caterpillar']                                  

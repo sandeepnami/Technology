@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"name": "Practice",
+			"path": "."
+		},
+		{
+			"name": "web-scraping-with-python-2848331",
+			"path": "C:\\Users\\namis\\anaconda3\\envs\\virtualenv_scrapy\\web-scraping-with-python-2848331"
+		},
+		{
+			"name": "Current_Working_Project",
+			"path": "Current_Working_Project"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Practice",
+		"liveServer.settings.port": 5501
+	}
+}

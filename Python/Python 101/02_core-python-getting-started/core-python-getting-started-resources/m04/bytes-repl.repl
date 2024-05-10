@@ -1,0 +1,8 @@
+b'data'                                                                         
+>>> b"data"                                                                     
+b'data'                                                                         
+>>> d = b'some bytes'                                                           
+>>> d[0]                                                                        
+115                                                                             
+>>> d.split()                                                                   
+[b'some', b'bytes']                                                             

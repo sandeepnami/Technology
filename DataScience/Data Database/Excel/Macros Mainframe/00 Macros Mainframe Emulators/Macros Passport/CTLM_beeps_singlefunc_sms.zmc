@@ -1,0 +1,311 @@
+Sub ZMain
+Dim PrNoOld, PrNoCurr,ret,R1,C1,C2,R2, login_flag,to_addr,cc_addr
+'permissible abend count note we have to write no in quotes for this to work
+abend_cnt = "1"
+to_addr = "sandeep_nami@mahindrasatyam.com"
+cc_addr = "sandeep_nami@mahindrasatyam.com"
+
+'nani remove comment if you want sms
+to_phone = "9052298330"
+
+Set Sys = CreateObject("PASSPORT.System")
+
+'selects the currently active session
+Set Sess = Sys.ActiveSession
+
+'selects the screen object
+Set MyScreen = Sess.Screen
+
+'*****Master For Loop to refresh PR scr ever 3 mins until 18 hrs start
+For count_time = 1 to 360
+     end_notok = refresh_ctlm(myscreen)
+     if Len(end_notok) <> 0 then 
+            if end_notok > abend_cnt Then
+	get_beep()
+	subject = "High Risk CTLM Abends"
+	msg = "Total Abends in P3 Lpar = " &end_notok 
+	outlook_send msg,subject,to_addr,cc_addr        
+' ************ send message through api*******
+	'Nani temporarily disable SMS
+	 response = send_sms( msg, to_phone )
+	'MsgBox "SMS response  = " &response 
+	'EXIT SUB
+	if  IsNumeric( response ) = false Then
+		  msg = "Error in sending sms" & Chr(13) & response
+		 subject =  "High Risk SMS send Fail"
+		 outlook_send msg,subject,to_addr,cc_addr
+ 	END IF 
+' ************ send message through api end*******
+         END If     
+  END If  
+  'refresh CTLM for every 3mins
+  ret = wait(180)	
+Next
+'*****Master For Loop to refresh PR scr ever 3 mins end 
+
+End Sub
+
+
+'********************refresh ctlm function	 ********************
+Function refresh_ctlm(myscreen)
+'selects the area (Start Row, End Row, Start Column, End Column)
+'pass refresh parameter to passport
+Set MyArea = MyScreen.Area(2, 15, 2, 17)
+MyArea.Select     
+MyScreen.Copy
+MyArea.Value = "REF"
+SendHostKeys ("<ENTER>")
+ret = wait(3)
+
+'capture endednotok count from ctlm
+Set MyArea = MyScreen.Area(3, 60, 3, 65)
+'comment after testing ctlm functionality
+'Set MyArea = MyScreen.Area(3, 75, 3, 80)
+MyArea.Select     
+MyScreen.Copy
+end_notok = TRIM(MyArea.Value)
+'MsgBox "END_NOTOK =" &END_NOTOK
+type_end_notok = IsNumeric( end_notok  )
+'MsgBox "type_end_notok =" &type_end_notok
+'MsgBox Len(end_notok)
+refresh_ctlm = end_notok
+
+End Function
+
+'********************beep function	 ********************
+Function get_beep()
+	For loopvar = 1 To 20
+	        Beep
+	        ret = wait(1)
+                     Next        
+END Function 
+
+
+'********************outlook_send ********************
+Sub outlook_send( msg, subject,to_addr,cc_addr )
+Dim  ret
+
+Set otlApp = CreateObject("Outlook.Application")
+Set otlNewMail = otlApp.CreateItem(olMailItem)
+
+With otlNewMail
+.SentOnBehalfOfName = "VisionPlus_Servicedesk@mahindrasatyam.com"
+.To = to_addr
+.CC = cc_addr
+.Subject = subject 
+.body = "Hi," & Chr(13) & "There is an abend in CTLM "  & Chr(13)  & msg 
+'.Attachments.Add fName
+.Display
+ .send
+END With
+
+End Sub
+
+'********************Capture screen start********************
+Function capture_screen( MyScreen )
+Dim ret, msg, row_st, row_end, col_st, col_end
+msg=""
+row_st = 6
+row_end = 41
+col_st = 6
+col_end = 79
+'start capture
+For count_msg= row_st to  row_end  
+Set MyArea = MyScreen.Area(count_msg, col_st , count_msg, col_end )
+MyArea.Select     
+MyScreen.Copy
+msg = msg & Chr(13) & MyArea.Value
+
+Next
+capture_screen = msg
+End Function 
+'********************Capture screen end ********************
+
+'********************Send message thru API ubaid.tk********************
+Function send_sms( msg,to_phone)
+Dim HttpReq 
+  Set HttpReq  = CreateObject("Microsoft.XMLHTTP")
+  Dim uname, pwd, provider, sms_api, request_str, surl
+ 'total supported providers ny ubaid api 
+ Dim count_providers
+  count_providers = 6
+  ReDim Provider_list(count_providers)
+  Provider_list(1) = "fullonsms"
+  Provider_list(2) = "site2sms"
+  Provider_list(3) = "indiarocks"
+  Provider_list(4) = "ultoo"
+  Provider_list(5) = "youmint"
+  Provider_list(6) = "smsabc"
+for i = 1 to count_providers 
+  uname = "9052298330"
+   pwd = "namiin"
+  'List of Providers : site2sms ,Ultoo , fullonsms
+  provider = Provider_list(i)
+  'character limitation
+  max_msg_len = 90
+  'please note that space is equivalent to %20
+  'msg = "Hello World from passport"
+  'length of msg
+   msg_len = Len(msg)
+   'MsgBox "length of Msg= " & msg_len
+
+   If msg_len > max_msg_len Then
+    msg = Mid(msg, 1, max_msg_len)
+	'MsgBox "First 100 chars is = " &msg
+	msg = msg & Chr(13) & "Please check the mail for rest of the PRs "
+	'MsgBox "Updated msg = " &msg
+   end if 
+'msg = URLEncode(msg)
+
+'nani comment check if urlencode is needed then only use it
+'msg = URLEncodeNew(msg)
+
+
+  
+  'multiple phone no's are seperated by comma in ubaid
+'pranati = 9908159485, bhargav = 9505001010
+  'to_phone = "9052298330,9441156635,9052219615,8885844825,9505001010,9908159485"
+  'to_phone = "9052298330"
+  'List of API's
+  sms_api = "http://ubaid.tk/sms/sms.aspx"  '---
+  'sms_api = "http://madsacsoft.com/mad/sms/smsapi.php"  '---not working
+    
+  'for ubaid    -working
+  request_str = "uid=" & uname & "&pwd=" & pwd & "&msg=" & msg & "&phone=" & to_phone & "&provider=" & provider
+
+  'for madsacsoft -- Not working
+  'request_str = "usr=" & uname & "&pwd=" & pwd & "&msg=" & msg & "&to=" & to_phone & "&site=" & provider
+
+  surl = sms_api & "?" & request_str
+
+ 
+  'MsgBox "url= " & surl
+  HttpReq.Open "GET", surl, False
+  HttpReq.Send
+  'MsgBox "ResponseText= " & HttpReq.ResponseText
+  'MsgBox "Status= " & HttpReq.Status
+  Status = HttpReq.Status
+  response = HttpReq.ResponseText
+  If Status = 503 Then
+    'MsgBox "The URL = " & surl & "Failed to open"
+  End If
+  
+'Debugging messages
+'Select Case response
+ '   Case 1
+ '      MsgBox "SMS sent"
+'    Case -1
+'        MsgBox "Server Error"
+'    Case -2
+'        MsgBox "Invalid Username"
+'    Case -3
+'        MsgBox "Invalid message text"
+'    Case -4
+'        MsgBox "Login Failed"
+'    Case -5
+'        MsgBox "IP Blocked"
+'    Case -7
+'        MsgBox "There is a Captcha which cannot be bypassed"
+'    Case -11
+'        MsgBox "Unsupported Provider"
+'    Case Else
+'        MsgBox "Some unknown error occured please cross check sms api site"
+'End Select
+'validating if message is sent or not
+if   IsNumeric( response ) then
+	if response = 1 then
+		Exit For
+	End if 
+End If
+Next
+send_sms = response
+
+
+End Function 
+
+
+'********************Url encode New version********************
+Public Function URLEncodeNew(StringVal) 
+
+StringLen = Len(StringVal)
+
+If StringLen > 0 Then
+    'ReDim result(StringLen) As String
+    'Dim i As Long, CharCode As Integer
+    'Dim Char As String, Space As String
+    SpaceAsPlus = false
+    ReDim result(StringLen)
+
+    If SpaceAsPlus = true Then 
+	Space1 = "+" 
+    Else 
+	Space1 = "%20"
+    End if
+
+    For i = 1 To StringLen
+       Char = Mid(StringVal, i, 1)
+      Case_val = Asc(Char)
+     
+     ' Select Case CharCode
+      '  Case 97 To 122, 65 To 90, 48 To 57, 45, 46, 95, 126
+       '   result(i) = Char
+        'Case 32
+        '  result(i) = Space
+       ' Case 0 To 15
+       '   result(i) = "%0" & Hex(CharCode)
+       ' Case Else
+       '   result(i) = "%" & Hex(CharCode)
+      'End Select
+'*******This if else is replacement of above select becoz of selects incopatability with passport
+       If (case_val >= 48 And case_val <= 57)  or (case_val >= 65 And case_val <= 90)  or (case_val >= 97 And case_val <= 122) or _
+	(case_val = 45) or (case_val = 45) or (case_val = 46) or (case_val = 95)OR (case_val = 126)  then
+	result(i) = Char
+       Elseif  case_val = 32 Then
+	result(i) = Space1
+      Elseif  case_val >= 0 And case_val <= 15 Then
+	result(i) = "%0" & Hex(CharCode)
+      Else
+                      result(i) = "%" & Hex(CharCode)
+     End If
+
+    Next 
+    URLEncodeNew = Join(result, "")
+  End If
+
+End Function
+
+
+
+
+
+
+
+
+
+
+
+Function get_country()
+
+Set Sys = CreateObject("PASSPORT.System")
+Set Sess = Sys.ActiveSession
+Set MyScreen = Sess.Screen
+Set MyArea = MyScreen.Area(6, 16, 6, 22)
+MyArea.Select     
+MyScreen.Copy
+country = MyArea.Value
+get_country = country 
+END Function
+
+Function get_prinfo ()
+
+Set Sys = CreateObject("PASSPORT.System")
+Set Sess = Sys.ActiveSession
+Set MyScreen = Sess.Screen
+Set MyArea = MyScreen.Area(6, 6, 6, 79)
+MyArea.Select     
+MyScreen.Copy
+prinfo = MyArea.Value
+'MsgBox "PrNoOld=" & PrNoOld & " PrNoCurr=" & PrNoCurr
+get_prinfo = prinfo 
+END Function
+

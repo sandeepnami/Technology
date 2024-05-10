@@ -1,0 +1,20 @@
+//STARTIMS JOB CA-1114,'CMPLE CA944',MSGCLASS=X,CLASS=W,
+// NOTIFY=&SYSUID
+//*
+//********************************************************************
+//*  START DATABASE AREAS PRIOR TO LOADING                           *
+//********************************************************************
+//START38  EXEC NBTSTBMP,OPT=W,PSB=PGMS63,MBR=PGMS63
+//SYSPRINT DD   SYSOUT=*
+//SYSIN    DD   *
+LIST
+*
+*    START DATABASE AREAS DD358VX1, DD358VX2,
+*                         DD358VX3, DD358VX4
+*
+AXS STAAREA DATA=(DD358VX1)
+AXS STAAREA DATA=(DD358VX2)
+AXS STAAREA DATA=(DD358VX3)
+AXS STAAREA DATA=(DD358VX4)
+/*
+

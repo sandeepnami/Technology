@@ -1,0 +1,62 @@
+                                                                               
+EDIT       MTPLB06.IMS.JCL(PRINTCOM) - 01.07               Columns 00001 00072 
+Command ===>                                                  Scroll ===> CSR  
+****** ***************************** Top of Data ******************************
+000100 //MTPLB06C JOB 43312,'COB COMPILE JCL',                                 
+000200 //             CLASS=A,MSGCLASS=H,MSGLEVEL=(1,1),                       
+000300 //             NOTIFY=&SYSUID                                           
+000400 //IMSCOMP PROC MBR=HOSPPRNT,PAGES=60,SYS2=,                             
+000500 //             SOUT=A                                                   
+000600 //COMPILE EXEC PGM=IGYCRCTL,REGION=4M,                                  
+000700 //             PARM='DYNAM,FASTSRT,LIB,OBJECT,RENT,APOST,MAP,XREF'      
+000800 //SYSLIN   DD  DSN=&&LIN,DISP=(MOD,PASS),UNIT=SYSDA,                    
+000900 //             DCB=(IMS810.&SYS2.DBDLIB),                               
+001000 //             SPACE=(3520,(40,10),RLSE,,ROUND)                         
+001100 //SYSPRINT DD  SYSOUT=&SOUT,                                            
+001200 //             DCB=(LRECL=121,BLKSIZE=605,RECFM=FBA),                   
+001300 //             SPACE=(605,(&PAGES.0,&PAGES),RLSE,,ROUND)                
+001400 //SYSUT1   DD  UNIT=SYSDA,DISP=(,DELETE),                               
+001500 //             SPACE=(3520,(100,10),RLSE,,ROUND)                        
+001600 //SYSUT2   DD  UNIT=SYSDA,DISP=(,DELETE),                               
+001700 //             SPACE=(3520,(100,10),RLSE,,ROUND)                        
+001800 //SYSUT3   DD  UNIT=SYSDA,DISP=(,DELETE),                                        001900 //             SPACE=(3520,(100,10),RLSE,,ROUND)                        
+002000 //SYSUT4   DD  UNIT=SYSDA,DISP=(,DELETE),                                        002100 //             SPACE=(3520,(100,10),RLSE,,ROUND)                        
+002200 //SYSUT5   DD  UNIT=SYSDA,DISP=(,DELETE),                               
+002300 //             SPACE=(3520,(100,10),RLSE,,ROUND)                        
+002400 //SYSUT6   DD  UNIT=SYSDA,DISP=(,DELETE),                               
+002500 //             SPACE=(3520,(100,10),RLSE,,ROUND)                        
+002600 //SYSUT7   DD  UNIT=SYSDA,DISP=(,DELETE),                               
+002700 //             SPACE=(3520,(100,10),RLSE,,ROUND)                        
+002800 //SYSIN    DD  DSN=MTPLB07.IMS.CBLSRC(&MBR),DISP=SHR                    
+002900 //*                                               --> SRCLIB(PGM NAME)  
+003000 //********************************************************************  
+003100 //LINK    EXEC PGM=IEWL,REGION=4M,                                      
+003200 //             PARM='XREF,LET,LIST',                                    
+003300 //             COND=(4,LT,COMPILE)                                                                       
+003400 //SYSLIB   DD  DSN=CEE.SCEELKED,DISP=SHR                                         003500 //SDFSRESL DD  DSN=IMS810.&SYS2.SDFSRESL,DISP=SHR                      
+003600 //SYSLIN   DD  DSN=&&LIN,DISP=(OLD,DELETE)                             
+003700 //         DD  DISP=SHR,                                               
+003800 //             DSN=IMS810.&SYS2.PROCLIB(CBLTDLI)                       
+003900 //SYSIN DD  DUMMY                                                      
+004000 //SYSLMOD  DD DISP=SHR,                                                
+004100 //         DSN=MTPLB06.IMS.LOADLIB(&MBR)                               
+004200 //*                                         --> LOADLIB(LOADMOD NAME)  
+004300 //SYSPRINT DD SYSOUT=&SOUT,                                            
+004400 //         DCB=(RECFM=FBA,LRECL=121,BLKSIZE=605),                      
+004500 //         SPACE=(605,(&PAGES.0,&PAGES),RLSE,,ROUND)                   
+004600 //SYSUT1   DD UNIT=(SYSDA,SEP=(SYSLMOD,SYSLIN)),                       
+004700 //         DISP=(,DELETE),                                             
+004800 //         SPACE=(3520,(100,10),RLSE,,ROUND)                           
+004900 //        PEND                                                         
+005000 //STEP1 EXEC PROC=IMSCOMP,MBR=HOSPPRNT --> PGM NAME                     
+005100 //LINK.SYSIN DD  *                                                      
+005200  INCLUDE SYSLIB(HOSPPRNT) --> PGM NAME                                  
+005300  INCLUDE RESLIB(DLITCBL)                                                
+005400  INCLUDE RESLIB(CBLTDLI)                                                
+005500  ENTRY DLITCBL                                                          
+005600  ENTRY CBLTDLI                                                          
+005700  NAME HOSPPRNT --> PGM NAME                                             
+005800                                                                         
+005900                                                                         
+****** **************************** Bottom of Data ****************************
+                                                                               

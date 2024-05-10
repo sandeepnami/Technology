@@ -1,0 +1,69 @@
+      *STRING HANDLING                                                  00010014
+       IDENTIFICATION DIVISION.                                         00020014
+       PROGRAM-ID. COBSTRNG.                                            00030014
+       ENVIRONMENT DIVISION.                                            00040014
+       CONFIGURATION SECTION.                                           00050014
+       DATA DIVISION.                                                   00060014
+       WORKING-STORAGE SECTION.                                         00070014
+       01 NAME.                                                         00080014
+          05 LAST-NAME PIC X(10) VALUE "NAMI".                          00090014
+          05 FIRST-NAME PIC X(10) VALUE "SANDEEP".                      00100014
+          05 MIDDLE-NAME PIC X(10) VALUE "KUMAR".                       00110014
+       01 NAME-OUT PIC X(33).                                           00120014
+                                                                        00130014
+       01 SOURCE-STRING   PIC X(11) VALUE "AABABBACABA".                00140014
+       01 TALLY-COUNTER   PIC 9(02) VALUE 0.                            00150014
+       01 SPACE-COUNTER   PIC 9(02) VALUE 0.                            00160014
+       01 SPACE-LEADING   PIC 9(02) VALUE 0.                            00170014
+       01 SPACE-TRAILING  PIC 9(02) VALUE 0.                            00180014
+       01 LENGTH-STR      PIC 9(02) VALUE 0.                            00190014
+      *                                                                 00200014
+       PROCEDURE DIVISION.                                              00210014
+       MAIN-SECTION.                                                    00220014
+      *CONCATENATION OF STRINGS                                         00230014
+           STRING                                                       00240014
+           FIRST-NAME DELIMITED BY ' '                                  00250014
+           ' ' DELIMITED BY SIZE                                        00260014
+           MIDDLE-NAME DELIMITED BY ' '                                 00270014
+           ' ' DELIMITED BY SIZE                                        00280014
+           LAST-NAME DELIMITED BY ' '                                   00290014
+           ' ' DELIMITED BY SIZE                                        00300014
+           INTO NAME-OUT.                                               00310014
+                                                                        00320014
+           DISPLAY 'NAME-OUT= ' NAME-OUT                                00330014
+                                                                        00340014
+      *INSPECT                                                          00350014
+           DISPLAY 'SOURCE-STRING= ' SOURCE-STRING                      00360014
+           INSPECT SOURCE-STRING TALLYING TALLY-COUNTER FOR CHARACTERS  00370014
+                                    BEFORE INITIAL 'C'                  00380014
+           DISPLAY 'CHARACTERS BEFORE INITIAL C= ' TALLY-COUNTER        00390014
+           MOVE 0 TO TALLY-COUNTER                                      00400014
+           INSPECT SOURCE-STRING TALLYING TALLY-COUNTER FOR ALL 'A'     00410014
+           DISPLAY 'ALL A IN STING            = ' TALLY-COUNTER         00420014
+                                                                        00430014
+                                                                        00440014
+           MOVE 0 TO TALLY-COUNTER                                      00450014
+           INSPECT SOURCE-STRING TALLYING TALLY-COUNTER FOR ALL 'A'     00460014
+                                    AFTER INITIAL 'B'                   00470014
+           DISPLAY 'ALL A AFTER INITIAL B     = ' TALLY-COUNTER         00480014
+                                                                        00490014
+           MOVE 0 TO TALLY-COUNTER                                      00500014
+           INSPECT SOURCE-STRING TALLYING TALLY-COUNTER FOR LEADING 'A' 00510014
+           DISPLAY "ALL LEADING A'S           = " TALLY-COUNTER         00520014
+                                                                        00530014
+      *SPACE COUNT AND TRIM THE STRINGS                                 00540014
+           MOVE "   SANDEEP" TO SOURCE-STRING                           00550014
+           DISPLAY 'SOURCE-STRING= ' SOURCE-STRING                      00560014
+           DISPLAY 'TOTAL LENGTH OF SOURCE-STRING= '                    00570014
+                                LENGTH OF SOURCE-STRING                 00580014
+           INSPECT SOURCE-STRING                                        00590014
+                TALLYING SPACE-LEADING FOR LEADING SPACES               00600014
+           INSPECT FUNCTION REVERSE (SOURCE-STRING)                     00610014
+                TALLYING SPACE-TRAILING FOR LEADING SPACES              00620014
+           COMPUTE SPACE-COUNTER = SPACE-LEADING + SPACE-TRAILING       00630014
+           COMPUTE LENGTH-STR = LENGTH OF SOURCE-STRING - SPACE-COUNTER 00640014
+           DISPLAY 'SPACE-COUNTER = ' SPACE-COUNTER                     00650014
+           DISPLAY "TRIM STRING= "                                      00660014
+                         SOURCE-STRING(1+SPACE-LEADING:LENGTH-STR)      00670014
+           STOP RUN.                                                    00680014
+

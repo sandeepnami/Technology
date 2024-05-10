@@ -1,0 +1,22 @@
+Sub ZMain
+Dim  ret
+MsgBox "test"
+
+'Dim myOutlook As Object
+'Dim myMailItem As Object
+
+Set otlApp = CreateObject("Outlook.Application")
+Set otlNewMail = otlApp.CreateItem(olMailItem)
+'fName = ActiveWorkbook.Path & "" & ActiveWorkbook.Name
+
+With otlNewMail
+.SentOnBehalfOfName = "VisionPlus_Servicedesk@mahindrasatyam.com"
+.To = "sandeep_nami@mahindrasatyam.com"
+.CC = "deepak_kemidi@mahindrasatyam.com"
+.Subject = "High Risk"
+.body = "Hi," & Chr(13) & "There is a PR raised "
+'.Attachments.Add fName
+.Display
+ .send
+END With
+End Sub

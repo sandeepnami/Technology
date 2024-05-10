@@ -1,0 +1,641 @@
+!SESSION 2014-04-13 20:35:24.467 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=JRE 1.7.0 IBM J9 2.6 Windows 7 x86-32 20130617_152572 (JIT enabled, AOT enabled)
+J9VM - R26_Java726_SR5_20130617_1436_B152572
+JIT  - r11.b04_20130528_38954ifx1
+GC   - R26_Java726_SR5_20130617_1436_B152572
+J9CL - 20130617_152572
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_IN
+Framework arguments:  -product com.ibm.datastudio.consolidated.product.ide
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ibm.datastudio.consolidated.product.ide
+
+!ENTRY com.ibm.datatools.uom 4 0 2014-04-13 20:40:26.325
+!MESSAGE 
+!STACK 0
+java.lang.NullPointerException
+	at com.ibm.datatools.uom.internal.objectlist.prop.PropertyArranger.restoreState(Unknown Source)
+	at com.ibm.datatools.aqt.dse2.ds311.EarlyStartupWorkspaceMigrator.earlyStartup(Unknown Source)
+	at org.eclipse.ui.internal.EarlyStartupRunnable.runEarlyStartup(Unknown Source)
+	at org.eclipse.ui.internal.EarlyStartupRunnable.run(Unknown Source)
+	at org.eclipse.core.runtime.SafeRunner.run(Unknown Source)
+	at org.eclipse.ui.internal.Workbench$54.run(Unknown Source)
+	at org.eclipse.core.internal.jobs.Worker.run(Unknown Source)
+
+!ENTRY com.ibm.datatools.core.http 1 0 2014-04-13 20:40:32.568
+!MESSAGE Embedded server started: [HTTP port: 56788, HTTPS port: 56789]
+
+!ENTRY com.ibm.datatools.optim.solutions 1 0 2014-04-13 20:40:33.678
+!MESSAGE Data Studio in shell sharing
+
+!ENTRY org.eclipse.datatools.connectivity 2 -1 2014-04-13 20:44:18.600
+!MESSAGE Error creating SQL Model Connection connection to SAMPLE. (Error: [jcc][t4][10108][11232][3.67.28] User ID length, 0, is not allowed. ERRORCODE=-4461, SQLSTATE=42815)
+!STACK 0
+com.ibm.db2.jcc.am.SqlSyntaxErrorException: [jcc][t4][10108][11232][3.67.28] User ID length, 0, is not allowed. ERRORCODE=-4461, SQLSTATE=42815
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.d(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.f(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.b(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.<init>(Unknown Source)
+	at com.ibm.db2.jcc.DB2SimpleDataSource.getConnection(Unknown Source)
+	at com.ibm.db2.jcc.DB2SimpleDataSource.getConnection(Unknown Source)
+	at com.ibm.db2.jcc.DB2Driver.connect(Unknown Source)
+	at com.ibm.db2.jcc.DB2Driver.connect(Unknown Source)
+	at org.eclipse.datatools.connectivity.drivers.jdbc.JDBCConnection.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.DriverConnectionBase.internalCreateConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.DriverConnectionBase.open(Unknown Source)
+	at org.eclipse.datatools.connectivity.drivers.jdbc.JDBCConnection.open(Unknown Source)
+	at com.ibm.datatools.db2.JDBCDB2AliasConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionFactoryProvider.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionProfile.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionInfoImpl.initializeJDBCConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionInfoImpl.<init>(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.core.SQMConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionFactoryAdapterProvider.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ManagedConnection.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.CreateConnectionJob.run(Unknown Source)
+	at org.eclipse.core.internal.jobs.Worker.run(Unknown Source)
+
+!ENTRY org.eclipse.datatools.connectivity 2 -1 2014-04-13 20:44:18.696
+!MESSAGE Error creating JDBC Connection connection to SAMPLE. (Error: [jcc][t4][10108][11232][3.67.28] User ID length, 0, is not allowed. ERRORCODE=-4461, SQLSTATE=42815)
+!STACK 0
+com.ibm.db2.jcc.am.SqlSyntaxErrorException: [jcc][t4][10108][11232][3.67.28] User ID length, 0, is not allowed. ERRORCODE=-4461, SQLSTATE=42815
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.d(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.f(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.b(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.<init>(Unknown Source)
+	at com.ibm.db2.jcc.DB2SimpleDataSource.getConnection(Unknown Source)
+	at com.ibm.db2.jcc.DB2SimpleDataSource.getConnection(Unknown Source)
+	at com.ibm.db2.jcc.DB2Driver.connect(Unknown Source)
+	at com.ibm.db2.jcc.DB2Driver.connect(Unknown Source)
+	at org.eclipse.datatools.connectivity.drivers.jdbc.JDBCConnection.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.DriverConnectionBase.internalCreateConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.DriverConnectionBase.open(Unknown Source)
+	at org.eclipse.datatools.connectivity.drivers.jdbc.JDBCConnection.open(Unknown Source)
+	at com.ibm.datatools.db2.JDBCDB2AliasConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionFactoryProvider.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionProfile.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ManagedConnection.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.CreateConnectionJob.run(Unknown Source)
+	at org.eclipse.core.internal.jobs.Worker.run(Unknown Source)
+
+!ENTRY org.eclipse.datatools.connectivity 4 -1 2014-04-13 20:44:19.385
+!MESSAGE Could not connect to SAMPLE.
+!SUBENTRY 1 org.eclipse.datatools.connectivity 2 -1 2014-04-13 20:44:19.385
+!MESSAGE Error creating SQL Model Connection connection to SAMPLE. (Error: [jcc][t4][10108][11232][3.67.28] User ID length, 0, is not allowed. ERRORCODE=-4461, SQLSTATE=42815)
+!STACK 0
+com.ibm.db2.jcc.am.SqlSyntaxErrorException: [jcc][t4][10108][11232][3.67.28] User ID length, 0, is not allowed. ERRORCODE=-4461, SQLSTATE=42815
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.d(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.f(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.b(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.<init>(Unknown Source)
+	at com.ibm.db2.jcc.DB2SimpleDataSource.getConnection(Unknown Source)
+	at com.ibm.db2.jcc.DB2SimpleDataSource.getConnection(Unknown Source)
+	at com.ibm.db2.jcc.DB2Driver.connect(Unknown Source)
+	at com.ibm.db2.jcc.DB2Driver.connect(Unknown Source)
+	at org.eclipse.datatools.connectivity.drivers.jdbc.JDBCConnection.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.DriverConnectionBase.internalCreateConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.DriverConnectionBase.open(Unknown Source)
+	at org.eclipse.datatools.connectivity.drivers.jdbc.JDBCConnection.open(Unknown Source)
+	at com.ibm.datatools.db2.JDBCDB2AliasConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionFactoryProvider.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionProfile.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionInfoImpl.initializeJDBCConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionInfoImpl.<init>(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.core.SQMConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionFactoryAdapterProvider.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ManagedConnection.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.CreateConnectionJob.run(Unknown Source)
+	at org.eclipse.core.internal.jobs.Worker.run(Unknown Source)
+!SUBENTRY 1 org.eclipse.datatools.connectivity 2 -1 2014-04-13 20:44:19.386
+!MESSAGE Error creating JDBC Connection connection to SAMPLE. (Error: [jcc][t4][10108][11232][3.67.28] User ID length, 0, is not allowed. ERRORCODE=-4461, SQLSTATE=42815)
+!STACK 0
+com.ibm.db2.jcc.am.SqlSyntaxErrorException: [jcc][t4][10108][11232][3.67.28] User ID length, 0, is not allowed. ERRORCODE=-4461, SQLSTATE=42815
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.d(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.f(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.b(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.<init>(Unknown Source)
+	at com.ibm.db2.jcc.DB2SimpleDataSource.getConnection(Unknown Source)
+	at com.ibm.db2.jcc.DB2SimpleDataSource.getConnection(Unknown Source)
+	at com.ibm.db2.jcc.DB2Driver.connect(Unknown Source)
+	at com.ibm.db2.jcc.DB2Driver.connect(Unknown Source)
+	at org.eclipse.datatools.connectivity.drivers.jdbc.JDBCConnection.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.DriverConnectionBase.internalCreateConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.DriverConnectionBase.open(Unknown Source)
+	at org.eclipse.datatools.connectivity.drivers.jdbc.JDBCConnection.open(Unknown Source)
+	at com.ibm.datatools.db2.JDBCDB2AliasConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionFactoryProvider.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionProfile.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ManagedConnection.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.CreateConnectionJob.run(Unknown Source)
+	at org.eclipse.core.internal.jobs.Worker.run(Unknown Source)
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-13 20:46:49.001
+!MESSAGE NLS missing message: DATATOOLS_CORE_UI_PREFERENCES_NAMING_SEQUENCE_DESCRIPTION in: com.ibm.datatools.core.ui.l10n.datatoolsCoreUI
+
+!ENTRY com.ibm.datatools.aqt 1 0 2014-04-13 20:47:02.342
+!MESSAGE IBM DB2 Analytics Accelerator Studio Plug-in Version: com.ibm.datatools.aqt 4.1.2.201403201609
+
+!ENTRY org.eclipse.ui 4 0 2014-04-13 21:47:47.969
+!MESSAGE Unhandled event loop exception
+!STACK 0
+org.eclipse.swt.SWTException: Failed to execute runnable (java.lang.NullPointerException)
+	at org.eclipse.swt.SWT.error(Unknown Source)
+	at org.eclipse.swt.SWT.error(Unknown Source)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Unknown Source)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Unknown Source)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Unknown Source)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(Unknown Source)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Unknown Source)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(Unknown Source)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(Unknown Source)
+	at org.eclipse.ui.internal.Workbench$5.run(Unknown Source)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Unknown Source)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Unknown Source)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(Unknown Source)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(Unknown Source)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(Unknown Source)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(Unknown Source)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(Unknown Source)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(Unknown Source)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(Unknown Source)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.basicRun(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.run(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.main(Unknown Source)
+Caused by: java.lang.NullPointerException
+	at org.eclipse.datatools.sqltools.result.internal.ui.view.SingleWindowTextSection.onInstanceFinished(Unknown Source)
+	at org.eclipse.datatools.sqltools.result.ui.view.ResultsViewControl$13.run(Unknown Source)
+	at org.eclipse.ui.internal.UILockListener.doPendingWork(Unknown Source)
+	at org.eclipse.ui.internal.UISynchronizer$3.run(Unknown Source)
+	at org.eclipse.swt.widgets.RunnableLock.run(Unknown Source)
+	... 25 more
+!SESSION 2014-04-14 07:42:41.376 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=JRE 1.7.0 IBM J9 2.6 Windows 7 x86-32 20130617_152572 (JIT enabled, AOT enabled)
+J9VM - R26_Java726_SR5_20130617_1436_B152572
+JIT  - r11.b04_20130528_38954ifx1
+GC   - R26_Java726_SR5_20130617_1436_B152572
+J9CL - 20130617_152572
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_IN
+Framework arguments:  -product com.ibm.datastudio.consolidated.product.ide
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ibm.datastudio.consolidated.product.ide
+
+!ENTRY org.eclipse.core.resources 2 10035 2014-04-14 07:44:06.509
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY com.ibm.datatools.core.http 1 0 2014-04-14 07:48:16.500
+!MESSAGE Embedded server started: [HTTP port: 56788, HTTPS port: 56789]
+
+!ENTRY com.ibm.datatools.optim.solutions 1 0 2014-04-14 07:48:23.286
+!MESSAGE Data Studio in shell sharing
+
+!ENTRY org.eclipse.datatools.connectivity 2 -1 2014-04-14 07:51:35.426
+!MESSAGE Error creating SQL Model Connection connection to SAMPLE. (Error: No start database command was issued. ErrorCode = -4499, SQLState = 08001.)
+!STACK 0
+org.eclipse.datatools.connectivity.exceptions.DBNotStartException: No start database command was issued. ErrorCode = -4499, SQLState = 08001.
+	at com.ibm.datatools.db2.JDBCDB2AliasJDBCConnection.getConnectException(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionInfoImpl.initializeJDBCConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionInfoImpl.<init>(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.core.SQMConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionFactoryAdapterProvider.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ManagedConnection.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.CreateConnectionJob.run(Unknown Source)
+	at org.eclipse.core.internal.jobs.Worker.run(Unknown Source)
+Caused by: com.ibm.db2.jcc.am.DisconnectNonTransientConnectionException: [jcc][t4][2043][11550][3.67.28] Exception java.net.ConnectException: Error opening socket to server localhost/127.0.0.1 on port 50,000 with message: Connection refused: connect. ERRORCODE=-4499, SQLSTATE=08001
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.yb.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.yb.<init>(Unknown Source)
+	at com.ibm.db2.jcc.t4.a.b(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.newAgent_(Unknown Source)
+	at com.ibm.db2.jcc.am.Connection.initConnection(Unknown Source)
+	at com.ibm.db2.jcc.am.Connection.<init>(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.<init>(Unknown Source)
+	at com.ibm.db2.jcc.DB2SimpleDataSource.getConnection(Unknown Source)
+	at com.ibm.db2.jcc.DB2SimpleDataSource.getConnection(Unknown Source)
+	at com.ibm.db2.jcc.DB2Driver.connect(Unknown Source)
+	at com.ibm.db2.jcc.DB2Driver.connect(Unknown Source)
+	at org.eclipse.datatools.connectivity.drivers.jdbc.JDBCConnection.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.DriverConnectionBase.internalCreateConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.DriverConnectionBase.open(Unknown Source)
+	at org.eclipse.datatools.connectivity.drivers.jdbc.JDBCConnection.open(Unknown Source)
+	at com.ibm.datatools.db2.JDBCDB2AliasConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionFactoryProvider.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionProfile.createConnection(Unknown Source)
+	... 9 more
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at com.ibm.db2.jcc.t4.v.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Unknown Source)
+	... 27 more
+
+!ENTRY org.eclipse.datatools.connectivity 2 -1 2014-04-14 07:51:36.451
+!MESSAGE Error creating JDBC Connection connection to SAMPLE. (Error: No start database command was issued. ErrorCode = -4499, SQLState = 08001.)
+!STACK 0
+org.eclipse.datatools.connectivity.exceptions.DBNotStartException: No start database command was issued. ErrorCode = -4499, SQLState = 08001.
+	at com.ibm.datatools.db2.JDBCDB2AliasJDBCConnection.getConnectException(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ManagedConnection$RestrictedConnection.getConnectException(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.CreateConnectionJob.run(Unknown Source)
+	at org.eclipse.core.internal.jobs.Worker.run(Unknown Source)
+Caused by: com.ibm.db2.jcc.am.DisconnectNonTransientConnectionException: [jcc][t4][2043][11550][3.67.28] Exception java.net.ConnectException: Error opening socket to server localhost/127.0.0.1 on port 50,000 with message: Connection refused: connect. ERRORCODE=-4499, SQLSTATE=08001
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.yb.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.yb.<init>(Unknown Source)
+	at com.ibm.db2.jcc.t4.a.b(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.newAgent_(Unknown Source)
+	at com.ibm.db2.jcc.am.Connection.initConnection(Unknown Source)
+	at com.ibm.db2.jcc.am.Connection.<init>(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.<init>(Unknown Source)
+	at com.ibm.db2.jcc.DB2SimpleDataSource.getConnection(Unknown Source)
+	at com.ibm.db2.jcc.DB2SimpleDataSource.getConnection(Unknown Source)
+	at com.ibm.db2.jcc.DB2Driver.connect(Unknown Source)
+	at com.ibm.db2.jcc.DB2Driver.connect(Unknown Source)
+	at org.eclipse.datatools.connectivity.drivers.jdbc.JDBCConnection.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.DriverConnectionBase.internalCreateConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.DriverConnectionBase.open(Unknown Source)
+	at org.eclipse.datatools.connectivity.drivers.jdbc.JDBCConnection.open(Unknown Source)
+	at com.ibm.datatools.db2.JDBCDB2AliasConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionFactoryProvider.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionProfile.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ManagedConnection.createConnection(Unknown Source)
+	... 2 more
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at com.ibm.db2.jcc.t4.v.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Unknown Source)
+	... 21 more
+
+!ENTRY org.eclipse.datatools.connectivity.ui 4 0 2014-04-14 07:51:36.934
+!MESSAGE SQL4499N  A fatal error occurred that resulted in a disconnect from the data source.
+
+<br/><b>User response:</b><br/><br/>Ensure that the specified database name exists in the system database directory. If the database name does not exist in the system database directory, either the database does not exist or the database name has not been cataloged. If needed, issue a db2start command and then resubmit the current command.
+!STACK 0
+com.ibm.db2.jcc.am.DisconnectNonTransientConnectionException: [jcc][t4][2043][11550][3.67.28] Exception java.net.ConnectException: Error opening socket to server localhost/127.0.0.1 on port 50,000 with message: Connection refused: connect. ERRORCODE=-4499, SQLSTATE=08001
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.yb.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.yb.<init>(Unknown Source)
+	at com.ibm.db2.jcc.t4.a.b(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.newAgent_(Unknown Source)
+	at com.ibm.db2.jcc.am.Connection.initConnection(Unknown Source)
+	at com.ibm.db2.jcc.am.Connection.<init>(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.<init>(Unknown Source)
+	at com.ibm.db2.jcc.DB2SimpleDataSource.getConnection(Unknown Source)
+	at com.ibm.db2.jcc.DB2SimpleDataSource.getConnection(Unknown Source)
+	at com.ibm.db2.jcc.DB2Driver.connect(Unknown Source)
+	at com.ibm.db2.jcc.DB2Driver.connect(Unknown Source)
+	at org.eclipse.datatools.connectivity.drivers.jdbc.JDBCConnection.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.DriverConnectionBase.internalCreateConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.DriverConnectionBase.open(Unknown Source)
+	at org.eclipse.datatools.connectivity.drivers.jdbc.JDBCConnection.open(Unknown Source)
+	at com.ibm.datatools.db2.JDBCDB2AliasConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionFactoryProvider.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionProfile.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionInfoImpl.initializeJDBCConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionInfoImpl.<init>(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.core.SQMConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionFactoryAdapterProvider.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ManagedConnection.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.CreateConnectionJob.run(Unknown Source)
+	at org.eclipse.core.internal.jobs.Worker.run(Unknown Source)
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at com.ibm.db2.jcc.t4.v.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Unknown Source)
+	... 27 more
+
+!ENTRY org.eclipse.datatools.connectivity 2 -1 2014-04-14 07:51:43.616
+!MESSAGE Error creating SQL Model Connection connection to SAMPLE. (Error: No start database command was issued. ErrorCode = -4499, SQLState = 08001.)
+!STACK 0
+org.eclipse.datatools.connectivity.exceptions.DBNotStartException: No start database command was issued. ErrorCode = -4499, SQLState = 08001.
+	at com.ibm.datatools.db2.JDBCDB2AliasJDBCConnection.getConnectException(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionInfoImpl.initializeJDBCConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionInfoImpl.<init>(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.core.SQMConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionFactoryAdapterProvider.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ManagedConnection.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.CreateConnectionJob.run(Unknown Source)
+	at org.eclipse.core.internal.jobs.Worker.run(Unknown Source)
+Caused by: com.ibm.db2.jcc.am.DisconnectNonTransientConnectionException: [jcc][t4][2043][11550][3.67.28] Exception java.net.ConnectException: Error opening socket to server localhost/127.0.0.1 on port 50,000 with message: Connection refused: connect. ERRORCODE=-4499, SQLSTATE=08001
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.yb.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.yb.<init>(Unknown Source)
+	at com.ibm.db2.jcc.t4.a.b(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.newAgent_(Unknown Source)
+	at com.ibm.db2.jcc.am.Connection.initConnection(Unknown Source)
+	at com.ibm.db2.jcc.am.Connection.<init>(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.<init>(Unknown Source)
+	at com.ibm.db2.jcc.DB2SimpleDataSource.getConnection(Unknown Source)
+	at com.ibm.db2.jcc.DB2SimpleDataSource.getConnection(Unknown Source)
+	at com.ibm.db2.jcc.DB2Driver.connect(Unknown Source)
+	at com.ibm.db2.jcc.DB2Driver.connect(Unknown Source)
+	at org.eclipse.datatools.connectivity.drivers.jdbc.JDBCConnection.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.DriverConnectionBase.internalCreateConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.DriverConnectionBase.open(Unknown Source)
+	at org.eclipse.datatools.connectivity.drivers.jdbc.JDBCConnection.open(Unknown Source)
+	at com.ibm.datatools.db2.JDBCDB2AliasConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionFactoryProvider.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionProfile.createConnection(Unknown Source)
+	... 9 more
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at com.ibm.db2.jcc.t4.v.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Unknown Source)
+	... 27 more
+
+!ENTRY org.eclipse.datatools.connectivity 2 -1 2014-04-14 07:51:44.698
+!MESSAGE Error creating JDBC Connection connection to SAMPLE. (Error: No start database command was issued. ErrorCode = -4499, SQLState = 08001.)
+!STACK 0
+org.eclipse.datatools.connectivity.exceptions.DBNotStartException: No start database command was issued. ErrorCode = -4499, SQLState = 08001.
+	at com.ibm.datatools.db2.JDBCDB2AliasJDBCConnection.getConnectException(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ManagedConnection$RestrictedConnection.getConnectException(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.CreateConnectionJob.run(Unknown Source)
+	at org.eclipse.core.internal.jobs.Worker.run(Unknown Source)
+Caused by: com.ibm.db2.jcc.am.DisconnectNonTransientConnectionException: [jcc][t4][2043][11550][3.67.28] Exception java.net.ConnectException: Error opening socket to server localhost/127.0.0.1 on port 50,000 with message: Connection refused: connect. ERRORCODE=-4499, SQLSTATE=08001
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.yb.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.yb.<init>(Unknown Source)
+	at com.ibm.db2.jcc.t4.a.b(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.newAgent_(Unknown Source)
+	at com.ibm.db2.jcc.am.Connection.initConnection(Unknown Source)
+	at com.ibm.db2.jcc.am.Connection.<init>(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.<init>(Unknown Source)
+	at com.ibm.db2.jcc.DB2SimpleDataSource.getConnection(Unknown Source)
+	at com.ibm.db2.jcc.DB2SimpleDataSource.getConnection(Unknown Source)
+	at com.ibm.db2.jcc.DB2Driver.connect(Unknown Source)
+	at com.ibm.db2.jcc.DB2Driver.connect(Unknown Source)
+	at org.eclipse.datatools.connectivity.drivers.jdbc.JDBCConnection.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.DriverConnectionBase.internalCreateConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.DriverConnectionBase.open(Unknown Source)
+	at org.eclipse.datatools.connectivity.drivers.jdbc.JDBCConnection.open(Unknown Source)
+	at com.ibm.datatools.db2.JDBCDB2AliasConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionFactoryProvider.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionProfile.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ManagedConnection.createConnection(Unknown Source)
+	... 2 more
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at com.ibm.db2.jcc.t4.v.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Unknown Source)
+	... 21 more
+
+!ENTRY org.eclipse.datatools.connectivity.ui 4 0 2014-04-14 07:51:45.072
+!MESSAGE SQL4499N  A fatal error occurred that resulted in a disconnect from the data source.
+
+<br/><b>User response:</b><br/><br/>Ensure that the specified database name exists in the system database directory. If the database name does not exist in the system database directory, either the database does not exist or the database name has not been cataloged. If needed, issue a db2start command and then resubmit the current command.
+!STACK 0
+com.ibm.db2.jcc.am.DisconnectNonTransientConnectionException: [jcc][t4][2043][11550][3.67.28] Exception java.net.ConnectException: Error opening socket to server localhost/127.0.0.1 on port 50,000 with message: Connection refused: connect. ERRORCODE=-4499, SQLSTATE=08001
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.yb.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.yb.<init>(Unknown Source)
+	at com.ibm.db2.jcc.t4.a.b(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.newAgent_(Unknown Source)
+	at com.ibm.db2.jcc.am.Connection.initConnection(Unknown Source)
+	at com.ibm.db2.jcc.am.Connection.<init>(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.<init>(Unknown Source)
+	at com.ibm.db2.jcc.DB2SimpleDataSource.getConnection(Unknown Source)
+	at com.ibm.db2.jcc.DB2SimpleDataSource.getConnection(Unknown Source)
+	at com.ibm.db2.jcc.DB2Driver.connect(Unknown Source)
+	at com.ibm.db2.jcc.DB2Driver.connect(Unknown Source)
+	at org.eclipse.datatools.connectivity.drivers.jdbc.JDBCConnection.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.DriverConnectionBase.internalCreateConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.DriverConnectionBase.open(Unknown Source)
+	at org.eclipse.datatools.connectivity.drivers.jdbc.JDBCConnection.open(Unknown Source)
+	at com.ibm.datatools.db2.JDBCDB2AliasConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionFactoryProvider.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionProfile.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionInfoImpl.initializeJDBCConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionInfoImpl.<init>(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.core.SQMConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionFactoryAdapterProvider.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ManagedConnection.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.CreateConnectionJob.run(Unknown Source)
+	at org.eclipse.core.internal.jobs.Worker.run(Unknown Source)
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at com.ibm.db2.jcc.t4.v.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Unknown Source)
+	... 27 more
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-14 07:52:47.315
+!MESSAGE NLS missing message: DATATOOLS_CORE_UI_PREFERENCES_NAMING_SEQUENCE_DESCRIPTION in: com.ibm.datatools.core.ui.l10n.datatoolsCoreUI
+
+!ENTRY org.eclipse.datatools.connectivity.ui 4 0 2014-04-14 07:53:26.240
+!MESSAGE SQL4499N  A fatal error occurred that resulted in a disconnect from the data source.
+
+<br/><b>User response:</b><br/><br/>Ensure that the specified database name exists in the system database directory. If the database name does not exist in the system database directory, either the database does not exist or the database name has not been cataloged. If needed, issue a db2start command and then resubmit the current command.
+!STACK 0
+com.ibm.db2.jcc.am.DisconnectNonTransientConnectionException: [jcc][t4][2043][11550][3.67.28] Exception java.net.ConnectException: Error opening socket to server localhost/127.0.0.1 on port 50,000 with message: Connection refused: connect. ERRORCODE=-4499, SQLSTATE=08001
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.am.gd.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.yb.a(Unknown Source)
+	at com.ibm.db2.jcc.t4.yb.<init>(Unknown Source)
+	at com.ibm.db2.jcc.t4.a.b(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.newAgent_(Unknown Source)
+	at com.ibm.db2.jcc.am.Connection.initConnection(Unknown Source)
+	at com.ibm.db2.jcc.am.Connection.<init>(Unknown Source)
+	at com.ibm.db2.jcc.t4.b.<init>(Unknown Source)
+	at com.ibm.db2.jcc.DB2SimpleDataSource.getConnection(Unknown Source)
+	at com.ibm.db2.jcc.DB2SimpleDataSource.getConnection(Unknown Source)
+	at com.ibm.db2.jcc.DB2Driver.connect(Unknown Source)
+	at com.ibm.db2.jcc.DB2Driver.connect(Unknown Source)
+	at org.eclipse.datatools.connectivity.drivers.jdbc.JDBCConnection.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.DriverConnectionBase.internalCreateConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.DriverConnectionBase.open(Unknown Source)
+	at org.eclipse.datatools.connectivity.drivers.jdbc.JDBCConnection.open(Unknown Source)
+	at com.ibm.datatools.db2.JDBCDB2AliasConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionFactoryProvider.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionProfile.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionInfoImpl.initializeJDBCConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionInfoImpl.<init>(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.core.SQMConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionFactory.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionFactoryAdapterProvider.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ManagedConnection.createConnection(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.CreateConnectionJob.run(Unknown Source)
+	at org.eclipse.datatools.connectivity.internal.ConnectionProfile.connectWithoutJob(Unknown Source)
+	at com.ibm.datatools.sqlxeditor.util.SQLXDBUtils.getConnectionInfoFromConnectionProfile(Unknown Source)
+	at com.ibm.datatools.sqlxeditor.util.SQLXDBUtils.getConnectionInfoFromConnectionProfile(Unknown Source)
+	at com.ibm.datatools.core.sqlxeditor.extensions.SQLXEditor2.requestConnectionFromUser(Unknown Source)
+	at com.ibm.datatools.sqlxeditor.actions.SQLXConnectAction.run(Unknown Source)
+	at com.ibm.datatools.core.sqlxeditor.extensions.multiPageEditor.SQLXConnectionRunUI$2.linkActivated(Unknown Source)
+	at org.eclipse.ui.forms.widgets.AbstractHyperlink.handleActivate(Unknown Source)
+	at org.eclipse.ui.forms.widgets.ImageHyperlink.handleActivate(Unknown Source)
+	at org.eclipse.ui.forms.widgets.AbstractHyperlink.handleMouseUp(Unknown Source)
+	at org.eclipse.ui.forms.widgets.AbstractHyperlink.access$2(Unknown Source)
+	at org.eclipse.ui.forms.widgets.AbstractHyperlink$4.handleEvent(Unknown Source)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(Unknown Source)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Unknown Source)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Unknown Source)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Unknown Source)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(Unknown Source)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Unknown Source)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(Unknown Source)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(Unknown Source)
+	at org.eclipse.ui.internal.Workbench$5.run(Unknown Source)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Unknown Source)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Unknown Source)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(Unknown Source)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(Unknown Source)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(Unknown Source)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(Unknown Source)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(Unknown Source)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(Unknown Source)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(Unknown Source)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.basicRun(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.run(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.main(Unknown Source)
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at com.ibm.db2.jcc.t4.v.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Unknown Source)
+	... 63 more
+
+!ENTRY com.ibm.datatools.aqt 1 0 2014-04-14 08:27:31.869
+!MESSAGE IBM DB2 Analytics Accelerator Studio Plug-in Version: com.ibm.datatools.aqt 4.1.2.201403201609
+
+!ENTRY com.ibm.datatools.core.http 1 0 2014-04-14 09:18:38.304
+!MESSAGE Embedded HTTP server stopped
+!SESSION 2014-04-15 17:52:53.610 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=JRE 1.7.0 IBM J9 2.6 Windows 7 x86-32 20130617_152572 (JIT enabled, AOT enabled)
+J9VM - R26_Java726_SR5_20130617_1436_B152572
+JIT  - r11.b04_20130528_38954ifx1
+GC   - R26_Java726_SR5_20130617_1436_B152572
+J9CL - 20130617_152572
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_IN
+Framework arguments:  -product com.ibm.datastudio.consolidated.product.ide
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ibm.datastudio.consolidated.product.ide
+
+!ENTRY com.ibm.datatools.aqt 1 0 2014-04-15 17:53:46.941
+!MESSAGE IBM DB2 Analytics Accelerator Studio Plug-in Version: com.ibm.datatools.aqt 4.1.2.201403201609
+
+!ENTRY com.ibm.datatools.core.http 1 0 2014-04-15 17:54:19.124
+!MESSAGE Embedded server started: [HTTP port: 56788, HTTPS port: 56789]
+
+!ENTRY com.ibm.datatools.optim.solutions 1 0 2014-04-15 17:54:21.187
+!MESSAGE Data Studio in shell sharing
+
+!ENTRY com.ibm.datatools.core.http 1 0 2014-04-15 17:55:40.809
+!MESSAGE Embedded HTTP server stopped
+!SESSION 2014-04-15 17:56:50.326 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=JRE 1.7.0 IBM J9 2.6 Windows 7 x86-32 20130617_152572 (JIT enabled, AOT enabled)
+J9VM - R26_Java726_SR5_20130617_1436_B152572
+JIT  - r11.b04_20130528_38954ifx1
+GC   - R26_Java726_SR5_20130617_1436_B152572
+J9CL - 20130617_152572
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_IN
+Framework arguments:  -product com.ibm.datastudio.consolidated.product.ide
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ibm.datastudio.consolidated.product.ide
+
+!ENTRY com.ibm.datatools.aqt 1 0 2014-04-15 17:57:01.622
+!MESSAGE IBM DB2 Analytics Accelerator Studio Plug-in Version: com.ibm.datatools.aqt 4.1.2.201403201609
+
+!ENTRY com.ibm.datatools.core.http 1 0 2014-04-15 17:57:09.022
+!MESSAGE Embedded server started: [HTTP port: 56788, HTTPS port: 56789]
+
+!ENTRY com.ibm.datatools.optim.solutions 1 0 2014-04-15 17:57:09.602
+!MESSAGE Data Studio in shell sharing

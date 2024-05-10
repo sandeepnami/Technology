@@ -1,0 +1,12 @@
+#Sun Apr 13 21:07:55 IST 2014
+url=jdbc\:db2\://localhost\:50000/SAMPLE\:retrieveMessagesFromServerOnGetMessage\=true;
+driverName=com.ibm.db2.jcc.DB2Driver
+profileProviderID=com.ibm.datatools.db2.alias.connectionProfile
+jarList=D\:\\Program Files\\IBM\\SDPShared\\plugins\\com.ibm.datatools.db2_2.2.0.v20131115_1748\\driver\\db2jcc.jar;D\:\\Program Files\\IBM\\SDPShared\\plugins\\com.ibm.datatools.db2_2.2.0.v20131115_1748\\driver\\db2jcc_license_cisuz.jar
+userid=db2admin
+version=V10.5
+databaseName=SAMPLE
+conName=SAMPLE
+driverDefinitionType=com.ibm.datatools.db2.alias.driverTemplate
+driverDefinitionID=DriverDefn.com.ibm.datatools.db2.alias.driverTemplate.IBM Data Server Driver for JDBC and SQLJ Default
+product=DB2 UDB

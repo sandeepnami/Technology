@@ -1,0 +1,200 @@
+---------------------------
+Two important features of DB2 are DB2I (DB2INTERACTIVE)
+and EXPLAIN.
+
+TSO supports both batch and online DB2 applications.
+TSO batch applications execute under the TSO monitor
+program directly. TSO online applications execute under the 
+control of Interactive System Productivity Facility (ISPF), which is a screen/dialog manager for TSO. DB2I intself is a 
+TSO online application.
+ 
+
+DB2I:(Program Preparation, DB2 commands, Execute the SQL(SPUFI),Bind the PACKAGE and PLAN).
+
+1) Logon to TSO and enter to ISPF.
+2) Select DB2I option or type =D on the command line
+
+----------------------------------------------------
+         DB2I PRIMARY OPTION MENU
+
+===>_
+
+Select one of the following options and press ENTER.
+
+1.SPUFI
+2.DCLGEN
+3.PROGRARM PREPARATION
+4.PRECOMPILE
+5.BIND/REBIND/FREE
+6.RUN
+7.DB2 COMMANDS
+8.UTILITIES.
+.
+.
+.
+X EXIT
+
+----------------------------------------------------
+
+1) SPUFI: This supports online execution of SQL statements
+from TSO terminal.
+SPUFI - We can store the results of the querry in the dataset.
+Can run multiple querries..
+
+2)DCLGEN (Declaration Generator): This a program that creates
+COBOL structure declarations from table desriptions in the
+catalog. The output from DCLGEN is stored as a member of a
+partitioned data set.It can be copied into an application
+program by means of a embedded SQL INCLUDE statement.
+
+---------------------------------------------------------
+QMF: Query Management Facility.
+Type =Q on the command line
+QMF main menu would be displayed.
+press PF6 to type the Query
+Type the querry and Press PF2 to run.
+If there are any errors, It will show on the screen or
+else the output will be displayed on the same screen.
+It also has REPORT utility for formatting.
+
+Disadvantages: Only one QUERRY can executed.
+we cannot save the output into a file as we do in SPUFI.
+---------------------------------------------------------
+EXPLAIN:
+Explain allows the user to obtain the information regarding
+the optimizer's choice of strategy fora specified SQL statement. The information provided includes:
+- indexes used
+- details of any sorts that will be needed.
+- if the specified statement involves JOIN, then the order
+  in which the tables will be joined, and the methods by which
+  the individual joins are performed.
+
+The syntax for EXPLAIN:
+
+EXPLAIN type FOR statement;
+
+Here "type" is a PLAN.
+
+EXPLAIN PLAN FOR 
+        SELECT S.S#, P.P#
+        FROM S, P
+        WHERE S.CITY = P.CITY;
+
+When is EXPLAIN is executed, DB2 will place the information
+regarding its implementation of the specified SELECT statment
+into PLAN_TABLE.
+(xyz.PLAN_TABLE which must already exist - XYZ is the authorization id)
+
+------------------------------------------------------------
+DATABASE UTILITIES:
+
+CHECK DATA:  This utility can be used to check a table space
+to seeif there are any referential integrity violations.
+
+CHECK INDEX: This utility can be used to test whether indexes
+are consistent with the data they index.
+
+COPY: This utility creates a full or incremental backup copies of a table space or partition.
+
+LOAD: This utility loads data from a sequential data set into
+one or more talbes within one or more partitions of a specified
+table space.
+
+RECOVER: This utility uses the most recent full copy, any
+subsequent incremental copies, and any subsequent log data
+to recover one or more table spaces, partitions or pages.
+
+REORG: This utility reorganizes a table spaces or index space
+to reclaim wasted spaces to reestablish the clustering sequence.
+
+RUNSTATS: This utility computes statistics on specified
+stored data (eg. sepecified table space etc)
+
+DIAGNOSE: This utility is used to aid in determining and correcting system problems. For eg, It can be used to take a dump of the system when error conditions occur.
+
+------------------------------------------------------------
+LOCKING:
+TRANSACTION is a logical unit of work.
+The transaction can end with a COMMIT or ROLLBACK.
+see the day wise ppt..
+
+COMMIT: This operation signals successful end-of-transaction.
+changes has to be committed or made permanent.
+
+ROLLBACK: This operation signals unsuccessful end-of-transaction. Changes has to be rolled back or undone.
+
+DB2 resolves the concurrency problems by means of LOCKING:
+The effect of lock is to lock the other transactions out of
+the object, and thereby preventing them from changing it.
+
+LOCKING FACILITIES IN DB2:
+Locks can be acquried by one of the methods given below:
+
+a) The SQL statement LOCK TABLE.
+b) The ISOLATION parameter on the BIND PACKAGE command.
+c) The table space LOCKSIZE parameter.
+d) ACQURE/RELEASE parameters on the BIND PLAN command.
+
+a) SQL statement:
+
+SYNTAX:
+
+LOCK TABLE table IN mode MODE;
+
+EG,
+
+LOCK TABLE EMPLOYEE IN EXCLUSIVE MODE;
+
+b) ISOLATION parameter (CS,RR,RS,UR)
+
+c) LOCKSIZE (PAGE,TABLE, TABLESPACE, OR ANY)
+
+d) ACQUIRE or RELEASE (See the JCL)
+
+-------------------------------------------------------------
+
+DCL:
+See the daywise ppt.
+
+-------------------------------------------------------------
+SYNONYMS AND ALIAS:
+
+ALIAS is an alternate name for a base table.
+
+a) CREATE TABLE EMP;
+This table is created by USER1.
+
+b) Another user USER2 can refer to this EMP table by
+SELECT * 
+FROM UESER1.EMP;
+
+C)Alternatively USER2 can issue:
+CREATE ALIAS ABC FOR USER1.EMP;
+
+d)NOw USER2 can refer to the USER1's table by
+SELECT *
+FROM ABC;
+
+e)Another user USER3 can also use user USER2's alias ABC to
+refer to base table.
+
+SELECT *
+FROM USER2.ABC
+
+f) Drop Alias
+DROP ALIAS ABC
+
+g) DROP TABLE EMP
+(Dropping table (Base table) causes all aliases for that
+table to be dropped automatically).
+
+-------------------------------------------------------
+SYNONYM like alias is an alternative name for a table.
+
+1) Synonym is private to the user who creates it.
+2) synonym cannot refer to the remote table ( Distributed
+database support)
+
+same commands as alias.....
+
+--------------------------------------------------------

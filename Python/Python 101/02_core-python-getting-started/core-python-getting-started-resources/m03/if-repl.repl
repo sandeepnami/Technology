@@ -1,0 +1,14 @@
+...     print("It's true!")                                                     
+...                                                                             
+It's true!                                                                      
+>>> if False:                                                                   
+...     print("It's true!")                                                     
+...                                                                             
+>>> if bool("eggs"):                                                            
+...     print("Yes please!")                                                    
+...                                                                             
+Yes please!                                                                     
+>>> if "eggs":                                                                  
+...     print("Yes please!")                                                    
+...                                                                             
+Yes please!                                                                     

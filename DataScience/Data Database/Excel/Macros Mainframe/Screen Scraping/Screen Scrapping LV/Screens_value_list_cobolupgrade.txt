@@ -1,0 +1,12 @@
+List of screens to be compared with values
+
+ARQS
+ARQN;400;                   ;0000000001010000006;1;
+ARIQ
+ARSD
+ARQO;400;
+ARQL;400;100;
+ARQB
+MBQO;400;
+MBQM;400;000000006;M;
+MBQS;400;2122;

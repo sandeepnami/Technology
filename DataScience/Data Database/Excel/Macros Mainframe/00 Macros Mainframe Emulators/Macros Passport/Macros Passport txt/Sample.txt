@@ -1,0 +1,29 @@
+Sub ZMain()
+Dim n, fso, ts, a, p, m
+'In this section, a text file is opened and data is read one line at a time, loaded
+'to the string variable, auto-keyed to a blank screen for a test.
+Set fso = CreateObject ("Scripting.FileSystemObject")
+If fso.FileExists ("c:\input.txt") Then
+        Set ts = fso.OpenTextFile ("c:\input.txt",1)
+        Do While Not ts.AtEndOfStream
+                a = ts.ReadLine
+                SendHostKeys ("<HOME>")
+                SendHostKeys ("<TAB>")
+                SendHostKeys (a)
+                p = "NOTOK"
+                        Do While p = "NOTOK"
+                                m = GetString (3,1,32)
+                                If m = "TRANSACTION SUCCESSFULLY WRITTEN" Then p = "OK"
+                                If p = "NOTOK" Then Prompt "Transaction Failed - Please Fix To Continue.", 0, "Attention"
+                        Loop
+        Loop
+ts.close
+Else 
+        MsgBox "File:      c:\input.txt" & vbNewline & vbNewline & "Does not exist!  Please correct to continue." & _
+                vbNewline & vbNewline & "Press OK to terminate macro.",16, "ERROR"
+End If
+End Sub
+Sub Prompt( sMsg, nType, sTitle )
+            Set ws = CreateObject( "wscript.shell" )
+            ws.popup sMsg, 0, sTitle, 4096 + nType
+End Sub 

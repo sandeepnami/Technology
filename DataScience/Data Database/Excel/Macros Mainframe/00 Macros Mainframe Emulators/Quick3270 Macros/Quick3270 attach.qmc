@@ -1,0 +1,19 @@
+'--------------------------------------------------------------------------------
+' This macro was created by the Macro Recorder.
+' Date: Friday, June 27, 1997 16:16:47
+' User: jcordova
+'--------------------------------------------------------------------------------
+
+'--------------------------------------------------------------------------------
+' Global variable declarations
+
+Global g_HostSettleTime%
+Global rec$
+Global accnum$
+Global acctstat$
+Global errcode$
+Global errmsg$
+
+Sub Main()
+Result = MsgBox ("Hello World")
+End Sub

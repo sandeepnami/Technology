@@ -1,0 +1,27 @@
+True                                                                            
+>>> False                                                                       
+False                                                                           
+>>> bool(0)                                                                     
+False                                                                           
+>>> bool(42)                                                                    
+True                                                                            
+>>> bool(-1)                                                                    
+True                                                                            
+>>> bool(0.0)                                                                   
+False                                                                           
+>>> bool(0.207)                                                                 
+True                                                                            
+>>> bool(-1.117)                                                                
+True                                                                            
+>>> bool([])                                                                    
+False                                                                           
+>>> bool([1, 5, 9])                                                             
+True                                                                            
+>>> bool("")                                                                    
+False                                                                           
+>>> bool("Spam")                                                                
+True                                                                            
+>>> bool("False")                                                               
+True                                                                            
+>>> bool("True")                                                                
+True                                                                            

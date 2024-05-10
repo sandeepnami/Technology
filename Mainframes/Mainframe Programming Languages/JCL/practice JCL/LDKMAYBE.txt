@@ -1,0 +1,29 @@
+//UGBMAYBE JOB 'IOA700','RESOLVE MAYBE CONDS',MSGCLASS=X,CLASS=X,       00010000
+//        REGION=0M,NOTIFY=&SYSUID                                      00020000
+//*                                                                     00030000
+//         JCLLIB  ORDER=CTL.IOAD1.INST.PROCLIB                         00040000
+//         INCLUDE MEMBER=IOASET                                        00050000
+//*                                                                     00060000
+//LOADMAN EXEC IOALDNRS                                                 00070000
+//LOCKOUT DD DSN=CTLU.CTMD1.OPER.LOCKOUT,DISP=OLD                       00080000
+//DAPRENV DD DUMMY                                                      00090000
+//DALNRIN DD *                                                          00100000
+//*                                                                     00110000
+//*    THIS JOB ADDS ANY "MAYBE" CONDITION TO THE IOA MANUAL            00120000
+//*    CONDITIONS MAP (SCREEN 7)                                        00130000
+//*                                                                     00140000
+//CMADDMAY EXEC IOARKSL                                                 00150000
+//*        INCLUDE MEMBER=IOAENV                                        00160000
+//LOCKOUT DD DSN=CTLU.CTMD1.OPER.LOCKOUT,DISP=OLD                       00170000
+//DAPRENV   DD DUMMY                                                    00180000
+*---------------------------------------------------------------------* 00190000
+*   ARGUMENTS:                                                        * 00200000
+*               A1  PREFIX   PREFIX OF CONDITION(S) TO BE ADDED       * 00210000
+*               A2  DATE     (MMDD/DDMM), OR 'NULL' FOR DEFAULT DATE  * 00220000
+*---------------------------------------------------------------------* 00230000
+  TRACE OFF                                                             00240000
+  MAXCOMMAND 999999                                                     00250000
+  CALLMEM SCRSET                                                        00260000
+  CALLMEM ADDCOND7 ?A%%.DK  2308                                        00270000
+  END                                                                   00280000
+

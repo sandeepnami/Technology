@@ -1,0 +1,3 @@
+KEY1sample record 1 
+KEY2sample record 2
+KEY3sample record 3

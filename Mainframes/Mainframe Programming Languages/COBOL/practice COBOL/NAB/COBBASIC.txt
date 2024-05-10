@@ -1,0 +1,22 @@
+      *COBOL BASIC                                                      00001021
+       IDENTIFICATION DIVISION.                                         00010001
+       PROGRAM-ID. COBBASIC.                                            00020021
+      *                                                                 00020112
+       ENVIRONMENT DIVISION.                                            00021001
+       CONFIGURATION SECTION.                                           00022001
+       INPUT-OUTPUT SECTION.                                            00023012
+      *                                                                 00027012
+       DATA DIVISION.                                                   00030001
+       FILE SECTION.                                                    00030115
+       WORKING-STORAGE SECTION.                                         00040001
+       01 WS-NAME PIC X(4).                                             00041021
+       01 WS-NO  PIC 9(4).                                              00042021
+      *                                                                 00101012
+       PROCEDURE DIVISION.                                              00110001
+       MAIN-PARA.                                                       00130012
+           MOVE "SANDEEP" TO WS-NAME                                    00140021
+           MOVE "123456" TO WS-NO                                       00150021
+           DISPLAY "WS-NAME SANDEEP TRUNCATED TO = " WS-NAME            00160021
+           DISPLAY "WS-NO 123456 TRUNCATED TO = " WS-NO                 00170021
+           STOP RUN.                                                    00185021
+

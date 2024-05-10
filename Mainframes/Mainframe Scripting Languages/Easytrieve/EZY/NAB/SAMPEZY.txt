@@ -1,0 +1,112 @@
+LIST ON                                                                 
+PARM DEBUG   (NOXREF NOCLIST NODMAP)                                    
+*                                                                       
+FILE FILEOUT                                                            
+FILEOUT-REC        1  80    A                                           
+FILEOUT-BSB        1   4    N                                           
+FILEOUT-ACCOUNT    5   9    N                                           
+FILEOUT-CURICC    13   5    N                                           
+FILEOUT-NEWICC    18   5    N                                           
+                                                                        
+* CA0001M0 PASSAREA                                                     
+FILE FL01940A                                                           
+EL05828-RC02127-FL01940  1   1    A                                     
+EL05164-RC02129-FL01940  2   3    P   0                                 
+EL05857-RC02129-FL01940  5   5    P   0                                 
+EL08011-RC02129-FL01940 76   3    P   0                                 
+                                                                        
+GENERAL-VARIABLES-SNAP-LABEL      W   32    A         VALUE            +
+                        '** CA953M00 GENERAL VARIABLES **'              
+                                                                        
+    INVALID-ICC                   W   30    A         VALUE            +
+                        'INVALID IND CLASS CODE'                        
+    INVALID-ACC-TYPE              W   30    A         VALUE            +
+                        'INVALID ACCT TYPE'                             
+    WS-ACC1                       W   9     N                           
+    WS-BSB1                       W   4     N                           
+                                                                        
+ACCUMULATORS-SNAP-LABEL           W   32    A         VALUE            +
+                        '***   CA953M00 ACCUMULATORS  ***'              
+                                                                        
+                                                                        
+    A1CF-CNT-TOTAL    W       9  P  VALUE 0                             
+                                                                        
+      *--------------------------------------------------------------*  
+      *      ***************************************************     *  
+      *      ***************************************************     *  
+      *      **                                               **     *  
+      *      **                                               **     *  
+      *      **    P R O C E D U R E     D I V I S I O N      **     *  
+      *      **                                               **     *  
+      *      ***************************************************     *  
+      *      ***************************************************     *  
+      *--------------------------------------------------------------*  
+                                                                        
+                                                                        
+           JOB INPUT NULL                                               
+           PERFORM P1000-INITIALISE                                     
+           STOP                                                         
+        P1000-INITIALISE. PROC                                          
+      ************************                                          
+                                                                        
+           PERFORM P8000-READ-FL01940A-INPUT                            
+                                                                        
+                                                                        
+       END-PROC                                                         
+                                                                        
+           NEWPAGE                                                      
+      *--------------------------------------------------------------*  
+      *                                                              *  
+      *                                                              *  
+      *                                                              *  
+      *                                                              *  
+      *                                                              *  
+      *                                                              *  
+      *      ***************************************************     *  
+      *      ***************************************************     *  
+      *      **                                               **     *  
+      *      **    I N P U T / O U T P U T   S E C T I O N    **     *  
+      *      **                                               **     *  
+      *      ***************************************************     *  
+      *      ***************************************************     *  
+      *                                                              *  
+      *                                                              *  
+      *                                                              *  
+      *                                                              *  
+      *                                                              *  
+      *                                                              *  
+      *--------------------------------------------------------------*  
+                                                                        
+                                                                        
+       P8000-READ-FL01940A-INPUT. PROC                                  
+      ********************************                                  
+                                                                        
+      *       ********************************************************  
+      *       *                                                      *  
+      *       *   -  READ RECORD OF FL01940A                         *  
+      *       *                                                      *  
+      *       ********************************************************  
+                                                                        
+           DISPLAY 'WS-BSB1=EL05164-RC02129-FL01940'                    
+           DISPLAY 'WS-ACC1=EL05857-RC02129-FL01940'                    
+           GET FL01940A                                                 
+           DO WHILE NOT EOF FL01940A                                    
+      *                                                                 
+              MOVE SPACES TO FILEOUT-REC                                
+              FILEOUT-BSB = EL05164-RC02129-FL01940                     
+              FILEOUT-ACCOUNT = EL05857-RC02129-FL01940                 
+              FILEOUT-CURICC  = EL08011-RC02129-FL01940                 
+              PUT FILEOUT                                               
+      *                                                                 
+              IF EL05857-RC02129-FL01940 NOT NUMERIC                    
+                 WS-ACC1 = 0                                            
+              ELSE                                                      
+                 WS-ACC1 = EL05857-RC02129-FL01940                      
+              END-IF                                                    
+                                                                        
+              DISPLAY 'WS-BSB1= ' WS-BSB1                               
+              DISPLAY 'WS-ACC1= ' WS-ACC1                               
+              GET FL01940A                                              
+           END-DO                                                       
+                                                                        
+       END-PROC 

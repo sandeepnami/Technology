@@ -1,0 +1,13 @@
+>>> timestamps = iter(datetime.datetime.now, None)                              
+>>> next(timestamps)                                                            
+                    2020-07-27 15:51:23.111850                                  
+>>> next(timestamps)                                                            
+                    2020-07-27 15:51:30.211850                                  
+>>> next(timestamps)                                                            
+                    2020-07-27 15:51:37.411850                                  
+>>> next(timestamps)                                                            
+                    2020-07-27 15:51:45.411850                                  
+>>> next(timestamps)                                                            
+                    2020-07-27 15:51:52.911850                                  
+>>> next(timestamps)                                                            
+                    2020-07-27 15:52:01.511850                                  

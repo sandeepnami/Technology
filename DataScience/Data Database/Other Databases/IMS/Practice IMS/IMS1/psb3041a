@@ -1,0 +1,10 @@
+  PRINT NOGEN                                                           00010025
+  PCB TYPE=DB,DBDNAME=DBD3041A,KEYLEN=30,PROCOPT=A                      00020025
+  SENSEG NAME=VENDSEG,PARENT=0                                          00030025
+  SENSEG NAME=ITEMSEG,PARENT=VENDSEG                                    00040025
+  SENSEG NAME=LOCSEG,PARENT=ITEMSEG                                     00050025
+  PCB TYPE=DB,DBDNAME=DBD3041A,KEYLEN=10,PROCOPT=G,PROCSEQ=DBD3051A     00060027
+  SENSEG NAME=LOCSEG,PARENT=0                                           00070025
+  PSBGEN PSBNAME=PSB3041A,LANG=COBOL                                    00100025
+  END                                                                   00110025
+

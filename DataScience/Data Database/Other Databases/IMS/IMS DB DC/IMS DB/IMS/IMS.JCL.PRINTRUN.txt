@@ -1,0 +1,29 @@
+                                                                                
+ EDIT       MTPLB06.IMS.JCL(PRINTRUN) - 01.04               Columns 00001 00072 
+  Command ===>                                                  Scroll ===> CSR  
+  ****** ***************************** Top of Data ******************************
+ 000100 //PRINTR6B JOB 43312,'IMS RUN JCL',                                     
+ 000200 //             CLASS=A,MSGCLASS=X,MSGLEVEL=(1,1),                       
+ 000300 //             NOTIFY=&SYSUID                                           
+ 001400 //STEP1 EXEC PGM=DFSRRC00,PARM=(DLI,HOSPPRNT,PSB1,0,,,,,,,,,,N,N)       
+ 001500 //*                   PGM NAME <--|__| |____|--> PSB NAME               
+ 001600 //*                                                                     
+ 001700 //STEPLIB  DD DSN=IMS810.SDFSRESL,DISP=SHR                              
+ 001800 //         DD DISP=SHR,DSN=MTPLB06.IMS.LOADLIB              --> LOADLIB 
+ 001900 //IMS      DD DISP=SHR,DSN=MTPLB06.IMS.DBDLIB              --> DBDLIB   
+ 002000 //         DD DISP=SHR,DSN=MTPLB06.IMS.PSBLIB              --> PSBLIB   
+ 002100 //DFSRESLB DD DISP=SHR,DSN=IMS810.SDFSRESL                              
+ 002200 //DFSVSAMP DD DSN=IMS810.PROCLIB(DFSVSMDB),DISP=SHR                     
+ 002300 //SDFSRESL DD DSN=IMS810.SDFSRESL,DISP=SHR                              
+ 002400 //HOSPDD   DD DSN=MTPLB06.DATABASE.HOSPDB,DISP=OLD                      
+ 002600 //OVERFLOW DD DUMMY                                                     
+ 002700 //PROCLIB  DD DSN=IMS810.PROCLIB,DISP=SHR                               
+ 002800 //IEFRDER  DD DSN=IMSLOG,DISP=SHR                                       
+ 002900 //SYSOUT DD SYSOUT=*                                                    
+ 003000 /*                                                                      
+ 003100 //                                                                      
+****** **************************** Bottom of Data ****************************
+                                                                               
+                                                                               
+                                                                               
+                                                                               

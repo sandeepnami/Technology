@@ -1,0 +1,139 @@
+      *COBOL SORT EXAMPLE                                               00001019
+       IDENTIFICATION DIVISION.                                         00010001
+       PROGRAM-ID. SORTPROC.                                            00020021
+       AUTHOR.NAMI.                                                     00020119
+      *                                                                 00020219
+       ENVIRONMENT DIVISION.                                            00021001
+       CONFIGURATION SECTION.                                           00022001
+                                                                        00022119
+       INPUT-OUTPUT SECTION.                                            00023012
+       FILE-CONTROL.                                                    00024012
+           SELECT INPUT-FILE ASSIGN TO INPUT01                          00025019
+               FILE STATUS IS WS-INPUT-FILE-STATUS.                     00026019
+      *********************************************                     00026119
+      * WHEN WE CODE FILE STATUS FOR THE SORT INPUT AND OUTPUT          00026219
+      * DATASETS FOLLOWING IS THE MESSAGE THAT IT SHOWS:                00026319
+      * FILE "INPUT-FILE" IN THE "USING" PHRASE OF THE "SORT"           00026419
+      * STATEMENT WAS ACCEPTED AS BEING ELIGIBLE FOR THE                00026519
+      * "FASTSRT" COMPILER OPTION, BUT HAD A FILE STATUS DATA-NAME.     00026619
+      *                                                                 00026719
+      * THE FILE STATUS DATA ITEM WILL NOT BE SET DURING THE SORT.      00026819
+      * THE REASON BEING SORT ITSELF HANDLES THE OPENING AND CLOS       00027019
+      * OF THE DATASETS AND HENCE STATUS VARIABLES WILL NOT BE          00027119
+      * CONSIDERED.                                                     00027219
+      * WHEN WE USE INPUT AND OUTPUT PROCEDURES FASTSRT OPTION GE       00027319
+      ***************************************                           00027419
+      *                                                                 00028012
+           SELECT SORT-FILE ASSIGN TO SORT01.                           00029020
+      * WE DONT NEED TO CODE ORGANIZATION CLAUSE OR FILE STATUS FOR SORT00029119
+      * DATASETS.IF WE DONE IT WOULD BE IGNORED.                        00029219
+      *    ORGANIZATION IS SEQUENTIAL.                                  00029319
+      * REASON FILE STATUS IS NOT ALLOWED IS THAT SORT DATASET OP       00029419
+      * IS NEVER TAKEN CARE BY PROGRAMMER                               00029519
+           SELECT OUTPUT-FILE ASSIGN TO OUTPUT01                        00029620
+            ORGANIZATION IS SEQUENTIAL                                  00029719
+            FILE STATUS IS WS-OUTPUT-FILE-STATUS.                       00029819
+      * NOTE NO - BETWEEN FILE AND STATUS                               00029919
+       DATA DIVISION.                                                   00030001
+       FILE SECTION.                                                    00030115
+       FD INPUT-FILE                                                    00030219
+      * RECORDING,LABEL,BLOCK,RECORD SHOULD NOT BEGIN IN AREA A         00030319
+            RECORDING MODE IS F                                         00030419
+            LABEL RECORDS ARE STANDARD                                  00030519
+            BLOCK CONTAINS 0 RECORDS                                    00030619
+            RECORD CONTAINS 584 CHARACTERS.                             00030719
+       01 INPUT-FILE-REC.                                               00030819
+           05 EMP-ID  PIC 9(3).                                         00030919
+           05 EMP-NAME PIC  X(11).                                      00031025
+           05 EMP-DEPT-ID PIC 9(3).                                     00031119
+           05 EMP-SALARY  PIC 9(5).                                     00031219
+           05 FILLER     PIC X(563).                                    00031319
+       SD SORT-FILE.                                                    00031419
+      * WE CANNOT USE THE RECORDING MODE, LABEL, BLOCK ETC FOR          00031519
+      * A SORT DATASET. IF WE CODE THESE THINGS THEY WLL BE PROC        00031619
+      * AS COMMENTS                                                     00031719
+      *THE RECORD LENGTH OF THE SORT FILE SHOULD NOT BE LESS THA        00031819
+      * INPUT FILE. OTHERWISE COMPILER GIVES A WARNING.                 00031919
+      * NOTE THAT FOR THESE FILES THE ECORD LAYOUT IS NOT COMPLE        00032019
+      * 80 CHARACTERS . BUT THE RECORD CONTAINS CLAUSE INDICATES        00032119
+      * THE LENGTH.                                                     00032219
+       01 SORT-FILE-REC.                                                00032319
+           05  SR-EMP-ID  PIC 9(3).                                     00032419
+           05  SR-EMP-NAME PIC  X(11).                                  00032525
+           05  SR-EMP-DEPT-ID PIC 9(3).                                 00032619
+           05  SR-EMP-SALARY  PIC 9(5).                                 00032719
+           05  FILLER     PIC X(563).                                   00032819
+      * ADED A FILLER FOR 53 BYTES TO MAKE THE LENGTH TO 80.            00032919
+      * SORT DATASET SHOULD NOT HAVE LENGTH LESSER THAN INPUT FI        00033019
+       FD OUTPUT-FILE                                                   00033119
+           RECORDING MODE IS F                                          00033219
+           LABEL RECORDS ARE STANDARD                                   00033319
+           BLOCK CONTAINS 0 RECORDS                                     00033419
+           RECORD CONTAINS 584 CHARACTERS.                              00033519
+       01 OUTPUT-FILE-REC.                                              00033619
+           05  OP-EMP-ID  PIC 9(3).                                     00033719
+           05  OP-EMP-NAME PIC  X(11).                                  00033825
+           05  OP-EMP-DEPT-ID PIC 9(3).                                 00033919
+           05  OP-EMP-SALARY  PIC 9(5).                                 00034024
+           05  FILLER     PIC X(563).                                   00034119
+                                                                        00034222
+       WORKING-STORAGE SECTION.                                         00040001
+       01 WS-EMPLOYEE-DATA.                                             00041013
+           05 WS-EMP-ID  PIC 9(3).                                      00042013
+           05 FILER   PIC X(1) VALUE SPACES.                            00042114
+           05 WS-EMP-NAME PIC  X(11).                                   00043025
+           05 FILER   PIC X(1) VALUE SPACES.                            00043114
+           05 WS-EMP-DEPT-ID PIC 9(3).                                  00044013
+           05 FILER   PIC X(1) VALUE SPACES.                            00044114
+           05 WS-EMP-SALARY  PIC 9(5).                                  00045013
+                                                                        00045112
+      * FILE STATUS IS ALWAYS 2 CHARACTERS                              00045219
+       01  WS-INPUT-FILE-STATUS PIC XX.                                 00045319
+       01  WS-OUTPUT-FILE-STATUS PIC XX.                                00045419
+      * END OF FILE INDICATOR                                           00045519
+       01  WS-INPUT-FILE-EOF  PIC X VALUE 'N'.                          00045619
+       01  WS-OUTPUT-FILE-EOF PIC X VALUE 'N'.                          00045719
+      * COUNTER                                                         00045821
+       01 COUNT-KEEP PIC 9(6) VALUE ZEROS.                              00045921
+       01 COUNTDROP PIC 9(6) VALUE ZEROS.                               00046021
+       PROCEDURE DIVISION.                                              00110001
+       1000-MAIN-PARA.                                                  00130019
+           SORT SORT-FILE ON ASCENDING KEY SR-EMP-NAME                  00140019
+      *NOTE THAT WE SORT THE SORT-FILE.                                 00141021
+      *THE KEY FIELD SHOULD BE FROM THE SORT DATASET DESCRIPTION.       00142021
+      * ITS POSSIBLE TO SORT DATA ON MULTIPLE FIELDS.                   00143021
+              INPUT PROCEDURE IS 2000-PROCESS-INPUT                     00144021
+              GIVING OUTPUT-FILE                                        00145021
+                                                                        00145121
+              DISPLAY 'RECORDS KEPT:' COUNT-KEEP                        00146021
+              DISPLAY 'RECORDS DROPPED:' COUNTDROP                      00147021
+                                                                        00147121
+              STOP RUN.                                                 00148021
+       2000-PROCESS-INPUT.                                              00149021
+           OPEN INPUT INPUT-FILE                                        00149121
+      * WHEN USING INPUT PROCEDURE WE SHOULD OPEN THE FILE              00149221
+      * SORT WILL NOT DO THAT FOR US.                                   00149321
+           PERFORM 3000-READ-INPUT-FILE                                 00149421
+      * READ 1ST RECORD BEFORE THE LOOP .                               00149521
+      * NEXT RECORD WILL BE READ AT THE END OF THE LOOP/                00149621
+           PERFORM UNTIL WS-INPUT-FILE-EOF = 'Y'                        00149721
+             IF EMP-NAME NOT = "AAMIR" AND                              00149823
+                EMP-NAME NOT = "HARI BABU"                              00149923
+                COMPUTE COUNT-KEEP = COUNT-KEEP + 1                     00150021
+                RELEASE SORT-FILE-REC FROM INPUT-FILE-REC               00151021
+      *NOTE THAT WITH RELEASE WE USE THE FIELD DEFINED IN SD            00160021
+      * RELEASE IS SIMLAR TO WRITE.                                     00170021
+      * WE BASICALLY WRITE RECORDS FROM INPUT PROCEDURE TO THE SOR      00180021
+      * WORK FILE USING RELEASE.                                        00190021
+             ELSE                                                       00200021
+                COMPUTE    COUNTDROP = COUNTDROP + 1                    00210021
+             END-IF                                                     00220021
+             PERFORM 3000-READ-INPUT-FILE                               00230021
+           END-PERFORM                                                  00240021
+           CLOSE INPUT-FILE.                                            00250021
+      * WHEN USING PROCEDURES SORT DOES NOT CLOSE THE INPUT FILE        00260021
+      * ON ITS OWN. WE SHOULD CLOSE IT IN THE INPUT PROCEDURE.          00270021
+       3000-READ-INPUT-FILE.                                            00280021
+            READ INPUT-FILE                                             00290021
+            AT END MOVE 'Y' TO WS-INPUT-FILE-EOF.                       00300021
+

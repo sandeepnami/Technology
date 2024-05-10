@@ -1,0 +1,107 @@
+Sub ZMain
+Dim PrNoOld, PrNoCurr
+Set Sys = CreateObject("PASSPORT.System")
+
+'selects the currently active session
+Set Sess = Sys.ActiveSession
+
+'selects the screen object
+Set MyScreen = Sess.Screen
+
+'selects the area (Start Row, End Row, Start Column, End Column)
+'selects the old pr i.e first PR 
+Set MyArea = MyScreen.Area(6, 6, 6, 12)
+MyArea.Select     
+MyScreen.Copy
+PrNoOld = MyArea.Value
+'MsgBox "Old PrNo =" &PrNoOld
+'exit sub
+'we are getting country for crosschecking
+country = get_country()
+'MsgBox "Country  "  &country
+
+'press F6 for every 3mins
+for i = 1 to 150
+    SendHostKeys ("<PF6>")
+    ret = wait(3)
+    'selects the area (Start Row, End Row, Start Column, End Column)
+    Set MyArea = MyScreen.Area(6, 6, 6, 12)
+    MyArea.Select     
+    MyScreen.Copy
+    PrNoCurr = MyArea.Value
+    'MsgBox "Curr PrNo =" &PrNoCurr
+'start of outlook test
+    'MsgBox "PrNoOld=" & PrNoOld & " PrNoCurr=" & PrNoCurr
+   'temp=  get_prinfo(PrNoOld, PrNoCurr)     
+'    outlook_send()
+'     exit sub
+'end of outlook test
+    'Check PR no's old and new
+    IF PrNoCurr<>PrNoOld Then
+           PrNoOld = PrNoCurr
+           'extra check to avoid missing of any PR's while neglecting UK PR's
+           PRDIFF = PrNoCurr - PrNoOld 
+           'ret=MsgBox("New Pr is raised ",0, PrNoCurr) 
+           country=get_country()
+           IF (country <> "GEGCFUK" AND country <> "GECBRUS") OR PRDIFF > 1 Then
+	'send mail if PR is raised
+	outlook_send()
+       	get_beep()
+          END IF
+    END If 
+    'refresh screen after 3mins
+    ret = Wait(180)	
+Next
+
+End Sub
+
+Sub outlook_send()
+Dim  ret
+prinfo= get_prinfo()
+Set otlApp = CreateObject("Outlook.Application")
+Set otlNewMail = otlApp.CreateItem(olMailItem)
+
+With otlNewMail
+.SentOnBehalfOfName = "VisionPlus_Servicedesk@mahindrasatyam.com"
+.To = "sandeep_nami@mahindrasatyam.com"
+.CC = "deepak_kemidi@mahindrasatyam.com;santhosh_kumarp@mahindrasatyam.com;sunil_munjal@mahindrasatyam.com;Chandrakanth_Kaspa@mahindrasatyam.com;Chetan_Reddy@mahindrasatyam.com;Mahesh_Dandu@mahindrasatyam.com;"
+.Subject = "High Risk"
+.body = "Hi," & Chr(13) & "There is a PR raised and PR info is "  & Chr(13)  & prinfo
+'.Attachments.Add fName
+.Display
+ .send
+END With
+End Sub
+
+Function get_country()
+
+Set Sys = CreateObject("PASSPORT.System")
+Set Sess = Sys.ActiveSession
+Set MyScreen = Sess.Screen
+Set MyArea = MyScreen.Area(6, 16, 6, 22)
+MyArea.Select     
+MyScreen.Copy
+country = MyArea.Value
+get_country = country 
+END Function
+
+Function get_prinfo ()
+
+Set Sys = CreateObject("PASSPORT.System")
+Set Sess = Sys.ActiveSession
+Set MyScreen = Sess.Screen
+Set MyArea = MyScreen.Area(6, 6, 6, 79)
+MyArea.Select     
+MyScreen.Copy
+prinfo = MyArea.Value
+'MsgBox "PrNoOld=" & PrNoOld & " PrNoCurr=" & PrNoCurr
+get_prinfo = prinfo 
+END Function
+
+'beep function	
+Function get_beep()
+	For loopvar = 1 To 20
+	        Beep
+	        ret = wait(1)
+                     Next        
+END Function 

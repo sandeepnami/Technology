@@ -1,0 +1,30 @@
+Sub ZMain
+Dim  ret	
+end_check = "Commands:"
+'List of jobs
+pgm = ARRAY("ARODM01","ARODM02","AROEM01","AROEM02","AROEM03","AROEXTI","AROGM01","AROGM02","AROIOAO","AROKM00","AROKM01","AROKM02","AROLE03","AROMA02","AROMA05","AROMB00","AROMB01","AROMB02","AROMB03","AROMB04","AROMC01","AROMC06","AROMD00","AROMD01","AROME02","AROME03","AROME04","AROME05","AROME08","AROME09","AROME10","AROME11","AROME12","AROMF00","AROMF01","AROMI00","AROMI01","AROMI02","AROMI03","AROMI04","AROML13","AROML39","AROMN02","AROMR00","AROMR01","AROMR02","AROMR03","AROMY00","AROMY01","AROMY02","AROMY03","AROPH03","ARORM00","ARORM01","ARORM02","AROSD05","AROVM00","AROVM01","AROVM02","AROVM03","AROVM04","AROVM05","AROVV01","AROVV03","AROVV04","ARZOM501","ASOMW00 ","ASOMW01 ","ASOSD00 ","ASOSQ00 ","GIROINC ","LTO02CMS","MBOMO00 ","MBOMS00 ","NCPO102 ","NCPO293 ","OFODL01 ","OFOLC01 ","OFOMA00 ","OFOME00 ","OFORQ01 ","OFOVPIN ","OFZOFCTL","OFZOFD01","OFZOFD02","OFZOTCP1")
+
+'Action tobe performed hold or release MH / MR
+action = "NEWC"
+
+Set Sys = CreateObject("PASSPORT.System")
+'selects the currently active session
+Set Sess = Sys.ActiveSession
+'selects the screen object
+Set MyScreen = Sess.Screen
+
+For N = LBound(pgm) To UBound(pgm)
+                  'ret=MsgBox(JOB(N)) 
+	Set MyArea = MyScreen.Area(13,41, 13, 48)
+	MyArea.Select     
+	MyScreen.Copy
+'initialise the pgm name with spaces and then write the actual data(8 spaces)
+	MyArea.Value = "        "
+	MyArea.Value = pgm(N)
+	SendHostKeys ("<ENTER>")
+	ret = wait(6)
+
+Next 
+
+End Sub
+ 

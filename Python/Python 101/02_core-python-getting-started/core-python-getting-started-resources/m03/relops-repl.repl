@@ -1,0 +1,16 @@
+>>> g == 20                                                                     
+True                                                                            
+>>> g == 13                                                                     
+False                                                                           
+>>> g != 20                                                                     
+False                                                                           
+>>> g != 13                                                                     
+True                                                                            
+>>> g < 30                                                                      
+True                                                                            
+>>> g <= 20                                                                     
+True                                                                            
+>>> g > 30                                                                      
+False                                                                           
+>>> g >= 20                                                                     
+True                                                                            

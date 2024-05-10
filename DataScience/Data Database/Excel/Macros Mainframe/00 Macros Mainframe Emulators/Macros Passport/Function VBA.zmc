@@ -1,0 +1,12 @@
+Sub ZMain
+Dim  ret
+'ret=test()
+MsgBox "ret= " &ret
+End Sub
+
+
+Private Function test()
+MsgBox("test")
+'function with return value
+test =10
+End Function

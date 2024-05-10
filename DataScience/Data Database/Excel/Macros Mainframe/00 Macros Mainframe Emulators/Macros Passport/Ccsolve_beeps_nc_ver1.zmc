@@ -1,0 +1,67 @@
+Sub ZMain
+Dim PrNoOld, PrNoCurr, ret	
+Set Sys = CreateObject("PASSPORT.System")
+
+Set Sess = Sys.ActiveSession
+
+Set MyScreen = Sess.Screen
+
+Set MyArea = MyScreen.Area(6, 6, 6, 12)
+MyArea.Select     
+MyScreen.Copy
+PrNoOld = MyArea.Value
+country = get_country()
+
+for i = 1 to 150
+    SendHostKeys ("<PF6>")
+    ret = wait(3)
+    Set MyArea = MyScreen.Area(6, 6, 6, 12)
+    MyArea.Select     
+    MyScreen.Copy
+    PrNoCurr = MyArea.Value
+    IF PrNoCurr<>PrNoOld Then
+           PrNoOld = PrNoCurr
+           PRDIFF = PrNoCurr - PrNoOld 
+           country=get_country()
+           IF country <> "GEGCFUK" OR PRDIFF > 1 Then
+       	For loopvar = 1 To 20
+	        Beep
+	        ret = wait(1)
+                     Next        
+          END IF
+    END If 
+    ret = Wait(180)	
+Next
+
+End Sub
+
+Sub outlook_send()
+Dim  ret
+country = get_country()
+Set otlApp = CreateObject("Outlook.Application")
+Set otlNewMail = otlApp.CreateItem(olMailItem)
+
+With otlNewMail
+.SentOnBehalfOfName = "VisionPlus_Servicedesk@mahindrasatyam.com"
+.To = "sandeep_nami@mahindrasatyam.com"
+.CC = "deepak_kemidi@mahindrasatyam.com"
+.Subject = "High Risk"
+.body = "Hi," & Chr(13) & "There is a PR raised " & country 
+'.Attachments.Add fName
+.Display
+ .send
+END With
+End Sub
+
+Function get_country()
+
+Set Sys = CreateObject("PASSPORT.System")
+Set Sess = Sys.ActiveSession
+Set MyScreen = Sess.Screen
+Set MyArea = MyScreen.Area(6, 16, 6, 22)
+MyArea.Select     
+MyScreen.Copy
+country = MyArea.Value
+get_country = country 
+END Function
+ 

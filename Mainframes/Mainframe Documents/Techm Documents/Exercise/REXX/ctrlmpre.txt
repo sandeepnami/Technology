@@ -1,0 +1,760 @@
+/******************************* rexx  *******************************/ 00010000
+/**  ljob     :  The command lists the successor and predecessor of **/ 00020000
+/**              the specified job                                  **/ 00030000
+/**  Author   :  D Prakash(TCS).                                    **/ 00040000
+/**                                                                 **/ 00050000
+/**  Written  :  05/02/2003                                         **/ 00060000
+/**                                                                 **/ 00070000
+/*********************************************************************/ 00080000
+arg Jobname                                                             00090000
+/*if length(n) > 0   then                                               00100000
+signal here                                                             00110000
+clear */                                                                00120000
+SAY '*****************************************************************' 00130000
+SAY '***   THE UTILITY LISTS THE PREDECCESSOR AND SUCCESOR OF THE ****' 00140000
+SAY '***   SPECIFIED JOB PRESENT IN PROD REGION AFTER CREDITLINE  ****' 00150000
+SAY '***   TCHVPGE.CTLM.SCHEDULE(TCHVPGE)                         ****' 00160000
+SAY '*****************************************************************' 00170000
+DS1  = "ECHVPGE.PAV.CTLM.JOBS.SE"                                       00180100
+ADDRESS TSO "PROFILE NOPREFIX"                                          00181000
+"ALLOC DDN(INPUTDD) DSN("DS1")SHR REU"                                  00182000
+"EXECIO * DISKR INPUTDD (STEM R1. FINIS"                                00183000
+"FREE DDN(INPUTDD)"                                                     00184000
+do job1 = 1 to r1.0                                                     00185000
+JOBNAME=SUBSTR(R1.job1,1,8)                                             00190000
+ /*here:                                                                00200000
+  do  while jobname = ''                                                00210000
+   say 'ENTER VALID JOBNAME'                                            00220000
+   pull JOBNAME                                                         00230000
+  end                                                                   00240000
+ Do while datatype(JOBNAME) = 'NUM'                                     00250000
+   say 'ENTER VALID JOBNAME(TCHGUCLS) should not be numeric'            00260000
+   pull JOBNAME                                                         00270000
+ end                                                                    00280000
+ Do while length(JOBNAME) < 8                                           00290000
+   say 'ENTER jobname of the format, TCHGUCLS'                          00300000
+   pull JOBNAME                                                         00310000
+ end */                                                                 00320000
+ SUCJOB. = 0                                                            00330000
+ PREJOB. = 0                                                            00340000
+       N = 0                                                            00350000
+      ptr= 0                                                            00360000
+       O = 0                                                            00370000
+                                                                        00380000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHARCA1)"                         00390000
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 00400000
+                                                                        00410000
+ ADDRESS TSO "PROFILE NOPREFIX"                                         00420000
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          00430000
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          00440000
+     "FREE DDN(INPUTDD)"                                                00450000
+                                                                        00460000
+  CALL FIND_SUCCESOR                                                    00461000
+  DO I = 1 TO REC.0                                                     00470000
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     00480000
+     DO                                                                 00490000
+       ptr = ptr + 1                                                    00500000
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              00510000
+         DO                                                             00520000
+          CALL FIND_PRECEDOR                                            00530000
+         END                                                            00560000
+     END                                                                00570000
+  END                                                                   00580000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHARCH1)"                         00590000
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 00600000
+                                                                        00610000
+ ADDRESS TSO "PROFILE NOPREFIX"                                         00620000
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          00630000
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          00640000
+     "FREE DDN(INPUTDD)"                                                00650000
+                                                                        00660000
+  CALL FIND_SUCCESOR                                                    00670000
+  DO I = 1 TO REC.0                                                     00680000
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     00690000
+     DO                                                                 00700000
+       ptr = ptr + 1                                                    00710000
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              00720000
+         DO                                                             00730000
+          CALL FIND_PRECEDOR                                            00740000
+         END                                                            00760000
+     END                                                                00770000
+  END                                                                   00780000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHARUP1)"                         00790000
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 00800000
+                                                                        00810000
+ ADDRESS TSO "PROFILE NOPREFIX"                                         00820000
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          00830000
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          00840000
+     "FREE DDN(INPUTDD)"                                                00850000
+                                                                        00860000
+  CALL FIND_SUCCESOR                                                    00870000
+  DO I = 1 TO REC.0                                                     00880000
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     00890000
+     DO                                                                 00900000
+       ptr = ptr + 1                                                    00910000
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              00920000
+         DO                                                             00930000
+          CALL FIND_PRECEDOR                                            00940000
+         END                                                            00960000
+     END                                                                00970000
+  END                                                                   00980000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHASMD1)"                         00990000
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 01000000
+                                                                        01010000
+ ADDRESS TSO "PROFILE NOPREFIX"                                         01020000
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          01030000
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          01040000
+     "FREE DDN(INPUTDD)"                                                01050000
+                                                                        01060000
+  CALL FIND_SUCCESOR                                                    01070000
+  DO I = 1 TO REC.0                                                     01080000
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     01090000
+     DO                                                                 01100000
+       ptr = ptr + 1                                                    01110000
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              01120000
+         DO                                                             01130000
+          CALL FIND_PRECEDOR                                            01140000
+         END                                                            01160000
+     END                                                                01170000
+  END                                                                   01180000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHBARI1)"                         01190000
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 01200000
+                                                                        01210000
+ ADDRESS TSO "PROFILE NOPREFIX"                                         01220000
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          01230000
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          01240000
+     "FREE DDN(INPUTDD)"                                                01250000
+                                                                        01260000
+  CALL FIND_SUCCESOR                                                    01270000
+  DO I = 1 TO REC.0                                                     01280000
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     01290000
+     DO                                                                 01300000
+       ptr = ptr + 1                                                    01310000
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              01320000
+         DO                                                             01330000
+          CALL FIND_PRECEDOR                                            01340000
+         END                                                            01360000
+     END                                                                01370000
+  END                                                                   01380000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHB91K1)"                         01390000
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 01400000
+                                                                        01410000
+ ADDRESS TSO "PROFILE NOPREFIX"                                         01420000
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          01430000
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          01440000
+     "FREE DDN(INPUTDD)"                                                01450000
+                                                                        01460000
+  CALL FIND_SUCCESOR                                                    01470000
+  DO I = 1 TO REC.0                                                     01480000
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     01490000
+     DO                                                                 01500000
+       ptr = ptr + 1                                                    01510000
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              01520000
+         DO                                                             01530000
+          CALL FIND_PRECEDOR                                            01540000
+         END                                                            01560000
+     END                                                                01570000
+  END                                                                   01580000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHCRDP1)"                         01590000
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 01600000
+                                                                        01610000
+ ADDRESS TSO "PROFILE NOPREFIX"                                         01620000
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          01630000
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          01640000
+     "FREE DDN(INPUTDD)"                                                01650000
+                                                                        01660000
+  CALL FIND_SUCCESOR                                                    01670000
+  DO I = 1 TO REC.0                                                     01680000
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     01690000
+     DO                                                                 01700000
+       ptr = ptr + 1                                                    01710000
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              01720000
+         DO                                                             01730000
+          CALL FIND_PRECEDOR                                            01740000
+         END                                                            01760000
+     END                                                                01770000
+  END                                                                   01780000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHCMSD1)"                         01790000
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 01800000
+                                                                        01810000
+ ADDRESS TSO "PROFILE NOPREFIX"                                         01820000
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          01830000
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          01840000
+     "FREE DDN(INPUTDD)"                                                01850000
+                                                                        01860000
+  CALL FIND_SUCCESOR                                                    01870000
+  DO I = 1 TO REC.0                                                     01880000
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     01890000
+     DO                                                                 01900000
+       ptr = ptr + 1                                                    01910000
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              01920000
+         DO                                                             01930000
+          CALL FIND_PRECEDOR                                            01940000
+         END                                                            01960000
+     END                                                                01970000
+  END                                                                   01980000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHCMSS1)"                         01990000
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 02000000
+                                                                        02010000
+ ADDRESS TSO "PROFILE NOPREFIX"                                         02020000
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          02030000
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          02040000
+     "FREE DDN(INPUTDD)"                                                02050000
+                                                                        02060000
+  CALL FIND_SUCCESOR                                                    02070000
+  DO I = 1 TO REC.0                                                     02080000
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     02090000
+     DO                                                                 02100000
+       ptr = ptr + 1                                                    02110000
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              02120000
+         DO                                                             02130000
+          CALL FIND_PRECEDOR                                            02140000
+         END                                                            02160000
+     END                                                                02170000
+  END                                                                   02180000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHCMSS2)"                         02190000
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 02200000
+                                                                        02210000
+ ADDRESS TSO "PROFILE NOPREFIX"                                         02220000
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          02230000
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          02240000
+     "FREE DDN(INPUTDD)"                                                02250000
+                                                                        02260000
+  CALL FIND_SUCCESOR                                                    02270000
+  DO I = 1 TO REC.0                                                     02280000
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     02290000
+     DO                                                                 02300000
+       ptr = ptr + 1                                                    02310000
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              02320000
+         DO                                                             02330000
+          CALL FIND_PRECEDOR                                            02340000
+         END                                                            02360000
+     END                                                                02370000
+  END                                                                   02380000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHEMLD1)"                         02390000
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 02400000
+                                                                        02410000
+ ADDRESS TSO "PROFILE NOPREFIX"                                         02420000
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          02430000
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          02440000
+     "FREE DDN(INPUTDD)"                                                02450000
+                                                                        02460000
+  CALL FIND_SUCCESOR                                                    02470000
+  DO I = 1 TO REC.0                                                     02480000
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     02490000
+     DO                                                                 02500000
+       ptr = ptr + 1                                                    02510000
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              02520000
+         DO                                                             02530000
+          CALL FIND_PRECEDOR                                            02540000
+         END                                                            02560000
+     END                                                                02570000
+  END                                                                   02580000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHFAID1)"                         02590000
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 02600000
+                                                                        02610000
+ ADDRESS TSO "PROFILE NOPREFIX"                                         02620000
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          02630000
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          02640000
+     "FREE DDN(INPUTDD)"                                                02650000
+                                                                        02660000
+  CALL FIND_SUCCESOR                                                    02670000
+  DO I = 1 TO REC.0                                                     02680000
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     02690000
+     DO                                                                 02700000
+       ptr = ptr + 1                                                    02710000
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              02720000
+         DO                                                             02730000
+          CALL FIND_PRECEDOR                                            02740000
+         END                                                            02760000
+     END                                                                02770000
+  END                                                                   02780000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHFALD1)"                         02790000
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 02791000
+                                                                        02792000
+ ADDRESS TSO "PROFILE NOPREFIX"                                         02793000
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          02794000
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          02795000
+     "FREE DDN(INPUTDD)"                                                02796000
+                                                                        02797000
+  CALL FIND_SUCCESOR                                                    02798000
+  DO I = 1 TO REC.0                                                     02799000
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     02799100
+     DO                                                                 02799200
+       ptr = ptr + 1                                                    02799300
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              02799400
+         DO                                                             02799500
+          CALL FIND_PRECEDOR                                            02799600
+         END                                                            02799800
+     END                                                                02799900
+  END                                                                   02800000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHFASD1)"                         02800100
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 02800200
+                                                                        02800300
+ ADDRESS TSO "PROFILE NOPREFIX"                                         02800400
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          02800500
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          02800600
+     "FREE DDN(INPUTDD)"                                                02800700
+                                                                        02800800
+  CALL FIND_SUCCESOR                                                    02800900
+  DO I = 1 TO REC.0                                                     02801100
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     02801200
+     DO                                                                 02801300
+       ptr = ptr + 1                                                    02801400
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              02801500
+         DO                                                             02801600
+          CALL FIND_PRECEDOR                                            02801700
+         END                                                            02801800
+     END                                                                02801900
+  END                                                                   02802000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHINPD1)"                         02802100
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 02802200
+                                                                        02802300
+ ADDRESS TSO "PROFILE NOPREFIX"                                         02802400
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          02802500
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          02802600
+     "FREE DDN(INPUTDD)"                                                02802700
+                                                                        02802800
+  CALL FIND_SUCCESOR                                                    02802900
+  DO I = 1 TO REC.0                                                     02803100
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     02803200
+     DO                                                                 02803300
+       ptr = ptr + 1                                                    02803400
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              02803500
+         DO                                                             02803600
+          CALL FIND_PRECEDOR                                            02803700
+         END                                                            02803800
+     END                                                                02803900
+  END                                                                   02804000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHOPTD1)"                         02804100
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 02804200
+                                                                        02804300
+ ADDRESS TSO "PROFILE NOPREFIX"                                         02804400
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          02804500
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          02804600
+     "FREE DDN(INPUTDD)"                                                02804700
+                                                                        02804800
+  CALL FIND_SUCCESOR                                                    02804900
+  DO I = 1 TO REC.0                                                     02805100
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     02805200
+     DO                                                                 02805300
+       ptr = ptr + 1                                                    02805400
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              02805500
+         DO                                                             02805600
+          CALL FIND_PRECEDOR                                            02805700
+         END                                                            02805800
+     END                                                                02805900
+  END                                                                   02806000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHIPMD1)"                         02806100
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 02806200
+                                                                        02806300
+ ADDRESS TSO "PROFILE NOPREFIX"                                         02806400
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          02806500
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          02806600
+     "FREE DDN(INPUTDD)"                                                02806700
+                                                                        02806800
+  CALL FIND_SUCCESOR                                                    02806900
+  DO I = 1 TO REC.0                                                     02807100
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     02807200
+     DO                                                                 02807300
+       ptr = ptr + 1                                                    02807400
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              02807500
+         DO                                                             02807600
+          CALL FIND_PRECEDOR                                            02807700
+         END                                                            02807800
+     END                                                                02807900
+  END                                                                   02808000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHITSD1)"                         02808100
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 02808200
+                                                                        02808300
+ ADDRESS TSO "PROFILE NOPREFIX"                                         02808400
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          02808500
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          02808600
+     "FREE DDN(INPUTDD)"                                                02808700
+                                                                        02808800
+  CALL FIND_SUCCESOR                                                    02808900
+  DO I = 1 TO REC.0                                                     02809100
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     02809200
+     DO                                                                 02809300
+       ptr = ptr + 1                                                    02809400
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              02809500
+         DO                                                             02809600
+          CALL FIND_PRECEDOR                                            02809700
+         END                                                            02809800
+     END                                                                02809900
+  END                                                                   02810000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHLTSD1)"                         02810100
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 02810200
+                                                                        02810300
+ ADDRESS TSO "PROFILE NOPREFIX"                                         02810400
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          02810500
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          02810600
+     "FREE DDN(INPUTDD)"                                                02810700
+                                                                        02810800
+  CALL FIND_SUCCESOR                                                    02810900
+  DO I = 1 TO REC.0                                                     02811100
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     02811200
+     DO                                                                 02811300
+       ptr = ptr + 1                                                    02811400
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              02811500
+         DO                                                             02811600
+          CALL FIND_PRECEDOR                                            02811700
+         END                                                            02811800
+     END                                                                02811900
+  END                                                                   02812000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHMBSD1)"                         02812100
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 02812200
+                                                                        02812300
+ ADDRESS TSO "PROFILE NOPREFIX"                                         02812400
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          02812500
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          02812600
+     "FREE DDN(INPUTDD)"                                                02812700
+                                                                        02812800
+  CALL FIND_SUCCESOR                                                    02812900
+  DO I = 1 TO REC.0                                                     02813100
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     02813200
+     DO                                                                 02813300
+       ptr = ptr + 1                                                    02813400
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              02813500
+         DO                                                             02813600
+          CALL FIND_PRECEDOR                                            02813700
+         END                                                            02813800
+     END                                                                02813900
+  END                                                                   02814000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHIPMI1)"                         02814100
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 02814200
+                                                                        02814300
+ ADDRESS TSO "PROFILE NOPREFIX"                                         02814400
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          02814500
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          02814600
+     "FREE DDN(INPUTDD)"                                                02814700
+                                                                        02814800
+  CALL FIND_SUCCESOR                                                    02814900
+  DO I = 1 TO REC.0                                                     02815100
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     02815200
+     DO                                                                 02815300
+       ptr = ptr + 1                                                    02815400
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              02815500
+         DO                                                             02815600
+          CALL FIND_PRECEDOR                                            02815700
+         END                                                            02815800
+     END                                                                02815900
+  END                                                                   02816000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHEP2IN)"                         02816100
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 02816200
+                                                                        02816300
+ ADDRESS TSO "PROFILE NOPREFIX"                                         02816400
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          02816500
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          02816600
+     "FREE DDN(INPUTDD)"                                                02816700
+                                                                        02816800
+  CALL FIND_SUCCESOR                                                    02816900
+  DO I = 1 TO REC.0                                                     02817100
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     02817200
+     DO                                                                 02817300
+       ptr = ptr + 1                                                    02817400
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              02817500
+         DO                                                             02817600
+          CALL FIND_PRECEDOR                                            02817700
+         END                                                            02817800
+     END                                                                02817900
+  END                                                                   02818000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHNDMO1)"                         02818100
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 02818200
+                                                                        02818300
+ ADDRESS TSO "PROFILE NOPREFIX"                                         02818400
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          02818500
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          02818600
+     "FREE DDN(INPUTDD)"                                                02818700
+                                                                        02818800
+  CALL FIND_SUCCESOR                                                    02818900
+  DO I = 1 TO REC.0                                                     02819100
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     02819200
+     DO                                                                 02819300
+       ptr = ptr + 1                                                    02819400
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              02819500
+         DO                                                             02819600
+          CALL FIND_PRECEDOR                                            02819700
+         END                                                            02819800
+     END                                                                02819900
+  END                                                                   02820000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHSSCD1)"                         02820100
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 02820200
+                                                                        02820300
+ ADDRESS TSO "PROFILE NOPREFIX"                                         02820400
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          02820500
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          02820600
+     "FREE DDN(INPUTDD)"                                                02820700
+                                                                        02820800
+  CALL FIND_SUCCESOR                                                    02820900
+  DO I = 1 TO REC.0                                                     02821100
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     02821200
+     DO                                                                 02821300
+       ptr = ptr + 1                                                    02821400
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              02821500
+         DO                                                             02821600
+          CALL FIND_PRECEDOR                                            02821700
+         END                                                            02821800
+     END                                                                02821900
+  END                                                                   02822000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHSLOD1)"                         02822100
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 02822200
+                                                                        02822300
+ ADDRESS TSO "PROFILE NOPREFIX"                                         02822400
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          02822500
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          02822600
+     "FREE DDN(INPUTDD)"                                                02822700
+                                                                        02822800
+  CALL FIND_SUCCESOR                                                    02822900
+  DO I = 1 TO REC.0                                                     02823100
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     02823200
+     DO                                                                 02823300
+       ptr = ptr + 1                                                    02823400
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              02823500
+         DO                                                             02823600
+          CALL FIND_PRECEDOR                                            02823700
+         END                                                            02823800
+     END                                                                02823900
+  END                                                                   02824000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHTRMD1)"                         02824100
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 02824200
+                                                                        02824300
+ ADDRESS TSO "PROFILE NOPREFIX"                                         02824400
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          02824500
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          02824600
+     "FREE DDN(INPUTDD)"                                                02824700
+                                                                        02824800
+  CALL FIND_SUCCESOR                                                    02824900
+  DO I = 1 TO REC.0                                                     02825100
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     02825200
+     DO                                                                 02825300
+       ptr = ptr + 1                                                    02825400
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              02825500
+         DO                                                             02825600
+          CALL FIND_PRECEDOR                                            02825700
+         END                                                            02825800
+     END                                                                02825900
+  END                                                                   02826000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHTRMIP)"                         02826100
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 02826200
+                                                                        02826300
+ ADDRESS TSO "PROFILE NOPREFIX"                                         02826400
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          02826500
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          02826600
+     "FREE DDN(INPUTDD)"                                                02826700
+                                                                        02826800
+  CALL FIND_SUCCESOR                                                    02826900
+  DO I = 1 TO REC.0                                                     02827100
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     02827200
+     DO                                                                 02827300
+       ptr = ptr + 1                                                    02827400
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              02827500
+         DO                                                             02827600
+          CALL FIND_PRECEDOR                                            02827700
+         END                                                            02827800
+     END                                                                02827900
+  END                                                                   02828000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHTRITS)"                         02828100
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 02828200
+                                                                        02828300
+ ADDRESS TSO "PROFILE NOPREFIX"                                         02828400
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          02828500
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          02828600
+     "FREE DDN(INPUTDD)"                                                02828700
+                                                                        02828800
+  CALL FIND_SUCCESOR                                                    02828900
+  DO I = 1 TO REC.0                                                     02829100
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     02829200
+     DO                                                                 02829300
+       ptr = ptr + 1                                                    02829400
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              02829500
+         DO                                                             02829600
+          CALL FIND_PRECEDOR                                            02829700
+         END                                                            02829800
+     END                                                                02829900
+  END                                                                   02830000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHVMXD1)"                         02830100
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 02830200
+                                                                        02830300
+ ADDRESS TSO "PROFILE NOPREFIX"                                         02830400
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          02830500
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          02830600
+     "FREE DDN(INPUTDD)"                                                02830700
+                                                                        02830800
+  CALL FIND_SUCCESOR                                                    02830900
+  DO I = 1 TO REC.0                                                     02831100
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     02831200
+     DO                                                                 02831300
+       ptr = ptr + 1                                                    02831400
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              02831500
+         DO                                                             02831600
+          CALL FIND_PRECEDOR                                            02831700
+         END                                                            02831800
+     END                                                                02831900
+  END                                                                   02832000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHHRIPT)"                         02834100
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 02834200
+                                                                        02834300
+ ADDRESS TSO "PROFILE NOPREFIX"                                         02834400
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          02834500
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          02834600
+     "FREE DDN(INPUTDD)"                                                02834700
+                                                                        02834800
+  CALL FIND_SUCCESOR                                                    02834900
+  DO I = 1 TO REC.0                                                     02835100
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     02835200
+     DO                                                                 02835300
+       ptr = ptr + 1                                                    02835400
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              02835500
+         DO                                                             02835600
+          CALL FIND_PRECEDOR                                            02835700
+         END                                                            02835800
+     END                                                                02835900
+  END                                                                   02836000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHMTHIO)"                         02836100
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 02836200
+                                                                        02836300
+ ADDRESS TSO "PROFILE NOPREFIX"                                         02836400
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          02836500
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          02836600
+     "FREE DDN(INPUTDD)"                                                02836700
+                                                                        02836800
+  CALL FIND_SUCCESOR                                                    02836900
+  DO I = 1 TO REC.0                                                     02837100
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     02837200
+     DO                                                                 02837300
+       ptr = ptr + 1                                                    02837400
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              02837500
+         DO                                                             02837600
+          CALL FIND_PRECEDOR                                            02837700
+         END                                                            02837800
+     END                                                                02837900
+  END                                                                   02838000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHVLSD1)"                         02838100
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 02838200
+                                                                        02838300
+ ADDRESS TSO "PROFILE NOPREFIX"                                         02838400
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          02838500
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          02838600
+     "FREE DDN(INPUTDD)"                                                02838700
+                                                                        02838800
+  CALL FIND_SUCCESOR                                                    02838900
+  DO I = 1 TO REC.0                                                     02839100
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     02839200
+     DO                                                                 02839300
+       ptr = ptr + 1                                                    02839400
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              02839500
+         DO                                                             02839600
+          CALL FIND_PRECEDOR                                            02839700
+         END                                                            02839800
+     END                                                                02839900
+  END                                                                   02840000
+    DSNAME  = "TCHVPGE.CTLM.SCHEDULE(TCHVLSW1)"                         02840100
+ /* DSNAME  = "KAUVPA1.TCS.VP.CTLM.SCHEDULE.D260703" */                 02840200
+                                                                        02840300
+ ADDRESS TSO "PROFILE NOPREFIX"                                         02840400
+     "ALLOC DDN(INPUTDD) DSN("DSNAME")SHR REU"                          02840500
+     "EXECIO * DISKR INPUTDD (STEM REC. FINIS"                          02840600
+     "FREE DDN(INPUTDD)"                                                02840700
+                                                                        02840800
+  CALL FIND_SUCCESOR                                                    02840900
+  DO I = 1 TO REC.0                                                     02841100
+    IF SUBSTR(REC.I,1,1) = 'M' THEN                                     02841200
+     DO                                                                 02841300
+       ptr = ptr + 1                                                    02841400
+       IF JOBNAME = SUBSTR(REC.I,2,8) THEN                              02841500
+         DO                                                             02841600
+          CALL FIND_PRECEDOR                                            02841700
+         END                                                            02841800
+     END                                                                02841900
+  END                                                                   02842000
+  /*   DO                                                               02842200
+       ZEDMSG='NOT FOUND'                                               02842300
+       ZEDLMSG='THE JOB' JOBNAME 'NOT DEFINED IN SCHEDULE'              02842400
+       ADDRESS ISPEXEC 'SETMSG MSG(ISRZ001)'                            02842500
+       END */                                                           02843000
+     SAY '__________________________________________________________'   02844000
+     SAY 'THE JOB' JOBNAME 'PREDECESSORS ARE AS BELOW:'                 02844100
+     DO X = 1 TO O                                                      02844200
+     SAY  PREJOB.X                                                      02844300
+     END                                                                02844400
+     SAY 'THE JOB' JOBNAME 'SUCCESSORS ARE AS BELOW:'                   02845000
+     DO Y = 1 TO N                                                      02846000
+     SAY  SUCJOB.Y                                                      02847000
+     END                                                                02848000
+     SAY '__________________________________________________________'   02849000
+  END                                                                   02849100
+   EXIT 0                                                               02850000
+                                                                        02860000
+ FIND_PRECEDOR:                                                         02870000
+  J = I+1                                                               02880000
+  DO UNTIL ( SUBSTR(REC.J,1,1) = 'M' | J > REC.0 )                      02890000
+   IF SUBSTR(REC.J,1,1) =  'I'    THEN                                  02900000
+      DO /*######*/                                                     02910000
+    /*  PARSE VALUE REC.J WITH A 'T1-' J1 'T1-' J2'T1-'J3 '-OK' */      02920000
+        PARSE VALUE REC.J WITH A 'TCH-' J1 '-' J2 'CONT' J3 '-OK'       02930000
+         J4 = J2||J3                                                    02931000
+         IF LENGTH(SUBSTR(J4,1,8)) > 0   THEN                           02940000
+           DO                                                           02950000
+           O = O + 1                                                    02960000
+           PREJOB.O = SUBSTR(J4,1,8)                                    02970000
+           END                                                          02980000
+       /*IF LENGTH(SUBSTR(J2,1,8)) > 0   THEN                           02990000
+           DO                                                           03000000
+           O = O + 1                                                    03010000
+           PREJOB.O = SUBSTR(J2,1,8)                                    03020000
+           END                                                          03030000
+         IF LENGTH(SUBSTR(J3,1,8)) > 0   THEN                           03040000
+           DO                                                           03050000
+           O = O + 1                                                    03060000
+           PREJOB.O = SUBSTR(J3,1,8)                                    03070000
+           END */                                                       03090000
+      END /*######*/                                                    03100000
+      J = J + 1                                                         03110000
+     END                                                                03120000
+     CLEAR                                                              03130000
+ RETURN                                                                 03200000
+ FIND_SUCCESOR:                                                         03210000
+  JOBCOND =  JOBNAME||"-OK"                                             03220000
+  DO K = 1 TO REC.0                                                     03230000
+      IF SUBSTR(REC.K,1,1) =  'I'    THEN                               03240000
+      DO                                                                03250000
+   /* PARSE VALUE REC.K WITH A 'T1-' J1 'T1-' J2'T1-'J3 '-OK' */        03260000
+      PARSE VALUE REC.K WITH A 'TCH-' J1 '-' J2 'CONT' J3 '-OK'         03270000
+      J4 = J2||J3                                                       03271000
+          SELECT                                                        03280000
+            WHEN  SUBSTR(J4,1,8) = JOBNAME THEN                         03290000
+               DO                                                       03300000
+               TEMP = 1                                                 03310000
+               CALL FIND_SUCJOB                                         03320000
+               END                                                      03330000
+         /* WHEN  SUBSTR(J4,1,8) = JOBNAME THEN                         03340000
+               DO                                                       03350000
+               TEMP = 1                                                 03360000
+               CALL FIND_SUCJOB                                         03370000
+               END                                                      03380000
+            WHEN  SUBSTR(J3,1,8) = JOBNAME THEN                         03390000
+               DO                                                       03400000
+               TEMP = 1                                                 03410000
+               CALL FIND_SUCJOB                                         03420000
+               END     */                                               03430000
+            OTHERWISE                                                   03440000
+              NOP                                                       03450000
+          END                                                           03460000
+      END                                                               03470000
+  END                                                                   03480000
+ RETURN                                                                 03550000
+                                                                        03560000
+FIND_SUCJOB:                                                            03570000
+  L = K - 1                                                             03580000
+  DO UNTIL TEMP = 0                                                     03590000
+   IF SUBSTR(REC.L,1,1) =  'M' THEN                                     03600000
+     DO                                                                 03610000
+       N  = N  + 1                                                      03620000
+     SUCJOB.N = SUBSTR(REC.L,2,8)                                       03630000
+     TEMP = 0                                                           03640000
+     END                                                                03650000
+     L = L - 1                                                          03660000
+  END                                                                   03670000
+RETURN                                                                  03680000
+

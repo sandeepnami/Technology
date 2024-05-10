@@ -1,0 +1,123 @@
+//*-------------------------------------------------------------------*
+//*                                                                   *
+//*              ***  PROCEDURE NAME:- GUDEVBND  ***                  *
+//*                                                                   *
+//*   ***  DEVELOPMENT ENVIRONMENT - BIND DB2 PACKAGE OR PLAN  ***    *
+//*                                                                   *
+//*-------------------------------------------------------------------*
+//*                                                                   *
+//*  METHOD OF USE:                                                   *
+//*  ==============                                                   *
+//*                                                                   *
+//*  1. BIND PACKAGE                                                  *
+//*                                                                   *
+//*     //BINDRUN EXEC GUDEVBND,DBRMLIB='......................'      *
+//*     //SYSIN   DD  *                                               *
+//*       DSN SYSTEM(DB2)                                             *
+//*         BIND PACKAGE(AA)                      -                   *
+//*         MEMBER(AANNNMNN)                      -                   *
+//*         OWNER(XXXXXXX)                        -                   *
+//*         ACT(REP)                              -                   *
+//*         VALIDATE(BIND)                        -                   *
+//*         IS(CS)                                -                   *
+//*         RELEASE (COMMIT)                                          *
+//*     /*                                                            *
+//*                                                                   *
+//*  2. BIND PLAN (USING PACKAGE LIST)                                *
+//*                                                                   *
+//*     //BINDRUN EXEC GUDEVBND                                       *
+//*     //SYSIN   DD  *                                               *
+//*       DSN SYSTEM(DB2)                                             *
+//*          BIND PLAN(AANNNTTN)                  -                   *
+//*          ACTION(REPLACE)                      -                   *
+//*          VALIDATE(BIND)                       -                   *
+//*          ISOLATION(CS)                        -                   *
+//*          OWNER(XXXXXXX)                       -                   *
+//*          ACQUIRE(USE)                         -                   *
+//*          RELEASE(COMMIT)                      -                   *
+//*          RETAIN                               -                   *
+//*          CACHESIZE(0)                         -                   *
+//*          PKLIST(AA.AANNNMNN, ..., BB.BBNNNNMN, ...)               *
+//*       END                                                         *
+//*     /*                                                            *
+//*                                                                   *
+//*                                                                   *
+//*  NOTES:                                                           *
+//*  ======                                                           *
+//*        1.  THE MEMBER PARAMETER NAMES THE DATABASE REQUEST        *
+//*           MODULE (DBRM) WHICH WILL BE BOUND INTO A PACKAGE.       *
+//*                                                                   *
+//*        2.  EACH TIME THE SOURCE MODULE IS RECOMPILED THE PACKAGE  *
+//*           FOR THE SOURCE MODULE NEEDS TO BE REBOUND.              *
+//*                                                                   *
+//*        3.  UNLESS THE LIST OF PACKAGES FOR A PLAN CHANGES, THE    *
+//*           DB2 PLAN FOR A PROGRAM SHOULD ONLY NEED TO BE BOUND     *
+//*           ONCE.                                                   *
+//*                                                                   *
+//*        4.  FOR NEW PROGRAMS, A "GRANT EXECUTE ON PLAN AANNNTTN    *
+//*           TO PUBLIC" WILL NEED TO BE DONE VIA SPUFI OR QMF. A     *
+//*           "SET CURRENT SQLID = 'XXXXXXX'" MAY BE NEEDED FIRST.    *
+//*                                                                   *
+//*        5.  TO WORK WITH DEVN, UNITN, LINKN AND TESTN DATASETS     *
+//*           ADD ",RLSE=N" TO THE EXEC STEP.                         *
+//*                                                                   *
+//*        6.  IF YOU DO NOT HAVE A TESTN DATASET THEN ALSO SPECIFY   *
+//*           ",ENV3=LINK" ON THE EXEC STEP.                          *
+//*                                                                   *
+//*-------------------------------------------------------------------*
+//*
+//GUDEVBND PROC CLASS1='A',          /* OUTPUT CLASS FOR 'SYSTSPRT'  */
+//             FORMAT1='TWOUP',      /* OUTPUT FORMAT FOR 'SYSTSPRT' */
+//*
+//             CLASS2='*',           /* OUTPUT CLASS FOR 'SYSOUT'    */
+//             FORMAT2='TWOUP',      /* OUTPUT FORMAT FOR 'SYSOUT'   */
+//*
+//             CLASS3='T',           /* OUTPUT CLASS FOR 'SYSUDUMP'  */
+//             FORMAT3='TWOUP',      /* OUTPUT FORMAT FOR 'SYSUDUMP' */
+//*
+//             HOLD=YES,             /* HOLD LISTINGS ? - YES        */
+//*
+//             DBRMLIB='PROG.DEV.DBRMLIB',   /* DBRM LIBRARY         */
+//*
+//             ENV1='UNIT',          /* ENVIRONMENT AFTER CURRENV    */
+//             ENV2='LINK',          /* ENVIRONMENT AFTER ENV1       */
+//             ENV3='TEST',          /* ENVIRONMENT AFTER ENV2       */
+//             ENV4='TST',           /* ENVIRONMENT AFTER ENV3       */
+//             ENV5='PREIMP',        /* ENVIRONMENT AFTER ENV4       */
+//*
+//             RLSE=,                /* SPECIFY PHASED ENV NBR       */
+//*
+//             DB2SYSID=T            /* FOR SYS1.DB2.DSNLOAD       */
+//      INCLUDE MEMBER=DB2&DB2SYSID
+//*
+//*-------------------------------------------------------------------*
+//*                                                                   *
+//*                  ***  BIND APPLICATION PLAN  ***                  *
+//*                                                                   *
+//*-------------------------------------------------------------------*
+//*
+//GUDEVBND EXEC PGM=IKJEFT01,DYNAMNBR=20
+//*
+//ONEUP        OUTPUT FORMDEF=0101,PAGEDEF=P0003
+//TWOUP        OUTPUT FORMDEF=F0002,PAGEDEF=P0014
+//TWOSHADE     OUTPUT FORMDEF=F0013,PAGEDEF=P0014
+//*
+//STEPLIB  DD  DSN=SYS1.DB2&DB2SYSID..SDSNLOAD,DISP=SHR
+//DBRMLIB  DD  DSN=&DBRMLIB,DISP=SHR
+//         DD  DSN=PROG.&ENV1.&RLSE..DBRMLIB,DISP=SHR
+//         DD  DSN=PROG.&ENV2.&RLSE..DBRMLIB,DISP=SHR
+//         DD  DSN=PROG.&ENV3.&RLSE..DBRMLIB,DISP=SHR
+//         DD  DSN=PROG.&ENV4..DBRMLIB,DISP=SHR
+//         DD  DSN=PROG.&ENV5..DBRMLIB,DISP=SHR
+//         DD  DSN=PROG.PROD.DBRMLIB,DISP=SHR
+//*
+//SYSTSPRT DD  SYSOUT=&CLASS1,OUTPUT=*.&FORMAT1,HOLD=&HOLD
+//DSNTRACE DD  SYSOUT=&CLASS2,OUTPUT=*.&FORMAT2,HOLD=&HOLD
+//SYSOUT   DD  SYSOUT=&CLASS2,OUTPUT=*.&FORMAT2,HOLD=&HOLD
+//SYSPRINT DD  SYSOUT=&CLASS2,OUTPUT=*.&FORMAT2,HOLD=&HOLD
+//SYSDBOUT DD  SYSOUT=&CLASS3,OUTPUT=*.&FORMAT3,HOLD=&HOLD
+//SYSUDUMP DD  SYSOUT=&CLASS3,OUTPUT=*.&FORMAT3,HOLD=&HOLD
+//*
+//SYSTSIN  DD  DDNAME=SYSIN
+//*
+

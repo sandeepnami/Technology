@@ -1,0 +1,21 @@
+...     iterator = iter(iterable)                                               
+...     try:                                                                    
+...         return next(iterator)                                               
+...     except StopIteration:                                                   
+...         raise ValueError("iterable is empty")                               
+...                                                                             
+>>> first(["1st", "2nd", "3rd"])                                                
+'1st'                                                                           
+>>> first({"1st", "2nd", "3rd"})                                                
+'3rd'                                                                           
+>>> first(set())                                                                
+Traceback (most recent call last):                                              
+  File "<stdin>", line 4, in first                                              
+StopIteration                                                                   
+                                                                                
+During handling of the above exception, another exception occurred:             
+                                                                                
+Traceback (most recent call last):                                              
+  File "<stdin>", line 1, in <module>                                           
+  File "<stdin>", line 6, in first                                              
+ValueError: iterable is empty                                                   

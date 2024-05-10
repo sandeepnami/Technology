@@ -1,0 +1,133 @@
+//UGBC13Z0 JOB (00000000),'LEGAL LETTER',
+//             MSGCLASS=X,REGION=0M,
+//             RESTART=STEP0005,CLASS=2,
+//             NOTIFY=&SYSUID
+//*NOTE HERE RESTART IS WRITTEN TO RUN ONLY CZD138 PGM
+//*CONVERSION JOB
+//*
+//LIBS    JCLLIB ORDER=(PDKVPGE.IHC.PROCLIB,
+//             PAYSYSJ.CMS.V814.PROCLIB.DK)
+//SYMBOLIC INCLUDE MEMBER=#SYMB
+//*NANI OVERRIDES
+//*VHLQ     SET VHLQ=CDKVPGE.NANI
+//*----------------------------------------------------------------*
+//* TO CHECK IF LEGAL LETTER FILE IS EMPTY !IF NOT IT WILL PROCESS *
+//*----------------------------------------------------------------*
+//*
+//STEP01  EXEC PGM=IDCAMS,
+//             COND=(0,NE)
+//SYSPRINT DD  SYSOUT=*
+//SORTIN   DD  DSN=DDKVPGE.TFR.CMS.AT6T.S1.GD.G0002V00,
+//             DISP=SHR
+//SORTOUT  DD  DSN=CDKVPGE.NANI.CMS.AT6T.S1.SE(+1),
+//             DISP=(NEW,CATLG,DELETE),
+//             SPACE=(CYL,(25,25),RLSE),
+//             LRECL=350,
+//             RECFM=FB
+//SYSIN    DD  *
+  REPRO INFILE(SORTIN) OUTFILE(SORTOUT) REUSE
+/*
+//*HARDCODED TO POINT TO TEST DATASET
+//*
+//AECONV1 EXEC PRAECON1,
+//             INDSN=CDKVPGE.NANI.CMS.AT6T.S1.SE(+1),
+//             OUTDSN=CDKVPGE.NANI.CMS.AT6T.EBDIC.S1.SE
+//AECONV.CARDIN DD  DSN=&VHLQ..IHC.PARMLIB(AT6T),
+//             DISP=SHR
+//VB2FB.SORTOUT DD  DSN=&OUTDSN,
+//             DISP=(NEW,CATLG,DELETE),
+//             SPACE=(CYL,(25,25),RLSE),
+//             LRECL=350,
+//             RECFM=FB
+//*
+//STEP0005 EXEC PGM=SORT,
+//             COND=(0,NE)
+//SORTMSG  DD  SYSOUT=*
+//SYSOUT   DD  SYSOUT=*
+//SYSPRINT DD  SYSOUT=*
+//SYSUDUMP DD  SYSOUT=*
+//SYSDBOUT DD  SYSOUT=*
+//SORTIN   DD  DSN=CDKVPGE.NANI.CMS.AT6T.EBDIC.S1.SE,
+//             DISP=SHR
+//SORTOUT  DD  DSN=CDKVPGE.NANI.CMS.AT6T.SE,
+//             DISP=(NEW,CATLG,DELETE),
+//             SPACE=(CYL,(25,25),RLSE),
+//             LRECL=350,
+//             RECFM=FB
+//SYSIN    DD  *
+    SORT FIELDS=(1,22,CH,A)
+/*
+//*
+//EMPTYCHK EXEC PGM=IDCAMS
+//SYSPRINT DD  SYSOUT=*
+//FILEIN   DD  DSN=CDKVPGE.NANI.CMS.AT6T.SE,
+//             DISP=SHR
+//SYSIN    DD  DSN=&VHLQ..CMS.PARMLIB(EMPTYCHK),
+//             DISP=SHR
+//*IF ELSE SYNTAX FOR JCL
+//         IF  (EMPTYCHK.RC < 4)  THEN
+//*
+//GNCN035 EXEC GNCN035
+//STEP0001.AT6T DD  DSN=CDKVPGE.NANI.CMS.AT6T.SE,
+//             DISP=SHR
+//STEP0001.ATT1 DD  DSN=CDKVPGE.NANI.CMS.ATT1.S1.SE.CZD138.SE,
+//             DISP=(NEW,CATLG,DELETE),
+//             UNIT=3390,
+//             SPACE=(CYL,(1,4),RLSE),
+//             LRECL=365,
+//             RECFM=FB,
+//             DSORG=PS
+//STEP0001.ATGH DD  DSN=CDKVPGE.NANI.CMS.ATGH.CZD138.S0.SE(+1),
+//             DISP=(,CATLG,CATLG),
+//             UNIT=3390,
+//             SPACE=(TRK,(15,15),RLSE),
+//             LRECL=425,
+//             RECFM=FB,
+//             DSORG=PS
+//D011#230.ATTI DD  DSN=CDKVPGE.NANI.CMS.ATT1.S1.SE.CZD138.SE,
+//             DISP=SHR
+//D011#230.ATTD DD  DSN=CDKVPGE.NANI.ATT1.CZD138.ARD011.SE(+1),
+//             DISP=(NEW,CATLG,DELETE),
+//             UNIT=3390,
+//             SPACE=(CYL,(1,4),RLSE),
+//             LRECL=365,
+//             RECFM=FB,
+//             DSORG=PS
+//         ELSE
+//*
+//STEP0010 EXEC PGM=IEFBR14
+//*------------------------------------------------------------------*
+//*  CREATING EMPTY ALT1 FILE FOR NON-MONETARY PROCESS               *
+//*  RESTART PROCEDURE:  RESTART JOB                                 *
+//*------------------------------------------------------------------*
+//ATT1     DD  DSN=CDKVPGE.NANI.ATT1.CZD138.ARD011.SE(+1),
+//             DISP=(NEW,CATLG,DELETE),
+//             UNIT=3390,
+//             SPACE=(TRK,(60,30),RLSE),
+//             LRECL=365
+//         ENDIF  (EMPTYCHK.RC < 4)
+//*****************************************************************
+//*  DELETE    DELETE TFR GDGS                        IEFBR14
+//*****************************************************************
+//* NANI NULL CARD SINCE FOR TESTING DELETION OF TFR IS NOT REQUIRED
+//
+//*
+//PM01    EXEC PGM=PM01,
+//             COND=(0,NE)
+//SYSUT1   DD  DSN=&VHLQ..TFR.CMS.AT6T.S1.GD,
+//             DISP=(OLD,DELETE),
+//             LRECL=350
+//*****************************************************************
+//*  CREATE EMPTY TFR FILE                            IEFBR14
+//*****************************************************************
+//*
+//STEP020 EXEC PGM=IEFBR14,
+//             COND=(0,NE)
+//SYSUT1   DD  DSN=&VHLQ..TFR.CMS.AT6T.S1.GD(+1),
+//             DISP=(,CATLG,DELETE),
+//             UNIT=3390,
+//             SPACE=(TRK,(15,15),RLSE),
+//             LRECL=350,
+//             RECFM=FB,
+//             DSORG=PS
+

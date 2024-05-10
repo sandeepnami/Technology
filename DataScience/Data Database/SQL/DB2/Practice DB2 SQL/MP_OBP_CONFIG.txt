@@ -1,0 +1,38 @@
+OBP_OFFER_CODE  VARBL_FXD_IND  AC_OFFSET_IND  OBP_RPAY_TYPE  
+CHAR(6)         CHAR(1)        CHAR(1)        CHAR(4)      
+PRIMARY-------  PRIMARY------  PRIMARY------  PRIMARY------
+**************************** TOP OF DATA ******************
+NCS001          V              N                           
+NCS002          V              N                           
+NCS006          V              N                           
+NCS007          V              N                           
+NCS003          V              N                           
+NTD001          F              N                           
+NTD002          F              N                           
+NPL001          F              N                           
+NPL001          V              N                           
+NPL002          F              N                           
+NCS004          V              N                           
+NHL001          F              N                           
+NHL001          V              N                           
+NHL002          V              N                           
+NHL003          F              N                           
+NHL003          V              N                           
+NHL004          V              N                           
+NHL005          V              N                           
+NHL005          F              N                           
+NHL008          V              N                           
+NHL006          F              N                           
+NHL006          V              N                           
+NHL007          F              N                           
+NHL004          F              N                           
+NHL008          F              N                           
+NHL007          V              N                           
+NHL009          F              N                           
+NHL009          V              N                           
+NHL010          F              N                           
+NHL011          F              N                           
+NHL012          F              N                           
+NHL012          V              N                           
+NHL013          F              N                           
+NHL014          F              N                           

@@ -1,0 +1,15 @@
+//LIBRSCH   JOB  (9999,0205,3),'SRCHFOR',CLASS=X,                       JOB02113
+//          MSGCLASS=X,NOTIFY=&SYSUID,REGION=0M,
+//          TIME=(0,20)
+//*
+//*SRCHFOR  '''EFTC''' <=> "'EFTC'"
+//*SRCHFOR  TRANSACTION ENDING LETTERS 'ET'''  <=> "ET'"
+//XDOETD  EXEC PGM=ISRSUPC,                                           *
+//            PARM=(SRCHCMP,
+//            'ANYC')
+//NEWDD  DD DISP=SHR,DSN=NDVR.AFC.PPY.PRD.PROGRAM
+//OUTDD  DD SYSOUT=*
+//SYSIN  DD *
+SRCHFOR  'ET'''
+/*
+

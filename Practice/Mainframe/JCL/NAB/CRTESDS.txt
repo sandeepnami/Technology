@@ -1,0 +1,18 @@
+//UGBIDCAM JOB AF-1055,'CRT ESDS',
+//             MSGCLASS=X,MSGLEVEL=(1,1),
+//             CLASS=P,NOTIFY=&SYSUID
+//*TO CREATE ESDS FILE
+//STEP1   EXEC PGM=IDCAMS
+//SYSPRINT DD  SYSOUT=*
+//SYSIN    DD  *
+  DEFINE CLUSTER(                                                      -
+      NAME(SDAF.NANI.VSAM.ESDS.CLUSTER)                           -
+      TRACKS(1  1)                                                    -
+      RECORDSIZE(80 80)                                                -
+      NONINDEXED                                                       -
+      NOREUSE                                                          -
+      )DATA(                                                           -
+              NAME(SDAF.NANI.VSAM.ESDS.CLUSTER.DATA))
+/*
+//
+

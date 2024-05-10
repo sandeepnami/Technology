@@ -1,0 +1,80 @@
+      *READ SE FILE                                                     00001012
+       IDENTIFICATION DIVISION.                                         00010001
+       PROGRAM-ID. JOINRECS.                                            00020020
+      *                                                                 00020112
+       ENVIRONMENT DIVISION.                                            00021001
+       CONFIGURATION SECTION.                                           00022001
+       INPUT-OUTPUT SECTION.                                            00023012
+       FILE-CONTROL.                                                    00024012
+           SELECT FILE-IN ASSIGN TO INDD                                00025013
+               FILE STATUS IS WS-STATUS-IN.                             00026012
+           SELECT FILE-OUT ASSIGN TO OUTDD                              00026121
+               FILE STATUS IS WS-STATUS-OUT.                            00026221
+      *                                                                 00027012
+       DATA DIVISION.                                                   00030001
+       FILE SECTION.                                                    00030115
+       FD FILE-IN.                                                      00031014
+      *RECL=584                                                         00032113
+       01 MONTH-DATA.                                                   00033020
+           05 MONTH-NAME  PIC X(9).                                     00033120
+           05 FILLER     PIC X(575).                                    00034020
+      *OUTPUT FILE                                                      00035020
+       FD FILE-OUT.                                                     00036020
+      *RECL=584                                                         00037020
+       01 MONTH-OUT-DATA PIC X(584).                                    00038021
+       WORKING-STORAGE SECTION.                                         00040001
+       01 WS-MONTH-DATA.                                                00041020
+           05 WS-MONTH-NAME  PIC X(9).                                  00042020
+                                                                        00045112
+       01 WS-STATUS-IN PIC 9(02) VALUE ZERO.                            00046014
+       01 WS-EOF-IN    PIC X(01) VALUE 'N'.                             00046123
+          88 WS-EOF-IN-YES       VALUE 'Y'.                             00046223
+          88 WS-EOF-IN-NO        VALUE 'N'.                             00046323
+       01 WS-STATUS-OUT PIC 9(02) VALUE ZERO.                           00046423
+       01 WS-LEN-STR   PIC 9(02) VALUE ZERO.                            00047021
+       01 WS-LEN-SPACE PIC 9(02) VALUE ZERO.                            00048022
+       01 WS-START     PIC 9(02) VALUE 1.                               00049022
+      *                                                                 00101012
+       PROCEDURE DIVISION.                                              00110001
+       MAIN-PARA.                                                       00130012
+      *OPENING FILE                                                     00140013
+           OPEN INPUT FILE-IN                                           00160013
+           OPEN OUTPUT FILE-OUT                                         00160123
+           INITIALIZE MONTH-DATA                                        00161020
+           INITIALIZE MONTH-OUT-DATA                                    00162023
+      *READING FILE                                                     00170013
+           READ FILE-IN                                                 00180013
+                 AT END MOVE 'Y' TO WS-EOF-IN                           00181023
+              END-READ                                                  00181113
+      *          DISPLAY 'NANI TEST =' MONTH-DATA                       00181220
+              PERFORM UNTIL WS-EOF-IN-YES                               00181423
+                 MOVE MONTH-NAME TO WS-MONTH-NAME                       00181520
+                 DISPLAY WS-MONTH-NAME " END"                           00181922
+      * WE CANNOT USE LENGTH FUNCTION AS IT INCLUDES SPACES             00182022
+      *          COMPUTE WS-LEN-STR = FUNCTION LENGTH(WS-MONTH-DATA)    00182122
+      *FINDING THE LENGTH OF THE REC USING INSPECT TALLYING             00182222
+      *THE INITIALISE OF TALLYCNTR IS MUST                              00182322
+                 MOVE 0 TO WS-LEN-SPACE                                 00182422
+                 INSPECT FUNCTION REVERSE(WS-MONTH-NAME)                00182522
+                     TALLYING WS-LEN-SPACE FOR LEADING SPACES           00182622
+                                                                        00182723
+                 COMPUTE WS-LEN-STR = LENGTH OF WS-MONTH-NAME -         00182822
+                                      WS-LEN-SPACE                      00182922
+                                                                        00183022
+                 DISPLAY 'LENGTH OF WS-MONTH-NAME = ' WS-LEN-STR        00183223
+                 MOVE WS-MONTH-NAME(1:WS-LEN-STR) TO                    00183322
+                      MONTH-OUT-DATA(WS-START:WS-LEN-STR)               00183422
+                 COMPUTE WS-START = WS-START + WS-LEN-STR               00183522
+                                                                        00183622
+                 INITIALIZE MONTH-DATA                                  00183722
+                 READ FILE-IN                                           00183822
+                     AT END MOVE 'Y' TO WS-EOF-IN                       00183924
+                 END-READ                                               00184122
+              END-PERFORM                                               00184222
+           DISPLAY 'ALL MONTHS MONTHS-OUT-DATA= ' MONTH-OUT-DATA        00184323
+           WRITE MONTH-OUT-DATA                                         00184425
+      *CLOSEING FILE                                                    00184522
+              CLOSE FILE-IN                                             00184622
+              CLOSE FILE-OUT                                            00184722
+              STOP RUN.                                                 00185013
+

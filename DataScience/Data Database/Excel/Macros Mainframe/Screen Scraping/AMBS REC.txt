@@ -1,0 +1,4 @@
+ 7 :AMBS:-ORG                3/NUM  400                 
+ :AMBS:-ACCT                19/AN   0000000001010000006 
+3 :AMBS:-ALT-CUST-NBR          19/AN   0000000000000000000
+

@@ -1,0 +1,26 @@
+/* REXX WITH STRING MANIPULATION                                       
+*/                                                                     
+/********************************************************************* 
+PARSE VAR InVar Out1Var (In2Var) Out2Var                               
+WHERE IN2VAR IS PATTERN MARKER                                         
+*/                                                                     
+/*INPUT*/                                                              
+INDD1="SDAF.P732083.OUTPUT.WRITE.SE"                                   
+STRING="EMAIL"                                                         
+                                                                       
+/*ALLOCATION OF DATASET*/                                              
+"ALLOC FI(INDD1) DA('"INDD1"') SHR "                                   
+                                                                       
+"EXECIO * DISKR INDD1(STEM INARR1. FINIS"                              
+"FREE F(INDD1)"                                                        
+                                                                       
+SAY "ALLOCATION COMPLETE"                                              
+I = 1                                                                  
+/* INARR.0 will have the number of elements in the stem*/              
+DO WHILE I <= INARR1.0                                                 
+ /*PARSE TO SPLIT UP BASED ON COMMA AS PATTERN MARKER*/                
+   PARSE VAR INARR1.I EMP_ID "," EMP_NAME "," EMP_SAL                  
+   SAY "EMP_ID = " EMP_ID "EMP_NAME=" EMP_NAME "EMP-SAL=" EMP_SAL      
+   I = I + 1                                                           
+END                                                                    
+EXIT                                                                   

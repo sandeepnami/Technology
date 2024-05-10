@@ -1,0 +1,19 @@
+Sub ZMain()
+Dim obj
+
+Set obj_file = CreateObject("Scripting.FileSystemObject")
+MsgBox "File OBject supported by Passport"
+
+Set obj_outlook =  CreateObject("Outlook.Application")
+MsgBox "outlook OBject supported by Passport"
+
+  Set xhr = CreateObject("Microsoft.XMLHTTP")
+MsgBox "Http object supported by Passport"
+
+End Sub
+
+
+Sub Prompt( sMsg, nType, sTitle )
+            Set ws = CreateObject( "wscript.shell" )
+            ws.popup sMsg, 0, sTitle, 4096 + nType
+End Sub 

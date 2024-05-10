@@ -1,0 +1,143 @@
+000100 IDENTIFICATION DIVISION.                                         00010000
+000200 PROGRAM-ID. NFIL2FI.                                             00020030
+000300 ENVIRONMENT DIVISION.                                            00030000
+000400 INPUT-OUTPUT SECTION.                                            00040000
+000500 FILE-CONTROL.                                                    00050000
+000600     SELECT IN-FILE                                               00060000
+000700     ASSIGN FIL1                                                  00070030
+000800     ORGANIZATION IS SEQUENTIAL                                   00080000
+000900     ACCESS MODE IS SEQUENTIAL                                    00090000
+001000     FILE STATUS IS W-STATUS.                                     00100000
+001100     SELECT OUT-FILE                                              00110000
+001200     ASSIGN FIL2                                                  00120030
+001300     ORGANIZATION IS SEQUENTIAL                                   00130000
+001400     ACCESS MODE IS SEQUENTIAL                                    00140000
+001500     FILE STATUS IS O-STATUS.                                     00150036
+001600 DATA DIVISION.                                                   00160000
+001700 FILE SECTION.                                                    00170000
+001800 FD IN-FILE                                                       00180000
+001900     RECORD CONTAINS 80 CHARACTERS                                00190029
+002000     BLOCK CONTAINS 0 RECORDS                                     00200000
+002100     RECORDING MODE IS F.                                         00210000
+002200 01 IN-REC.                                                       00220000
+002300     03  EMP-ID      PIC    X(06).                                00230000
+002500     03  EMP-NAME    PIC    X(20).                                00250000
+002700     03  EMP-BASIC   PIC    9(06)V99.                             00270034
+002810     03  EMP-ALW     PIC    9(06)V99.                             00281034
+002830     03  EMP-DEDUC   PIC    9(06)V99.                             00283034
+002840     03  FILLER      PIC    X(27).                                00284034
+002900 FD OUT-FILE                                                      00290000
+003000     RECORD CONTAINS 80  CHARACTERS                               00300029
+003100     BLOCK CONTAINS 0 RECORDS                                     00310000
+003200     RECORDING MODE IS F.                                         00320000
+003300 01 OUT-REC  PIC  X(80).                                          00330040
+004000 WORKING-STORAGE SECTION.                                         00400000
+004010 01 W-OUT-REC.                                                    00401040
+004011       03  W-SER-NO      PIC    ZZ9.                              00401153
+004012       03  FILLER        PIC    X(02).                            00401253
+004020       03 W-EMP-ID       PIC   Z9(05).                            00402040
+004030       03 FILLER         PIC   X(02).                             00403040
+004040       03 W-EMP-NAME     PIC   X(15).                             00404040
+004050       03 FILLER         PIC   X(02).                             00405040
+004060       03 W-BASIC        PIC   9(06).99.                          00406040
+004070       03 FILLER         PIC   X(02).                             00407040
+004080       03 W-ALLOWANCES   PIC   9(06).99.                          00408040
+004090       03 FILLER         PIC   X(01).                             00409040
+004091       03 W-DEDUCTIONS   PIC   9(04).                             00409140
+004092       03 FILLER         PIC   X(01).                             00409240
+004093       03 W-GROSS        PIC   9(06).99.                          00409340
+004094       03 FILLER         PIC   X(01).                             00409440
+004095       03 W-NET          PIC   9(06).99.                          00409540
+004096       03 FILLER         PIC   X(05).                             00409653
+004100 01 WORK-AREA.                                                    00410041
+004200     03 W-STATUS       PIC X(02).                                 00420000
+004300     03 O-STATUS       PIC X(02).                                 00430038
+004310     03 W-SERIAL       PIC  999 VALUE ZEROS.                      00431053
+004400     03 EOF            PIC X  VALUE IS 'Y'.                       00440000
+004410     03 W-EMP-GROSS    PIC 9(06)V99.                              00441034
+004420     03 W-EMP-NET      PIC 9(06)V99.                              00442040
+004421     03 W-SYS-DATE.                                               00442158
+004422        05   YEAR     PIC  99.                                    00442258
+004423        05   MONTH    PIC  99.                                    00442358
+004424        05   DAT      PIC  99.                                    00442458
+004425     03 W-PAGE-CTR    PIC  9(03) VALUE ZEROS.                     00442561
+004426     03 W-LINE-CTR    PIC  9(02) VALUE ZEROS.                     00442665
+004427 01 W-TITLE.                                                      00442750
+004428     03 FILLER        PIC  X(55)  VALUE IS                        00442863
+004429     "                    EMPLOYEE PAY SLIP               ".      00442950
+004430     03 FILLER        PIC  X(08) VALUE IS "PAGENO:".              00443063
+004431     03 T-PAGE-CTR    PIC  ZZ9   VALUE ZEROS.                     00443161
+004432 01 TITLE-AREA.                                                   00443243
+004433     03 T-HYPHEN       PIC  X(80) VALUE ALL "-".                  00443343
+004440     03 T-HEADING      PIC  X(70) VALUE "SNO  EMP-ID  EMP-NAME    00444054
+004450-     "     BASIC     DEDUC     ALLO     GROSS   NET".            00445056
+004460 01  DATE-AREA.                                                   00446057
+004470     03 W-DAT-STRING  PIC  X(15)  VALUE IS "AS ON DATE:".         00447057
+004493     03 W-MOD-DATE.                                               00449357
+004494        05   DAT      PIC  99/.                                   00449457
+004495        05   MONTH    PIC  99/.                                   00449557
+004496        05   YEAR     PIC  99.                                    00449657
+004500 PROCEDURE DIVISION.                                              00450000
+004600 0000-MAIN-PARA.                                                  00460000
+004700     PERFORM 1000-OPEN-PARA.                                      00470000
+004710     PERFORM 1100-HEADING-PARA.                                   00471043
+004800     PERFORM 2000-PROCESS-PARA UNTIL EOF = 'N'.                   00480000
+004810     PERFORM 9000-CLOSE-PARA.                                     00481012
+004900     STOP RUN.                                                    00490000
+005000 1000-OPEN-PARA.                                                  00500000
+005100     OPEN INPUT IN-FILE                                           00510011
+005110          OUTPUT OUT-FILE.                                        00511011
+005200     EVALUATE TRUE ALSO TRUE                                      00520036
+005300        WHEN  W-STATUS = 00  ALSO O-STATUS = 00                   00530037
+005400             CONTINUE                                             00540001
+005500        WHEN  OTHER                                               00550008
+005600             PERFORM 9999-ERROR-CODE                              00560000
+005700     END-EVALUATE.                                                00570000
+005710 1100-HEADING-PARA.                                               00571043
+005711     ADD 1 TO W-PAGE-CTR.                                         00571161
+005712     MOVE W-PAGE-CTR TO T-PAGE-CTR.                               00571261
+005713     WRITE OUT-REC FROM T-HYPHEN.                                 00571364
+005714     WRITE OUT-REC FROM W-TITLE.                                  00571450
+005715     WRITE OUT-REC FROM T-HYPHEN.                                 00571560
+005716     ACCEPT W-SYS-DATE FROM DATE.                                 00571657
+005717     MOVE CORR  W-SYS-DATE TO W-MOD-DATE.                         00571759
+005718     WRITE  OUT-REC FROM DATE-AREA.                               00571858
+005720     WRITE OUT-REC FROM T-HYPHEN.                                 00572043
+005730     WRITE OUT-REC FROM T-HEADING.                                00573043
+005740     WRITE OUT-REC FROM T-HYPHEN.                                 00574043
+005800 2000-PROCESS-PARA.                                               00580000
+005900     READ IN-FILE                                                 00590000
+006000          AT END MOVE 'N' TO EOF                                  00600013
+006100          NOT AT END                                              00610000
+006200          EVALUATE TRUE                                           00620000
+006300             WHEN W-STATUS = 00                                   00630000
+006400               PERFORM 2100-MOVE-PARA                             00640001
+006500             WHEN OTHER                                           00650000
+006600               PERFORM 9999-ERROR-CODE                            00660000
+006700          END-EVALUATE                                            00670000
+006800     END-READ.                                                    00680000
+006900 2100-MOVE-PARA.                                                  00690000
+006910     ADD 1 TO W-SERIAL                                            00691061
+006920     MOVE W-SERIAL TO W-SER-NO                                    00692061
+007000     MOVE EMP-ID TO W-EMP-ID                                      00700061
+007010     MOVE EMP-NAME TO W-EMP-NAME                                  00701061
+007011     MOVE EMP-BASIC TO W-BASIC                                    00701161
+007012     MOVE EMP-ALW TO W-ALLOWANCES                                 00701261
+007013     MOVE EMP-DEDUC TO W-DEDUCTIONS                               00701361
+007014     COMPUTE W-EMP-GROSS = EMP-BASIC + EMP-ALW                    00701461
+007016     COMPUTE W-EMP-NET   = W-EMP-GROSS - EMP-DEDUC                00701661
+007017     MOVE W-EMP-GROSS TO W-GROSS                                  00701761
+007018     MOVE W-EMP-NET  TO W-NET                                     00701861
+007019     WRITE OUT-REC  FROM W-OUT-REC.                               00701940
+007020     ADD 1 TO W-LINE-CTR.                                         00702067
+007021     IF W-LINE-CTR  > 04                                          00702167
+007022        PERFORM 1100-HEADING-PARA                                 00702261
+007023        MOVE ZERO TO W-LINE-CTR                                   00702366
+007024     END-IF.                                                      00702461
+007025 9000-CLOSE-PARA.                                                 00702512
+007030     CLOSE IN-FILE OUT-FILE .                                     00703028
+007100 9999-ERROR-CODE.                                                 00710000
+007200     DISPLAY " ERROR IN FILE : " W-STATUS .                       00720028
+007210     DISPLAY " ERROR IN FILE : " O-STATUS .                       00721036
+007300     STOP RUN .                                                   00730028
+

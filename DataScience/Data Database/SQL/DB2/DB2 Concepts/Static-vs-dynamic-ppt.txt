@@ -1,0 +1,34 @@
+-----------------------------------------
+          static
+------------------------------------------
+Statement : 
+
+	Coded in program, always does the same function on the same tables and columns
+
+dynamic:
+
+STATEMENT : ACQUIRED DURING RUN, AND FUNCTION CAN VARY AND CAN BE DONE TO DIFFERENT  TABLES  AND  COLUMNS
+
+Bind:	on all SQL statements
+
+	Before program execution
+	Builds a stored Plan/Package
+
+------------------------------------------
+static vs dynamic
+-----------------
+Statement :
+
+	Static	: Object and Action known
+	Dynamic	: Object or Action not known
+
+
+Bind :
+
+	Static	: is bound once.
+               -on all SQL statements
+	       -Before program execution
+	       -Builds a stored Plan/Package
+	Dynamic	: is bound every time
+---------------------------------------------
+

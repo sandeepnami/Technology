@@ -1,0 +1,45 @@
+USE employees;
+/*Consider the latest salary for employee*/
+WITH changed_salary AS (
+  SELECT s.*, ROW_NUMBER() OVER (PARTITION BY emp_no ORDER BY from_date DESC) AS partitioned_rowno
+  FROM salaries AS s
+)
+SELECT * FROM changed_salary WHERE partitioned_rowno = 1;
+;
+-- This query is quite fast than above
+SELECT s1.*
+FROM salaries s1 LEFT JOIN salaries s2
+ ON (s1.emp_no = s2.emp_no AND s1.from_date < s2.from_date)
+WHERE s2.emp_no IS NULL
+;
+-- Checking time taken
+WITH single_sal AS(
+SELECT s1.*
+FROM salaries s1 LEFT JOIN salaries s2
+ ON (s1.emp_no = s2.emp_no AND s1.from_date < s2.from_date)
+WHERE s2.emp_no IS NULL
+)
+SELECT * FROM single_sal
+;
+/* consider only salry and employee table*/
+SELECT e.emp_no, first_name, last_name, birth_date, salary
+FROM employees as e
+INNER JOIN salaries as s
+ON e.emp_no=s.emp_no
+;
+/*Query to get single salary for employees*/
+WITH single_sal AS(
+SELECT s1.*
+FROM salaries s1 LEFT JOIN salaries s2
+ ON (s1.emp_no = s2.emp_no AND s1.from_date < s2.from_date)
+WHERE s2.emp_no IS NULL
+)
+SELECT e.emp_no, first_name, last_name, dept_name, salary
+FROM employees as e
+INNER JOIN single_sal as s
+ON e.emp_no=s.emp_no
+INNER JOIN dept_emp as de
+ON e.emp_no=de.emp_no
+INNER JOIN departments as d
+ON de.dept_no=d.dept_no
+;

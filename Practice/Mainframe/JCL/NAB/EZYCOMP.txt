@@ -1,0 +1,24 @@
+//EZYCOMP  JOB CA-1114,'CMPLE CA944',MSGCLASS=X,CLASS=W,                JOB27034
+// NOTIFY=&SYSUID                                                       NXZ25_SX
+//*                                                                     00020000
+/*ROUTE PRINT MDP10004                                                  00040001
+//*                                                                     00050000
+//*-------------------------------------------------------------------*
+//* EASYTRIEVE COMPILE OF MODULE :- CA953M00                          *
+//*-------------------------------------------------------------------*
+//*
+//CA944M00 EXEC PROC=DEVOSEZY
+//PANDD1   DD DSN=SDAF.ELTP.SOURCE.LIBRARY,DISP=SHR
+//PANDD13  DD DSN=PROG.PROD.COPY.LIBRARY,DISP=SHR
+//*
+//EXPNDPAN.SYSIN DD *
+++WRITE WORK,CA953M00
+/*
+//*-------------------------------------------------------------------*
+//* BATCH PROGRAM LINK OF LOAD MODULE :-  CA953BA0                    *
+//*-------------------------------------------------------------------*
+//*
+//LINKEDIT EXEC PROC=GUDOSLNK,LOADMOD=CA953BA0
+//LKED.SYSLMOD DD DSN=SDCA.PP40399.LOAD.LIBRARY(&LOADMOD),DISP=SHR
+//*
+

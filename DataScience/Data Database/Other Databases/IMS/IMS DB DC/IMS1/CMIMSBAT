@@ -1,0 +1,81 @@
+//UELT228C JOB NOTIFY=&SYSUID,CLASS=A                                   00010000
+//*                                                                     00050000
+//************************************************************@SCPYRT** 00060000
+//*                                                                   * 00061000
+//*  Licensed Materials - Property of IBM                             * 00062000
+//*                                                                   * 00063000
+//*  5655-J38                                                         * 00064000
+//*                                                                   * 00065000
+//*  (C) Copyright IBM Corp. 1991,1998 prog Rights Reserved           * 00066000
+//*                                                                   * 00067000
+//*  US Government Users Restricted Rights - Use, duplication or      * 00100000
+//*  disclosure restricted by GSA ADP Schedule contract with          * 00130000
+//*  IBM Corp.                                                        * 00140000
+//*                                                                   * 00150000
+//************************************************************@ECPYRT** 00170000
+//*                                                                     00190000
+//* INSTALL/IVP IMS 7.1                                                 00200000
+//*                                                                     00210000
+//* FUNCTION: COMPILE AND LINK-EDIT MPP APPLICATION PROGRAM WRITTEN IN  00220000
+//*            COBOL LANGUAGE.                                          00230000
+//*                                                                     00240000
+//*  CHANGES: THIS PART IS NEW FOR IMS 3.2                              00250000
+//* APAR...  ID  PREREQ.  DATE....  DESCRIPTION......................   00260000
+//* KNQ0115  01           11/17/91  ADD COBOL LANG. VERSION             00260010
+//* KNQ0197  02           01/20/92  CHANGE RESLIB TO DISP=SHR           00260020
+//* KOR1347  03           06/17/92  32 TO XX                            00260030
+//* UPDT071  04           12/17/92  NEW NAMES                           00260040
+//*                                                                     00270000
+//********************************************************************* 00280000
+//*                                                                     00290000
+//* COMPILE AND LINK-EDIT THE CONVERSATIONAL MPP APPLICATION PROGRAM    00300000
+//*                                                                     00310000
+//COMLK  PROC SRC=CMDCODD                                               00320000
+//*                                                                     00330000
+//C        EXEC  PGM=IGYCRCTL,REGION=4M,                                00340000
+//         PARM='MAP,OFFSET,VBREF,XREF,OBJ,LIB'                         00350000
+//SYSLIN   DD UNIT=SYSDA,DISP=(MOD,PASS),SPACE=(CYL,(1,1)),             00370000
+//            DCB=(RECFM=F,LRECL=80,BLKSIZE=80),DSN=&&LOADSET           00380000
+//SYSPRINT DD SYSOUT=*                                                  00390000
+//SYSUT1   DD UNIT=SYSDA,DISP=(,DELETE),                                00400000
+//            SPACE=(CYL,(1,1))                                         00410000
+//SYSUT2   DD UNIT=SYSDA,DISP=(,DELETE),                                00420000
+//            SPACE=(CYL,(1,1))                                         00430000
+//SYSUT3   DD UNIT=SYSDA,DISP=(,DELETE),                                00440000
+//            SPACE=(CYL,(1,1))                                         00450000
+//SYSUT4   DD UNIT=SYSDA,DISP=(,DELETE),                                00460000
+//            SPACE=(CYL,(1,1))                                         00470000
+//SYSUT5   DD UNIT=SYSDA,DISP=(,DELETE),                                00480000
+//            SPACE=(CYL,(1,1))                                         00490000
+//SYSUT6   DD UNIT=SYSDA,DISP=(,DELETE),                                00500000
+//            SPACE=(CYL,(1,1))                                         00510000
+//SYSUT7   DD UNIT=SYSDA,DISP=(,DELETE),                                00520000
+//            SPACE=(CYL,(1,1))                                         00530000
+//SYSIN    DD DISP=SHR,                                                 00540000
+//             DSN=UELT228.ELTP1026.IMS.COBOL(&SRC)                     00550000
+//COMPILE.SYSLIB DD DSN=ELTP.HYD.IMS.COPYLIB,DISP=SHR
+//*                                                                     00560000
+//L        EXEC PGM=IEWL,                                               00570000
+//         PARM='SIZE=(4096K,64K),LET,LIST,XREF',                       00580000
+//         COND=(4,LT,C)                                                00590000
+//RESLIB   DD DSN=IMS910.SDFSRESL,DISP=SHR                              00600000
+//SYSLIB   DD DSN=CEE.SCEELKED,DISP=SHR                                 00610000
+//         DD DSN=IMS910.PGMLIB,DISP=SHR
+//SYSLMOD  DD DSN=IMS910.PGMLIB,DISP=SHR                                00620000
+//SYSPRINT DD SYSOUT=*                                                  00630000
+//SYSUT1   DD UNIT=SYSDA,SPACE=(CYL,(5,1))                              00640000
+//SYSLIN   DD DSN=&&LOADSET,DISP=(OLD,DELETE)                           00650000
+//         DD DDNAME=SYSIN                                              00660000
+//         PEND                                                         00670000
+//********************************************************************  00680000
+//*                                                                     00690000
+//* COMPILE AND LINK-EDIT THE CONVERSATIONAL MPP APPLICATION PROGRAM    00700000
+//*                                                                     00710000
+//STEP1 EXEC PROC=COMLK,SRC=CMDCODD                                     00720000
+//L.SYSIN  DD  *                                                        00750000
+  INCLUDE RESLIB(CBLTDLI)                                               00760000
+  ENTRY   DLITCBL
+  NAME CMDCODD(R)                                                       00770000
+/*                                                                      00780000
+//
+

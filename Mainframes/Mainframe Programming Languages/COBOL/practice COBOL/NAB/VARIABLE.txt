@@ -1,0 +1,34 @@
+      *COBOL BASIC                                                      00001021
+       IDENTIFICATION DIVISION.                                         00010001
+       PROGRAM-ID. VARIABLE.                                            00020022
+      *                                                                 00020112
+       ENVIRONMENT DIVISION.                                            00021001
+       CONFIGURATION SECTION.                                           00022001
+       INPUT-OUTPUT SECTION.                                            00023012
+      *                                                                 00027012
+       DATA DIVISION.                                                   00030001
+       FILE SECTION.                                                    00030115
+       WORKING-STORAGE SECTION.                                         00040001
+       01 WS-STRING       PIC X(10) VALUE 'NALINI'.                     00041023
+       01 WS-LENGTH       PIC 9(4).                                     00042023
+       01 WS-COUNT        PIC 9(4).                                     00042123
+       01 WS-COMP3        PIC S9(3) COMP-3 VALUE +123.                  00043023
+       01 WS-COMP1        USAGE IS COMP-1 .                             00044023
+      *                                                                 00101012
+       PROCEDURE DIVISION.                                              00110001
+       MAIN-PARA.                                                       00130012
+           MOVE +12345   TO WS-COMP1                                    00140023
+           DISPLAY "WS-COMP VALUE +123 = " WS-COMP3                     00180023
+           MOVE +12345   TO WS-COMP3                                    00181023
+           DISPLAY "WS-COMP VALUE +12345 = " WS-COMP3                   00182023
+           DISPLAY "WS-COM1 VALUE +123456 = " WS-COMP1                  00183023
+           PERFORM STRING-LENGTH                                        00184023
+           DISPLAY 'LENGTH OF WS-STRING=' WS-STRING  'IS =' WS-LENGTH   00184123
+           STOP RUN.                                                    00185021
+       STRING-LENGTH.                                                   00186023
+           MOVE 0 TO WS-COUNT                                           00187023
+           INSPECT WS-STRING REPLACING ALL LOW-VALUE BY SPACE           00188023
+           INSPECT FUNCTION REVERSE(WS-STRING)                          00189023
+                   TALLYING WS-COUNT FOR LEADING SPACE                  00190023
+           COMPUTE WS-LENGTH = LENGTH OF WS-STRING - WS-COUNT.          00200023
+

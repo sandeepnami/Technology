@@ -1,0 +1,14 @@
+... a multiline                                                                 
+... string"""                                                                   
+'This is\na multiline\nstring'                                                  
+>>> '''So                                                                       
+... is                                                                          
+... this.'''                                                                    
+'So\nis\nthis.'                                                                 
+>>> m = 'This string\nspans multiple\nlines'                                    
+>>> m                                                                           
+'This string\nspans multiple\nlines'                                            
+>>> print(m)                                                                    
+This string                                                                     
+spans multiple                                                                  
+lines                                                                           

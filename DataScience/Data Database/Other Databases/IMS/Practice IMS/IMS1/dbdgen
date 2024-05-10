@@ -1,0 +1,22 @@
+//       PROC MBR=TEMPNAME,SOUT=A,RGN=0M,SYS2=                          00000010
+//C      EXEC PGM=ASMA90,REGION=&RGN,                                   00000020
+//            PARM=(OBJECT,NODECK,NODBCS,                               00000030
+//            'SIZE(MAX,ABOVE)')                                        00000040
+//SYSLIB   DD DSN=IMS910.&SYS2.SDFSMAC,DISP=SHR                         00000050
+//SYSLIN   DD UNIT=SYSDA,DISP=(,PASS),                                  00000060
+//         SPACE=(80,(100,100),RLSE),                                   00000070
+//         DCB=(BLKSIZE=80,RECFM=F,LRECL=80)                            00000080
+//SYSPRINT DD SYSOUT=&SOUT,DCB=BLKSIZE=1089,                            00000090
+//         SPACE=(121,(300,300),RLSE,,ROUND)                            00000100
+//SYSUT1   DD UNIT=SYSDA,DISP=(,DELETE),                                00000110
+//         SPACE=(CYL,(10,5))                                           00000120
+//L      EXEC PGM=IEWL,PARM='XREF,LIST',                                00000130
+//            COND=(0,LT,C),REGION=4M                                   00000140
+//SYSLIN   DD DSN=*.C.SYSLIN,DISP=(OLD,DELETE)                          00000150
+//SYSPRINT DD SYSOUT=&SOUT,DCB=BLKSIZE=1089,                            00000160
+//         SPACE=(121,(90,90),RLSE)                                     00000170
+//SYSLMOD  DD DISP=SHR,                                                 00000180
+//         DSN=IMS910.&SYS2.DBDLIB(&MBR)                                00000190
+//SYSUT1   DD UNIT=(SYSDA,SEP=(SYSLMOD,SYSLIN)),                        00000200
+//         SPACE=(1024,(100,10),RLSE),DISP=(,DELETE)                    00000210
+

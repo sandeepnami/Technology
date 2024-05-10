@@ -1,0 +1,161 @@
+//COMPARE  JOB AF-1055,'EZY RUN',                                     
+//             MSGCLASS=X,MSGLEVEL=(1,1),                             
+//             CLASS=P,NOTIFY=&SYSUID,RESTART=COMPARE1                
+//*                                                                   
+//SORT001 EXEC PGM=SORT                                               
+//SYSOUT   DD  SYSOUT=*                                               
+//SYSPRINT DD  SYSOUT=*                                               
+//SORTIN   DD  DSN=SDAF.P726363.ND600M9L.MEMBER.CSECT1.D0209,         
+//             DISP=SHR                                               
+//SORTOUT  DD  DSN=SDAF.P726363.ND600M9L.MEMBER.CSECT1.D0209,         
+//             DISP=OLD                                               
+//SYSIN    DD  *                                                      
+ SORT FIELDS=(5,8,CH,A)                                               
+/*                                                                    
+//*                                                                   
+//SORT002 EXEC PGM=SORT                                               
+//SYSOUT   DD  SYSOUT=*                                               
+//SYSPRINT DD  SYSOUT=*                                               
+//SORTIN   DD  DSN=SDAF.P726363.SPUFI.D02.OUT2.D0209,                 
+//             DISP=SHR                                               
+//SORTOUT  DD  DSN=SDAF.P726363.SPUFI.D02.OUT2.D0209,                 
+//             DISP=OLD                                               
+//SYSIN    DD  *                                                      
+ SORT FIELDS=(1,8,CH,A)                                               
+/*                                                                    
+//*                                                                   
+//COMPARE1 EXEC PGM=EZTPA00                                           
+//SYSPRINT DD   SYSOUT=*                                              
+//SYSOUT   DD   SYSOUT=*                                              
+//PANDD1   DD   DSN=SDAF.P732083.NAMI.COPY.LIBRARY,DISP=SHR           
+//* ENTER COPYBOOK LIBRARY IN PANDD13                                 
+//PANDD13  DD   DSN=SDAF.P732083.NAMI.COPY.LIBRARY,DISP=SHR           
+//*                                                                   
+//FILE1    DD DSN=SDAF.P726363.ND600M9L.MEMBER.CSECT1.D0209,          
+//             DISP=SHR                                               
+//FILE2    DD DSN=SDAF.P726363.SPUFI.D02.OUT2.D0209,                  
+//             DISP=SHR                                               
+//* MATCH ALL FILE1 WITH FILE2.                                    
+//*ENTRIES OF ALL FILE1 MUST BE THERE IN MATCH1                    
+//FILEOUT  DD DSN=SDAF.P726363.MATCHREP.SE,                        
+//             DISP=OLD                                            
+//*                                                                
+//SYSIN    DD *                                                    
+LIST ON                                                            
+PARM DEBUG   (NOXREF NOCLIST NODMAP)                               
+*                                                                  
+FILE FILE1                                                         
+FILE1-REC        1  80    A                                        
+FILE1-FIELD      5   8    A                                        
+FILE1-DATE      45   8    A                                        
+                                                                   
+*                                                                  
+FILE FILE2 VB (4092 4096)                                          
+FILE2-FIELD      1   8    A                                        
+FILE2-TYPE      13   8    A                                        
+FILE2-DATE      33  10    A                                        
+                                                                   
+*                                                                  
+FILE FILEOUT                                                       
+FILEOUT-REC      1  80    A                                        
+                                                                   
+******working storage variables******************                  
+WS-FILEOUT           W   80   A                                    
+WS-FILEOUT-FIELD    WS-FILEOUT         8    A                      
+WS-FILEOUT-COMMA1   WS-FILEOUT    +8   1    A VALUE ','            
+WS-FILEOUT-LDATE    WS-FILEOUT    +9   8    A                      
+WS-FILEOUT-COMMA2   WS-FILEOUT    +17  1    A VALUE ','            
+WS-FILEOUT-LFOUND   WS-FILEOUT    +18  1    A                      
+WS-FILEOUT-COMMA3   WS-FILEOUT    +19  1    A VALUE ','            
+WS-FILEOUT-SDATE    WS-FILEOUT    +20  10   A                      
+WS-FILEOUT-COMMA4   WS-FILEOUT    +30  1    A VALUE ','            
+WS-FILEOUT-SFOUND   WS-FILEOUT    +31  1    A                      
+WS-FILEOUT-COMMA5   WS-FILEOUT    +32  1    A VALUE ','            
+WS-FILEOUT-TYPE     WS-FILEOUT    +33  8    A                      
+WS-FILEOUT-FILLER   WS-FILEOUT    +41  39   A                      
+                                                                        
+WS-FOUND-FIELD           W   8   A                                      
+WS-WRITE-OUT             W   1   A  VALUE 'Y'                           
+                                                                        
+      *--------------------------------------------------------------*  
+      *      ***************************************************     *  
+      *      ***************************************************     *  
+      *      **                                               **     *  
+      *      **    P R O C E D U R E     D I V I S I O N      **     *  
+      *      **                                               **     *  
+      *      ***************************************************     *  
+      *      ***************************************************     *  
+      *--------------------------------------------------------------*  
+                                                                        
+           JOB INPUT NULL                                               
+      *******INITIALISE VARIABLES TO SPACES                             
+           MOVE SPACE TO WS-FILEOUT-FILLER                              
+           GET FILE1                                                    
+           GET FILE2                                                    
+           %DATECONV FILE1-DATE "DD/MM/YY"  FILE1-DATE "DD.MM.CCYY" 20  
+           DISPLAY 'FILE1-DATE  ' FILE1-DATE                            
+           STOP                                                         
+      *    DISPLAY 'FILE1-FIELD ' FILE1-FIELD                           
+      *    DISPLAY 'FILE2-FIELD ' FILE2-FIELD                           
+           DO WHILE NOT EOF FILE1                                       
+            IF NOT EOF FILE2                                            
+      *****************NESTED IF ELSE IF STATEMENT*****************     
+              IF FILE1-FIELD <  FILE2-FIELD                             
+                 IF  WS-FOUND-FIELD EQ FILE1-FIELD                      
+                   WS-WRITE-OUT = 'N'                                   
+                 END-IF                                                 
+                 WS-FILEOUT-FIELD  = FILE1-FIELD                        
+                 WS-FILEOUT-LDATE  = FILE1-DATE                         
+                 WS-FILEOUT-LFOUND = 'Y'                                
+                 MOVE SPACE TO WS-FILEOUT-SDATE WS-FILEOUT-TYPE         
+                 WS-FILEOUT-SDATE  = '-'                                
+                 WS-FILEOUT-SFOUND = 'N'                                
+                 WS-FILEOUT-TYPE   = '-'                                
+                 GET FILE1                                           
+              ELSE                                                   
+                IF FILE1-FIELD  EQ FILE2-FIELD                       
+      *            DISPLAY 'IF2'                                     
+                   WS-FILEOUT-FIELD  = FILE1-FIELD                   
+                   WS-FILEOUT-LDATE  = FILE1-DATE                    
+                   WS-FILEOUT-LFOUND = 'Y'                           
+                   WS-FILEOUT-SDATE  = FILE2-DATE                    
+                   WS-FILEOUT-SFOUND = 'Y'                           
+                   WS-FILEOUT-TYPE   = FILE2-TYPE                    
+      *special case if file2 has duplicate entries comment get file1 
+                   WS-FOUND-FIELD = FILE1-FIELD                      
+      *            GET FILE1                                         
+                                                                     
+                   GET FILE2                                         
+      *ELSE CASE IS FOR FILE1-FIELD > FILE2-FIELD                    
+                ELSE                                                 
+      *            DISPLAY 'IF3'                                     
+                   WS-FILEOUT-FIELD  = FILE1-FIELD                   
+                   WS-FILEOUT-LDATE  = FILE1-DATE                    
+                   WS-FILEOUT-LFOUND = 'Y'                           
+                   MOVE SPACE TO WS-FILEOUT-SDATE WS-FILEOUT-TYPE    
+                   WS-FILEOUT-SDATE  = '--'                          
+                   WS-FILEOUT-SFOUND = 'N'                           
+                   WS-FILEOUT-TYPE   = '-'                           
+                   GET FILE2                                         
+                END-IF                                               
+              END-IF                                                 
+            ELSE                                                     
+               WS-FILEOUT-FIELD  = FILE1-FIELD                       
+               WS-FILEOUT-LDATE  = FILE1-DATE                        
+               WS-FILEOUT-LFOUND = 'Y'                               
+               MOVE SPACE TO WS-FILEOUT-SDATE WS-FILEOUT-TYPE        
+               WS-FILEOUT-SDATE  = '-'                               
+               WS-FILEOUT-SFOUND = 'N'                               
+               WS-FILEOUT-TYPE   = '-'                               
+               GET FILE1                                             
+            END-IF                                                   
+            IF WS-WRITE-OUT EQ 'Y'                                     
+              FILEOUT-REC = WS-FILEOUT                                 
+              PUT FILEOUT                                              
+            END-IF                                                     
+            WS-WRITE-OUT = 'Y'                                         
+      **********INITIALISE THE VARIABLES                               
+      *    MOVE SPACE TO FILE1-FIELD FILE2-FIELD FILE1-DATE FILE2-DATE 
+           END-DO                                                      
+           STOP                                                        
+/*                                                                     

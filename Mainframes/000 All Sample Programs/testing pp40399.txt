@@ -1,0 +1,45 @@
+Customer No's
+401887244
+401979392
+casb - 401979448
+
+Account no's
+843020798 - NTNA  bsb- 3047
+
+Austrac verification
+4. ME Toolbox
+2. ME Utilities... give database version
+6. ME Austrac Verify Customer enter me-id: cust-no
+
+start fai
+05  EL23031-SE1339P-REDEF-V01         C   1    Y         
+05  EL23032-SE1339P-REDEF-V01         PS  9    11072014  
+
+Customer creation in CAMS
+do austrac
+in casb
+no need of austracc
+
+
+Account creation in ebobs
+go to 3200
+enter  'S' before accts/services
+Product Code : LFDA (base product MPID) 
+PRESS ENTER TILL U GET PRODUCT VARIATIONS SCREEN
+Then goto SDAF.PROD.VARTION.LATEST
+Give repricing date: procdate+1 year
+
+For LFDA create casb customer and then create accounts
+note: before creating LFDA acc create NTNA acc
+
+GU0091M0
++000011C4
+         
+Stert EN;;62;1;2
+DATA SET NAME ===> 'ENDEVOR.PROD.GU.LISTING  
+ENDEVOR.PROD.AF.LISTING 
+
+GIVE L BEFORE THE PROGRAM ADN THEN SEARCH FOR THE OFFFSET. SEE ABOVE TO GET LINE NO.
+Then search for line no to get the code.
+
+400520133

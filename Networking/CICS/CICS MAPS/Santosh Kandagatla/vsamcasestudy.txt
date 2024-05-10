@@ -1,0 +1,170 @@
+000100 IDENTIFICATION DIVISION.                                         00010000
+000200 PROGRAM-ID. SAMPCSL2.                                            00020002
+000300 ENVIRONMENT DIVISION.                                            00030000
+000400 INPUT-OUTPUT SECTION.                                            00040000
+000500 FILE-CONTROL.                                                    00050000
+000600     SELECT M01-INPUT-FILE ASSIGN TO STUFILE                      00060015
+000810     ORGANIZATION IS INDEXED                                      00081015
+000820     ACCESS MODE IS SEQUENTIAL                                    00082014
+000830     RECORD KEY IS M01-I-STU-ID                                   00083014
+000840     FILE STATUS IS W-IN-STATUS.                                  00084014
+001000     SELECT R02-OUTPUT-FILE ASSIGN TO STUOUT                      00100012
+001010     COPY SEQUEN REPLACING ==W-IN-STATUS== BY ==W-OUT-STATUS==.   00101008
+001400 DATA DIVISION.                                                   00140000
+001500 FILE SECTION.                                                    00150000
+001600 FD M01-INPUT-FILE                                                00160015
+001700     RECORD CONTAINS 50 CHARACTERS.                               00170017
+001800                                                                  00180013
+002000 01 M01-INPUT-REC.                                                00200012
+002100     03  M01-I-STU-ID     PIC  9(06).                             00210012
+002200     03  M01-X-STU-NAME   PIC X(14).                              00220012
+002300     03  M01-F-OLA1-SCORE PIC 9(03)V99.                           00230012
+002400     03  M01-F-OLA2-SCORE PIC 9(03)V99.                           00240012
+002500     03  M01-F-OLA3-SCORE PIC 9(03)V99.                           00250012
+002600     03  M01-F-OLA4-SCORE PIC 9(03)V99.                           00260012
+002700     03  M01-F-CS1-SCORE  PIC 9(03)V99.                           00270012
+002800     03  M01-F-CS2-SCORE  PIC 9(03)V99.                           00280012
+002900 FD R02-OUTPUT-FILE                                               00290012
+003000     RECORD CONTAINS 80 CHARACTERS                                00300000
+003100     BLOCK CONTAINS 0 RECORDS                                     00310000
+003200     RECORDING MODE IS F.                                         00320000
+003300 01 M01-OUTPUT-REC PIC X(80).                                     00330012
+003400 WORKING-STORAGE SECTION.                                         00340000
+003500 01 W-G-OUTPUT-REC.                                               00350012
+003510     03 W-SNO             PIC   Z9.                               00351000
+003520     03 FILLER            PIC   X(01).                            00352000
+003600     03 W-I-STU-ID        PIC      9(06).                         00360013
+003700     03 FILLER            PIC      X(01).                         00370013
+003800     03 W-X-STU-NAME      PIC      X(14).                         00380013
+003900     03 FILLER            PIC      X(01).                         00390013
+004000     03 W-F-OLA1-SCORE    PIC      Z9(02).99.                     00400013
+004100     03 FILLER            PIC      X(01).                         00410013
+004200     03 W-F-OLA2-SCORE    PIC      Z9(02).99.                     00420013
+004210     03 FILLER            PIC      X(01).                         00421013
+004300     03 W-F-OLA3-SCORE    PIC      Z9(02).99.                     00430013
+004301     03 FILLER            PIC      X(01).                         00430113
+004310     03 W-F-OLA4-SCORE    PIC      Z9(02).99.                     00431013
+004320     03 FILLER            PIC      X(01).                         00432013
+004400     03 W-F-CS1-SCORE     PIC      Z9(02).99.                     00440013
+004410     03 FILLER            PIC      X(01).                         00441013
+004500     03 W-F-CS2-SCORE     PIC      Z9(02).99.                     00450013
+004600     03 FILLER            PIC      X(01).                         00460013
+004700     03 W-I-AVERAGE       PIC      Z99.99.                        00470013
+004800     03 FILLER            PIC      X(07).                         00480013
+004900 01 WORK-AREA.                                                    00490000
+005000     03 W-IN-STATUS       PIC X(02).                              00500000
+005100     03 W-OUT-STATUS      PIC X(02).                              00510000
+005200     03 W-FLA-EOF         PIC X VALUE "Y".                        00520012
+005300     03 W-I-SER-NO        PIC 99 VALUE ZEROS.                     00530012
+005400     03 W-I-TEMP-AVG      PIC 9(03)V99.                           00540012
+005500     03 W-I-PAGE-CTR      PIC 999 VALUE ZEROS.                    00550012
+005600     03 W-I-LINE-CTR      PIC 99 VALUE 01.                        00560012
+005610     03 W-X-HYPHEN        PIC X(80) VALUE ALL "*".                00561013
+005620     03 W-X-COLOUMN-HEADING PIC X(80) VALUE IS                    00562012
+005630     "SNO  ID     NAME         OLA1    OLA2    OLA3   OLA4    CS1 00563004
+005640-    "   CS2  AVG ".                                              00564004
+005650     03 W-I-PAGE-TOTAL    PIC 999V99 VALUE ZEROS.                 00565012
+005660     03 W-I-GRAND-TOTAL   PIC  9999V99 VALUE ZEROS.               00566013
+005670     03 W-I-PAGE-TOTAL-FOOTER.                                    00567012
+005680         05  FILLER      PIC    X(50) VALUE IS                    00568009
+005690         "                                PAGE TOTAL:".           00569009
+005691         05  W-RES-PAGE-TOTAL    PIC ZZZ.ZZ.                      00569110
+005692     03 W-I-GRAND-TOTAL-FOOTER.                                   00569212
+005693         05  FILLER      PIC     X(50) VALUE IS                   00569309
+005694         "                                GRAND TOTAL:".          00569409
+005695         05  W-RES-GRAND-TOTAL     PIC ZZZZ.ZZ.                   00569509
+005700 01 W-G-OUTPUT-HEADING.                                           00570012
+005800     03 FILLER            PIC  X(50) VALUE IS                     00580000
+005900     "         EMPLOYEE MARKS REPORT         ".                   00590000
+006000     03 FILLER            PIC  X(10) VALUE IS "PAGENO:".          00600000
+006100     03 PAGE-CTR        PIC  ZZ9.                                 00610000
+006200 PROCEDURE DIVISION.                                              00620000
+006300 0000-MAIN-PARA.                                                  00630000
+006310*    MOVE 109132 TO M01-I-STU-ID.                                 00631015
+006400     PERFORM 1000-OPEN-PARA.                                      00640000
+006410     PERFORM 1100-HEADING-PARA.                                   00641000
+006500     PERFORM 2000-READ-PARA UNTIL W-FLA-EOF = "N".                00650012
+006510     PERFORM 3100-FILE-FOOTER-PARA.                               00651009
+006520     PERFORM 3200-GRAND-TOTAL-FOOTER-PARA.                        00652009
+006600     PERFORM 9000-CLOSE-PARA.                                     00660000
+006700     STOP RUN.                                                    00670000
+006800 1000-OPEN-PARA.                                                  00680000
+006900     OPEN I-O M01-INPUT-FILE OUTPUT R02-OUTPUT-FILE.              00690016
+007000     EVALUATE TRUE ALSO TRUE                                      00700000
+007100           WHEN W-IN-STATUS = 00 ALSO W-OUT-STATUS = 00           00710000
+007200              CONTINUE                                            00720000
+007300           WHEN OTHER                                             00730000
+007400              PERFORM 9999-ERROR-PARA                             00740000
+007500     END-EVALUATE.                                                00750000
+007600 1100-HEADING-PARA.                                               00760000
+007700     ADD 1 TO W-I-PAGE-CTR.                                       00770012
+007710     MOVE 01 TO W-I-LINE-CTR.                                     00771012
+007800     MOVE W-I-PAGE-CTR TO PAGE-CTR.                               00780012
+008000     WRITE M01-OUTPUT-REC FROM W-G-OUTPUT-HEADING.                00800012
+008100     WRITE M01-OUTPUT-REC FROM W-X-HYPHEN.                        00810012
+008200     WRITE M01-OUTPUT-REC FROM W-X-COLOUMN-HEADING.               00820012
+008300     WRITE M01-OUTPUT-REC FROM W-X-HYPHEN.                        00830012
+008400 2000-READ-PARA.                                                  00840001
+008500     READ M01-INPUT-FILE                                          00850015
+008600        AT END  MOVE "N" TO W-FLA-EOF                             00860012
+008700        NOT AT END                                                00870001
+008800          EVALUATE TRUE                                           00880001
+008900             WHEN W-IN-STATUS = 00                                00890001
+009000                 PERFORM 2100-PROCESS-PARA                        00900001
+009100             WHEN OTHER                                           00910001
+009200                 PERFORM 9999-ERROR-PARA                          00920001
+009300          END-EVALUATE                                            00930001
+009400     END-READ.                                                    00940001
+009500 2100-PROCESS-PARA.                                               00950001
+009600     ADD 1 TO W-I-SER-NO.                                         00960012
+009700     MOVE W-I-SER-NO TO W-SNO.                                    00970012
+009900     MOVE M01-I-STU-ID TO W-I-STU-ID.                             00990012
+010000     MOVE M01-X-STU-NAME TO W-X-STU-NAME.                         01000012
+010100     MOVE M01-F-OLA1-SCORE TO W-F-OLA1-SCORE.                     01010012
+010200     MOVE M01-F-OLA2-SCORE TO W-F-OLA2-SCORE.                     01020012
+010300     MOVE M01-F-OLA3-SCORE TO W-F-OLA3-SCORE.                     01030012
+010400     MOVE M01-F-OLA4-SCORE TO W-F-OLA4-SCORE.                     01040012
+010500     MOVE M01-F-CS1-SCORE  TO W-F-CS1-SCORE.                      01050013
+010600     MOVE M01-F-CS2-SCORE  TO W-F-CS2-SCORE.                      01060013
+010700     COMPUTE W-I-TEMP-AVG ROUNDED = M01-F-OLA1-SCORE +            01070013
+010800                                    M01-F-OLA2-SCORE +            01080013
+010810                                    M01-F-OLA3-SCORE +            01081013
+010820                                    M01-F-OLA4-SCORE +            01082013
+010830                                    M01-F-CS1-SCORE  +            01083013
+010840                                    M01-F-CS2-SCORE.              01084013
+010900     COMPUTE W-I-TEMP-AVG ROUNDED = W-I-TEMP-AVG / 6              01090012
+010910         ON SIZE ERROR                                            01091001
+010920         DISPLAY " MAKE W-I-TEMP-AVG SIZE MORE ".                 01092012
+010930     ADD W-I-TEMP-AVG TO W-I-PAGE-TOTAL.                          01093012
+011000     MOVE W-I-TEMP-AVG TO W-I-AVERAGE.                            01100012
+011100     WRITE M01-OUTPUT-REC FROM W-G-OUTPUT-REC.                    01110013
+011200     ADD 1 TO W-I-LINE-CTR.                                       01120012
+011300       IF W-I-LINE-CTR > 3                                        01130012
+011310           ADD W-I-PAGE-TOTAL TO W-I-GRAND-TOTAL                  01131012
+011320           PERFORM 3000-PAGE-FOOTER-PARA                          01132010
+011400           PERFORM 1100-HEADING-PARA                              01140001
+011500       END-IF.                                                    01150001
+011510 3000-PAGE-FOOTER-PARA.                                           01151009
+011520     MOVE W-I-PAGE-TOTAL TO W-RES-PAGE-TOTAL.                     01152012
+011521     WRITE M01-OUTPUT-REC FROM W-X-HYPHEN.                        01152112
+011530     WRITE M01-OUTPUT-REC FROM W-I-PAGE-TOTAL-FOOTER.             01153012
+011540     MOVE ZEROS TO W-I-PAGE-TOTAL.                                01154012
+011550 3100-FILE-FOOTER-PARA.                                           01155009
+011560     ADD W-I-PAGE-TOTAL TO W-I-GRAND-TOTAL.                       01156012
+011570     MOVE W-I-PAGE-TOTAL TO W-RES-PAGE-TOTAL.                     01157012
+011580     WRITE M01-OUTPUT-REC FROM W-X-HYPHEN.                        01158012
+011590     WRITE M01-OUTPUT-REC FROM W-I-PAGE-TOTAL-FOOTER.             01159012
+011591     WRITE M01-OUTPUT-REC FROM W-X-HYPHEN.                        01159112
+011592     MOVE ZEROS TO W-I-PAGE-TOTAL.                                01159212
+011593 3200-GRAND-TOTAL-FOOTER-PARA.                                    01159309
+011594     MOVE W-I-GRAND-TOTAL TO W-RES-GRAND-TOTAL.                   01159412
+011595     WRITE M01-OUTPUT-REC FROM W-X-HYPHEN.                        01159512
+011596     WRITE M01-OUTPUT-REC FROM W-I-GRAND-TOTAL-FOOTER.            01159612
+011597     WRITE M01-OUTPUT-REC FROM W-X-HYPHEN.                        01159712
+011600 9000-CLOSE-PARA.                                                 01160001
+011700     CLOSE M01-INPUT-FILE R02-OUTPUT-FILE.                        01170015
+011800 9999-ERROR-PARA.                                                 01180001
+011900     DISPLAY "ERROR IN INPUT FILE : " W-IN-STATUS.                01190001
+012000     DISPLAY "ERROR IN OUTPUT FILE:" W-OUT-STATUS.                01200001
+012100     STOP RUN.                                                    01210013
+

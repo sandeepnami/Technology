@@ -1,0 +1,69 @@
+       IDENTIFICATION DIVISION.                                         00010008
+       PROGRAM-ID. SCROLL.                                              00020018
+       ENVIRONMENT DIVISION.                                            00060008
+       CONFIGURATION SECTION.                                           00070008
+       DATA DIVISION.                                                   00080008
+       WORKING-STORAGE SECTION.                                         00090008
+           EXEC SQL                                                     00091001
+           INCLUDE EMP003                                               00092001
+           END-EXEC.                                                    00093001
+           EXEC SQL                                                     00097001
+           INCLUDE SQLCA                                                00098001
+           END-EXEC.                                                    00099007
+           EXEC SQL                                                     00099201
+              DECLARE CSR2 SENSITIVE STATIC SCROLL CURSOR FOR           00099325
+              SELECT EMP_NO,EMP_NAME,EMP_JOIN_DATE,EMP_SAL              00099401
+              FROM UELA003.EMP_TBL01                                    00099502
+              WHERE EMP_JOIN_DATE = :HP-EMP-JOIN-DATE                   00099626
+           END-EXEC.                                                    00099701
+       01 WS-SQLCODE PIC 999.                                           00100008
+       01 WS-N       PIC 9 VALUE 1.                                     00101019
+       PROCEDURE DIVISION.                                              00110008
+        0000-MAINLINE.                                                  00130008
+             MOVE '2007-01-01' TO HP-EMP-JOIN-DATE.                     00140026
+             PERFORM 1100-OPEN-CURSOR.                                  00150008
+             PERFORM 2000-FETCH-CURSOR .                                00191019
+             PERFORM 3000-CLOSE-CURSOR.                                 00240013
+            STOP RUN.                                                   00260013
+        1100-OPEN-CURSOR.                                               00450008
+                  EXEC SQL                                              00470008
+                     OPEN CSR2                                          00480019
+                  END-EXEC.                                             00490008
+                   EVALUATE SQLCODE                                     00510008
+                       WHEN ZERO                                        00520008
+                          CONTINUE                                      00530008
+                    WHEN OTHER                                          00540008
+                         MOVE SQLCODE TO WS-SQLCODE                     00550008
+                         DISPLAY 'BAD OPEN ON CURSOR'                   00560008
+                         DISPLAY 'SQLCODE IS = ' WS-SQLCODE             00570011
+                  END-EVALUATE.                                         00580008
+        2000-FETCH-CURSOR.                                              00590016
+      *            EXEC SQL                                             00600029
+      *              FETCH INSENSITIVE LAST CSR2 INTO                   00630029
+      *                 :HP-EMP-NO,                                     00660029
+      *                 :HP-EMP-NAME,                                   00670029
+      *                 :HP-EMP-JOIN-DATE,                              00680029
+      *                 :HP-EMP-SAL                                     00690029
+      *            END-EXEC.                                            00700029
+      *            DISPLAY 'LAST' , HP-EMP-NO.                          00701029
+                   EXEC SQL                                             00710019
+                     FETCH RELATIVE  3 CSR2 INTO                        00720029
+                        :HP-EMP-NO,                                     00730019
+                        :HP-EMP-NAME,                                   00740019
+                        :HP-EMP-JOIN-DATE,                              00750019
+                        :HP-EMP-SAL                                     00760019
+                   END-EXEC.                                            00770019
+                   PERFORM 2100-NEXT-PARA UNTIL WS-N > 3.               00780019
+        2100-NEXT-PARA.                                                 00790019
+               EXEC SQL                                                 00791019
+                  FETCH INSENSITIVE NEXT CSR2 INTO                      00792024
+                   :HP-EMP-NO,                                          00793019
+                   :HP-EMP-NAME,                                        00794019
+                   :HP-EMP-JOIN-DATE,                                   00795019
+                   :HP-EMP-SAL                                          00796019
+               END-EXEC.                                                00797019
+               DISPLAY 'NEXT' , HP-EMP-NO.                              00798019
+               ADD 1 TO WS-N.                                           00800019
+        3000-CLOSE-CURSOR.                                              01000008
+                 EXEC SQL CLOSE CSR2 END-EXEC.                          01010019
+

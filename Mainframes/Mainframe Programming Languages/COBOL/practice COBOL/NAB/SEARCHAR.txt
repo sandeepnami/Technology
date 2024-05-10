@@ -1,0 +1,45 @@
+      *SEARCH AND SEARCH ALL ILUSTRATION                                00001008
+       IDENTIFICATION DIVISION.                                         00010001
+       PROGRAM-ID. SEARCHAR.                                            00020008
+       ENVIRONMENT DIVISION.                                            00021001
+       CONFIGURATION SECTION.                                           00022001
+       DATA DIVISION.                                                   00030001
+       WORKING-STORAGE SECTION.                                         00040001
+       01  MONTH-TABLE-LITERALS.                                        00041009
+           05     FILLER     PIC X(11)     VALUE '01JANUARY'.           00042009
+           05     FILLER     PIC X(11)     VALUE '02FEBRUARY'.          00043009
+           05     FILLER     PIC X(11)     VALUE '03MARCH'.             00044009
+           05     FILLER     PIC X(11)     VALUE '04APRIL'.             00045009
+           05     FILLER     PIC X(11)     VALUE '05MAY'.               00046009
+           05     FILLER     PIC X(11)     VALUE '06JUNE'.              00047009
+           05     FILLER     PIC X(11)     VALUE '07JULY'.              00048009
+           05     FILLER     PIC X(11)     VALUE '08AUGUST'.            00049009
+           05     FILLER     PIC X(11)     VALUE '09SEPTEMBER'.         00049109
+           05     FILLER     PIC X(11)     VALUE '10OCTOBER'.           00049209
+           05     FILLER     PIC X(11)     VALUE '11NOVEMBER'.          00049309
+           05     FILLER     PIC X(11)     VALUE '12DECEMBER'.          00049409
+      *REDEFINES EXAMPLE FOR ARRAY                                      00049509
+       01  MONTH-TABLE REDEFINES MONTH-TABLE-LITERALS.                  00049609
+           05  EACH-MONTH-INFO     OCCURS 12 TIMES                      00049709
+                      ASCENDING KEY IS EACH-MONTH-NUMBER                00049809
+                      INDEXED BY MONTH-INDEX.                           00049909
+               10  EACH-MONTH-NUMBER           PIC XX.                  00050009
+               10  EACH-MONTH-NAME             PIC X(09).               00050109
+       01 WT-FIELDS.                                                    00051008
+          05 WT-CODE-CTRL   OCCURS 100 TIMES                            00060008
+                        ASCENDING KEY IS WT-CODE-VALUE                  00061009
+                        INDEXED BY WT-CODE-CTRL-INDEX.                  00070009
+          10 WT-CODE-VALUE       PIC X(03).                             00090008
+          10 WT-CODE-DESC         PIC X(03).                            00100008
+       PROCEDURE DIVISION.                                              00110001
+      *  ------------ EXECUTABLE INSTRUCTIONS.                          00120006
+       MAIN-SECTION.                                                    00130001
+           SEARCH ALL EACH-MONTH-INFO                                   00131009
+               AT END DISPLAY "SEARCH ELEMENET NOT FOUND IN TABLE "     00132008
+                                "WT-CODE-CTRL"                          00132108
+               WHEN EACH-MONTH-NUMBER(MONTH-INDEX) = "03"               00133010
+                    DISPLAY EACH-MONTH-NAME(MONTH-INDEX)                00134009
+           END-SEARCH.                                                  00135008
+           DISPLAY "HELLO NALLI".                                       00140006
+           STOP RUN.                                                    00310007
+

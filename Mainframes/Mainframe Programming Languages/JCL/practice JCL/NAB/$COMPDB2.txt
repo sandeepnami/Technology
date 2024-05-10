@@ -1,0 +1,165 @@
+//UGBCOMPC JOB AF-1055,'COMP DB2',
+//             MSGCLASS=X,MSGLEVEL=(1,1),
+//             CLASS=P,NOTIFY=&SYSUID
+//*
+//************************************************************
+//* CHANGE THE MEM NAME TO YOUR PRORAM NAME
+//* CHANGE THE SYSIN LIBRARY AS YOUR PROGRAM LIBRARY
+//* CHANGE THE SYSLIB LIBRARY AS YOUR COPY LIBRARY
+//* CHANGE THE SYSLMOD LIBRARY AS YOUR LOAD MODULE LIBRARY
+//************************************************************
+//*
+//JOBPROC  JCLLIB ORDER=SDAF.P732083.NAMI.JCL.CNTL
+//********************************************************************
+//* COMPILATION, LINK EDIT AND THE BIND STEP FOR A COBOL DB2 PROGRAM *
+//* WILL BE DONE BY SUBMITTING THIS JOB.                             *
+//* THE DB2 REGIONS AND CORRESPONDING PARAMETERS NEEDS TO BE CHANGED *
+//* WITH RESPECT TO THE PROGRAM                                      *
+//********************************************************************
+//*                 PRECOMPILE DB2 PROGRAM                           *
+//*--------------  LOCATION OF DBRM LIBRARY -------------------------*
+//********************************************************************
+//PC       EXEC PGM=DSNHPC,
+//             PARM='HOST(IBMCOB),APOST,SOURCE',
+//             REGION=4096K
+//DBRMLIB  DD  DISP=SHR,
+//             DSN=SDAF.P732083.NAMI.DBRMLIB(COBDB2)
+//STEPLIB  DD  DISP=SHR,
+//             DSN=SYS1.DB2.DSNLOAD
+//********************************************************************
+//*SYSIN -----------INPUT COBOL DB2 PROGRAM LOCATION-----------------*
+//********************************************************************
+//SYSIN    DD  DISP=SHR,
+//             DSN=SDAF.P732083.NAMI.COBOL.LIBRARY(COBDB2)
+//SYSCIN   DD  DISP=(MOD,PASS),
+//             DSN=&&TEMP,
+//             SPACE=(800,(500,500)),
+//             UNIT=SYSDA
+//********************************************************************
+//*                          DCLGEN MEMBER LOCATION                  *
+//*SYSLIB-----------------INPUT SOURCE LIBRARY FOR SQL---------------*
+//********************************************************************
+//SYSLIB   DD  DISP=SHR,
+//             DSN=SDAF.P732083.NAMI.DCLGEN
+//         DD  DISP=SHR,
+//             DSN=SDAF.P732083.NAMI.COPY.LIBRARY
+//SYSPRINT DD  SYSOUT=T
+//SYSTERM  DD  SYSOUT=T
+//SYSUDUMP DD  SYSOUT=*
+//SYSUT1   DD  SPACE=(800,(500,500),,,ROUND),
+//             UNIT=SYSDA
+//SYSUT2   DD  SPACE=(800,(500,500),,,ROUND),
+//             UNIT=SYSDA
+//*
+//********************************************************************
+//*                         COMPILATION                              *
+//********************************************************************
+//*
+//COB      EXEC PGM=IGYCRCTL,
+//             COND=(4,LT,PC),
+//             PARM=('SIZE(4000K),BUFSIZE(32760),LIST,LIB,MAP,OBJECT',
+//             'DATA(31),XREF,RENT'),
+//             REGION=4M
+//STEPLIB  DD  DISP=SHR,
+//             DSN=SYS1.SIGYCOMP
+//SYSIN    DD  DISP=(OLD,DELETE),
+//             DSN=&&TEMP
+//SYSLIN   DD  DISP=(MOD,PASS),
+//             DSN=&&LOADTMP,
+//             SPACE=(800,(500,500)),
+//             UNIT=SYSDA
+//********************************************************************
+//*--------------SOURCE LIBRARIES FOR COBOL DB2 CODE (COPY LIBRARIES)*
+//********************************************************************
+//SYSLIB   DD  DISP=SHR,
+//             DSN=SDAF.P732083.NAMI.DCLGEN
+//         DD  DSN=SDAF.P732083.NAMI.COPY.LIBRARY,DISP=SHR
+//SYSPRINT DD  SYSOUT=*
+//SYSUDUMP DD  SYSOUT=*
+//SYSUT1   DD  SPACE=(800,(500,500),,,ROUND),
+//             UNIT=SYSDA
+//SYSUT2   DD  SPACE=(800,(500,500),,,ROUND),
+//             UNIT=SYSDA
+//SYSUT3   DD  SPACE=(800,(500,500),,,ROUND),
+//             UNIT=SYSDA
+//SYSUT4   DD  SPACE=(800,(500,500),,,ROUND),
+//             UNIT=SYSDA
+//SYSUT5   DD  SPACE=(800,(500,500),,,ROUND),
+//             UNIT=SYSDA
+//SYSUT6   DD  SPACE=(800,(500,500),,,ROUND),
+//             UNIT=SYSDA
+//SYSUT7   DD  SPACE=(800,(500,500),,,ROUND),
+//             UNIT=SYSDA
+//*
+//*
+//********************************************************************
+//*                         LINK EDIT                                *
+//********************************************************************
+//*
+//LKED     EXEC PGM=IEWL,
+//             COND=((4,LT,COB),(4,LT,PC)),
+//             PARM='XREF'
+//SYSLIB   DD  DSN=SYS1.SCEELKED,DISP=SHR,DCB=(BLKSIZE=32760)
+//         DD  DSN=SYS1.DB2.DSNLOAD,DISP=SHR
+//SYSLIN   DD  DISP=(OLD,DELETE),
+//             DSN=&&LOADTMP
+//*        DD  DDNAME=SYSIN
+//********************************************************************
+//*----------------LOCATION OF LOAD LIBRARY--------------------------*
+//SYSLMOD  DD  DISP=SHR,
+//             DSN=SDAF.P732083.NAMI.LOADLIB(COBDB2)
+//SYSPRINT DD  SYSOUT=*
+//SYSUDUMP DD  SYSOUT=*
+//SYSUT1   DD  SPACE=(1024,(50,50)),
+//             UNIT=SYSDA
+//*
+//********************************************************************
+//*               BIND - BIND THE DB2 PACKAGE                        *
+//********************************************************************
+//BINDPACK EXEC PGM=IKJEFT01,
+//             COND=(4,LT),
+//             REGION=4096K
+//STEPLIB  DD  DISP=SHR,
+//             DSN=SDAF.P732083.NAMI.LOADLIB
+//DBRMLIB  DD  DISP=SHR,
+//             DSN=SDAF.P732083.NAMI.DBRMLIB(COBDB2)
+//SYSPRINT DD  SYSOUT=*
+//SYSTSPRT DD  SYSOUT=*
+//SYSUDUMP DD  SYSOUT=*
+//SYSTSIN  DD  *
+DSN SYSTEM(DB2)
+      BIND  PACKAGE(AF) -
+      MEMBER(COBDB2) -
+      OWNER(SDCM) -
+      EXPLAIN(NO) -
+      ISOLATION(CS) -
+      VALIDATE(BIND)-
+      RELEASE(COMMIT)
+/*
+//*
+//********************************************************************
+//*               BINDPLAN-BIND THE DB2 PACKAGE TO PLAN                *
+//********************************************************************
+//BINDPLAN EXEC PGM=IKJEFT01,
+//             COND=(4,LT),
+//             REGION=4096K
+//STEPLIB  DD  DISP=SHR,
+//             DSN=SDAF.P732083.NAMI.LOADLIB
+//DBRMLIB  DD  DISP=SHR,
+//             DSN=SDAF.P732083.NAMI.DBRMLIB(COBDB2)
+//SYSPRINT DD  SYSOUT=*
+//SYSTSPRT DD  SYSOUT=*
+//SYSUDUMP DD  SYSOUT=*
+//SYSTSIN  DD  *
+DSN SYSTEM(DB2)
+      BIND  PLAN(NAMI) -
+      MEMBER(COBDB2) -
+      OWNER(SDCM) -
+      ACTION(REPLACE) -
+      VALIDATE(BIND)-
+      ISOLATION(CS) -
+      ACQUIRE(USE) -
+      EXPLAIN(NO) -
+      RELEASE(COMMIT)
+/*
+

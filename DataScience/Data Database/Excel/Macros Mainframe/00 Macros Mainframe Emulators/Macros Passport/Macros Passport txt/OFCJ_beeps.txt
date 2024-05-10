@@ -1,0 +1,81 @@
+Sub ZMain
+Dim  ret,risk	
+'press F6 for every 3mins
+for i = 1 to 150
+    SendHostKeys ("<PF4>")
+    ret = wait(3)
+    'Check NG YG count and give beeps	
+    risk=NGYG_CHK()	
+    'refresh screen after 3mins
+    ret = Wait(180)	
+Next
+
+End Sub
+ 
+
+Private Function NGYG_CHK()
+Dim ret,AUTH_PREV,RISK, MAX_RISK
+MAX_RISK = 1
+'MsgBox("test")
+
+
+Set Sys = CreateObject("PASSPORT.System")
+'selects the currently active session
+Set Sess = Sys.ActiveSession
+'selects the screen object
+Set MyScreen = Sess.Screen
+
+AUTH_PREV = "Y"
+AUTH_NG=0
+AUTH_YG=0
+RISK=0
+'  Check
+for ri = 6 to 22
+	'selects the area (Start Row, End Row, Start Column, End Column)
+	Set MyArea = MyScreen.Area(ri, 74, ri, 74)
+	MyArea.Select     
+	MyScreen.Copy
+	AUTH = MyArea.Value
+	'MsgBox "AUTH =" &AUTH
+	If AUTH  = "N" THEN
+		AUTH_NG=AUTH_NG +1
+	ELSEIF AUTH = "Y" THEN
+		AUTH_YG=AUTH_YG +1
+	END IF
+
+	IF AUTH = AUTH_PREV  AND AUTH= "Y"  THEN
+		RISK= RISK + 1
+		AUTH_PREV  = AUTH
+	ELSEIF AUTH= "N" THEN
+		RISK = 0 
+	END IF
+Next
+
+'MsgBox "AUTH NG CNT =" &AUTH_NG
+'MsgBox "AUTH YG CNT =" &AUTH_YG
+'MsgBox "RISK=" &RISK
+
+'10 Consecutive YG'S
+if  RISK > MAX_RISK then
+	beep_sound()
+end if
+
+'refresh ofcj and chk for more YG's
+if  RISK > 5 then
+	SendHostKeys ("<PF4>")
+    	wait(3)
+    	ret=NGYG_CHK()	
+	risk=ret+risk
+end if
+
+NGYG_CHK = risk
+End Function
+
+Sub beep_sound()
+
+For loopvar = 1 To 20
+	Beep
+	ret = wait(1)
+Next        
+
+end Sub

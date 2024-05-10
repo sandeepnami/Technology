@@ -1,0 +1,13 @@
+>>> iterator = iter(iterable)                                                   
+>>> next(iterator)                                                              
+'Spring'                                                                        
+>>> next(iterator)                                                              
+'Summer'                                                                        
+>>> next(iterator)                                                              
+'Autumn'                                                                        
+>>> next(iterator)                                                              
+'Winter'                                                                        
+>>> next(iterator)                                                              
+Traceback (most recent call last):                                              
+  File "<stdin>", line 1, in <module>                                           
+StopIteration                                                                   

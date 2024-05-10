@@ -1,0 +1,160 @@
+//*-------------------------------------------------------------------*
+//*                                                                   *
+//*              ***  PROCEDURE NAME:- GUDOSLNK  ***                  *
+//*                                                                   *
+//*      ***  STANDARD ENVIRONMENT - COBOL FOR MVS LINKEDIT ***       *
+//*                                                                   *
+//*-------------------------------------------------------------------*
+//*                                                                   *
+//*  METHOD OF USE:                                                   *
+//*  ==============                                                   *
+//*                                                                   *
+//*  A. WITHOUT MQ SERIES:                                            *
+//*                                                                   *
+//*        //LINKEDIT EXEC  PROC=GUDOSLNK,LOADMOD=XXNNNNM0            *
+//*        //*                                                        *
+//*        //SYSIN    DD  *                                           *
+//*          ENTRY    XXNNNNMN                                        *
+//*        /*                                                         *
+//*                                                                   *
+//*  B. WITH MQ SERIES (FOR BATCH, BATCH DB2 OR BATCH DL/I):          *
+//*                                                                   *
+//*        //LINKEDIT EXEC  PROC=GUDOSLNK,LOADMOD=XXNNNNM0            *
+//*        //*                                                        *
+//*        //SYSIN    DD  *                                           *
+//*          INCLUDE  MQSTUB                                          *
+//*          ENTRY    XXNNNNMN                                        *
+//*        /*                                                         *
+//*                                                                   *
+//*  C. WITH MQ SERIES (FOR IMS BMP):                                 *
+//*                                                                   *
+//*        //LINKEDIT EXEC  PROC=GUDOSLNK,LOADMOD=XXNNNTT0            *
+//*        //*                                                        *
+//*        //SYSIN    DD  *                                           *
+//*          INCLUDE  MQSTUBI                                         *
+//*          ENTRY    DLITCBL                                         *
+//*        /*                                                         *
+//*                                                                   *
+//*                                                                   *
+//*  NOTES:                                                           *
+//*  ======                                                           *
+//*        1.  THIS PROCEDURE WILL LINKEDIT THE OBJECT MODULE(S)      *
+//*           CREATED BY WAY OF PROCEDURES GUDOSCBL & GUDOSCD2.       *
+//*                                                                   *
+//*        2.  TO WORK WITH DEVN, UNITN, LINKN AND TESTN DATASETS     *
+//*           ADD ",RLSE=N" TO THE EXEC STEP.                         *
+//*                                                                   *
+//*        3.  IF YOU DO NOT HAVE A TESTN DATASET THEN ALSO SPECIFY   *
+//*           ",ENV3=LINK" ON THE EXEC STEP.                          *
+//*                                                                   *
+//*        4.  ADD AN "INCLUDE OLDLOAD(XXNNNTTN)" TO THE SYSIN DD TO  *
+//*           RESOLVE ITEMS IN THE LINKEDIT FROM A PREVIOUS VERSION   *
+//*           OF THE LOAD MODULE.                                     *
+//*                                                                   *
+//*        5.  TO ADD EXTRA LOAD LIBRARIES FOR USE BY THE LINKEDIT    *
+//*           STEP, OR WHEN SPECIFYING SYSLIB OR SYSLMOD OVERRIDES,   *
+//*           PUT THE ADDITIONAL CARDS *AFTER* THE SYSIN DD CARDS:    *
+//*                                                                   *
+//*           E.G. //LINKEDIT EXEC PROC=GUDOSLNK,LOADMOD=XXNNNTTN     *
+//*                //SYSIN       DD *                                 *
+//*                  ENTRY    XXNNNMNN                                *
+//*                /*                                                 *
+//*                //LKED.OBJLIB DD DSN=A.LOAD.LIBRARY,DISP=SHR       *
+//*                                                                   *
+//*-------------------------------------------------------------------*
+//*
+//GUDOSLNK PROC APPLID='PROG',       /* APPLICATION ID               */
+//*
+//             CURRENV='DEV',        /* CURRENT ENVIRONMENT          */
+//             ENV1='UNIT',          /* ENVIRONMENT AFTER CURRENV    */
+//             ENV2='LINK',          /* ENVIRONMENT AFTER ENV1       */
+//             ENV3='TEST',          /* ENVIRONMENT AFTER ENV2       */
+//             ENV4='TST',           /* ENVIRONMENT AFTER ENV3       */
+//             ENV5='PREIMP',        /* ENVIRONMENT AFTER ENV4       */
+//*
+//             RLSE=,                /* SPECIFY PHASED ENV NBR       */
+//*
+//             LOADMOD=,             /* RESULTANT LOAD MODULE        */
+//*
+//             LINKOPT=,             /* ADDITIONAL LINK OPTIONS      */
+//*
+//             HOLD=YES,             /* HOLD OUTPUT LISTING ? - YES  */
+//*
+//             CLASS1='A',           /* OUTPUT CLASS FOR 'SYSPRINT'  */
+//             FORMAT1='TWOUP'       /* OUTPUT FORMAT FOR 'SYSPRINT' */
+//*
+//OKTOLINK IF RC LT 8 THEN
+//*
+//*-------------------------------------------------------------------*
+//*                                                                   *
+//*  EDIT THE LINK CARDS TO PLACE "INCLUDE CARDLIB" IN INPUT          *
+//*                                                                   *
+//*-------------------------------------------------------------------*
+//*
+//SM035   EXEC PGM=SM035BA0,PARM='M'
+//*
+//LINKIN   DD  DDNAME=SYSIN
+//*
+//LINKIMS  DD  DSN=&&OBJECT,DISP=(MOD,PASS)
+//*
+//*
+//*-------------------------------------------------------------------*
+//*                                                                   *
+//*              ***  LINKEDIT SPECIFIED LOAD MODULE  ***             *
+//*                                                                   *
+//*-------------------------------------------------------------------*
+//*
+//LKED     EXEC PGM=HEWL,
+//*
+//      PARM=('LIST',
+//            'XREF',
+//            'LET',
+//            'MAP,&LINKOPT')
+//*
+//ONEUP        OUTPUT FORMDEF=0101,PAGEDEF=P0003
+//TWOUP        OUTPUT FORMDEF=F0002,PAGEDEF=P0014
+//TWOSHADE     OUTPUT FORMDEF=F0013,PAGEDEF=P0014
+//*
+//SYSLIN DD DSN=&&OBJECT,DISP=(OLD,DELETE,DELETE)
+//*
+//OLDLOAD  DD  DSN=&APPLID..&CURRENV.&RLSE..OS.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=&APPLID..&ENV1.&RLSE..OS.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=&APPLID..&ENV2.&RLSE..OS.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=&APPLID..&ENV3.&RLSE..OS.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=&APPLID..&ENV4..OS.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=&APPLID..&ENV5..OS.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=&APPLID..PROD.OS.LOAD.LIBRARY,DISP=SHR
+//         DD  DSN=NBA.MVS.LINKLIB,DISP=SHR
+//PRODLOAD DD  DSN=NBA.MVS.LINKLIB,DISP=SHR
+//*
+//CARDLIB  DD  DSN=PROG.PROD.PROC.DATA.LIBRARY(IGZ#REPL),DISP=SHR
+//MQSTUB   DD  DSN=SYS1.SCSQLOAD(CSQBSTUB),DISP=SHR
+//MQSTUBI  DD  DSN=SYS1.SCSQLOAD(CSQQSTUB),DISP=SHR
+//*
+//SYSLIB   DD DSN=PROG.PROD.EXP.SMG3.DA.BASEJNIX,
+//         DCB=(BLKSIZE=27920),DISP=SHR
+//         DD DSN=SYS1.SCEELKED,DISP=SHR,DCB=(BLKSIZE=32760)
+//         DD DSN=CUMOD.PROD.OS.DUMMY.LIBRARY,DISP=SHR
+//         DD DSN=SYS1.IMSTEST.RESLIB,DISP=SHR
+//         DD DSN=SYS1.DB2.DSNLOAD,DISP=SHR
+//         DD DSN=SYS1.SISPLOAD,DISP=SHR
+//         DD DSN=PROG.TELON.LOAD,DISP=SHR
+//         DD DSN=SYS1.TELON.LOAD,DISP=SHR
+//         DD DSN=PROG.TELON.USERSUBR,DISP=SHR
+//         DD DSN=SYS1.BMC.FEP.LOAD,DISP=SHR
+//         DD DSN=IMSTEST.DBTOOLS.LOADLIB,DISP=SHR
+//         DD DSN=IMSTEST.UTILITY.ONLINE.LOADLIB,DISP=SHR
+//*
+//SYSUT1   DD  UNIT=SYSDA,SPACE=(CYL,(5,1))
+//*
+//SYSLMOD  DD  DSN=&APPLID..&CURRENV.&RLSE..OS.LOAD.LIBRARY(&LOADMOD),
+//             DISP=SHR
+//*
+//SYSPRINT DD  SYSOUT=&CLASS1,OUTPUT=*.&FORMAT1,HOLD=&HOLD
+//*
+//SYSLOG   DD  DUMMY
+//SYSPUNCH DD  DUMMY
+//SYSUDUMP DD  DUMMY
+//*
+//ENDLINK  ENDIF
+

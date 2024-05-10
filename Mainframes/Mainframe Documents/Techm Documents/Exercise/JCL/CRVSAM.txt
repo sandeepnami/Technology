@@ -1,0 +1,25 @@
+//UGBPCRVS JOB 345,'CREATE VSAM',                                       00010000
+//             MSGCLASS=X,MSGLEVEL=(1,1),                               00020000
+//             CLASS=2,NOTIFY=&SYSUID                                   00030000
+//*                                                                     00030100
+//STEP1   EXEC PGM=IDCAMS                                               00030200
+//SYSPRINT DD  SYSOUT=*                                                 00110300
+//SYSIN    DD  *                                                        00110400
+  DEFINE CLUSTER(                                                      -00110500
+      NAME(CDKVPGE.NANI.S1.KE)                                         -00110600
+      TRACKS(10 10)                                                    -00110700
+      CONTROLINTERVALSIZE(4096)                                        -00110800
+      NOERASE                                                          -00110900
+      FREESPACE(10 10)                                                 -00111000
+      NOIMBED                                                          -00112000
+      INDEXED                                                          -00113000
+      KEYS(3 0)                                                        -00114000
+      RECORDSIZE(34 34)                                                -00115000
+      NOREPLICATE                                                      -00116000
+      NOREUSE                                                          -00117000
+      )DATA(                                                           -00118000
+              NAME(CDKVPGE.NANI.S1.KE.DATA)                            -00119000
+      )INDEX(                                                          -00120000
+              NAME(CDKVPGE.NANI.S1.KE.INDEX)                           -00130000
+      )                                                                 00140000
+

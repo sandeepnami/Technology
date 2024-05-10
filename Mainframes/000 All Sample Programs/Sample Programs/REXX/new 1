@@ -1,0 +1,212 @@
+01 EXTERNAL-INFORMATION-REC.     
+   COPY EXTRATE.                 
+01 EXTERNAL-INFORMATION-REC.                           
+    05 EXT-POLICY-FIELDS.                              
+        10 EXT-POLICY-INFO.                             
+            15 EXT-POL-SYM-CD                 PIC X(03).
+            15 EXT-POL-NBR                    PIC X(07).
+            15 EXT-POL-MOD-NBR                PIC X(02).
+        10 EXT-POL-STATE-CD                   PIC X(02).
+		10 EXT-POL-CO-CD                      PIC X(02). 
+		10 EXT-POL-PRODUCER-CD                PIC X(07). 
+		10 EXT-POL-ISSUE-CD                   PIC X(01). 
+		10 EXT-POL-TXN-ISSUE-CD               PIC X(01). 
+		10 EXT-POL-TXN-RSN-CD                 PIC X(03). 
+		10 EXT-POL-EFF-DATE.                             
+		   15 EXT-POL-EFF-YEAR                PIC 9(04). 
+		   15 EXT-POL-EFF-MNTH                PIC 9(02). 
+		   15 EXT-POL-EFF-DAY                 PIC 9(02).
+		10 EXT-POL-EXP-DATE.                             
+		   15 EXT-POL-EXP-YEAR                PIC 9(04). 
+		   15 EXT-POL-EXP-MNTH                PIC 9(02). 
+		   15 EXT-POL-EXP-DAY                 PIC 9(02). 
+		10 EXT-POL-RATED-ON-DATE.                        
+		   15 EXT-POL-RATED-ON-YEAR           PIC X(04). 
+		   15 EXT-POL-RATED-ON-MNTH           PIC X(02). 
+		   15 EXT-POL-RATED-ON-DAY            PIC X(02). 
+		10 EXT-POL-TRANSACTION-EFF-DT         PIC X(08). 
+		10 EXT-POL-START-DATE                 PIC X(08). 
+		10 EXT-POL-UW-TIER-NBR                PIC 9(07). 
+		10 EXT-POL-UW-TIER-ALPHA REDEFINES               
+			  EXT-POL-UW-TIER-NBR             PIC X(07). 
+		10 EXT-POL-UW-TIER-TYPE-CD            PIC X(02). 
+		10 EXT-POL-PREVIOUS-UW-TIER-NBR       PIC X(07). 
+		10 EXT-POL-ADDRESS-LINE-1-DESC        PIC X(30). 
+		10 EXT-POL-ADDRESS-LINE-2-DESC        PIC X(30). 
+		10 EXT-POL-ADDRESS-LINE-3-DESC        PIC X(30). 
+		10 EXT-POL-ADDRESS-LINE-4-DESC        PIC X(30). 
+		10 EXT-POL-ZIP-CD                     PIC X(06).
+		10 EXT-POL-TERM-NBR                   PIC X(03).
+		10 EXT-POL-TERM-NBR-9 REDEFINES                 
+			  EXT-POL-TERM-NBR                PIC 9(03).
+		10 EXT-POL-PLATINUM-IND               PIC X(01).
+		10 EXT-POL-INSURANCE-START-DATE.                
+		   15 EXT-POL-INS-START-YEAR          PIC X(04).
+		   15 EXT-POL-INS-START-MNTH          PIC X(02).
+		   15 EXT-POL-INS-START-DAY           PIC X(02).
+		10 EXT-POL-MEI-FCTR                   PIC 9.999.
+		10 EXT-POL-MEI-FCTR-ALPHA REDEFINES             
+			  EXT-POL-MEI-FCTR                PIC X(05).
+		10 EXT-POL-ACCOUNT-CREDIT-IND         PIC X(01).
+		10 EXT-POL-AM-BEST-CD                 PIC X(05).
+		10 EXT-POL-AQM-APPLY-CD               PIC X(01).
+		10 EXT-POL-FIFTH-CAR-IND              PIC X(01).
+		10 EXT-POL-GROUP-CD                   PIC X(03).
+		10 EXT-POL-HOMEOWNER-IND              PIC X(01).
+		10 EXT-POL-HOMEOWNER-FORM-CD          PIC X(01).
+		10 EXT-POL-MODE-CD                    PIC X(01).
+		10 EXT-POL-PAYBY-CD                   PIC X(01).
+		10 EXT-POL-PRIOR-HAN-CIT-IND          PIC X(01).
+		10 EXT-POL-PRIOR-HAN-REWRT-RSN-CD     PIC X(01).
+		10 EXT-POL-PRIOR-BI-LMT-CD            PIC X(07).
+		10 EXT-POL-LAPSE-INCOV-PRI-EXP-DT.              
+		   15 EXT-POL-LAPSE-INCOV-PRI-YEAR    PIC X(04).
+		   15 EXT-POL-LAPSE-INCOV-PRI-MTH     PIC X(02).
+		   15 EXT-POL-LAPSE-INCOV-PRI-DAY     PIC X(02).
+		10 EXT-POL-CURR-INSRNC-SCOR-NBR       PIC X(03).
+		10 EXT-POL-DRVSMRT-COV-EFF-DT         PIC X(08). 
+		10 EXT-POL-UW-TIER-OVERRIDE-IND       PIC X(01). 
+		10 EXT-POL-UW-TIER-OVERRIDE-INTLS     PIC X(03). 
+		10 EXT-POL-UW-TIER-LAST-TIER-DATE     PIC X(10). 
+		10 EXT-RCAP-EXPIRING-MOD-EFF-DT       PIC X(08). 
+		10 EXT-RCAP-EXPIRING-MOD-PREM-AMT     PIC 9(08)V9(02).
+		10 EXT-RCAP-TYPE-CD                   PIC X(01). 
+		10 EXT-POL-PRIOR-HANCIT-RSN-DESC      PIC X(30). 
+		10 EXT-POL-QUOTE-NBR                  PIC X(07). 
+		10 EXT-POL-QUOTE-SEQUENCE-NBR         PIC X(02). 
+		10 EXT-POL-CUSTOMER-NBR               PIC X(10). 
+		10 EXT-POL-GUID-NBR                   PIC X(16). 
+		10 EXT-POL-CYCLE-DATE                 PIC X(10). 
+		10 EXT-POL-CENSUS-BLOCK-ID            PIC X(15). 
+		10 EXT-POL-PLATINUM-CONV-IND          PIC X(01). 
+		10 EXT-POL-CONVERSION-CD              PIC X(01). 
+		10 EXT-POL-CNTL-PROCESS-CD            PIC X(03). 
+		10 EXT-POL-RCAP-FCTR-OVRD-IND         PIC X(01). 
+		10 EXT-POL-RCAP-OVRD-USER-ID          PIC X(08).     
+		10 EXT-POL-ROD-OVRD-USER-ID           PIC X(10).     
+		10 EXT-POL-ROD-PREV-DATE              PIC X(08).     
+		10 EXT-POL-ROD-OVRD-RSN-DESC          PIC X(20).     
+		10 EXT-POL-GEO-CENSUS-VERSION         PIC X(15).     
+		10 EXT-RCAP-CURR-TRANS-FCTR           PIC 9(3)V9(5). 
+		10 EXT-RCAP-UNCAPPED-PREM             PIC 9(10)V9(2).
+		10 EXT-RCAP-EVENT-DT                  PIC X(10).     
+		10 EXT-RCAP-YEAR-CNT                  PIC X(02).     
+		10 EXT-RCAP-CAPPED-CHNG-FCTR          PIC S9(4)V9(4).
+		10 EXT-RCAP-UNCAP-CHNG-FCTR           PIC S9(4)V9(4).
+		10 EXT-RCAP-EXPIRE-RATELOG            PIC X(20).     
+		10 EXT-RCAP-UNCAP-RATELOG             PIC X(20).     
+		10 EXT-RCAP-TIMESTAMP                 PIC X(26).     
+		10 EXT-RCAP-OUT-OF-RANGE-CAP-IND      PIC X(01).     
+		10 EXT-POL-PRIOR-BI-LIMIT-1-CD        PIC 9(07).     
+		10 EXT-POL-PRIOR-BI-LIMIT-2-CD        PIC 9(07).     
+		10 EXT-POL-WKS-UNIQUE-SEQ             PIC X(01).     
+		10 EXT-POL-RCAP-RNWL-ISSUED-TFCTR     PIC 9(3)V9(5).
+		10 EXT-POL-UW-TIER-2BYTE-NBR          PIC X(03).    
+		10 EXT-POL-REDESIGN-EFF-DATE          PIC X(08).    
+		10 EXT-POL-MAILING-STATE-CD           PIC X(02).    
+		10 EXT-POL-INSRNC-SCOR-ORD-DATE       PIC X(08).    
+		10 EXT-POL-VARIATION-CD               PIC X(01).    
+		10 EXT-FORMS-FCRA-CODE                PIC X(01). 
+		10 EXT-FORMS-FCRA-FORM-NBR-EDTN       PIC X(11). 
+		10 EXT-POL-AQM-IND                    PIC X(01).
+		10 EXT-POL-AQM-NUM-OF-DAYS            PIC X(03).
+		10 EXT-POL-BOOK-ROLL-IND              PIC X(01).
+		10 EXT-POL-EXP-MOD-LIAB-LMT           PIC X(09).
+		10 EXT-POL-FIRST-VEH-ZIP-CD           PIC 9(05).
+		10 EXT-NYR-POL-ACTVTY-ARRAY                     
+				  OCCURS 15 TIMES INDEXED BY XNYRARR.            
+		   15 EXT-NYR-POL-ACTVTY-ATTR         PIC X(03).         
+		   15 EXT-NYR-POL-ACTVTY-POINT        PIC X(01).         
+		   15 EXT-NYR-POL-ACTVTY-DATE.                           
+			  20 EXT-NYR-POL-ACTVTY-YYYY      PIC X(04).         
+			  20 EXT-NYR-POL-ACTVTY-MM        PIC X(02).         
+			  20 EXT-NYR-POL-ACTVTY-DD        PIC X(02).         
+		10 EXT-POL-TIER-MOVEMENT-IND          PIC X(01).         
+		10 EXT-POL-RENEWAL-CNV-IND            PIC X(01).         
+		10 EXT-POL-MKT-PRICE-MATCH-IND        PIC X(01).      
+		10 EXT-POL-PRICE-MATCH-FCTR           PIC 99V99999.   
+		10 EXT-POL-RCAP-TYPE-CD               PIC X(01).      
+		10 EXT-POL-MKT-PRIOR-CARRIER-PREM     PIC 9(08)V9(02).
+		10 EXT-POL-MKT-TARGET-PREM            PIC 99999.99.   
+		10 EXT-POL-MKT-TARGET-PREM-ALPH REDEFINES             
+		   EXT-POL-MKT-TARGET-PREM            PIC X(08).      
+		10 EXT-POL-MKT-CONSOLIDATION-IND      PIC X(01).      
+		10 EXT-POL-MKT-PRIOR-CARRIER-DESC     PIC X(30).      
+		10 EXT-POL-MKT-RECALC-DESC            PIC X(20).      
+		10 EXT-POL-MKT-RECALC-USER-ID         PIC X(10).      
+		10 EXT-POL-MKT-MIN-MAX-BYPASS-IND     PIC X(01).      
+		10 EXT-POL-MKT-MINMAX-BYPSS-USRID     PIC X(10).      
+		10 EXT-POL-MKT-LOWER-BOUNDRY-FCTR     PIC 99.99999.   
+		10 EXT-POL-MKT-LOWER-BOUNDRY-ALPH REDEFINES           
+		   EXT-POL-MKT-LOWER-BOUNDRY-FCTR     PIC X(08).      
+		10 EXT-POL-MKT-UPPER-BOUNDRY-FCTR     PIC 99.99999.   
+		10 EXT-POL-MKT-UPPER-BOUNDRY-ALPH REDEFINES           
+		   EXT-POL-MKT-UPPER-BOUNDRY-FCTR     PIC X(08).      
+		10 EXT-POL-MKT-TYPE-CD                PIC X(01).      
+		10 EXT-POL-MKT-EXCLUD-TARGET-PREM     PIC 9(08)V9(02).
+		10 EXT-POL-MKT-ADJUST-TARGET-PREM     PIC 9(08)V9(02).
+		10 EXT-POL-MKT-NATURAL-PREM           PIC 9(08)V9(02).
+		10 EXT-POL-MKT-EXCL-NATURAL-PREM      PIC 9(08)V9(02).
+		10 EXT-POL-MKT-ADJ-NATURAL-PREM       PIC 9(08)V9(02).
+		10 EXT-POL-MKT-CALCULATED-FCTR        PIC 99.99999.   
+		10 EXT-POL-MKT-CALCULATED-ALPH REDEFINES              
+		   EXT-POL-MKT-CALCULATED-FCTR        PIC X(08).      
+		10 EXT-POL-MKT-ORIG-APPLIED-FCTR      PIC 99.99999.   
+		10 EXT-POL-MKT-ORIG-APPLIED-ALPH REDEFINES            
+		   EXT-POL-MKT-ORIG-APPLIED-FCTR      PIC X(08).      
+		10 EXT-POL-MKT-APPLIED-FCTR           PIC 99.99999.   
+		10 EXT-POL-MKT-APPLIED-ALPH REDEFINES                 
+		   EXT-POL-MKT-APPLIED-FCTR           PIC X(08).      
+		10 EXT-POL-MKT-ADJ-PRICE-MTC-PREM     PIC 9(08)V9(02). 
+		10 EXT-POL-MKT-PM-LOCKED-IND          PIC X(01).       
+		10 EXT-POL-VEH-FRST-CENSUS-BLK-CD     PIC X(15).       
+		10 EXT-POL-RATING-CYCLE-DATE.                          
+		   15 EXT-POL-RATNG-CYCLE-YYYY        PIC X(04).       
+		   15 EXT-POL-RATNG-CYCLE-MM          PIC X(02).       
+		   15 EXT-POL-RATNG-CYCLE-DD          PIC X(02).       
+		10 EXT-POL-MKT-PM-ID                  PIC X(16).       
+		10 EXT-POL-LAPSE-COVG-DESC            PIC X(20).       
+		10 EXT-POL-AP-POLICY-IND              PIC X(01).       
+		10 EXT-POL-TOWN-CD                    PIC X(06).       
+		10 EXT-POL-AP-GUID-NBR                PIC X(16).       
+		10 EXT-POL-VEH-FIRST-TOWN-CD          PIC X(06).     
+		10 EXT-POL-RCAP-POLICY-EVENT-DATE     PIC X(10).     
+		10 EXT-POL-PRESTIGE-OVRDRSN           PIC X(05).     
+		10 EXT-POL-PRESTIGE-OVRDRSN-ID        PIC X(08).     
+		10 EXT-POL-PRESTIGE-OVRD-OTHRSN       PIC X(30).     
+		10 EXT-POL-PRESTIGE-OVRD-IND          PIC X(01).     
+		10 EXT-POL-PRESTIGE-OVRD-AMT          PIC X(07).     
+		10 EXT-POL-PRESTIGE-OVRD-AMT2         PIC X(07).     
+		10 EXT-RCAP-TENURE-MTH-CNT            PIC 9(03).     
+		10 EXT-RCAP-EXP-MOD-TRANS-FCTR        PIC 9(3)V9(5). 
+		10 EXT-POL-MKT-UPPER-BOUNDRY-PREM     PIC 9(08)V9(02).        
+		10 EXT-POL-MKT-LOWER-BOUNDRY-PREM     PIC 9(08)V9(02).        
+		10 EXT-POL-MKT-NY-NATURL-UW-TIER      PIC 9(07).              
+		10 EXT-POL-MKT-NY-NATRL-UW-TIER-X     REDEFINES               
+		   EXT-POL-MKT-NY-NATURL-UW-TIER      PIC X(07).              
+		10 EXT-POL-MKT-NY-NATURAL-PREM        PIC 9(08)V9(02).        
+		10 EXT-POL-MKT-APPLD-UW-TIER-NBR      PIC 9(07).              
+		10 EXT-POL-MKT-APPLD-UW-TIER-X        REDEFINES               
+		   EXT-POL-MKT-APPLD-UW-TIER-NBR      PIC X(07).              
+		10 EXT-POL-MKT-ORIG-UW-TIER-NBR       PIC 9(07).              
+		10 EXT-POL-MKT-ORIG-UW-TIER-X         REDEFINES               
+		   EXT-POL-MKT-ORIG-UW-TIER-NBR       PIC X(07).              
+		10 EXT-POL-MKT-PRIOR-CARR-EFF-DT      PIC X(08).              
+		10 EXT-POL-MKT-PRIOR-CARR-EXP-DT      PIC X(08).              
+		10 EXT-POL-MKT-INIT-UW-TIER-NBR       PIC 9(07).              
+		10 EXT-POL-HAN-FAMILY-ELIGIBL-IND     PIC X(01).    
+		10 EXT-POL-PROP-INSRNCE-IND           PIC X(01).  
+		10 EXT-POL-FINANCE-CO-IND             PIC X(01).  
+		10 EXT-POL-PULSE-CONVRSN-CD           PIC X(01). 
+		10 EXT-POL-MILITARY-DISCOUNT-IND      PIC X(01).
+		10 EXT-POL-VEH-CHAR-RATED-IND         PIC X(01). 
+		10 EXT-RCAP-PRIOR-TFCTR-PMTCH         PIC 9(3)V9(5).  
+		10 EXT-POL-RCAP-ATTRB-IND             PIC X(01).      
+		10 EXT-RCAP-EXPIRING-MOD-CAP-PREM     PIC 9(08)V9(02).
+		10 EXT-RCAP-CURR-NEWUNCAP-TFCTR       PIC 9(3)V9(5).  
+		10 EXT-RCAP-REN-EXP-ADJ-UNCAP-PRM     PIC 9(08)V9(02).
+		10 EXT-POL-RCAP-ATTRB-TYPE-CD         PIC X(07).      
+		10 EXT-POL-HOUSEHOLD-MEMBERS-NBR      PIC 9(02).  
+		10 EXT-POL-OPT-OUT-NBR                PIC 9(02).  
+		10 EXT-POL-PORTAL-RATING-IND          PIC X(01).  
+		10 FILLER                             PIC X(264). 

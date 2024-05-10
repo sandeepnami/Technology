@@ -1,0 +1,27 @@
+//UGBIDCAM JOB AF-1055,'CRT KE',
+//             MSGCLASS=X,MSGLEVEL=(1,1),
+//             CLASS=P,NOTIFY=&SYSUID
+//*TO CREATE VSAM KE FILE
+//STEP1   EXEC PGM=IDCAMS
+//SYSPRINT DD  SYSOUT=*
+//SYSIN    DD  *
+  DEFINE CLUSTER(                                                      -
+      NAME(SDAF.NANI.VSAM.KE)                                     -
+      TRACKS(10 10)                                                    -
+      CONTROLINTERVALSIZE(4096)                                        -
+      NOERASE                                                          -
+      FREESPACE(10 10)                                                 -
+      NOIMBED                                                          -
+      INDEXED                                                          -
+      KEYS(3 0)                                                        -
+      RECORDSIZE(23 584)                                               -
+      NOREPLICATE                                                      -
+      NOREUSE                                                          -
+      )DATA(                                                           -
+              NAME(SDAF.NANI.VSAM.KE.DATA)-
+      )INDEX(     -
+              NAME(SDAF.NANI.VSAM.KE.INDEX)-
+      )
+/*
+//
+

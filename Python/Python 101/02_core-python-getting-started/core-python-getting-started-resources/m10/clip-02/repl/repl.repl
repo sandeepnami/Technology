@@ -1,0 +1,7 @@
+<class 'int'>                                                                   
+>>> type("python")                                                              
+<class 'str'>                                                                   
+>>> type([1, 2, 3])                                                             
+<class 'list'>                                                                  
+>>> type(x*x for x in [2, 4, 6])                                                
+<class 'generator'>                                                             

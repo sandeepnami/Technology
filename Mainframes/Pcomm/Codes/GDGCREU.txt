@@ -1,0 +1,24 @@
+//#T53VXV1 JOB (1022,XXXX,1),'GDG CRE/GR325',CLASS=X,
+//     MSGCLASS=X,REGION=0M,NOTIFY=&SYSUID
+//**********************************************************************
+//***JCL FOR BUILDING GDG BASES
+//**********************************************************************
+//*  THIS JOB WILL CREATE GDG BASES
+//**********************************************************************
+//* 1. COPY THIS JCL TO YOUR OWN LIBRARY FROM 'TRAC.PROD.JCL'.
+//* 2. FILL IN THE CORRECT FILE NAME(S) AND GENERATION LIMIT.
+//* 3.COPY YOUR JCL INTO 'MVSSHARE.STAGE.JCL(YOUR MEMBER NAME)'.
+//* 4. COMPLETE WEBFORM CALLED 'GDG/FILE ALLOCATION REQUEST' AND SEND
+//*    TO 'SCHEDAIS' FOR PROCESSING.
+//**********************************************************************
+//STEPLIM  EXEC PGM=IDCAMS
+//SYSPRINT DD   SYSOUT=X
+//SYSIN    DD   *
+ DEFINE  GDG(NAME(PDY.TFF.COMMDEC.F17001) LIM(10) SCRATCH)
+ DEFINE  GDG(NAME(PDY.TFO.COMMDEC.F17001) LIM(10) SCRATCH)
+ DEFINE  GDG(NAME(PDY.TF5.COMMDEC.F17001) LIM(10) SCRATCH)
+ DEFINE  GDG(NAME(PDY.TF9.COMMDEC.F17001) LIM(10) SCRATCH)
+ DEFINE  GDG(NAME(PTY.TFF.COMMDEC.F17001) LIM(10) SCRATCH)
+/*
+**************************** BOTTOM OF DATA ***************************
+

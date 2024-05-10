@@ -1,0 +1,18 @@
+//P732083A JOB IN-1INC-IN,'TOOLBOX',CLASS=P,
+//             MSGCLASS=X,NOTIFY=P732083
+//*
+//*
+//**********************************************************************
+//*  CREATE NEW PANVALET LIBRARY FOR USERID
+//**********************************************************************
+//CREATE   EXEC PGM=PAN#4
+//SYSPRINT DD  SYSOUT=*
+//SYSUDUMP DD  SYSOUT=*
+//PANDD1   DD  DSN=P732083.SDAF.PP41475.SOURCE.LIBRARY,
+//             DISP=(,CATLG),UNIT=DPROG,
+//             SPACE=(CYL,10,,CONTIG),DCB=DSORG=DA
+//SYSIN    DD  *
+++CLEAR RECORDS=10
+/*
+//
+

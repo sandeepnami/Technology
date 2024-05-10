@@ -1,0 +1,12 @@
+'This is a string'                                                              
+>>> "This is also a string"                                                     
+'This is also a string'                                                         
+>>> "inconsistent'                                                              
+  File "<stdin>", line 1                                                        
+    "inconsistent'                                                              
+                 ^                                                              
+SyntaxError: EOL while scanning string literal                                  
+>>> "It's a good thing."                                                        
+"It's a good thing."                                                            
+>>> '"Yes!", he said, "I agree!"'                                               
+'"Yes!", he said, "I agree!"'                                                   

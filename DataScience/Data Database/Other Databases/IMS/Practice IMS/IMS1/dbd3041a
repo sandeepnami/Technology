@@ -1,0 +1,21 @@
+ PRINT   NOGEN                                                          00001003
+ DBD     NAME=DBD3041A,ACCESS=HDAM,RMNAME=RMOD3                         00010017
+ DATASET DD1=DBD3041A,DEVICE=3380,SIZE=2048                             00020017
+ SEGM    NAME=VENDSEG,PARENT=0,BYTES=40                                 00030007
+ FIELD   NAME=(VENDID,SEQ,U),BYTES=5,START=1,TYPE=C                     00040006
+ FIELD   NAME=VENDNAME,BYTES=15,START=6,TYPE=C                          00050006
+ FIELD   NAME=VENDADDR,BYTES=20,START=21,TYPE=C                         00060007
+ SEGM    NAME=ITEMSEG,PARENT=VENDSEG,BYTES=35                           00070007
+ FIELD   NAME=(ITEMID,SEQ,U),BYTES=10,START=1,TYPE=C                    00080006
+ FIELD   NAME=ITEMNAME,BYTES=20,START=11,TYPE=C                         00090006
+ FIELD   NAME=ITEMVAL,BYTES=5,START=31,TYPE=C                           00091007
+ SEGM    NAME=LOCSEG,PARENT=ITEMSEG,BYTES=35                            00100007
+ LCHILD  NAME=(SECPNTR,DBD3051A),POINTER=INDX                           00101018
+ FIELD   NAME=(LOCID,SEQ,U),BYTES=10,START=1,TYPE=C                     00110014
+ XDFLD   NAME=SECKEY,SRCH=LOCID                                         00111012
+ FIELD   NAME=LOCNAME,BYTES=20,START=11,TYPE=C                          00120006
+ FIELD   NAME=ITEMQTY,BYTES=5,START=31,TYPE=P                           00130007
+ DBDGEN                                                                 00150003
+ FINISH                                                                 00160003
+ END                                                                    00170003
+

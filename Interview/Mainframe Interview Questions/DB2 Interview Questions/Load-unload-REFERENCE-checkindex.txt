@@ -1,0 +1,37 @@
+              Db2 utilities.
+----------------------------------------------------
+The RESUME YES clause specifies that the table space does not need to be empty; new records are added to the end of the table
+----------------------------------------------------
+The ENFORCE CONSTRAINTS option indicates that LOAD is to enforce referential constraints on the data that is being added. This option is also the default. All violations are reported in the output. All records causing these violations are not loaded and placed in the SYSDISC data set, which is the default data set for discarded records.
+---------------------------------------------------
+---------------------------------------------------
+Example of LOAD WITH DIFFERENT DATA TYPE & EXTERNAL
+---------------------------------------------------
+LOAD DATA INDDN(SYSRECPJ)
+ INTO TABLE DSN8910.PROJ
+  (PROJNO   POSITION  (1) CHAR(6),
+   PROJNAME POSITION  (8) CHAR(22),
+   DEPTNO   POSITION (31) CHAR(3),
+   RESPEMP  POSITION (35) CHAR(6),
+   PRSTAFF  POSITION (42) DECIMAL EXTERNAL(5),
+   PRSTDATE POSITION (48) DATE EXTERNAL(10),
+   PRENDATE POSITION (59) DATE EXTERNAL(10),
+   MAJPROJ  POSITION (70) CHAR(6))
+----------------------------------------------------
+Example of a LOAD statement that specifies field positions 
+----------------------------------------------------    LOAD DATA
+ RESUME YES
+ INTO TABLE DSN8910.DEPT
+ (DEPTNO    POSITION (1:3)     CHAR(3),
+    DEPTNAME POSITION (4:39)    CHAR(36),
+    MGRNO     POSITION (s40:45)   CHAR(6),
+    ADMRDEPT POSITION (46:48)   CHAR(3),
+    LOCATION POSITION (49:64)   CHAR(16))
+
+----------------------------------------------------
+------------UNLOAD----------------------------------
+The NOPAD option indicates that variable-length fields are to be unloaded without any padding. 
+----------------------------------------------------
+-------------CHECK INDEX---------------------------
+Also run CHECK INDEX before running CHECK DATA, especially if you specify DELETE YES. Running CHECK INDEX before CHECK DATA ensures that the indexes that CHECK DATA uses are valid. 
+-------------CHECK INDEX---------------------------

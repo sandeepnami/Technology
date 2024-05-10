@@ -1,0 +1,56 @@
+Sub ZMain
+Dim ret	
+end_check = "Commands:"
+'List of jobs
+'JOB = ARRAY("adkGLOPN","adkGSROP","adkNDM21")
+'POSTING SUCCESORS FOR DK-814
+JOB = ARRAY("ADKGSCLS ","ADKGSD10 ","ADKC1ML1 ","ADKC12Z0 ","ADKC19A0","ADKC19C0","ADKC1PH0 ","ADKC1W30 ","ADKC1W40 ","ADKGRMOI ","ADKGRNMI","ADKGDDB2 ","ADKGINS1 ","ADKGINS2","ADKGMG1D","ADKNDM51","ADKVLDR0")
+'Action tobe performed hold or release MH / MR
+
+'hold jobs
+action = "H"
+'free jobs
+'action= "F"
+
+Set Sys = CreateObject("PASSPORT.System")
+'selects the currently active session
+Set Sess = Sys.ActiveSession
+'selects the screen object
+Set MyScreen = Sess.Screen
+
+
+For N = LBound(JOB ) To UBound(JOB)
+                  'ret=MsgBox(JOB(N)) 
+	SendHostKeys ("<HOME>")
+	ret = wait(3)
+	SendHostKeys ("SH")
+	ret = wait(3)
+	SendHostKeys ("<ENTER>")
+	ret = wait(3)
+
+	Set MyArea = MyScreen.Area(3,12, 3, 19)
+	MyArea.Select     
+	MyScreen.Copy
+'initialise the pgm name with spaces and then write the actual data(8 spaces)
+	MyArea.Value = "        "
+	MyArea.Value =JOB(N)
+	SendHostKeys ("<ENTER>")
+	ret = wait(6)
+
+	SendHostKeys ("M")
+	ret = wait(3)
+	SendHostKeys ("<PF7>")
+	ret = wait(3)
+
+	'HOLD PROCESS START
+	Set MyArea = MyScreen.Area(4,2, 4, 2)
+	MyArea.Select     
+	MyScreen.Copy
+	MyArea.Value = action
+	SendHostKeys ("<ENTER>")
+	ret = wait(6)
+
+Next 
+
+End Sub
+ 

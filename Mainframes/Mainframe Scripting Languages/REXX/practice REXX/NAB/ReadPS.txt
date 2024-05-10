@@ -1,0 +1,23 @@
+/* REXX TO sequencially read a PS file              
+*/                                                  
+/*NANI COMMENT FOR STD INPUT                        
+*/                                                  
+/*INPUT                                             
+STRING="ATTACHMENT"                                 
+PDSDD="NAB.MASTER.CNTL"  */                         
+DD1="SDAF.NANI.P732083.INPUT.SE"                    
+STRING="EMAIL"                                      
+                                                    
+/*ALLOCATION OF DATASET*/                           
+"ALLOC FI(DD1) DA('"DD1"') SHR "                    
+                                                    
+"EXECIO * DISKR DD1(STEM ARRAY. FINIS"              
+"FREE F(DD1)"                                       
+I = 1                                               
+/* ARRAY.0 will have the number of */               
+/* elements in the stem             */              
+DO WHILE I <= ARRAY.0                               
+   SAY ' LINE ' I ' : ' ARRAY.I                     
+   I = I + 1                                        
+END                                                 
+EXIT                                                

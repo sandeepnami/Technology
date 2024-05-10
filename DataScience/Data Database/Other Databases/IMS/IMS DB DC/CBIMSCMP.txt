@@ -1,0 +1,28 @@
+//CBIMSCMP JOB TS-1039,'COMPCUM',CLASS=W,MSGCLASS=X,MSGLEVEL=(1,1),     JOB31018
+//         NOTIFY=&SYSUID
+/*ROUTE    PRINT MDP10004
+/*JOBPARM  COPIES=1
+//*-------------------------------------------------------------------*
+//         SET RLSE=6
+//*-------------------------------------------------------------------*
+//*        COMPILE & LINK SAMPLE PGM NEWIMS
+//*-------------------------------------------------------------------*
+//AF0306M0   EXEC GUDCMCBL                                              00060003
+//EXPNDPAN.PANDD1     DD DSN=SDAF.P732083.NAMI.PANV.COBOL.LIBRARY,
+//    DISP=SHR
+//EXPNDPAN.PANDD13    DD DSN=PROG.PROD.COPY.LIBRARY,DISP=SHR
+//SYSIN DD   *                                                          00070000
+++WRITE WORK,NEWIMS                                                     00080000
+/*
+//*
+//*-------------------------------------------------------------------*
+//*        COMPILE & LINK SAMPLE PGM NEWIMS
+//*-------------------------------------------------------------------*
+//LINKEDIT EXEC GUDCMLNK,LOADMOD=NEWIMS                                 00100001
+//SYSIN  DD  *
+  ENTRY DLITCBL
+/*
+//CEE.SYSLMOD  DD  DSN=SDAF.P732083.NAMI.LOADLIB(NEWIMS),
+//    DISP=SHR
+//
+

@@ -1,0 +1,6 @@
+
+; sample program to display hello world
+
+Result = MsgBox ("Hello World")
+
+End 

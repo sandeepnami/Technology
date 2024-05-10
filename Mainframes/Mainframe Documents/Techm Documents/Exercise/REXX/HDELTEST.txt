@@ -1,0 +1,17 @@
+/* REXX TO DELETE A LIST OF DATASETS USING HDELETE*/                    00010000
+IN='CDKVPGE.FIX.SANDEEPN.IN1.SE'                                        00020000
+/* INP CONTAINS THE LIST OF GDGS WHICH */                               00030000
+"ALLOC FI(INPT) DA('"IN"') SHR "                                        00040000
+"EXECIO * DISKR  INPT(STEM IN. FINIS "                                  00050000
+T = 1                                                                   00060000
+DO A = 1 TO IN.0                                                        00070000
+ FILE_BASE = STRIP(IN.A)                                                00080000
+ PARSE VAR FILE_BASE FILE_BAS JUNK1                                     00090000
+ TEMP = "'"||FILE_BAS||"'"                                              00100000
+ DROP VAR1.                                                             00110000
+           ADDRESS TSO                                                  00120000
+           "DEL "TEMP""                                                 00130000
+           "HDELETE "TEMP""                                             00140000
+/*     "DEL '"ABSOLUTE_NAME.M"' GDG PURGE" */                           00150000
+       END                                                              00160000
+

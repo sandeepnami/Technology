@@ -1,0 +1,10 @@
+'This is a " in a string'                                                       
+>>> 'This is a \' in a string'                                                  
+"This is a ' in a string"                                                       
+>>> 'This is a \" and a \' in a string'                                         
+'This is a " and a \' in a string'                                              
+>>> k = 'A \\ in a string'                                                      
+>>> k                                                                           
+'A \\ in a string'                                                              
+>>> print(k)                                                                    
+A \ in a string                                                                 

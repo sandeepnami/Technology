@@ -1,0 +1,13 @@
+//#T53VXV3  JOB  (9999,0206,3),'12221 RG6   ',CLASS=X,              
+//           MSGCLASS=X,NOTIFY=&SYSUID,REGION=0M                    
+//*                                                                 
+//STEP01 EXEC PGM=IDCAMS                                            
+//SYSPRINT DD SYSOUT=*                                              
+//SYSIN DD *                                                        
+        LISTCAT -                                                   
+             ENTRIES (HPSVSAM.ACCPEND.H100005) -                    
+             CLUSTER  -                                             
+             INDEX -                                                
+             DATA  -                                                
+             ALL                                                    
+/*                                                                  

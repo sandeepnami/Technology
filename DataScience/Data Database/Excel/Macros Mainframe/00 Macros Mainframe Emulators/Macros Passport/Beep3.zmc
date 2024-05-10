@@ -1,0 +1,14 @@
+Sub ZMain()
+Dim loopvar, ret
+for i = 1 to 150
+    SendHostKeys ("<PF6>")
+For loopvar = 1 To 20
+	Beep
+	ret = wait(2)
+Next 
+'refresh screen after 4mins
+    ret = Wait(240)	
+Next
+End Sub
+
+

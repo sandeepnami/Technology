@@ -1,0 +1,57 @@
+Sub ZMain
+'Dim  ret,job_array_old(),job_array_new(),job_check,job_temp	
+
+Dim dict 
+dict.Add "John", 34
+
+
+
+exit sub
+Set Sys = CreateObject("PASSPORT.System")
+'selects the currently active session
+Set Sess = Sys.ActiveSession
+'selects the screen object
+Set MyScreen = Sess.Screen
+
+Set MyArea = MyScreen.Area(7,7, 7, 14)
+MyArea.Select     
+MyScreen.Copy
+job_temp = MyArea.Value
+'job_array_old(job_temp,"JOBNAME") = job_temp
+job_array_old(1,1) = "test"
+
+MsgBox "job_array_old value " & job_array_old(1,1) 
+
+exit sub
+for i = 1 to 40
+	Set MyArea = MyScreen.Area(i,7, i, 13)
+	MyArea.Select     
+	MyScreen.Copy
+	MyArea.Value
+	if (MyArea.Value = "JOBNAME") Then
+		Set MyArea = MyScreen.Area(i,7, i, 13)
+		MyArea.Select     
+		MyScreen.Copy
+		MyArea.Value		
+			
+	End If
+
+
+Next
+
+
+exit sub
+
+'note that refresh_time=180 for 3mins
+refresh_time = "180"
+'refresh_time = "20"
+'press Enter for every specified refresh_time
+for i = 1 to 150
+                
+	SendHostKeys ("<ENTER>")
+	'refresh screen after 3mins
+	 ret = Wait(refresh_time)	
+Next 
+
+End Sub
+ 

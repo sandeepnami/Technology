@@ -1,0 +1,17 @@
+//UGBIDCAM JOB AF-1055,'CRT AIX',
+//             MSGCLASS=X,MSGLEVEL=(1,1),
+//             CLASS=P,NOTIFY=&SYSUID
+//*TO CREATE ALTERNATE INDEX TO A FILE
+//STEP1   EXEC PGM=IDCAMS
+//SYSPRINT DD  SYSOUT=*
+//SYSIN    DD  *
+  DEFINE AIX(                                                      -
+      NAME(SDAF.NANI.VSAM2.KE.AIX)                           -
+      RELATE(SDAF.NANI.VSAM2.KE)  -
+      TRACKS(10 5)                                                   -
+      RECORDSIZE(80 80)                                                -
+      KEYS(12 68)                                                     -
+      UPGRADE)
+/*
+//
+

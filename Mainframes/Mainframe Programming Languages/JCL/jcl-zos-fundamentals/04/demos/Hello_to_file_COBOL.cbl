@@ -1,0 +1,89 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. GRCOBF.
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT PEOPLE-TO-GREET
+           ASSIGN TO 'INPUT'
+           ORGANIZATION IS SEQUENTIAL
+           ACCESS MODE IS SEQUENTIAL
+           FILE STATUS IS PEOPLE-FILE-STATUS.
+
+           SELECT GENERATED-GREETINGS
+           ASSIGN TO 'OUTPUT'
+           ORGANIZATION IS SEQUENTIAL
+           ACCESS MODE IS SEQUENTIAL
+           FILE STATUS IS GREETINGS-FILE-STATUS.
+
+       DATA DIVISION.
+       FILE SECTION.
+       FD  PEOPLE-TO-GREET
+           RECORDING MODE IS F
+           RECORD CONTAINS 80 CHARACTERS
+           BLOCK CONTAINS 0 RECORDS.
+       01  PEOPLE-RECORD.
+           05  PEOPLE-NAME       PIC X(73).
+           05  FILLER            PIC X(7).
+
+       FD  GENERATED-GREETINGS 
+           RECORDING MODE IS F 
+           RECORD CONTAINS 80 CHARACTERS 
+           BLOCK CONTAINS 0 RECORDS.
+       01  GREETINGS-RECORD. 
+           05  GREETING-MESSAGE  PIC X(80).
+
+       WORKING-STORAGE SECTION. 
+       01  WS-WORK AREAS.
+           05  WS-HELLO               PIC X(7) VALUE 'Hello, '.
+       01  WS-FILE-STATUS. 
+           05  PEOPLE-FILE-STATUS     PIC X(2).
+               88  PEOPLE-OK          VALUE '00'.
+               88  PEOPLE-END-OF-FILE VALUE '10'.        
+           05  GREETINGS-FILE-STATUS  PIC X(2).
+               88  GREETINGS-OK       VALUE '00'.
+
+       PROCEDURE DIVISION.
+           PERFORM 0100-INITIALIZE
+           PERFORM 2000-GENERATE-GREETINGS
+           PERFORM 3000-HOUSEKEEPING
+           GOBACK
+           .
+       0100-INITIALIZE. 
+           OPEN INPUT PEOPLE-TO-GREET 
+           IF NOT PEOPLE-OK
+               DISPLAY 'PROBLEM OPENING INPUT FILE, STATUS='
+                   PEOPLE-FILE-STATUS
+               GOBACK
+           END-IF 
+           OPEN OUTPUT GENERATED-GREETINGS 
+           IF NOT GREETINGS-OK 
+               DISPLAY 'PROBLEM OPENING OUTPUT FILE, STATUS='
+                   GREETINGS-FILE-STATUS
+               GOBACK
+           END-IF
+           PERFORM 8100-READ-NEXT-RECORD
+           IF PEOPLE-END-OF-FILE 
+               DISPLAY 'INPUT FILE IS EMPTY; NOTHING TO DO'
+               GOBACK
+           END-IF
+           .
+       2000-GENERATE-GREETINGS.
+           PERFORM WITH TEST BEFORE UNTIL PEOPLE-END-OF-FILE 
+               STRING WS-HELLO DELIMITED BY SIZE
+                      PEOPLE-NAME DELIMITED BY SPACE 
+                  INTO GREETINGS-RECORD 
+               END-STRING 
+               PERFORM 8200-WRITE-GREETING
+               PERFORM 8100-READ-NEXT-RECORD
+           END-PERFORM
+           .
+       3000-HOUSEKEEPING.
+           CLOSE PEOPLE-TO-GREET 
+           CLOSE GENERATED-GREETINGS
+           .
+       8100-READ-NEXT-RECORD.
+           READ PEOPLE-TO-GREET
+           .
+       8200-WRITE-GREETING.
+           WRITE GREETINGS-RECORD
+           .                                                               

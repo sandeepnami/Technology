@@ -1,0 +1,20 @@
+             
+----------------------------------------------------
+pds name: uela003.db2.uti
+'UELA003.DB2.LOAD' - PS (with records to be loaded)
+---------------------------------------------------------
+---------------------------------------------------------
+NEW POSITION FOR LAOD1 - 
+1:5
+6:20
+26:30
+   
+--------------table syntax-------------------------------
+
+CREATE TABLE UELA003.LOADEMP(               
+                         EMP_ID   INT,      
+                         EMP_NAME CHAR(20), 
+                         EMP_ADDR CHAR(30)) 
+             IN DELT01.STEME;
+
+--------------table syntax-------------------------------

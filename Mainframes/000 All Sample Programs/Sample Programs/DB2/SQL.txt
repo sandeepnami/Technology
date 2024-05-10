@@ -1,0 +1,145 @@
+
+/*To find Table definition*/
+DESCRIBE TABLE 'table name'
+
+/* Describe table alternative */
+SELECT B.REFTBNAME AS PARENTTABLE,COLNAME
+FROM
+SYSIBM.SYSFOREIGNKEYS A,
+SYSIBM.SYSRELS B
+WHERE A.RELNAME = B.RELNAME
+AND   B.TBNAME = 'table name'
+AND   B.REFTBCREATOR = 'creator'
+AND   B.REFTBCREATOR = A.CREATOR 
+
+-- For CHeck Constrints
+
+ 
+
+Select CheckName,CheckCondition From sysibm.SYSChecks where TBName = 'TM766H_SPCLPGMCNV' And Creator = 'HNDBA000'
+
+And TBOwner = 'HNDBA000'
+
+ 
+
+Select * From sysibm.SYSIndexes Where TBName = 'TM766H_SPCLPGMCNV'
+
+And Creator = 'HNDBA000' and UniqueRule = 'U'
+
+ 
+
+Select * From SYSIBM.SYSKEYCOLUSE
+
+ 
+
+-- For Primary and Unique Keys
+
+Select * From sysibm.syscolumns where TBName = 'TM766H_SPCLPGMCNV' and
+
+KEYSEQ > 0  And TBCreator = 'HNDBY000'
+
+ 
+
+-- To see View Defnition
+
+ 
+
+Select Type,Text From SysIBM.SysViews Where name = 'BR_VW'
+
+ 
+
+select * from hndbn00f.T3B1DR_HOME_STYLE_REF
+
+select * from hndba000.T3B1DR_HOME_STYLE_REF
+
+ 
+
+-- For Parent Tables
+
+SELECT A.TBNAME, A.RELNAME, B.COLNAME,A.REFTBNAME,IXName
+
+FROM SYSIBM.SYSRELS A, SYSIBM.SYSFOREIGNKEYS B
+
+WHERE A.CREATOR = 'HNDBN00F'
+
+AND B.CREATOR = 'HNDBN00F'
+
+AND A.TBNAME = 'T1960T_PRDCR_PRGRM'
+
+AND A.RELNAME = B.RELNAME ORDER BY A.RELNAME, B.COLSEQ
+
+ 
+
+--For Child Tables
+
+SELECT A.RELNAME,A.TBNAME, B.COLNAME, A.REFTBNAME
+
+FROM SYSIBM.SYSRELS A, SYSIBM.SYSFOREIGNKEYS B
+
+WHERE A.REFTBCREATOR = 'HNDBA002' ANd B.CREATOR = 'HNDBA002'
+
+AND A.REFTBNAME = 'TM766H_SPCLPGMCNV'
+
+AND A.RELNAME = B.RELNAME ORDER BY A.RELNAME, B.COLNO
+
+ 
+
+SELECT A.TBNAME, A.RELNAME, B.COLNAME,A.REFTBNAME,IXName
+
+FROM SYSIBM.SYSRELS A, SYSIBM.SYSFOREIGNKEYS B
+
+WHERE A.CREATOR = 'HNDBN00F'
+
+AND B.CREATOR = 'HNDBN00F'
+
+AND A.TBNAME = 'T320KT_BOP_LOC_RPT_REL'
+
+AND A.RELNAME = B.RELNAME ORDER BY A.RELNAME, B.COLSEQ
+
+ 
+
+select * from
+
+SELECT DISTINCT A.PRODT_LN_DESC, A.PRODT_LN_CD FROM HNDBA000.T310BT_PRODT_LN A
+
+  ,HNDBA000.T310WT_CO_ST_PRODT B, HNDBA000.PRDCR_VW C WHERE PCB_CD = 'P'AND PROCS_SYS_CD='POS'
+
+   AND PRODT_ABBR_CD = 'AMIG' AND B.PRODT_LN_CD = A.PRODT_LN_CD AND B.ROW_EFF_DT_TYPE = 'N'
+
+   AND B.ROW_EFF_DT < '9999-12-31' AND C.PRDCR = '0601065' AND C.CO_CD = B.CO_CD
+
+ 
+
+ 
+
+ 
+
+-- For Foreign Key Relations
+
+Select B.TBName ForeignKey_Table,A.ColName,B.RefTBName Primary_Table,A.RelName From
+
+SysIBM.SysForeignKeys A,SysIBM.SysRels B
+
+Where A.RelName = B.RelName And B.Creator = 'HNDBN00F' ANd B.RefTBCreator = 'HNDBN00F'
+
+ANd A.Creator = 'HNDBN00F'  And A.RelName = '00000175A0'
+
+ 
+
+-- And B.Creator = 'HNDBA000' ANd B.RefTBCreator = 'HNDBA000'
+
+Select * From SysIBM.SysTables Where upper(TBNAME) Like '%T4501T_POL_PENDING %'
+
+Select * From SysIBM.SYSRELS where TBNAME = 'TM766H_SPCLPGMCNV'
+
+Select * From SysIBM.SYSRELS where  RelName = 'FK0134'   TBNAME = 'TM766H_SPCLPGMCNV'
+
+select * from hndba000.T310BT_PRODT_LN
+
+ 
+
+Select * From SysIBM.SysColumns Where  TBCreator = 'HNDBA000' And NAME='PRGRM_CD'
+
+ 
+
+Select * From SysIBM.SysForeignKeys Where RelName = 'F320DC4'

@@ -1,0 +1,18 @@
+//UGBIDCAM JOB AF-1055,'CRT RRDS',
+//             MSGCLASS=X,MSGLEVEL=(1,1),
+//             CLASS=P,NOTIFY=&SYSUID
+//*TO CREATE RRDS FILE
+//STEP1   EXEC PGM=IDCAMS
+//SYSPRINT DD  SYSOUT=*
+//SYSIN    DD  *
+  DEFINE CLUSTER(                                                      -
+      NAME(SDAF.NANI.VSAM.RRDS.CLUSTER)                           -
+      TRACKS(1  1)                                                    -
+      RECORDSIZE(80 80)                                                -
+      NUMBERED                                                        -
+      REUSE                                                          -
+      )DATA(                                                           -
+              NAME(SDAF.NANI.VSAM.RRDS.CLUSTER.DATA))
+/*
+//
+

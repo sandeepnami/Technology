@@ -1,0 +1,25 @@
+>>> import words                                                                
+>>> help(words)                                                                 
+Help on module words:                                                           
+                                                                                
+NAME                                                                            
+    words - Retrieve and print words from a URL.                                
+                                                                                
+DESCRIPTION                                                                     
+    Usage:                                                                      
+                                                                                
+       python3 words.py <URL>                                                   
+                                                                                
+FUNCTIONS                                                                       
+    fetch_words(url)                                                            
+        Fetch a list of words from a URL.                                       
+                                                                                
+        Args:                                                                   
+            url: The URL of a UTF-8 text document.                              
+                                                                                
+        Returns:                                                                
+            A list of strings containing the words from                         
+            the document.                                                       
+                                                                                
+    main(url)                                                                   
+        Print each word from a text document from at a URL.                     

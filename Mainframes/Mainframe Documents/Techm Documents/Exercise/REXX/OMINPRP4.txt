@@ -1,0 +1,112 @@
+/**************************** REXX ************************************/
+/* REXX TO REPORT ALL THE FILES THAT WILL BE PROCESSED IN TODAYS BATCH*/
+/* CODED BY: RITESH SHAH - SATYAM COMPUTER SERVICES LTD.              */
+/**********************************************************************/
+"EXECIO * DISKR  SYSIN(STEM IN. FINIS "
+DO IP = 1 TO IN.0 BY 1
+IF IP = 1 THEN DO
+SAY '/////////////////////////// START \\\\\\\\\\\\\\\\\\\\\\\\\\\\\'
+SAY '|  LIST OF FILES THAT WILL BE PROCESSED IN DENMARK-V814       |'
+SAY '|  REPORT FOR: ' DATE()    'AT' TIME() '                      |'
+SAY '|-------------------------------------------------------------|'
+SAY '|                  GDG-VERSION                        |RECORDS|'
+END
+CONTROL_CARD = STRIP(IN.IP)
+PARSE VAR CONTROL_CARD GDGNAME MAXIMUM_NO_OF_FILES
+TEMP = "'"||GDGNAME||"'"
+IF DATATYPE(MAXIMUM_NO_OF_FILES) \= 'NUM' |,
+   DATATYPE(GDGNAME) \= 'CHAR' THEN
+DO
+   SAY '--------------INVALID CONTROL CARD-----------'
+   SAY '---CHECK THE FILENAME AND THE NO. OF FILES---'
+   SAY 'DATATYPE(MAXIMUM_NO_OF_FILES): ' DATATYPE(MAXIMUM_NO_OF_FILES)
+   SAY 'DATATYPE(GDGNAME)            : ' DATATYPE(GDGNAME)
+   SAY 'SYSDSN(TEMP)                 : ' SYSDSN(TEMP)
+   EXIT 16
+END
+SAY '|-----------------------------------------------------|-------|'
+IF IP = 1  THEN
+SAY '| << SALEIN >>         (FILE TRIGGERED       - ANY)   |       |'
+IF IP = 2  THEN
+SAY '| << GIROIN >>         (TIME TRIGGERED-18:00 - 9  )   |       |'
+IF IP = 3  THEN
+SAY '| << AKS >>            (FILE + TIME-18:00    - 1  )   |       |'
+IF IP = 4  THEN
+SAY '| << PBS-DD >>         (TIME TRIGGERED-18:00 - 5  )   |       |'
+IF IP = 5  THEN
+SAY '| << PHONE-WASH >>     (BATCH                - ANY)   |       |'
+IF IP = 6  THEN
+SAY '| << SHELL >>          (TIME TRIGGERED-18:00 - 9  )   |       |'
+IF IP = 7  THEN
+SAY '| << DDEBIN >>         (FILE TRIGGERED       - ANY)   |       |'
+IF IP = 8  THEN
+SAY '| << GENIN >>          (TIME TRIGGERED-18:00 - 9  )   |       |'
+IF IP = 9  THEN
+SAY '| << CPR-GUARD >>      (FILE TRIGGERED       - ANY)   |       |'
+IF IP = 10 THEN
+SAY '| << Q8 >>             (FILE TRIGGERED       - ANY)   |       |'
+IF IP = 11 THEN
+SAY '| << OLD-GIRO >>       (FILE TRIGGERED       - ANY)   |       |'
+IF IP = 12 THEN
+SAY '| << MERCURY-ATRT >>   (BATCH                - 1  )   |       |'
+IF IP = 13 THEN
+SAY '| << XPON-AT5T >>      (TIME TRIGGERED-18:00 - 4  )   |       |'
+IF IP = 14 THEN
+SAY '| << PBS-TRANSFER >>   (FILE TRIGGERED       - ANY)   |       |'
+IF IP = 15 THEN
+SAY '| << BLOCK-CODE >>     (BATCH                - ANY)   |       |'
+IF IP = 16 THEN
+SAY '| << REAGE >>          (BATCH                - 1  )   |       |'
+/* DATE CALCULATION LOGIC */
+TODAYS_YEAR   = SUBSTR(DATE(J),1,2) ; TODAYS_DAY = SUBSTR(DATE(J),3)
+TODAYS_DATE   = TODAYS_YEAR||'.'||TODAYS_DAY
+FILES_TO_BE_CREATED = MAXIMUM_NO_OF_FILES ; M = 0
+/* CAPTURE GDG DETAILS */
+DROP VAR1.
+X = OUTTRAP('VAR1.')
+'LISTCAT ENT('TEMP') GDG ALL'
+X = OUTTRAP('OFF')
+DROP ABSOLUTE_NAME.
+DO Z = VAR1.0 TO MAXIMUM_NO_OF_FILES BY -1
+  M = M + 1
+  ABSOLUTE_NAME.M = "'"||SUBSTR(VAR1.Z,17)||"'"
+END
+ABSOLUTE_NAME.0 = MAXIMUM_NO_OF_FILES
+TEMP2 = LENGTH(ABSOLUTE_NAME.1) - 7
+LAST_VER = SUBSTR(ABSOLUTE_NAME.1,TEMP2,4)
+GOT = 0
+DO N = 1 TO MAXIMUM_NO_OF_FILES
+     DROP VAR2.
+     Y = OUTTRAP('VAR2.')
+     'LISTCAT ENT('ABSOLUTE_NAME.N') HISTORY'
+     Y = OUTTRAP('OFF')
+     DO K = VAR2.0 TO 1 BY -1
+        P = INDEX(VAR2.K,'CREATION')
+        IF P <> 0 THEN LEAVE
+     END
+     CREATED_DATE = STRIP(SUBSTR(VAR2.K,P+18))
+/* CHECK IF ANY FILE HAS BEEN RECEIVED TODAY AND PRINT */
+     IF CREATED_DATE = TODAYS_DATE THEN DO
+        "ALLOC FI(IN) DA("ABSOLUTE_NAME.N") SHR REUSE"
+        COUNT = 0; FIN = 0; SPOS = 1
+        "NEWSTACK"
+        DO UNTIL FIN
+         "EXECIO 1000 DISKR IN "SPOS" (FINIS)"
+         COUNT = COUNT + QUEUED()
+         IF QUEUED() < 1000 THEN FIN = 1
+         ELSE SPOS = SPOS + 1000
+         "DELSTACK"
+        END
+        "FREE FI(IN)"
+        FILE_NAME = LEFT(STRIP(ABSOLUTE_NAME.N),51,' ')
+        COUNT1    = RIGHT(STRIP(COUNT),5,' ')
+        SAY '|' FILE_NAME '|' COUNT1 '|'
+        GOT = 1
+     END
+END
+IF GOT = 0 THEN
+  SAY '| <------------ NO FILES RECEIVED TODAY ------------> |       |'
+IF IP = IN.0 THEN
+  SAY '\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END //////////////////////////////'
+END
+

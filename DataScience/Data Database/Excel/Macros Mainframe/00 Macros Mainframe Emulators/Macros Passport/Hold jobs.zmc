@@ -1,0 +1,38 @@
+Sub ZMain
+Dim PrNoOld, PrNoCurr, ret	
+'List of jobs
+JOB = ARRAY("DDKA1530","DDKGLOPN","DDKGSROP","DDKNDM21")
+'Action tobe performed hold or release MH / MR
+action = "MR"
+
+Set Sys = CreateObject("PASSPORT.System")
+
+For N = LBound(JOB) To UBound(JOB)
+                  'ret=MsgBox(JOB(N)) 
+	'selects the currently active session
+	Set Sess = Sys.ActiveSession
+	'selects the screen object
+	Set MyScreen = Sess.Screen
+	'selects the area (Start Row, End Row, Start Column, End Column)
+	'selects the old pr i.e first PR 
+	Set MyArea = MyScreen.Area(6, 24, 6, 31)
+	MyArea.Select     
+	MyScreen.Copy
+	MyArea.Value = JOB(N)
+	SendHostKeys ("<ENTER>")
+	ret = wait(3)
+
+	Set Sess = Sys.ActiveSession
+	Set MyScreen = Sess.Screen
+	Set MyArea = MyScreen.Area(18, 2, 18, 3)
+	MyArea.Select     
+	MyScreen.Copy
+	MyArea.Value = action
+	SendHostKeys ("<ENTER>")
+	ret = wait(3)
+	SendHostKeys ("<PF3>")
+	ret = wait(3)
+Next 
+
+End Sub
+ 

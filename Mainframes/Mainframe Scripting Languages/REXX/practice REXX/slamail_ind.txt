@@ -1,0 +1,449 @@
+/* rexx */
+
+/*****************************************************************/
+/* This rexx exec allows SMTP mail to be sent using TSO in batch */
+/* It could be used for example as a notify step at the end of a */
+/* job which is run depending on condition codes.                */
+/*                                                               */
+/* To call use the tso command: email mail subject line          */
+/* where "mail subject line" is the subject to appear on the     */
+/* mail.                                                         */
+/*                                                               */
+/* The following DD names are required:                          */
+/* ADDRESS: a file with a list of addressees one per line        */
+/* MESSAGE: the text of the message                              */
+/* Attachments: IF an ATTACH DD is present any DD name it refers */
+/*              to MUST be present                               */
+/*                                                               */
+/* The following DD names are optional:                          */
+/* REPLYTO: a file with a single Email address for use in the    */
+/*          REPLY Email processing - if left out, no replyto     */
+/*          header will be included.                             */
+/* ATTACH: a file with a list of attachment DD names, one per    */
+/*         line. The files pointed to by these DD names will be  */
+/*         attached to the message. These files must contain     */
+/*         plain text.  Each DD name can optionally by           */
+/*         followed by the filename for the attachment.          */
+/*         If this does not end with .txt, .csv, or .rtf, then   */
+/*         .txt will be added.                                   */
+/*                                                               */
+/* No syntax checking is done on the addressees but blank lines  */
+/* are allowed and removed.                                      */
+/*                                                               */
+/* No syntax checking is done on the attachment DD names but     */
+/* if the read from the DD name fails the message will not be    */
+/* sent. Blank lines in the ATTACH file are allowed and ignored. */
+/*                                                               */
+/* The From: headers will probably not be real addresses         */
+/*                                                               */
+/* Revision History:                                             */
+/* 30/07/97: AJR  Initial version                                */
+/* 19/11/98: AJR  add checking for invalid characters            */
+/* 11/11/98: PMcD Eliminate EST date format            -* GE9906 */
+/* 04/10/05: TRH  Change to NETDATA format and true sender       */
+/* 15/11/05: TRH  Customised for IFD1                            */
+/* 15/02/06: TRH  Customised for GED1                            */
+/* 07/03/06: TRH  Added prefix for mailout where no tso prefix   */
+/* 08/03/06: TRH  Handle situation of no valid tso userid        */
+/* 24/04/07: TRH  Added optional filename for ATTACH input.      */
+/* 31/05/07: TRH  Added REPLYTO processing and timezone.         */
+/* 19/07/07: TRH  Allow for multiple emails in same second.      */
+/* 24/09/07: TRH  Eliminate case sensitivity for extension.      */
+/* 25/09/07: TRH  Increase LRECL to maximum for SMTP RFC.        */
+/* 09/11/07: TRH  Increase dataset allocation for longer recs    */
+/* 01/05/08: TRH  Modify alloc, smaller primary, add secondary   */
+/*                                                               */
+/*****************************************************************/
+
+/* ------------------------------------------------------------- */
+/* set up customization values                                   */
+/* ------------------------------------------------------------- */
+thisnode = sysvar("SYSNODE")
+syschar = substr(thisnode,3,1)
+dspfx = syschar"NET.TCPIP.SMTP"
+smtpdest = thisnode".SMTP"
+jobname = MVSVAR("SYMDEF","JOBNAME")
+/* For secure SMTP, mail must be from real TSO userid.           */
+/* If job has 8 char id, TSO substitutes BATCHTSO                */
+if userid() = ""
+  then sender = "BATCHTSO@"thisnode
+  else sender = userid()"@"thisnode
+sender = "BATCHTSO@"thisnode
+say sender
+fromtext="GE Money"
+/* ------------------------------------------------------------- */
+/*     Parse the passed subject to preserve case                 */
+/* ------------------------------------------------------------- */
+/*   38 to 7                                                     */
+ cnt1 = 0
+ 'execio * diskr message (stem msg. finis'
+ if rc ¬= 0 then do
+    say "COULD NOT READ MESSAGE FILE RC =" rc
+    exit 12
+ end
+ do i = 1 to msg.0
+    msg1 = substr(msg.i,38,7)
+    msg1 = strip(msg1)
+    if msg1 = 'MET' then do
+      cnt1 = cnt1 + 1
+      end
+ end
+ cnt = cnt1||'/6'
+ parse arg odate1
+ odate1 = '20'||odate1
+ time1 = time('c')
+ subject = 'India SLA MET '||cnt||' - '||odate1||' at '||time1,
+            ||' AEST'
+
+mimeboundary = "mime-boundary-01"
+
+/* ------------------------------------------------------------- */
+/* The following EBCDIC characters translate to ascii characters */
+/* greater than 127 which are not allowed in SMTP mail. We will  */
+/* check for them in the message and attachments and reject the  */
+/* message if it contains them to avoid possible problems with   */
+/* the mail further down the line.                               */
+/* This table is based on the translate table in                 */
+/* SYS1.SEZATCPX(STANDARD)                                       */
+/* RFC821 says that mail data can contain any of the 128 ASCII   */
+/* characters, however x'00' crashes our mail gateway. x'00' has */
+/* therefore been added to the list of forbidden characters.     */
+/* It is most likely to be in the data due to a programming      */
+/* error in the sending program anyway.                          */
+/* ------------------------------------------------------------- */
+
+bad_chars = '00'x ||,
+            '41 42 43 44 45 46 47 48 49 4a'x ||,
+            '51 52 53 54 55 56 57 58 59'x ||,
+            '62 63 64 65 66 67 68 69 6a'x ||,
+            '70 71 72 73 74 75 76 77 78'x ||,
+            '80 8a 8b 8c 8d 8e 8f'x ||,
+            '90 9a 9b 9c 9d 9e 9f'x ||,
+            'a0 aa ab ac ae af'x ||,
+            'b0 b1 b2 b3 b4 b5 b6 b7 b8 b9 ba bb bc be bf'x ||,
+            'ca cb cc cd ce cf'x ||,
+            'da db dc dd de df'x ||,
+            'e1 ea eb ec ed ee ef'x ||,
+            'fa fb fc fd fe ff'x
+
+/* ------------------------------------------------------------- */
+/*     Read the ADDRESS DD                                       */
+/* ------------------------------------------------------------- */
+'execio * diskr address (stem address. finis'
+if rc ¬= 0 then do
+   say "COULD NOT READ ADDRESS FILE RC =" rc
+   exit 12
+end
+/* ------------------------------------------------------------- */
+/*     Read the MESSAGE                                          */
+/* ------------------------------------------------------------- */
+'execio * diskr message (stem message. finis'
+if rc ¬= 0 then do
+   say "COULD NOT READ MESSAGE FILE RC =" rc
+   exit 12
+end
+/* ------------------------------------------------------------- */
+/*     Check if we have the following ddnames present :          */
+/*         "ATTACH" - Lists DD names containing file attachments */
+/*         "REPLYTO"- Requests a replyto header is the message   */
+/* ------------------------------------------------------------- */
+x = outtrap("l.")
+"listalc status"
+x = outtrap("off")
+attachments = "NO"
+replyto_dd  = "NO"
+do i = 1 to l.0
+   if substr(l.i,1,10) == "  ATTACH  " then do
+      attachments = "YES"
+      'execio * diskr attach (stem attach. finis'
+      if rc ¬= 0 then do
+         say "COULD NOT READ ATTACHMENT FILE RC =" rc
+         exit 12
+      end
+   end
+   if substr(l.i,1,10) == "  REPLYTO " then do
+      replyto_dd  = "YES"
+      'execio * diskr replyto (stem replyto. finis'
+      if rc ¬= 0 then do
+        say "COULD NOT READ REPLYTO FILE RC =" rc
+        exit 12
+      end
+   end
+end
+
+/* ------------------------------------------------------------- */
+/*     Start counting how many output lines we have generated    */
+/* ------------------------------------------------------------- */
+outlines = 0
+
+/* ------------------------------------------------------------- */
+/*     Initial SMTP commands                                     */
+/* ------------------------------------------------------------- */
+outlines=outlines + 1
+mailout.outlines = "helo" sysvar(sysnode)
+outlines=outlines + 1
+mailout.outlines = "mail from: <"sender">"
+
+/* ------------------------------------------------------------- */
+/* read the list of addressees and create rcpt to: lines for them */
+/* we ignore any blank lines in the list                         */
+/* ------------------------------------------------------------- */
+do i = 1 to address.0
+   addressee = strip(address.i)
+   if addressee ¬= "" then do
+      outlines=outlines + 1
+      mailout.outlines = "rcpt to:<"||addressee||">"
+   end
+end
+
+/* ------------------------------------------------------------- */
+/* start of the smtp data section                                */
+/* ------------------------------------------------------------- */
+outlines=outlines + 1
+mailout.outlines = "data"
+
+/* ------------------------------------------------------------- */
+/* Generate the mail headers which go in the data section        */
+/* Calculate timezone from value in cvt                          */
+/* ------------------------------------------------------------- */
+cvttz = storage(d2x(c2d(storage(10,4))+304),4)
+tzmins = x2d(c2x(cvttz),5) * 1.048576 / 60
+tzsign = '+'
+if tzmins < 0 then do
+    tzmins = abs(tzmins)
+    tzsign = '-'
+  end
+tzmins = trunc(tzmins + 0.5)
+tzhours = right(trunc(tzmins/60),2,'0')
+tzmins = right(tzmins//60,2,'0')
+timezone = tzsign||tzhours||tzmins
+date = date("n")" "time() timezone
+date = subword(date,1,2)               || ,   /* dd mon */
+       " "                             || ,
+       strip(substr(word(date,3),3,4)) || ,   /* yy */
+       " "                             || ,
+       subword(date,4)                        /* time and zone  @03C */
+outlines=outlines + 1
+mailout.outlines = "Date:" date
+
+/* ------------------------------------------------------------- */
+/* Put in the FROM  address - goes into header of message        */
+/* ------------------------------------------------------------- */
+outlines=outlines + 1
+mailout.outlines = "From:" fromtext"<"sender">"
+
+/* ------------------------------------------------------------- */
+/* Put in the reply address                                      */
+/* ------------------------------------------------------------- */
+
+if replyto_dd = "YES" then do
+   replyee = strip(replyto.1)
+   if replyee ¬= "" then do
+      if replyee == "NONE" | replyee == "none" then do
+        outlines=outlines + 1
+        mailout.outlines = "Reply-To: <invalid.address@gecapital.com>"
+      end
+      else do
+         outlines=outlines + 1
+         mailout.outlines = "Reply-To: <"||replyee||">"
+      end
+   end
+end
+
+/* ------------------------------------------------------------- */
+/* repeat our list of addressees                                 */
+/* ------------------------------------------------------------- */
+do i = 1 to address.0
+   addressee = strip(address.i)
+   if addressee ¬= "" then do
+      outlines=outlines + 1
+      mailout.outlines = "To: <"||addressee||">"
+   end
+end
+
+/* ------------------------------------------------------------- */
+/* subject comes from the arg passed to us                       */
+/* ------------------------------------------------------------- */
+outlines=outlines + 1
+mailout.outlines = "Subject: " subject
+
+/* ------------------------------------------------------------- */
+/* If we have attachments do some mime stuff                     */
+/* ------------------------------------------------------------- */
+if attachments = "YES" then do
+   outlines=outlines + 1
+   mailout.outlines = "MIME-Version: 1.0"
+   outlines=outlines + 1
+   mailout.outlines = "Content-Type: multipart/mixed;",
+             "boundary="||mimeboundary
+   /* ---------------------------------------------------------- */
+   /* create a blank line                                        */
+   /* ---------------------------------------------------------- */
+   outlines=outlines + 1
+   mailout.outlines = " "
+   outlines=outlines + 1
+   mailout.outlines = "This message is in MIME format."
+   outlines=outlines + 1
+   mailout.outlines = "If you see this your mail program does not"
+   outlines=outlines + 1
+   mailout.outlines = "support MIME."
+   /* ---------------------------------------------------------- */
+   /* start section 1                                            */
+   /* create a blank line                                        */
+   /* ---------------------------------------------------------- */
+   outlines=outlines + 1
+   mailout.outlines = " "
+   outlines=outlines + 1
+   mailout.outlines = "--"||mimeboundary
+   outlines=outlines + 1
+   mailout.outlines = "Content-type: text/plain; charset=US-ASCII"
+   /* ---------------------------------------------------------- */
+   /* create a blank line                                        */
+   /* ---------------------------------------------------------- */
+   outlines=outlines + 1
+   mailout.outlines = " "
+end
+
+/* ------------------------------------------------------------- */
+/* Now insert the meat of the message                            */
+/* ------------------------------------------------------------- */
+do i = 1 to message.0
+   /* ---------------------------------------------------------- */
+   /* Verify the line does not contain invalid characters        */
+   /* ---------------------------------------------------------- */
+   bad_char_pos = verify(message.i,bad_chars,m)
+   if bad_char_pos > 0 then do
+      say "THE FOLLOWING LINE CONTAINS AN INVALID CHARACTER FOR"
+      say "SMTP MAIL IN POSITION" bad_char_pos
+      say "THE MESSAGE WILL NOT BE SENT"
+      say "PROBLEM LINE:"
+      say message.i
+      exit 12
+   end
+
+   /* ---------------------------------------------------------- */
+   /* If we have a full stop at the beginning of the line we have */
+   /* to add one for the RFC 821 transparency - a single full    */
+   /* stop on a line by itself is the end of data marker         */
+   /* ---------------------------------------------------------- */
+   if substr(message.i,1,1) = "." then
+      message.i = "."||message.i
+   outlines=outlines + 1
+   mailout.outlines = message.i
+end
+
+/* ------------------------------------------------------------- */
+/* If we have attachments we put them in now                     */
+/* Note we only support plain text                               */
+/* ------------------------------------------------------------- */
+if attachments = "YES" then do
+   quotes ="'"'"'
+   /*----------------------------------------------------------- */
+   /* attach. has the list of ddnames                            */
+   /*----------------------------------------------------------- */
+   do i = 1 to attach.0
+      parse var attach.i attachfile attachname 71 .
+      attachfile = strip(attachfile)
+      attachname = strip(translate(attachname,'  ',quotes))
+      /*-------------------------------------------------------- */
+      /* ignore blank lines in the list of attachments           */
+      /*-------------------------------------------------------- */
+      if attachfile ¬= "" then do
+         if attachname = "" then attachname = attachfile
+         extpos = lastpos('.',attachname)
+         if extpos > 0 then do
+            extension = substr(attachname,extpos)
+            upper extension
+            select
+              when (extension = '.TXT') then nop
+              when (extension = '.CSV') then nop
+              when (extension = '.RTF') then nop
+              otherwise attachname = attachname'.txt'
+            end
+         end
+         else attachname = attachname'.txt'
+         /*----------------------------------------------------- */
+         /* create a blank line                                  */
+         /*----------------------------------------------------- */
+         outlines=outlines + 1
+         mailout.outlines = " "
+         outlines=outlines + 1
+         mailout.outlines = "--"||mimeboundary
+         outlines=outlines + 1
+/*changing for coulr addition */
+         mailout.outlines = "Content-type: text/HTMl;",
+                            "charset=US-ASCII"
+         outlines=outlines + 1
+         mailout.outlines = "Content-Disposition: attachment;",
+                            'filename="'||attachname'"'
+         /*----------------------------------------------------- */
+         /* create a blank line                                  */
+         /*----------------------------------------------------- */
+         outlines=outlines + 1
+         mailout.outlines = " "
+         /*----------------------------------------------------- */
+         /* read the file to attach                              */
+         /*----------------------------------------------------- */
+         'execio * diskr ' attachfile '(stem attachfile. finis'
+         if rc = 0 then do
+            /*-------------------------------------------------- */
+            /* put it in the message                             */
+            /*-------------------------------------------------- */
+            do j = 1 to attachfile.0
+              /*------------------------------------------------ */
+              /* Verify the line does not contain invalid chars  */
+              /*------------------------------------------------ */
+               bad_char_pos = verify(attachfile.j,bad_chars,m)
+               if bad_char_pos > 0 then do
+                  say "THE FOLLOWING LINE CONTAINS AN INVALID CHARACTER FOR"
+                  say "SMTP MAIL IN POSITION" bad_char_pos
+                  say "THE MESSAGE WILL NOT BE SENT"
+                  say "PROBLEM LINE:"
+                  say attachfile.j
+                  exit 12
+               end
+
+               if substr(attachfile.j,1,1) = "." then
+                  attachfile.j = "."||attachfile.j
+               outlines=outlines + 1
+               mailout.outlines = attachfile.j
+            end
+         end
+         else do
+            say "COULD NOT READ ATTACHMENT" attachfile "RC =" rc
+            exit 12
+         end
+      end
+   end
+end
+
+/* ------------------------------------------------------------- */
+/* end of data                                                   */
+/* ------------------------------------------------------------- */
+outlines=outlines + 1
+mailout.outlines = "."
+
+/* ------------------------------------------------------------- */
+/* Allocate a temporary file to hold the mail message            */
+/* ------------------------------------------------------------- */
+/* numblocks = trunc(outlines / 18) + 1 */
+numblocks = trunc(outlines / 72) + 1
+secblocks = trunc((numblocks + 4) / 5)
+jdate=Date("J")
+ttime=Time("S")
+do try = 0 to 9 until rc ¬= 12
+  msgdsn = "'"dspfx".D"jdate".T"ttime+try"."jobname".EMAIL'"
+  "alloc f(mailout) da("msgdsn") space("numblocks secblocks") release",
+  " lrecl(1002) dsorg(ps) recfm(v b) block(18452) new catalog"
+end
+if rc ¬= 0 then do
+   say "COULD NOT ALLOCATE SMTP MESSAGE FILE RC =" rc
+   exit 12
+end
+/* ------------------------------------------------------------- */
+/* write out the generated file, close, xmit and free it         */
+/* ------------------------------------------------------------- */
+"execio * diskw mailout (stem mailout. finis"
+"transmit" smtpdest "ddname(mailout) noepilog nolog noprolog"
+"free f(mailout)"
+

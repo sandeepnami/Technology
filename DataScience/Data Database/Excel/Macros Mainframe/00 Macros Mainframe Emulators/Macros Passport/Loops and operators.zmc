@@ -1,0 +1,42 @@
+Sub ZMain()
+Dim num,ret,name
+name = "Sandeep Nami"
+ret = IsNumeric( name )
+
+'example of if
+If ret = false Then
+        MsgBox "The Name = " &name & " is not numeric"
+End If
+
+num = 30
+ret = IsNumeric( num )
+
+'example of ifelse
+If ret = true Then
+        MsgBox "The Num = " &num & " is numeric"
+Else 
+        MsgBox "The Num = " &num & "is not numeric"
+End If
+
+'for loop and exit example example
+for i = 1 to 40
+	MsgBox "Loop count = " &i 
+	If i = 4 Then
+        		exit for '**********************using break operations
+	End If
+Next
+MsgBox "Out of for loop"
+
+
+'Logical or operator
+If 3=2 or 2<3 Then
+        MsgBox "3=2 or 2<3 which is always true" 
+End If
+'Not equal operator <> 
+
+End Sub
+
+Sub Prompt( sMsg, nType, sTitle )
+            Set ws = CreateObject( "wscript.shell" )
+            ws.popup sMsg, 0, sTitle, 4096 + nType
+End Sub 

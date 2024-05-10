@@ -1,0 +1,23 @@
+-----------------------------------------------
+FETCH attributes:
+
+1)sentivity
+2)orientation 
+
+
+INSENSITIVe - Use temp table values
+sENSITIVE - Refresh from base table.
+
+2)orientation: NEXT, BEFORE, AFTER
+-----------------------------
+Fetch:description
+
+insensitive scroll:always static- always fixed no of rows - declared temp table used. 
+
+
+sensitive static scroll:always static- always fixed no of rows - declared temp table used. sees changes, but not inserts.
+
+Sensitive Dynamic scroll: just for comparison,direct table acess, live data access.
+
+-----------------------------------------
+

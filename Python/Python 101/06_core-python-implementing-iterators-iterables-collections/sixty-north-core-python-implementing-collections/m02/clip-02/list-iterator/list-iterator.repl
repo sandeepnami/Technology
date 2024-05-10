@@ -1,0 +1,37 @@
+>>> iterator = iter(expr_tree)                                                  
+>>> iterator                                                                    
+<list_iterator object at 0x10d5fc7f0>                                           
+>>> next(iterator)                                                              
+'*'                                                                             
+>>> next(iterator)                                                              
+'+'                                                                             
+>>> next(iterator)                                                              
+'-'                                                                             
+>>> next(iterator)                                                              
+'a'                                                                             
+>>> next(iterator)                                                              
+'b'                                                                             
+>>> next(iterator)                                                              
+'c'                                                                             
+>>> next(iterator)                                                              
+'d'                                                                             
+>>> next(iterator)                                                              
+Traceback (most recent call last):                                              
+  File "<stdin>", line 1, in <module>                                           
+StopIteration                                                                   
+>>> next(iterator)                                                              
+Traceback (most recent call last):                                              
+  File "<stdin>", line 1, in <module>                                           
+StopIteration                                                                   
+>>>                                                                             
+>>> iterator = iter(expr_tree)                                                  
+>>> for item in iterator:                                                       
+...     print(item)                                                             
+...                                                                             
+*                                                                               
++                                                                               
+-                                                                               
+a                                                                               
+b                                                                               
+c                                                                               
+d                                                                               

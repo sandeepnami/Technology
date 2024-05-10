@@ -1,0 +1,28 @@
+//UGBCMSRS JOB (0),'REST CMS1 FILES',                                   JOB03736
+//             MSGCLASS=X,CLASS=2,                                      00020000
+//             NOTIFY=&SYSUID                                           00030000
+//*                                                                     00031000
+//RESTFLS EXEC PGM=ADRDSSU                                              00040000
+//TAPE     DD  DSN=LDKVPGE.FIX.CMS.REG.BKUP.DT1401,                     00050012
+//             DISP=SHR                                                 00060000
+//SYSPRINT DD  SYSOUT=*                                                 00070000
+//SYSIN    DD  *                                                        00080000
+  RESTORE           -                                                   00090000
+  SPHERE            -                                                   00100000
+  TGTGDS(ACTIVE)    -                                                   00110000
+  INDDNAME(TAPE)    -                                                   00120000
+  DS(INCL(          -                                                   00130000
+           LDKVPGE.CMS.**                   -                           00140012
+         )                                    -                         00150000
+     EXC(                                     -                         00160000
+           LDKVPGE.CMS.**.**.G%%%%V%%       -                           00170012
+         )                                    -                         00180000
+     BY (                                     -                         00190000
+           (DSORG NE PDS)                     -                         00200000
+         )                                    -                         00210000
+    )                                         -                         00220000
+  RENUNC(LDKVPGE.CMS.**, IDKVPGE.CMS.** ) -                             00230012
+  CATALOG                                     -                         00240000
+  REPLACE                                                               00250000
+/*                                                                      00260000
+

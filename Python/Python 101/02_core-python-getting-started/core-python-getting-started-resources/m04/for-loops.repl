@@ -1,0 +1,15 @@
+>>> for city in cities:                                                         
+...     print(city)                                                             
+...                                                                             
+London                                                                          
+New York                                                                        
+Paris                                                                           
+Oslo                                                                            
+Helsinki                                                                        
+>>> colors = {'crimson': 0xdc143c, 'coral': 0xff7f50, 'teal': 0x008080}         
+>>> for color in colors:                                                        
+...     print(color, colors[color])                                             
+...                                                                             
+crimson 14423100                                                                
+coral 16744272                                                                  
+teal 32896                                                                      

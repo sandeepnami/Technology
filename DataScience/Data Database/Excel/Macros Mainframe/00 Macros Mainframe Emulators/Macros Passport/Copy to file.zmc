@@ -1,0 +1,80 @@
+Sub ZMain
+Dim start_row,start_column,last_column,eod_check,start_check
+start_check="***************************** Top of Data ******************************"
+eod_check="**************************** Bottom of Data ****************************"
+start_row = 6'***************please note down this manually by checking the screen
+start_column = 9
+last_column = 80
+'nani this is very imp character please note down this manually by checking the screen
+page_lines = 40   '***************please note down this manually by checking the screen
+Set Sys = CreateObject("PASSPORT.System")
+
+'selects the currently active session
+Set Sess = Sys.ActiveSession
+
+'selects the screen object
+Set MyScreen = Sess.Screen
+
+copy_screen = copy_screen( MyScreen, start_row,start_column,last_column,eod_check, page_lines)
+
+Set fso = CreateObject("Scripting.FileSystemObject")
+msg_file = "D:\GEGDC\sn95502\sandeep\imp\Imp Docs\MYwork\Rexx\Extents2.rex"
+Set tf = fso.CreateTextFile(msg_file, True)
+tf.Write (copy_screen)
+ tf.Close
+End Sub
+
+
+
+
+'********************outlook_send ********************
+Sub outlook_send( msg, subject,to_addr,cc_addr )
+Dim  ret
+
+Set otlApp = CreateObject("Outlook.Application")
+Set otlNewMail = otlApp.CreateItem(olMailItem)
+
+With otlNewMail
+.SentOnBehalfOfName = "VisionPlus_Servicedesk@mahindrasatyam.com"
+.To = to_addr
+.CC = cc_addr
+.Subject = subject 
+.body = "Hi," & Chr(13) & "There is a PR raised and PR info is "  & Chr(13)  & msg 
+'.Attachments.Add fName
+.Display
+ .send
+END With
+
+End Sub
+
+'********************copy_screen start********************
+Function copy_screen( MyScreen, start_row,start_column,last_column,eod_check, page_lines)
+Dim ret, msg, row_st, row_end, col_st, col_end,line_count
+msg=""
+line_count=0
+row_st = start_row
+row_end = 50
+col_st = start_column
+col_end = last_column
+'start capture
+For count_msg= row_st to  row_end  
+Set MyArea = MyScreen.Area(count_msg, col_st , count_msg, col_end )
+MyArea.Select     
+MyScreen.Copy
+if (MyArea.Value = eod_check) Then
+	exit for
+else
+	line_count = line_count  + 1
+	msg = msg & Chr(13) & MyArea.Value
+end if
+if  line_count = page_lines then
+	SendHostKeys ("<PF8>")
+    	ret = wait(6)
+end if
+Next
+copy_screen = msg
+End Function 
+'********************copy_screen end ********************
+
+
+

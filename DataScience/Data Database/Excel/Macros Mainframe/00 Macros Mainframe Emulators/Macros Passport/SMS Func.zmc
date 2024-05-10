@@ -1,0 +1,70 @@
+Sub ZMain()
+ Dim HttpReq 
+  Set HttpReq  = CreateObject("Microsoft.XMLHTTP")
+  Dim uname, pwd, to_phone, msg, provider, sms_api, request_str, surl
+  uname = "9052298330"
+  pwd = "namiin"
+  'please note that space is equivalent to %20
+  msg = "Hello World from passport"
+  'List of Providers : site2sms ,Ultoo , fullonsms
+  provider = "fullonsms"
+  'multiple phone no's are seperated by comma in ubaid
+  to_phone = "9052298330,9441156635,9052219615"
+  'to_phone = "9052298330"
+  'List of API's
+  sms_api = "http://ubaid.tk/sms/sms.aspx"  '---
+  'sms_api = "http://madsacsoft.com/mad/sms/smsapi.php"  '---not working
+    
+  'for ubaid
+  request_str = "uid=" & uname & "&pwd=" & pwd & "&msg=" & msg & "&phone=" & to_phone & "&provider=" & provider
+  'for madsacsoft -- Not working
+  'request_str = "usr=" & uname & "&pwd=" & pwd & "&msg=" & msg & "&to=" & to_phone & "&site=" & provider
+  surl = sms_api & "?" & request_str
+  
+  'Working Url
+  'URL = "http://XMLSampleServer/CatalogServer.asp"
+  
+  '160by2 sms
+  'URL = "http://madsacsoft.com/mad/sms/smsapi.php?usr=9052298330&pwd=sandeep429&site=160by2&mes=Hello_World&to=9052298330;8790803366;9441156635;"
+  'URL = "http://ubaid.tk/sms/sms.aspx?uid=9052298330&pwd=sandeep429&msg=Hello_world&phone=9052298330&provider=160by2"
+  'URL = "http://ubaid.tk/sms/sms.aspx?uid=9052298330&pwd=D0nt5h@renami&msg=Hello_world&phone=9052298330&provider=160by2"
+  
+  'WaytoSMS
+  'URL=http://ubaid.tk/sms/sms.aspx?uid=" + uid + "&pwd=" + password + "&msg=" + message + "&phone=" + no + "&provider=way2sms");
+  'URL = "http://ubaid.tk/sms/sms.aspx?uid=9052298330&pwd=sandeep&msg=Hello_world&phone=9052298330&provider=way2sms"
+  'Ultoo
+  'URL = "http://ubaid.tk/sms/sms.aspx?uid=9052298330&pwd=D0nt5h@renami&msg=Hello_world&phone=9052298330&provider=Ultoo"
+  
+  'MsgBox "url= " & surl
+  HttpReq.Open "GET", surl, False
+  HttpReq.Send
+  'MsgBox "ResponseText= " & HttpReq.ResponseText
+  'MsgBox "Status= " & HttpReq.Status
+  Status = HttpReq.Status
+  response = HttpReq.ResponseText
+  If Status = 503 Then
+    MsgBox "The URL = " & surl & "Failed to open"
+  End If
+  
+'Debugging messages
+Select Case response
+    Case 1
+        MsgBox "SMS sent"
+    Case -1
+        MsgBox "Server Error"
+    Case -2
+        MsgBox "Invalid Username"
+    Case -3
+        MsgBox "Invalid message text"
+    Case -4
+        MsgBox "Login Failed"
+    Case -5
+        MsgBox "IP Blocked"
+    Case -7
+        MsgBox "There is a Captcha which cannot be bypassed"
+    Case -11
+        MsgBox "Unsupported Provider"
+    Case Else
+        MsgBox "Some unknown error occured please cross check sms api site"
+End Select
+End Sub 

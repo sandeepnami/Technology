@@ -1,0 +1,4 @@
+iterator = iter(
+    callable,
+    sentinel
+)

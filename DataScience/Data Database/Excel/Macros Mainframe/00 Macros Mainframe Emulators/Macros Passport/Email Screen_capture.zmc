@@ -1,0 +1,65 @@
+' This macro emails the current screen to the user provided email address(es).
+Sub ZMain()
+' Allocate the local variables for this PASSPORT macro
+   Dim nRow, nCol
+   Dim nScreenSize
+' Name of the temp file (user must have write permissions)
+ strTextFile = "D:\MSAT\sn95502\sandeep\imp\Macros\Macros Passport\email_file.txt"
+' Determine the actual screen size (number of rows and columns)
+   nScreenSize = GetScreenSize ()
+   Select Case nScreenSize
+      Case 2000
+ nRow = 25
+ nCol = 80
+      Case 2560
+         nRow = 32
+         nCol = 80
+      Case 3168
+         nRow = 24
+         nCol = 132
+      Case 3300
+ nRow = 25
+ nCol = 132
+      Case 3440
+         nRow = 43
+         nCol = 80
+      Case 3564
+         nRow = 27
+         nCol = 132
+      Case Else
+         nRow = 24
+         nCol = 80
+   End Select
+ 
+
+'strTextFile = "C:\Program Files\PASSPORT\temp.txt"
+ 
+' Write the current screen contents to the above temporary file 
+WritePSToFile strTextFile,1,1,nRow,nCol
+ 
+' Create a File System Object
+Set objFSO = CreateObject("Scripting.FileSystemObject")
+ 
+' Open the text file - strScreen will now contain the current PASSPORT screen
+strScreen = objFSO.OpenTextFile(strTextFile, 1).ReadAll
+ 
+' Get the email address(es) to send to
+strEmail=MsgBoxGetInput("Please enter the email address to send to:" & vbCRLF & vbCRLF & "(Multiple addresses should be separated by semicolons.)")
+ 
+If strEmail <> "" Then
+      ' Create a new Microsoft Outlook message containing the contents of the current PASSPORT screen
+      Set MyApp = CreateObject("Outlook.Application")
+      Set MyItem = MyApp.CreateItem(0) 'MailItem
+            With MyItem
+            .To = strEmail
+            .Subject = "PASSPORT Host Screen" 'Modify this text string to change the email subject field
+            .Body = strScreen 
+            End With
+      MyItem.Send
+      MsgBox "The current PASSPORT screen has been succesfully sent to " & strEmail & ".", 64, "Congratulations!"
+End If
+ 
+'Cleanup the file system object
+Set objFSO = Nothing
+ 
+End Sub 

@@ -1,0 +1,56 @@
+procedure division.
+   perform 1000-select-para.
+   perform 2000-delete-para.
+
+
+
+1000-select-para.
+Move e5 to hv-emp-name.
+.....
+exec sql
+select 
+end-exec.
+
+EVALUATE  SQLCODE                        
+       WHEN ZERO                         
+        CONTINUE                         
+      WHEN 100                           
+        PERFORM 1100-INSERT-PARA         
+     WHEN OTHER                          
+      DISPLAY 'SQLCODE IS = ' SQLCODE 
+ END-EVALUATE.                           
+
+
+1100-insert-para.
+  build the host variables.
+  exec sql
+ insert
+  end-exec.
+     EVALUATE  SQLCODE                        
+       WHEN ZERO                         
+        CONTINUE                         
+      WHEN 100                           
+        PERFORM 1110-UPDATE-PARA         
+     WHEN OTHER                          
+              
+      DISPLAY 'SQLCODE IS = ' SQLCODE 
+   END-EVALUATE. 
+
+
+
+
+1110-update-para.
+ compute hv-sal = hv-sal*10
+ exec sql
+update 
+end exec
+
+2000-delete-para.
+  move e4 to hv-emp-no
+  exec sql 
+ delete
+  end-exec.
+ 
+
+
+

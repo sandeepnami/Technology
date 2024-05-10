@@ -1,0 +1,39 @@
+ GRPLIF:PROC OPTIONS(MAIN);
+ /************************************************************
+  * WRITE GREETINGS FOR MULTIPLE PEOPLE TO A FILE.
+  ************************************************************/
+
+ DCL PEOPLE FILE INPUT SEQUENTIAL BUFFERED;
+
+ DCL GREETS FILE OUTPUT RECORD SEQUENTIAL
+     ENV(FB RECSIZE(80) BLKSIZE(0));
+
+ DCL 1 PEOPLE_RECORD,
+       2 PEOPLE_NAME                CHAR(73),
+       2 FILL                       CHAR(7);
+
+ DCL 1 GREETING_RECORD,
+       2 GREETING                   CHAR(7),
+       2 GREET_NAME                 CHAR(73);
+
+ DCL MORE_PEOPLE                    BIT(1) INIT('1'B);
+ DCL HELLO                          CHAR(7) INIT('Hello, ');
+
+ OPEN FILE (PEOPLE) TITLE('INPUT');
+ ON ENDFILE (PEOPLE)
+   MORE_PEOPLE = '0'B;
+ OPEN FILE (GREETS) TITLE('OUTPUT');
+ 
+ READ FILE (PEOPLE) INTO (PEOPLE_RECORD);
+
+ DO WHILE (MORE_PEOPLE);
+   GREETING = HELLO;
+   GREET_NAME = PEOPLE_NAME;
+   WRITE FILE (GREETS) FROM (GREETING_RECORD);
+   READ FILE (PEOPLE) INTO (PEOPLE_RECORD);
+ END; 
+ 
+ CLOSE FILE (PEOPLE);
+ CLOSE FILE (GREETS);
+
+ END GRPLIF;         

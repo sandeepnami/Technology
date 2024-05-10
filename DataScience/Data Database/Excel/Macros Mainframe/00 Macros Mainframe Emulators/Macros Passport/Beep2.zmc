@@ -1,0 +1,9 @@
+Sub ZMain()
+Dim loopvar, ret
+For loopvar = 1 To 1
+	Beep
+Next 
+
+End Sub
+
+

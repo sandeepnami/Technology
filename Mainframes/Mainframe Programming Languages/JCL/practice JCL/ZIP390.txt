@@ -1,0 +1,34 @@
+//UGBZIP39 JOB (0),'CMS',
+//             MSGCLASS=X,CLASS=2,
+//             NOTIFY=&SYSUID
+//*
+//*LIBS    JCLLIB ORDER=(DLVVPSC.V823.PROCLIB,
+//*             PAYSYSJ.CMS.V814.PROCLIB.DK)
+//*SYMBOLIC INCLUDE MEMBER=#SYMB
+//VHLQ     SET     VHLQ=CDKVPGE.NANI
+//*
+//STEP020 EXEC PGM=ZIP390
+//STEPLIB  DD  DSN=LSE.ZIP390.LOADLIB,
+//             DISP=SHR
+//INFILE   DD  DSN=&VHLQ..PRB.RESULT.S1.ASCII.SE,
+//             DISP=SHR
+//WORKFILE DD  DSN=&&WORKFILE,
+//             DISP=(NEW,DELETE,DELETE),
+//             UNIT=3390,
+//             VOL=(,,,99),
+//             SPACE=(CYL,(500,500),RLSE),
+//             LRECL=10206,
+//             BLKSIZE=10210,
+//             RECFM=V
+//ARCHIVE  DD  DSN=&VHLQ..PRB.RESULT.FINAL.S1.Z390.SE,
+//             DISP=(NEW,CATLG,DELETE),
+//             UNIT=3390,
+//             VOL=(,,,99),
+//             SPACE=(CYL,(75,75),RLSE),
+//             LRECL=10206,
+//             BLKSIZE=10210,
+//             RECFM=V
+//SYSPRINT DD  SYSOUT=*
+//SYSIN    DD  DSN=DNDVPGE.SANDEEPN.PARMLIB(ZIPBINRY),
+//             DISP=SHR
+

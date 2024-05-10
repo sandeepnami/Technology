@@ -1,0 +1,228 @@
+Sub ZMain
+Dim  ret,risk,old_time,curr_time
+to_addr = "sandeep_nami@mahindrasatyam.com"
+cc_addr = "sandeep_nami@mahindrasatyam.com"
+'cics_arr=ARRAY("PCICHUBB","PCICCZGS","PCICPLGS")
+cics_arr=ARRAY("PCICPLGS")
+old_time_arr=ARRAY("0","0","0")
+wait_time = "3"
+Set Sys = CreateObject("PASSPORT.System")
+'selects the currently active session
+Set Sess = Sys.ActiveSession
+'selects the screen object
+Set MyScreen = Sess.Screen
+'MsgBox "cics_arr(1)=" &cics_arr(0)
+active_cics=cics_login(MyScreen,cics_arr(0))
+'EXIT Sub
+SendHostKeys ("<PF4>")
+ret = wait(wait_time)
+Set MyArea = MyScreen.Area(22, 7,22,12)
+MyArea.Select     
+MyScreen.Copy
+old_time_ARR(0) = MyArea.Value
+'MsgBox "old_time=" &old_time &"old_time=" &old_time
+'For N = LBound(cics_arr) To UBound(cics_arr)
+'Next
+'press F4 for every 4mins
+for i = 1 to 150
+	For N = LBound(cics_arr) To UBound(cics_arr)
+		'Check NG YG count and give beeps	
+		 'risk=NGYG_CHK(MyScreen )	
+		'Go into screens menu
+		SendHostKeys (".m")
+		ret = wait(wait_time)
+		SendHostKeys ("<PF12>")
+		ret = wait(wait_time)
+		'browse into ofcj of particular cics
+		active_cics=cics_login(MyScreen,cics_arr(N))
+		 'refresh screen after 4mins
+		  ret = wait(240)
+		 'echo_check returns current time which will be the old_time in next calculation
+		  old_time_arr(N) =  echo_check(MyScreen,old_time_arr(N),active_cics)
+		'cics scrshot every hour
+		if i mod 15 = 0 then
+			subject =  "High Risk OFCJ " &active_cics
+			capture_msg = capture_ofcj(MyScreen)
+			msg = " Hi Nami " & Chr(13) &"The Screen shot of OFCJ of  "& active_cics & Chr(13) & capture_msg 
+			outlook_send msg, subject,to_addr,cc_addr
+		end if
+	Next    
+Next
+
+End Sub
+ 
+Private Function echo_check(MyScreen,old_time,active_cics)
+
+to_addr = "sandeep_nami@mahindrasatyam.com"
+cc_addr = "sandeep_nami@mahindrasatyam.com"
+subject =  "High Risk OFCJ " &active_cics
+msg=" Hi Nami " 
+SendHostKeys ("<PF4>")
+ret = wait(3)
+Set MyArea = MyScreen.Area(22, 7,22,12)
+MyArea.Select     
+MyScreen.Copy
+curr_time=MyArea.Value
+'MsgBox "old_time=" &old_time  &"curr_time=" &curr_time
+if curr_time = old_time Then
+	msg = msg & Chr(13) &"There is echo lag in OFCJ of "& active_cics &" at " & curr_time &" Time "
+	capture_msg = capture_ofcj(MyScreen)
+	msg=msg & Chr(13) & capture_msg
+	beep_sound()
+	outlook_send msg, subject,to_addr,cc_addr
+end if
+
+echo_check = curr_time
+END Function 
+
+'*****************Login into CICS and go to OFCJ*************************************
+Function cics_login( MyScreen,login_scr)
+Dim ret,scr_name,exit_master,wait_time
+'If we are unable to login then we logout of mainframe
+wait_time = "3"
+exit_master = 0
+C1 = 6
+C2 = 13
+R1 = 6
+R2 = 41
+'If we are unable to login then we logout of mainframe
+for count_f3 = 1 to 10
+	'Check for CICS scr name 
+	For i = R1 to R2
+		Set MyArea = MyScreen.Area(i, C1, i, C2)
+		MyArea.Select     
+		MyScreen.Copy
+		scr_name = MyArea.Value
+		'MsgBox "Screen Name = " &scr_name  
+		If scr_name = login_scr Then
+ 			'MsgBox "Login successfull"     
+			'Set this parameter to come out of all loops 
+			exit_master = 1
+			'Enter into the CICS OFCJ
+			Set MyArea = MyScreen.Area(i, 2, i, 2)
+			MyArea.Select     
+			MyArea.Value = "S"
+			'ret = wait(wait_time)
+			SendHostKeys ("<Enter>") 
+			ret = wait(wait_time)
+	      		 Exit For
+		End If
+	Next
+	If exit_master > 0 Then
+		Exit For
+	End If
+	'press f3 if we dont get logout screen
+	SendHostKeys ("<PF3>")   
+	ret = wait(wait_time)
+Next
+cics_login = scr_name
+END Function
+
+Private Function NGYG_CHK(MyScreen )
+Dim ret,AUTH_PREV,RISK, MAX_RISK
+MAX_RISK = 1
+'MsgBox("test")
+AUTH_PREV = "Y"
+AUTH_NG=0
+AUTH_YG=0
+RISK=0
+'  Check
+for ri = 6 to 22
+	'selects the area (Start Row, End Row, Start Column, End Column)
+	Set MyArea = MyScreen.Area(ri, 74, ri, 74)
+	MyArea.Select     
+	MyScreen.Copy
+	AUTH = MyArea.Value
+	'MsgBox "AUTH =" &AUTH
+	If AUTH  = "N" THEN
+		AUTH_NG=AUTH_NG +1
+	ELSEIF AUTH = "Y" THEN
+		AUTH_YG=AUTH_YG +1
+	END IF
+
+	IF AUTH = AUTH_PREV  AND AUTH= "Y"  THEN
+		RISK= RISK + 1
+		AUTH_PREV  = AUTH
+	ELSEIF AUTH= "N" THEN
+		RISK = 0 
+	END IF
+Next
+
+'MsgBox "AUTH NG CNT =" &AUTH_NG
+'MsgBox "AUTH YG CNT =" &AUTH_YG
+'MsgBox "RISK=" &RISK
+
+'10 Consecutive YG'S
+if  RISK > MAX_RISK then
+	beep_sound()
+end if
+
+'refresh ofcj and chk for more YG's
+if  RISK > 5 then
+	SendHostKeys ("<PF4>")
+    	wait(3)
+    	ret=NGYG_CHK()	
+	risk=ret+risk
+end if
+
+NGYG_CHK = risk
+End Function
+
+'********************Capture screen start********************
+Function capture_ofcj( MyScreen )
+Dim ret, msg, row_st, row_end, col_st, col_end
+msg=""
+row_st = 1
+row_end = 23
+col_st = 2
+col_end = 80
+'start capture
+For count_msg= row_st to  row_end  
+	Set MyArea = MyScreen.Area(count_msg, col_st , count_msg, col_end )
+	MyArea.Select     
+	MyScreen.Copy
+	msg = msg & Chr(13) & MyArea.Value
+	'MsgBox "MyArea.Value =" &MyArea.Value
+	'MsgBox "msg building row = "&count_msg &"---" &msg 
+Next
+
+capture_ofcj = msg
+End Function
+
+'********************outlook_send ********************
+Sub outlook_send( msg, subject,to_addr,cc_addr )
+Dim  ret
+
+Set otlApp = CreateObject("Outlook.Application")
+Set otlNewMail = otlApp.CreateItem(olMailItem)
+
+With otlNewMail
+.SentOnBehalfOfName = "VisionPlus_Servicedesk@mahindrasatyam.com"
+.To = to_addr
+.CC = cc_addr
+.Subject = subject 
+'.body = "Hi," & Chr(13) & "There is a PR raised and PR info is "  & Chr(13)  & msg 
+.body = msg 
+'.Attachments.Add fName
+.Display
+ .send
+END With
+
+End Sub
+
+Sub beep_sound()
+
+For loopvar = 1 To 20
+	Beep
+	ret = wait(1)
+Next        
+
+end Sub
+
+Sub refresh_wait( refresh_time)
+
+ret = wait(refresh_time)
+SendHostKeys ("<PF4>")
+ret = wait(3) 
+
+end Sub

@@ -1,0 +1,24 @@
+//SRCHGDG0 JOB (9999,8517,3),'SORTINCVB',CLASS=X,                       JOB09222
+//     MSGCLASS=X,NOTIFY=&SYSUID,REGION=0M                              00002001
+//*                                                                     00008003
+//SEARCH3  EXEC PGM=SORT,REGION=0M,PARM='VLTESTI=2'
+//SYSPRINT DD SYSOUT=*
+//SYSUDUMP DD SYSOUT=X
+//SYSOUT   DD SYSOUT=*
+//SORTLIB  DD DSN=SYS1.SORTLIB,DISP=SHR
+//SORTIN   DD DISP=SHR,DSN=PPE.RG0.WDR0304.F12010
+//SORTOF01 DD SYSOUT=*
+//SORTWK01 DD UNIT=DISK,SPACE=(CYL,(50))
+//SORTWK02 DD UNIT=DISK,SPACE=(CYL,(50))
+//SORTWK03 DD UNIT=DISK,SPACE=(CYL,(50))
+//* GIVING FULL RECORD SEARCH FROM BEG TO END ADD 4 TO MAX REC FOR VB
+//SYSIN    DD *
+  SORT FIELDS=COPY
+  OUTFIL FILES=01,INCLUDE=(1,1255,SS,EQ,C'7020120',OR,
+                           1,1255,SS,EQ,C'H866490',OR,
+                           1,1255,SS,EQ,C'H866513',OR,
+                           1,1255,SS,EQ,C'H866519',OR,
+                           1,1255,SS,EQ,C'H866510',OR,
+                           1,1255,SS,EQ,C'H866516')
+//*                                                                     0000000
+

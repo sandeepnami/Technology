@@ -1,0 +1,208 @@
+==MSG> -Warning- The UNDO command is not available until you change            
+==MSG>           your edit profile using the command RECOVERY ON.              
+000100 000100******************************************************************
+000200 000200********     THIS IS A CUSTOMER INQUIRY PROGRAM       ************
+000300 000300******************************************************************
+000400 000400 IDENTIFICATION DIVISION.                                         
+000500 000500 PROGRAM-ID. MTCUSY00.                                            
+000600 000600******************************************************************
+000700 000700 ENVIRONMENT DIVISION.                                            
+000800 000800******************************************************************
+000900 000900 DATA DIVISION.                                                   
+001000 001000 WORKING-STORAGE SECTION.                                         
+001100 001100 01  WS-FLAGS.                                                    
+001200 001200     05  END-OF-MESSAGES          PIC X(1)    VALUE 'N'.          
+001300 001300         88 NO-MORE-MESSAGE  VALUE 'Y'.                           
+001310 001310 01 ERROR-MSG1   PIC X(40) VALUE 'CUSTOMER NO NOT NUMERIC'.       
+001320 001320 01 ERROR-MSG2   PIC X(40) VALUE 'CUSTOMER NOT FOUND'.            
+001330 001330 01 ERROR-MSG3   PIC X(40) VALUE 'ADDRESS NOT FOUND'.             
+001340 001340 01 CUSTOMER-NUMBER  PIC X(3).                                    
+001400 001400*****INPUT MESSAGE AREA*******************************************
+001500 001500 01  INPUT-MESSAGE-AREA.                                          
+001600 001600    05  IM-LL                         PIC S9(3)  COMP.            
+001700 001700    05  IM-ZZ                         PIC S9(3)  COMP.            
+001800 001800    05  IM-TRANSACTION-CODE           PIC X(10).                  
+001900 001900    05  IM-CUSTOMER-NO                PIC 9(3).                   
+001910 001910    05  FILLER                        PIC X(13).                  
+002000 002000*****OUTPUT MESSAGE AREA******************************************
+002100 002100 01 OUTPUT-MESSAGE-AREA.                                          
+002200 002200        05  OM-LL                PIC S9(3)  COMP VALUE +336.      
+002300 002300        05  OM-ZZ                PIC S9(3)  COMP VALUE ZERO.      
+002400 002400        05  OUT-DATA.                                             
+002500 002500              10  OM-CUSTOMER-NO       PIC 9(3).                  
+002600 002600              10  OM-CUST-NAME         PIC X(40).                 
+002700 002700              10  OM-CUST-DOB          PIC 9999/99/99.            
+002800 002800              10  OM-CUST-SEX          PIC X(1).                  
+002900 002900              10  OM-CUST-OPD          PIC 9999/99/99.            
+003000 003000              10  OM-CUST-OCCU         PIC X(4).                  
+003100 003100              10  OM-CUST-PHONE        PIC 9(13).                 
+003200 003200              10  OM-CUST-ADDR1        PIC X(30).                 
+003300 003300              10  OM-CUST-ADDRM        PIC X(30).                 
+003400 003400              10  OM-CUST-CITY         PIC X(20).                 
+003500 003500              10  OM-CUST-PIN          PIC 9(6).                  
+003600 003600              10  OM-CUST-ADDR2        PIC X(30).                 
+003700 003700              10  OM-CUST-ADDRR        PIC X(30).                 
+003800 003800              10  OM-CUST-CITY1        PIC X(20).                 
+003900 003900              10  OM-CUST-PIN1         PIC 9(6).                  
+004000 004000              10  OM-ERROR-MSG         PIC X(79).                 
+004100 004100*****I/O AREA*****************************************************
+004200 004200 01 CUST-SEG-IO-AREA.                                             
+004300 004300           05  CUSTOMER-NO           PIC S9(3) USAGE COMP-3.      
+004400 004400           05  CUST-NAME             PIC X(40).                   
+004500 004500           05  CUST-DOB              PIC S9(8) USAGE COMP-3.      
+004700 004700           05  CUST-OPD              PIC S9(8) USAGE COMP-3.      
+004710 004710           05  CUST-SEX              PIC X(1).                    
+004800 004800           05  CUST-OCC              PIC X(4).                    
+004900 004900           05  CUST-PHO              PIC S9(13) USAGE COMP-3.     
+005000 005000 01 ADDR-I-O-AREA.                                                
+005100 005100           05  ADDRTYP              PIC X.                        
+005200 005200           05  ADDCHDT              PIC S9(8) USAGE COMP-3.       
+005300 005300           05  CUST-ADDRESS-2       PIC X(30).                    
+005400 005400           05  CUST-ADDRESS-3       PIC X(30).                    
+005500 005500           05  ADDRCTY              PIC X(20).                    
+005600 005600           05  ADDRPIN              PIC S9(6) USAGE COMP-3.       
+005700 005700*****MFS CONTROL CHARS********************************************
+005800 005800 01 MFS-CONTROL-CHARS.                                            
+005900 005900           05  CURSOR-ON                  PIC X  VALUE X'C0'.     
+006000 006000           05  ATTR-BRIGHT                PIC X   VALUE X'88'.    
+006100 006100           05  RESET-CURSOR-ATTR.                                 
+ 006200 006200                10 RESET-CURSOR         PIC X   VALUE X'00'.      
+ 006300 006300                10 RESET-ATTR           PIC X   VALUE X'80'.      
+ 006400 006400 01 END-OF-CARDFILE PIC X VALUE 'N'.                              
+ 006500 006500*****QUALIFIED SSA************************************************
+ 006600 006600 01 CUST-QUAL-SSA.                                                
+ 006700 006700      05 SEGNAME               PIC X(08)                          
+ 006800 006800               VALUE 'CUSTOMER'.                                  
+ 006900 006900      05 CMMD-CODE1            PIC X(1) VALUE '*'.                
+ 007000 007000      05 CMMD-CODE2            PIC X(1) VALUE '-'.                
+ 007100 007100      05 BEGIN-QUAL            PIC X(1) VALUE '('.                
+ 007200 007200      05 FIELD                 PIC X(8) VALUE 'CUSTNO  '.         
+ 007300 007300      05 REL-OPERT             PIC X(2) VALUE '= '.               
+ 007400 007400      05 SEARCH-VAL            PIC S9(3) USAGE COMP-3.            
+ 007500 007500      05 END-QUAL              PIC X VALUE ')'.                   
+ 007600 007600 01 ADDR-UNQUAL-SSA   PIC X(9) VALUE 'ADDRESS  '.                 
+ 007700 007700*****DL/I FUNCTIONS***********************************************
+ 007800 007800  01 DLI-FUNCTION-CODES.                                          
+007900 007900            05 ISRT-FUNCTION PIC X(4) VALUE 'ISRT'.               
+008000 008000            05 GU-FUNCTION PIC X(4) VALUE 'GU '.                  
+008100 008100            05 GN-FUNCTION PIC X(4) VALUE 'GN '.                  
+008200 008200            05 GNP-FUNCTION PIC X(4) VALUE 'GNP'.                 
+008300 008300 LINKAGE SECTION.                                                 
+008400 008400*****PCB MASKS****************************************************
+008500 008500 01  IO-PCB-MASK1.                                                
+008600 008600            05 IO-LTERM-NAME PIC X(8).                            
+008700 008700            05 IO-PCB1-FILLER       PIC X(2).                     
+008800 008800            05 IO-PCB1-STATUS-CODE PIC X(2).                      
+008900 008900            05 IO-PCB1-DATE PIC S9(7) COMP-3.                     
+009000 009000            05 IO-PCB1-TIME  PIC S9(6)V9 COMP-3.                  
+009100 009100            05 IO-PCB1-MSG-SEQ-NBR PIC S9(5) COMP.                
+009200 009200            05 IO-PCB1-MOD-NAME PIC X(8).                         
+009300 009300            05 IO-PCB1-USER-ID PIC X(8).                          
+009400 009400 01  IO-PCB-MASK2.                                                
+009500 009500           05 IO1-LTERM-NAME PIC X(8).                            
+009600 009600           05 IO-PCB1-FILLER       PIC X(2).                      
+009700 009700           05 IO-PCB2-STATUS-CODE PIC X(2).                       
+009800 009800           05 IO-PCB1-DATE PIC S9(7) COMP-3.                      
+009900 009900           05 IO-PCB1-TIME  PIC S9(6)V9 COMP-3.                   
+010000 010000           05 IO-PCB1-MSG-SEQ-NBR PIC S9(5) COMP.                 
+010100 010100           05 IO-PCB1-MOD-NAME PIC X(8).                          
+010200 010200           05 IO-PCB1-USER-ID PIC X(8).                           
+010300 010300 01  PCB-MASK-1.                                                  
+010400 010400           05 PCB1-DBD-NAME PIC X(8).                             
+010500 010500           05 PCB1-LEVEL-NUMBER PIC X(2).                         
+010600 010600           05 PCB1-STATUS-CODE PIC X(2).                          
+010700 010700           05 PCB1-PROC-OPTIONS PIC X(4).                         
+010800 010800           05 FILLER PIC S9(5) COMP.                              
+010900 010900           05 PCB1-SEGMENT-NAME PIC X(8).                         
+011000 011000           05 PCB1-KEY-LENGTH PIC S9(5) COMP.                     
+011100 011100           05 PCB1-NUM-SENS-SEGMENTS PIC S9(5) COMP.              
+011200 011200           05 PCB1-KEY-FEEDBACK-AREA PIC X(14).                   
+011300 011300********PROCEDURE DIVISION****************************************
+011400 011400 PROCEDURE DIVISION.                                              
+011500 011500 0000-MAIN.                                                       
+011600 011600       ENTRY 'DLITCBL' USING  IO-PCB-MASK1,                       
+011700 011700                              IO-PCB-MASK2,                       
+011710 011710                              PCB-MASK-1.                         
+011800 011800          PERFORM 1000-INITIALISATION.                            
+011900 011900          PERFORM 2000-PROCESS-MESSAGE                            
+012000 012000                 UNTIL NO-MORE-MESSAGE.                           
+012100 012100        GOBACK.                                                   
+012200 012200******************************************************************
+012300 012300 1000-INITIALISATION.                                             
+012400 012400         CALL 'CBLTDLI' USING GU-FUNCTION,                        
+012500 012500              IO-PCB-MASK1, INPUT-MESSAGE-AREA.                   
+012600 012600         IF IO-PCB1-STATUS-CODE EQUAL 'QC'                        
+012700 012700             MOVE 'Y' TO END-OF-MESSAGES.                         
+012800 012800******************************************************************
+012900 012900 2000-PROCESS-MESSAGE.                                            
+012901 012901       INITIALIZE OUT-DATA.                                       
+012910 012910       INITIALIZE OM-ERROR-MSG.                                   
+013000 013000       IF IM-CUSTOMER-NO NOT NUMERIC                              
+013001 013001       MOVE IM-CUSTOMER-NO TO CUSTOMER-NUMBER                     
+013010 013010          STRING ERROR-MSG1, CUSTOMER-NUMBER,                     
+013020 013020          DELIMITED BY ',' INTO OM-ERROR-MSG                      
+013200 013200          PERFORM 3200-ISRT-OUTPUT-MSG.                           
+013300 013300      IF OM-ERROR-MSG EQUAL SPACES                                
+013400 013400          PERFORM 3000-SLET-CUST-DB.                              
+013410 013410      CALL 'CBLTDLI' USING GU-FUNCTION,                           
+013420 013420          IO-PCB-MASK1, INPUT-MESSAGE-AREA.                       
+013430 013430      IF IO-PCB1-STATUS-CODE EQUAL 'QC'                           
+013440 013440             MOVE 'Y' TO END-OF-MESSAGES.                         
+013500 013500******************************************************************
+013600 013600 3000-SLET-CUST-DB.                                               
+013700 013700         MOVE IM-CUSTOMER-NO TO SEARCH-VAL.                       
+013800 013800         CALL 'CBLTDLI' USING GU-FUNCTION,                        
+013900 013900              PCB-MASK-1, CUST-SEG-IO-AREA, CUST-QUAL-SSA.        
+014000 014000         IF PCB1-STATUS-CODE EQUAL SPACES                         
+014100 014100                 PERFORM 3300-ADDR-SELECT-PARA                    
+014200 014200         ELSE IF PCB1-STATUS-CODE = 'GE'                          
+014300 014300                PERFORM 4000-CUST-ERROR-PARA                      
+014400 014400         ELSE IF PCB1-STATUS-CODE NOT EQUAL SPACES                
+014500 014500                PERFORM 4100-CUST-ERROR-PARA                      
+014600 014600         END-IF.                                                  
+014700 014700******************************************************************
+014800 014800 3100-MOVE-TO-OUTPUT-AREA.                                        
+014900 014900         INITIALIZE OUT-DATA.                                     
+015000 015000         MOVE CUSTOMER-NO TO OM-CUSTOMER-NO.                      
+015100 015100         MOVE CUST-NAME TO OM-CUST-NAME.                          
+015200 015200         MOVE CUST-DOB TO          OM-CUST-DOB.                   
+015300 015300         MOVE CUST-SEX TO          OM-CUST-SEX.                   
+015400 015400         MOVE CUST-OPD TO          OM-CUST-OPD.                   
+015500 015500         MOVE CUST-OCC TO          OM-CUST-OCCU.                  
+015600 015600         MOVE CUST-PHO TO          OM-CUST-PHONE.                 
+015700 015700         IF ADDRTYP = 'M'                                         
+015800 015800         MOVE CUST-ADDRESS-2 TO    OM-CUST-ADDR1                  
+015900 015900         MOVE CUST-ADDRESS-3 TO    OM-CUST-ADDRM                  
+016000 016000         MOVE ADDRCTY        TO    OM-CUST-CITY                   
+016100 016100         MOVE ADDRPIN        TO    OM-CUST-PIN                    
+016200 016200         ELSE                                                     
+016300 016300         MOVE CUST-ADDRESS-2 TO    OM-CUST-ADDR2                  
+016400 016400         MOVE CUST-ADDRESS-3 TO    OM-CUST-ADDRR                  
+016500 016500         MOVE ADDRCTY        TO    OM-CUST-CITY1                  
+016600 016600         MOVE ADDRPIN        TO    OM-CUST-PIN1                   
+016700 016700         END-IF.                                                  
+016800 016800         PERFORM 3200-ISRT-OUTPUT-MSG.                            
+016900 016900******************************************************************
+017000 017000 3200-ISRT-OUTPUT-MSG.                                            
+017100 017100         CALL 'CBLTDLI' USING ISRT-FUNCTION,                      
+017200 017200                          IO-PCB-MASK1, OUTPUT-MESSAGE-AREA.      
+017300 017300 3300-ADDR-SELECT-PARA.                                           
+017400 017400         CALL 'CBLTDLI' USING GNP-FUNCTION,                       
+017500 017500                PCB-MASK-1, ADDR-I-O-AREA, ADDR-UNQUAL-SSA.       
+017600 017600         IF PCB1-STATUS-CODE EQUAL SPACES                         
+017700 017700               PERFORM 3100-MOVE-TO-OUTPUT-AREA                   
+017800 017800         ELSE IF PCB1-STATUS-CODE NOT EQUAL SPACES                
+017900 017900               PERFORM 5000-ADDR-ERROR-PARA                       
+018000 018000        END-IF.                                                   
+018100 018100 4000-CUST-ERROR-PARA.                                            
+018200 018200            MOVE ERROR-MSG2 TO OM-ERROR-MSG.                      
+018300 018300            PERFORM 3200-ISRT-OUTPUT-MSG.                         
+018400 018400 4100-CUST-ERROR-PARA.                                            
+018500 018500            MOVE PCB1-STATUS-CODE TO OM-ERROR-MSG.                
+018600 018600            PERFORM 3200-ISRT-OUTPUT-MSG.                         
+018700 018700 5000-ADDR-ERROR-PARA.                                            
+018800 018800            MOVE ERROR-MSG3 TO OM-ERROR-MSG.                      
+018900 018900            PERFORM 3200-ISRT-OUTPUT-MSG.                         
+****** **************************** Bottom of Data ****************************
+                                                                               
+ 

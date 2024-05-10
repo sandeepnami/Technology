@@ -1,0 +1,23 @@
+//UGBFDRCP JOB 345,'FDRABR BKUP',                                       00010000
+//             MSGCLASS=X,MSGLEVEL=(1,1),                               00020000
+//             CLASS=2,NOTIFY=&SYSUID                                   00030000
+//*BAKUP OF FILES USING FDRABR                                          00030100
+//*                                                                     00030200
+//FDRBKUP EXEC PGM=FDRABR                                               00030400
+//SYSPRINT DD  SYSOUT=*                                                 00030500
+//SYSPRIN1 DD  SYSOUT=*                                                 00030600
+//SYSUDUMP DD  SYSOUT=*                                                 00030700
+//ARCHIVE  DD  DSN=CDKVPGE.SANDEEPN.FDRABR.LOG41.SE(+1), << LOG FILE    00030800
+//             DISP=(NEW,CATLG),                                        00030900
+//             UNIT=3390,                                               00032000
+//             SPACE=(TRK,(15,15),RLSE)                                 00032100
+//*TAPE 1 DEFINITION IS MUST IRST THEN SELECT                           00032200
+//TAPE1    DD  DSN=CDKVPGE.SANDEEPN.FDRABR.BKUP41.S1.TEMPA.SE,          00033000
+//             DISP=(,KEEP),                                            00034000
+//             UNIT=VCART,                                              00035000
+//             RETPD=33                                                 00035100
+//*WE HAVE TO WRITE EXCLUDE FIRST THEN SELECT                           00035200
+//*ARCB1DSN IS THE TAPE WHERE ACTUAL BAKUP IS TAKEN                     00035300
+//SYSIN    DD  DSN=DNDVPGE.SANDEEPN.PARMLIB(FDRBAKUP),                  00036000
+//             DISP=SHR                                                 00037000
+

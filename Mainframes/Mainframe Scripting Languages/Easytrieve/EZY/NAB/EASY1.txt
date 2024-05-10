@@ -1,0 +1,147 @@
+//EASY1    JOB CA-1114,CLASS=P,MSGCLASS=X,                              
+// NOTIFY=&SYSUID                                                       
+//*                                                                     
+//*                                                                     
+//*                                                                     
+//*-------------------------------------------------------------------* 
+//*   THIS PROGRAM IS USED TO RETRIEVE BSB, ACCOUNT NUMBER,             
+//*   CUSTOMER NUMBER, MPID, PMPID, MATURITY DATE, OPEN DATE AND        
+//*   EFFECTIVE DATE IF THE PRODUCT IS 'TDEP' OR 'TDFM' AND             
+//*   OPEN DATE = '10/05/2013 MATURITY DATE = '10/05/2014'              
+//*-------------------------------------------------------------------* 
+//*                                                                     
+//*-------------------------------------------------------------------* 
+//* DELETE OUTPUT DATA SET                                              
+//*-------------------------------------------------------------------* 
+//*                                                                     
+//DELETE   EXEC PGM=IDCAMS                                              
+//*                                                                     
+//SYSPRINT DD  SYSOUT=A,HOLD=YES                                        
+//AMSDUMP  DD  SYSOUT=T,HOLD=YES                                        
+//SYSIN    DD  *                                                        
+    DELETE (SDAF.MENTOR.M10.OUTPUT.DUMP)                                
+  SET MAXCC = 0                                                         
+/*                                                                      
+//*                                                                     
+//*-------------------------------------------------------------------* 
+//* EXTRACTING ACCOUNT DETAILS                                          
+//*-------------------------------------------------------------------* 
+//EZPLUS1  EXEC GULVEMVS,MBR=EZTPA00                                    
+//SYSPRINT DD   SYSOUT=A,HOLD=YES,DEST=R287                             
+//PANDD1   DD   DUMMY                                                   
+//SNAP     DD   SYSOUT=*                                                
+//SYSSNAP  DD   SYSOUT=*                                                
+//SYSUDUMP DD   SYSOUT=*                                                
+//SYSOUT   DD   SYSOUT=Z                                                
+//EZTVFM   DD   UNIT=SYSDA,SPACE=(CYL,(20,20))                          
+//FILEA    DD DSN=SDAF.PP40223N.ONLDUMP.D140508,DISP=SHR                
+//EZTVFM   DD   UNIT=SYSDA,SPACE=(CYL,(20,20))                  
+//FILEA    DD DSN=SDAF.PP40223N.ONLDUMP.D140508,DISP=SHR        
+//FILEB    DD DSN=SDAF.MENTOR.M10.OUTPUT.DUMP,                  
+//            DISP=(NEW,CATLG,DELETE),                          
+//            SPACE=(CYL,(1,1),RLSE),                           
+//            UNIT=(SYSDA),                                     
+//            DCB=(RECFM=FB,LRECL=80,BLKSIZE=800)               
+//PRINT01  DD SYSOUT=*                                          
+/*                                                              
+//SYSIN    DD   *                                               
+LIST ON                                                         
+PARM DEBUG(NOCLIST NODMAP NOXREF NOFLOW STATE)                  
+*_______________________________________________________________
+* INPUT RECORD DEATILS                                          
+*                                                               
+FILE FILEA                                                      
+FILEA-REC       1    133     A                                  
+FA-EL-POS      09    07    A                                    
+FA-EL-MPID     61    04    A                                    
+FA-EL-ACC      70    10    A                                    
+FA-EL-OPND     61    10    A                                    
+FA-EL-EFFD     61    10    A                                    
+FA-EL-REPD     61    10    A                                    
+FA-EL-MATD     61    10    A                                    
+                                                                
+*                                                               
+*OUTPUT RECORD DETAILS                                          
+*                                                               
+FILE FILEB                                                      
+FILEB-REC       1    80      A                                  
+FB-EL-MPID     01    04    A                                    
+FB-EL-ACC      07    10    A                                    
+FB-EL-EFFD     19    10    A                                    
+FB-EL-OPND     32    10    A                                    
+FB-EL-REPD     45    10    A                                    
+FB-EL-MATD     58    10    A                                    
+                                                                
+                                                                
+*** WORKING STORAGE SECTION                                            
+WS-HEADING-0    W    80    A   VALUE +                                 
+  ' BSB  ACCOUNT NO  CUSTOMER    PMPID  MPID   OPEN DATE   +           
+         EFFEC DATE   MAT DATE '                                       
+                                                                       
+WS-HEADING-1    W    80    A   VALUE +                                 
+   '--------------------------------------------+                      
+    ----------------------------------'                                
+                                                                       
+WS-COUNT        W    02    N   VALUE 0                                 
+                                                                       
+*READ INPUT FILE AND WRITE IN OUTPUT FILE ON THE GIVEN CONDITION BELOW 
+*WE ARE WRITING ACCOUNT NUMBER,MPID, BSB, PMPID, CUSTOMER NUMBER,      
+*OPEN DATE, MATURITY DATE AND EFFECTIVE DATE IN OUTPUT FILE            
+**                                                                     
+*CONDITIONS:                                                           
+* MPID SHOULD BE TDEP OR TDFM                                          
+* OPEN DATE IS 10/05/2013, MATURITY DATE IS 10/05/2014                 
+* ONLY FIRST 10 RECORDS SHOULD BE RETRIEVED                            
+                                                                       
+***** ACTIVITY SECTION                                                 
+                                                                       
+                                                                       
+   JOB INPUT  FILEA               +                                    
+       START  P1000-INITIALISE                                         
+       PERFORM P2000-PROCESS                                           
+                                                                       
+***** HEADING PARA *************************************************** 
+   P1000-INITIALISE. PROC                                              
+********************************************************************** 
+                                                                       
+       MOVE WS-HEADING-1 TO FILEB-REC                                  
+         PUT FILEB                                                     
+       MOVE WS-HEADING-0 TO FILEB-REC                                  
+         PUT FILEB                                                     
+       MOVE WS-HEADING-1 TO FILEB-REC                                  
+         PUT FILEB                                                     
+       MOVE SPACES TO FILEB-REC                                        
+                                                                       
+   END-PROC                                                            
+                                                                       
+***** PROCESS PARA *************************************************** 
+   P2000-PROCESS. PROC                                                 
+********************************************************************** 
+                                                                       
+     IF FA-EL-POS = 'EL06943'                                          
+        FB-EL-MPID =  FA-EL-MPID                                       
+     END-IF                                                            
+                                                                       
+     IF FA-EL-POS = 'EL06725'                                          
+        FB-EL-ACC  = FA-EL-ACC                                         
+     END-IF                                                            
+                                                                       
+     IF FA-EL-POS = 'EL14145'                                          
+        FB-EL-EFFD  =  FA-EL-EFFD                                      
+     END-IF                                                            
+                                                                       
+     IF FA-EL-POS = 'EL06720'                                          
+        FB-EL-OPND  =  FA-EL-OPND                                      
+     END-IF                                                            
+                                                                       
+     IF FA-EL-POS = 'EL03663'                                          
+        FB-EL-MATD  =  FA-EL-MATD                                      
+     END-IF                                                            
+                                                                       
+     IF FA-EL-POS = 'EL14153'                                          
+        FB-EL-REPD  =  FA-EL-REPD                                      
+        PUT FILEB                                                      
+     END-IF                                                            
+                                                                       
+                                                                       
+   END-PROC                                                            

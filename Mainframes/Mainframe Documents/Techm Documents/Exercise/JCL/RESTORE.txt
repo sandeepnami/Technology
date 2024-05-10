@@ -1,0 +1,29 @@
+//UGBRESTO JOB (DC1Z8385),'CMS RESTORE',                                JOB13795
+//             MSGCLASS=X,CLASS=A,
+//             NOTIFY=&SYSUID
+//**********************************************************************
+//* THIS JOB RESTORES ALL THE VSAM FILES OF CMS MODULE FROM THE BACKUP *
+//* BACKUP FILE NAME NEED TO BE CHANGED                                *
+//**********************************************************************
+//*
+//STEP010 EXEC PGM=ADRDSSU
+//SYSPRINT DD  SYSOUT=*
+//BACKUP   DD  DSN=ADKVPGE.CMS.ABMF.S0.GD.BEFKE.G0118V00,
+//             DISP=SHR
+//SYSIN    DD  *
+  RESTORE                                       -
+       INDD(BACKUP)                             -
+       DATASET(                                 -
+               INC(                             -
+                   ADKVPGE.CMS.AMCR.KE         -
+                   ADKVPGE.CMS.AMFF.KE         -
+                   ADKVPGE.CMS.AMMR.KE         -
+                   ADKVPGE.CMS.AMPP.KE         -
+                   ADKVPGE.CMS.AMRC.KE         -
+                   ADKVPGE.CMS.AMTP.KE         -
+              ))                                -
+       SPHERE                                   -
+       CATALOG                                  -
+       REPLACE                                  -
+       RENUNC(ADKVPGE.CMS.**   ADKVPGE.CMS.**.DT2308)
+

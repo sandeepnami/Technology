@@ -1,0 +1,29 @@
+IDENTIFICATION DIVISION.
+PROGRAM-ID. PROG005.
+ENVIRONMENT DIVISION.
+
+DATA DIVISION.
+WORKING-STORAGE SECTION.
+01 ASK-TIME                       PIC S9(15) COMP-3.
+01 ASK-TIME1                     PIC X(80) VALUE SPACES.
+01 ASK-DATE1                    PIC X(80) VALUE SPACES.
+01 W-LEN                             PIC S9(4) COMP.
+
+PROCEDURE DIVISION.
+           EXEC CICS ASKTIME
+                                ABSTIME(ASK-TIME)
+           END-EXEC.
+           EXEC CICS FORMATTIME ABSTIME(ASK-TIME)
+                                 YYYYMMDD(ASK-DATE1)
+                                  DATESEP('-')
+                                  TIME(ASK-TIME1)
+                                  TIMESEP
+          END-EXEC.
+          MOVE 72 TO W-LEN.
+          EXEC CICS SEND TEXT
+                                FROM(ASK-DATA1)
+                                LENGTH(W-LEN)
+                                ACCUM ERASE
+          END-EXEC.
+          EXEC CICS SEND PAGE END-EXEC.
+          EXEC CICS RETURN END-EXEC.

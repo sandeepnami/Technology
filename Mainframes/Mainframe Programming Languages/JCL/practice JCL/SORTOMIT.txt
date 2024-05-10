@@ -1,0 +1,20 @@
+//UGBPCRPS JOB AF-1055,'SORT OMIT',                                     00010000
+//             MSGCLASS=X,MSGLEVEL=(1,1),                               00020000
+//             CLASS=P,NOTIFY=&SYSUID                                   00030000
+//*                                                                     00030100
+//SORT001 EXEC PGM=SORT                                                 00030200
+//SYSOUT   DD  SYSOUT=*                                                 00030300
+//SYSPRINT DD  SYSOUT=*                                                 00030400
+//*INPUT FILE IS OMITTED OUT SOME RECORDS OUTPUT IS CREATED             00030500
+//*PLZ NOTE THAT IN1 IS A VBA FILESO OFFSET 4 IS ADDED                  00030600
+//SORTIN   DD  DSN=SDAF.NANI.P732083.INPUT.SE,                          00030700
+//             DISP=SHR                                                 00030800
+//SORTOUT  DD  DSN=SDAF.NANI.OUT.SE,                                    00031100
+//             DISP=OLD                                                 00031200
+//SYSIN    DD  *                                                        00031300
+ SORT FIELDS=COPY                                                       00031400
+ OMIT COND=((4,11,CH,EQ,C'HARI BABU'))                                  00031501
+/*                                                                      00033000
+//* OUTREC FIELDS=(10,5,16,5)                                           00033100
+//*,OR,(16,4,CH,EQ,C'5901'))                                            00034000
+

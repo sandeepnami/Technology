@@ -1,0 +1,32 @@
+/* REXX TO COPY PDS MEMBERS INTO ANOTHER FILE                           00010000
+** THIS IS ALSO EXAMPLE FOR USING CALLING ANOTHER REXX                  00011000
+** THIS IS MEMBER READS MEMBERS OF THE PDS                              00012000
+*/                                                                      00013000
+/*NANI COMMENT FOR STD INPUT                                            00014000
+LIB="CHGMAN.LV231.STG.#000316.MSC"                                      00020000
+OUTDD="CDKVPGE.FIX.SANDEEPN.IN1.SE"                                     00021000
+*/                                                                      00021300
+                                                                        00021400
+LIB="CHGMAN.DK011.STG.#000984.MSC"                                      00021500
+OUTDD="CDKVPGE.FIX.SANDEEPN.IN.SE"                                      00021600
+"ALLOC FI(OUTDD) DA('"OUTDD"') SHR "                                    00022000
+/*READ MEMBERS OF THE PDS*/                                             00023000
+X = OUTTRAP('PDS.')                                                     00030000
+"LISTDS '"LIB"' MEMBERS"                                                00040000
+X=OUTTRAP('OFF')                                                        00050000
+                                                                        00050100
+J = 0                                                                   00051000
+DO I = 7 TO PDS.0                                                       00060000
+  J = J+1                                                               00061000
+  OUT.J = STRIP(PDS.I)                                                  00070000
+  /*SAY "MEMBER NAME IS" OUT.J*/                                        00080000
+/* WITH PDS NAME */                                                     00080100
+  DD.J = LIB  ||"("OUT.J")"                                             00080200
+END                                                                     00081000
+DD.0=J                                                                  00081100
+                                                                        00081200
+"EXECIO" DD.0 "DISKW OUTDD (STEM DD. FINIS"                             00082000
+                                                                        00083000
+"FREE FI(OUTDD)"                                                        00085000
+EXIT(0)                                                                 00100000
+

@@ -1,0 +1,72 @@
+Metropolitan area,population,NFL,NBA,NHL,MLB,team,W,L,winlossratio
+Phoenix,4661537,Arizona Cardinals,Phoenix Suns,Arizona Coyotes,Arizona Diamondbacks,Arizona Cardinals,3,13,0.1875
+Atlanta,5789700,Atlanta Falcons,Atlanta Hawks,Atlanta,Atlanta Braves,Atlanta Falcons,7,9,0.4375
+Baltimore,2798886,Baltimore Ravens,Baltimore,Baltimore,Baltimore Orioles,Baltimore Ravens,10,6,0.625
+Buffalo,1132804,Buffalo Bills,Buffalo,Buffalo Sabres,Buffalo,Buffalo Bills,6,10,0.375
+Charlotte,2474314,Carolina Panthers,Charlotte Hornets,Charlotte,Charlotte,Carolina Panthers,7,9,0.4375
+Chicago,9512999,Chicago Bears,Chicago Bulls,Chicago Blackhawks,Chicago Cubs,Chicago Bears,12,4,0.75
+Chicago,9512999,Chicago Bears,Chicago Bulls,Chicago Blackhawks,Chicago White Sox,Chicago Bears,12,4,0.75
+Cincinnati,2165139,Cincinnati Bengals,Cincinnati,Cincinnati,Cincinnati Reds,Cincinnati Bengals,6,10,0.375
+Cleveland,2055612,Cleveland Browns,Cleveland Cavaliers,Cleveland,Cleveland Indians,Cleveland Browns,7,8,0.4666666666666667
+Dallas–Fort Worth,7233323,Dallas Cowboys,Dallas Mavericks,Dallas Stars,Texas Rangers,Dallas Cowboys,10,6,0.625
+Denver,2853077,Denver Broncos,Denver Nuggets,Colorado Avalanche,Colorado Rockies,Denver Broncos,6,10,0.375
+Detroit,4297617,Detroit Lions,Detroit Pistons,Detroit Red Wings,Detroit Tigers,Detroit Lions,6,10,0.375
+Green Bay,318236,Green Bay Packers,Green Bay,Green Bay,Green Bay,Green Bay Packers,6,9,0.4
+Houston,6772470,Houston Texans,Houston Rockets,Houston,Houston Astros,Houston Texans,11,5,0.6875
+Indianapolis,2004230,Indianapolis Colts,Indiana Pacers,Indianapolis,Indianapolis,Indianapolis Colts,10,6,0.625
+Jacksonville,1478212,Jacksonville Jaguars,Jacksonville,Jacksonville,Jacksonville,Jacksonville Jaguars,5,11,0.3125
+Kansas City,2104509,Kansas City Chiefs,Kansas City,Kansas City,Kansas City Royals,Kansas City Chiefs,12,4,0.75
+Los Angeles,13310447,Los Angeles Chargers,Los Angeles Lakers,Los Angeles Kings,Los Angeles Dodgers,Los Angeles Chargers,12,4,0.75
+Los Angeles,13310447,Los Angeles Chargers,Los Angeles Lakers,Los Angeles Kings,Los Angeles Angels,Los Angeles Chargers,12,4,0.75
+Los Angeles,13310447,Los Angeles Chargers,Los Angeles Clippers,Los Angeles Kings,Los Angeles Dodgers,Los Angeles Chargers,12,4,0.75
+Los Angeles,13310447,Los Angeles Chargers,Los Angeles Lakers,Anaheim Ducks,Los Angeles Dodgers,Los Angeles Chargers,12,4,0.75
+Los Angeles,13310447,Los Angeles Chargers,Los Angeles Clippers,Los Angeles Kings,Los Angeles Angels,Los Angeles Chargers,12,4,0.75
+Los Angeles,13310447,Los Angeles Chargers,Los Angeles Lakers,Anaheim Ducks,Los Angeles Angels,Los Angeles Chargers,12,4,0.75
+Los Angeles,13310447,Los Angeles Chargers,Los Angeles Clippers,Anaheim Ducks,Los Angeles Dodgers,Los Angeles Chargers,12,4,0.75
+Los Angeles,13310447,Los Angeles Chargers,Los Angeles Clippers,Anaheim Ducks,Los Angeles Angels,Los Angeles Chargers,12,4,0.75
+Los Angeles,13310447,Los Angeles Rams,Los Angeles Lakers,Anaheim Ducks,Los Angeles Angels,Los Angeles Rams,13,3,0.8125
+Los Angeles,13310447,Los Angeles Rams,Los Angeles Lakers,Los Angeles Kings,Los Angeles Dodgers,Los Angeles Rams,13,3,0.8125
+Los Angeles,13310447,Los Angeles Rams,Los Angeles Clippers,Los Angeles Kings,Los Angeles Dodgers,Los Angeles Rams,13,3,0.8125
+Los Angeles,13310447,Los Angeles Rams,Los Angeles Lakers,Los Angeles Kings,Los Angeles Angels,Los Angeles Rams,13,3,0.8125
+Los Angeles,13310447,Los Angeles Rams,Los Angeles Clippers,Anaheim Ducks,Los Angeles Dodgers,Los Angeles Rams,13,3,0.8125
+Los Angeles,13310447,Los Angeles Rams,Los Angeles Clippers,Anaheim Ducks,Los Angeles Angels,Los Angeles Rams,13,3,0.8125
+Los Angeles,13310447,Los Angeles Rams,Los Angeles Lakers,Anaheim Ducks,Los Angeles Dodgers,Los Angeles Rams,13,3,0.8125
+Los Angeles,13310447,Los Angeles Rams,Los Angeles Clippers,Los Angeles Kings,Los Angeles Angels,Los Angeles Rams,13,3,0.8125
+Miami–Fort Lauderdale,6066387,Miami Dolphins,Miami Heat,Florida Panthers,Miami Marlins,Miami Dolphins,7,9,0.4375
+Minneapolis–Saint Paul,3551036,Minnesota Vikings,Minnesota Timberwolves,Minnesota Wild,Minnesota Twins,Minnesota Vikings,8,7,0.5333333333333333
+Boston,4794447,New England Patriots,Boston Celtics,Boston Bruins,Boston Red Sox,New England Patriots,11,5,0.6875
+New Orleans,1268883,New Orleans Saints,New Orleans Pelicans,New Orleans,New Orleans,New Orleans Saints,13,3,0.8125
+New York City,20153634,New York Giants,New York Knicks,New York Islanders,New York Yankees,New York Giants,5,11,0.3125
+New York City,20153634,New York Giants,Brooklyn Nets,New York Rangers,New York Yankees,New York Giants,5,11,0.3125
+New York City,20153634,New York Giants,New York Knicks,New York Islanders,New York Mets,New York Giants,5,11,0.3125
+New York City,20153634,New York Giants,Brooklyn Nets,New York Rangers,New York Mets,New York Giants,5,11,0.3125
+New York City,20153634,New York Giants,Brooklyn Nets,New Jersey Devils,New York Yankees,New York Giants,5,11,0.3125
+New York City,20153634,New York Giants,Brooklyn Nets,New York Islanders,New York Mets,New York Giants,5,11,0.3125
+New York City,20153634,New York Giants,New York Knicks,New Jersey Devils,New York Yankees,New York Giants,5,11,0.3125
+New York City,20153634,New York Giants,Brooklyn Nets,New York Islanders,New York Yankees,New York Giants,5,11,0.3125
+New York City,20153634,New York Giants,Brooklyn Nets,New Jersey Devils,New York Mets,New York Giants,5,11,0.3125
+New York City,20153634,New York Giants,New York Knicks,New York Rangers,New York Yankees,New York Giants,5,11,0.3125
+New York City,20153634,New York Giants,New York Knicks,New Jersey Devils,New York Mets,New York Giants,5,11,0.3125
+New York City,20153634,New York Giants,New York Knicks,New York Rangers,New York Mets,New York Giants,5,11,0.3125
+New York City,20153634,New York Jets,Brooklyn Nets,New York Islanders,New York Mets,New York Jets,4,12,0.25
+New York City,20153634,New York Jets,New York Knicks,New Jersey Devils,New York Yankees,New York Jets,4,12,0.25
+New York City,20153634,New York Jets,Brooklyn Nets,New Jersey Devils,New York Mets,New York Jets,4,12,0.25
+New York City,20153634,New York Jets,New York Knicks,New Jersey Devils,New York Mets,New York Jets,4,12,0.25
+New York City,20153634,New York Jets,Brooklyn Nets,New Jersey Devils,New York Yankees,New York Jets,4,12,0.25
+New York City,20153634,New York Jets,Brooklyn Nets,New York Islanders,New York Yankees,New York Jets,4,12,0.25
+New York City,20153634,New York Jets,New York Knicks,New York Islanders,New York Mets,New York Jets,4,12,0.25
+New York City,20153634,New York Jets,New York Knicks,New York Islanders,New York Yankees,New York Jets,4,12,0.25
+New York City,20153634,New York Jets,Brooklyn Nets,New York Rangers,New York Mets,New York Jets,4,12,0.25
+New York City,20153634,New York Jets,Brooklyn Nets,New York Rangers,New York Yankees,New York Jets,4,12,0.25
+New York City,20153634,New York Jets,New York Knicks,New York Rangers,New York Mets,New York Jets,4,12,0.25
+New York City,20153634,New York Jets,New York Knicks,New York Rangers,New York Yankees,New York Jets,4,12,0.25
+San Francisco Bay Area,6657982,Oakland Raiders,Golden State Warriors,San Jose Sharks,Oakland Athletics,Oakland Raiders,4,12,0.25
+San Francisco Bay Area,6657982,Oakland Raiders,Golden State Warriors,San Jose Sharks,San Francisco Giants,Oakland Raiders,4,12,0.25
+Philadelphia,6070500,Philadelphia Eagles,Philadelphia ers,Philadelphia Flyers,Philadelphia Phillies,Philadelphia Eagles,9,7,0.5625
+Pittsburgh,2342299,Pittsburgh Steelers,Pittsburgh,Pittsburgh Penguins,Pittsburgh Pirates,Pittsburgh Steelers,9,6,0.6
+San Francisco Bay Area,6657982,San Francisco ers,Golden State Warriors,San Jose Sharks,San Francisco Giants,San Francisco ers,4,12,0.25
+San Francisco Bay Area,6657982,San Francisco ers,Golden State Warriors,San Jose Sharks,Oakland Athletics,San Francisco ers,4,12,0.25
+Seattle,3798902,Seattle Seahawks,Seattle,Seattle,Seattle Mariners,Seattle Seahawks,10,6,0.625
+Tampa Bay Area,3032171,Tampa Bay Buccaneers,Tampa Bay Area,Tampa Bay Lightning,Tampa Bay Rays,Tampa Bay Buccaneers,5,11,0.3125
+Nashville,1865298,Tennessee Titans,Nashville,Nashville Predators,Nashville,Tennessee Titans,9,7,0.5625
+"Washington, D.C.",6131977,Washington Redskins,Washington Wizards,Washington Capitals,Washington Nationals,Washington Redskins,7,9,0.4375

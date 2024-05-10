@@ -1,0 +1,76 @@
+Sub ZMain
+Dim  ret,risk,old_time,curr_time
+Set Sys = CreateObject("PASSPORT.System")
+Set Sess = Sys.ActiveSession
+Set MyScreen = Sess.Screen
+
+SendHostKeys ("<PF4>")
+ret = wait(3)
+Set MyArea = MyScreen.Area(22, 7,22,12)
+MyArea.Select     
+MyScreen.Copy
+old_time=	MyArea.Value
+
+for i = 1 to 150
+     refresh_wait()
+     old_time =  echo_check(MyScreen,old_time)
+Next
+
+End Sub
+ 
+Private Function echo_check(MyScreen,old_time)
+
+to_addr = "sandeep_nami@mahindrasatyam.com"
+cc_addr = "sandeep_nami@mahindrasatyam.com"
+subject =  "High Risk OFCJ Denmark"
+msg=" Hi Nami " 
+SendHostKeys ("<PF4>")
+ret = wait(3)
+Set MyArea = MyScreen.Area(22, 7,22,12)
+MyArea.Select     
+MyScreen.Copy
+curr_time=MyArea.Value
+if curr_time = old_time Then
+	msg = msg & Chr(13) &"There is echo lag in OFCJ of denmark at " & curr_time &" Time "
+	beep_sound()
+	outlook_send msg, subject,to_addr,cc_addr
+end if
+
+echo_check = curr_time
+END Function 
+
+
+Sub outlook_send( msg, subject,to_addr,cc_addr )
+Dim  ret
+
+Set otlApp = CreateObject("Outlook.Application")
+Set otlNewMail = otlApp.CreateItem(olMailItem)
+
+With otlNewMail
+.SentOnBehalfOfName = "VisionPlus_Servicedesk@mahindrasatyam.com"
+.To = to_addr
+.CC = cc_addr
+.Subject = subject 
+.body = "Hi," & Chr(13) & "There is a PR raised and PR info is "  & Chr(13)  & msg 
+.Display
+ .send
+END With
+
+End Sub
+
+Sub beep_sound()
+
+For loopvar = 1 To 20
+	Beep
+	ret = wait(1)
+Next        
+
+end Sub
+
+Sub refresh_wait()
+
+ret = wait(240)
+SendHostKeys ("<PF4>")
+ret = wait(3) 
+
+end Sub

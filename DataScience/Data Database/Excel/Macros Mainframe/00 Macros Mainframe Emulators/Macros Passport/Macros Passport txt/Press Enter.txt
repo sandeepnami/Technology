@@ -1,0 +1,13 @@
+Sub ZMain
+Dim PrNoOld, PrNoCurr, ret	
+
+'press Enter for every 3mins
+for i = 1 to 150
+                
+	SendHostKeys ("<ENTER>")
+	'refresh screen after 3mins
+	 ret = Wait(180)	
+Next 
+
+End Sub
+ 

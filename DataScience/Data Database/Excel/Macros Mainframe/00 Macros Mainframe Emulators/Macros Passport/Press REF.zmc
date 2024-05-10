@@ -1,0 +1,24 @@
+Sub ZMain
+Dim ret
+Set Sys = CreateObject("PASSPORT.System")	
+Set Sess = Sys.ActiveSession
+Set MyScreen = Sess.Screen
+'wait_ref="180"
+wait_ref="60"
+
+'press ref for every 3mins
+for i = 1 to 150
+        	Set MyArea = MyScreen.Area(4, 15, 4, 17)
+	MyArea.Select     
+	MyScreen.Copy
+	MyArea.Value = "REF"
+	SendHostKeys ("<ENTER>")
+	ret = wait(3)    
+	SendHostKeys ("M")
+	SendHostKeys ("<PF7>")	    
+	'refresh screen after 3mins
+	 ret = Wait(wait_ref)	
+Next 
+
+End Sub
+ 

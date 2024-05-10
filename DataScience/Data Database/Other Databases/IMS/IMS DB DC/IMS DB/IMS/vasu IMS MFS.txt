@@ -1,0 +1,169 @@
+000010          PRINT ON,NOGEN                                                 
+000100 CUSY00   FMT                                                            
+000200          DEV   TYPE=(3270,2),                                          X
+000300                FEAT=IGNORE,                                            X
+000400                SYSMSG=ERRMSG,                                          X
+=COLS> ----+----1----+----2----+----3----+----4----+----5----+----6----+----7--
+000500                DSCA=X'00A0',                                           X
+000510                PFK=(PFKFLD,                                            X
+000520                1='/FOR MENU00O')                                        
+000600          DIV   TYPE=INOUT                                               
+000700          DPAGE CURSOR=((4,20)),FILL=PT                                  
+000800          DFLD  'CUSTOMER INQUIRY',                                     X
+000900                POS=(2,30),                                             X
+001000                ATTR=(HI,PROT)                                           
+001100 CURDAT   DFLD  POS=(2,72),                                             X
+001200                LTH=8,                                                  X
+001300                ATTR=(HI,PROT)                                           
+001400          DFLD  'CUSTOMER NO:',                                         X
+001500                POS=(4,2),                                              X
+001600                ATTR=(HI,PROT)                                           
+001800 CUSTNO   DFLD  POS=(4,20),                                             X
+001900                LTH=3,                                                  X
+002000                ATTR=(NOPROT,NUM,NORM,MOD)                               
+002100          DFLD  'CUSTOMER NAME:',                                       X
+002200                POS=(6,2),                                              X
+002300                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+002400 CUSTNM   DFLD  POS=(6,20),                                             X
+002500                LTH=40,                                                 X
+002600                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+002610          DFLD  'DATE OF BIRTH:',                                       X
+002620                POS=(8,2),                                              X
+002630                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+002640 CUSTDT   DFLD  POS=(8,20),                                             X
+002650                LTH=10,                                                 X
+=COLS> ----+----1----+----2----+----3----+----4----+----5----+----6----+----7--
+ 002660                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+ 002670          DFLD  'SEX:',                                                 X
+ 002680                POS=(10,2),                                             X
+ 002690                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+ 002691 CUSTSX   DFLD  POS=(10,20),                                            X
+ 002692                LTH=1,                                                  X
+ 002693                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+ 002694          DFLD  'OPEN DATE:',                                           X
+ 002695                POS=(12,2),                                             X
+ 002696                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+ 002697 CUSTOP   DFLD  POS=(12,20),                                            X
+ 002698                LTH=10,                                                 X
+ 002699                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+ 002700          DFLD  'OCCUPATION:',                                          X
+ 002701                POS=(14,2),                                             X
+ 002702                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+ 002703 CUSTOC   DFLD  POS=(14,20),                                            X
+ 002704                LTH=4,                                                  X
+ 002705                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+ 002706          DFLD  'PHONE:',                                               X
+ 002707                POS=(16,2),                                             X
+ 002708                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+ 002709 CUSTPH   DFLD  POS=(16,20),                                            X
+ 002710                LTH=13,                                                 X
+ 002711                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+ 002715          DFLD  'MAILING ADD.:',                                        X
+ 002716                POS=(17,2),                                             X
+ 002717                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+ 002718 CUSTA1   DFLD  POS=(17,16),                                            X
+ 002719                LTH=30,                                                 X
+ 002720                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+ 002721          DFLD  'ADDRESS LN-2:',                                        X
+ 002722                POS=(18,2),                                             X
+ 002723                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+ 002724 CUSTAM   DFLD  POS=(18,16),                                            X
+ 002725                LTH=30,                                                 X
+002726                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+002727          DFLD  '_',                                                    X
+002728                POS=(18,47),                                            X
+002729                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+002730 CITY     DFLD  POS=(18,49),                                            X
+002731                LTH=20,                                                 X
+002732                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+002733          DFLD  '_',                                                    X
+002734                POS=(18,70),                                            X
+002735                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+002736 PIN      DFLD  POS=(18,72),                                            X
+002737                LTH=06,                                                 X
+002738                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+002739          DFLD  'RESIDENCE ADD.:',                                      X
+002740                POS=(19,2),                                             X
+002741                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+002742 CUSTA2   DFLD  POS=(19,18),                                            X
+002743                LTH=30,                                                 X
+002744                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+002745          DFLD  'ADDRESS LINE-2:',                                      X
+002746                POS=(20,2),                                             X
+002747                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+002748 CUSTAR   DFLD  POS=(20,18),                                            X
+002749                LTH=30,                                                 X
+002750                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+002751          DFLD  '_',                                                    X
+002752                POS=(20,49),                                            X
+002753                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+002754 CITY1    DFLD  POS=(20,51),                                            X
+002755                LTH=20,                                                 X
+002756                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+002757          DFLD  '_',                                                    X
+002758                POS=(20,72),                                            X
+002759                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+002760 PIN1     DFLD  POS=(20,74),                                            X
+002761                LTH=06,                                                 X
+ 002762                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+ 002763          DFLD  'PF1 - MENU',                                           X
+ 002764                POS=(22,02),                                            X
+ 002765                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+ 002770 ERRMSG   DFLD  POS=(24,2),                                             X
+ 002800                LTH=79,                                                 X
+ 002900                ATTR=(PROT,ALPHA,HI,NOMOD)                               
+ 003000                FMTEND                                                   
+ 003100 CUSY00I  MSG   TYPE=INPUT,                                             X
+ 003200                SOR=(CUSY00,IGNORE),                                    X
+ 003300                NXT=CUSY00O                                              
+ 003400          SEG                                                            
+ 003410          MFLD  PFKFLD,                                                 X
+ 003420                LTH=13,                                                 X
+ 003440                FILL=NULL                                                
+ 003500          MFLD  'CUSY00   ',                                            X
+ 003600                LTH=10                                                   
+ 003700          MFLD  CUSTNO,                                                 X
+003800                LTH=3,                                                  X
+003810                JUST=R,                                                 X
+003820                FILL=C'0'                                                
+003920          MSGEND                                                         
+004000 CUSY00O  MSG   TYPE=OUTPUT,                                            X
+004100                SOR=(CUSY00,IGNORE),                                    X
+004200                NXT=CUSY00I                                              
+004300          SEG                                                            
+004400          MFLD  (CURDAT,DATE3)                                           
+004600          MFLD  CUSTNO,                                                 X
+004700                LTH=3                                                    
+004702          MFLD  CUSTNM,                                                 X
+004703                LTH=40                                                   
+004705          MFLD  CUSTDT,                                                 X
+004706                LTH=10                                                   
+004708          MFLD  CUSTSX,                                                 X
+004710                LTH=1                                                    
+004720          MFLD  CUSTOP,                                                 X
+004721                LTH=10                                                   
+004723          MFLD  CUSTOC,                                                 X
+004724                LTH=4                                                    
+004726          MFLD  CUSTPH,                                                 X
+004727                LTH=13                                                   
+004729          MFLD  CUSTA1,                                                 X
+004730                LTH=30                                                   
+004732          MFLD  CUSTAM,                                                 X
+004733                LTH=30                                                   
+004735          MFLD  CITY,                                                   X
+004736                LTH=20                                                   
+004738          MFLD  PIN,                                                    X
+004739                LTH=06                                                   
+004741          MFLD  CUSTA2,                                                 X
+004742                LTH=30                                                   
+004744          MFLD  CUSTAR,                                                 X
+004745                LTH=30                                                   
+004747          MFLD  CITY1,                                                  X
+ 004748                LTH=20                                                   
+ 004750          MFLD  PIN1,                                                   X
+ 004751                LTH=06                                                   
+ 004755          MFLD  ERRMSG,                                                 X
+ 004760                LTH=79                                                   
+ 004800          MSGEND                                                         
+ 004900          END                                                            
+ ****** **************************** Bottom of Data ****************************

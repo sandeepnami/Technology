@@ -1,0 +1,66 @@
+000100 IDENTIFICATION DIVISION.                                         00010000
+000200 PROGRAM-ID. DYNMACC.                                             00020035
+000300 ENVIRONMENT DIVISION.                                            00030000
+000400 INPUT-OUTPUT SECTION.                                            00040000
+000500 FILE-CONTROL.                                                    00050000
+001100     SELECT IN-FILE                                               00110021
+001200     ASSIGN OUTPS                                                 00120019
+001300     ORGANIZATION IS INDEXED                                      00130018
+001400     ACCESS MODE IS DYNAMIC                                       00140034
+001500     RECORD KEY IS O-EMP-ID                                       00150019
+001510     FILE STATUS IS W-I-STATUS.                                   00151021
+001600 DATA DIVISION.                                                   00160000
+001700 FILE SECTION.                                                    00170000
+002900 FD IN-FILE                                                       00290023
+003000     RECORD CONTAINS 80 CHARACTERS.                               00300020
+003300 01 OUT-REC.                                                      00330000
+003400     03 O-EMP-ID        PIC    X(06).                             00340016
+003500     03 FILLER          PIC    X(04).                             00350016
+003600     03 O-EMP-NAME      PIC    X(20).                             00360016
+003700     03 FILLER          PIC    X(04).                             00370016
+003800     03 O-EMP-SAL       PIC    X(06).                             00380016
+003900     03 FILLER          PIC    X(40).                             00390016
+004000 WORKING-STORAGE SECTION.                                         00400000
+004100 01 WORK-AREA.                                                    00410000
+004210     03 W-I-STATUS    PIC X(02).                                  00421021
+004220     03 W-IN-TABLE .                                              00422033
+004230        05 W-EMP-ID          PIC X(06).                           00423023
+004250        05 W-EMP-NAME       PIC    X(20).                         00425023
+004270        05 W-EMP-SAL        PIC    X(06).                         00427023
+004400     03 EOF            PIC X  VALUE IS 'Y'.                       00440000
+004500 PROCEDURE DIVISION.                                              00450000
+004600 0000-MAIN-PARA.                                                  00460000
+004700     PERFORM 1000-OPEN-PARA.                                      00470000
+004800     PERFORM 2000-PROCESS-PARA .                                  00480033
+004810     PERFORM 9000-CLOSE-PARA.                                     00481012
+004900     STOP RUN.                                                    00490000
+005000 1000-OPEN-PARA.                                                  00500000
+005110     OPEN INPUT IN-FILE.                                          00511032
+005200     EVALUATE TRUE                                                00520007
+005300        WHEN  W-I-STATUS = 00                                     00530022
+005400             CONTINUE                                             00540001
+005500        WHEN  OTHER                                               00550008
+005600             PERFORM 9999-ERROR-CODE                              00560000
+005700     END-EVALUATE.                                                00570000
+005800 2000-PROCESS-PARA.                                               00580000
+005810     MOVE "109197" TO O-EMP-ID.                                   00581034
+005820     START IN-FILE INVALID KEY DISPLAY "ERROR".                   00582034
+005830     PERFORM 2100-READ-PARA UNTIL EOF = "N".                      00583034
+005840 2100-READ-PARA.                                                  00584034
+005900     READ IN-FILE NEXT                                            00590034
+005910        AT END MOVE "N" TO EOF                                    00591034
+005920        NOT AT END                                                00592034
+005930            PERFORM 2200-MOVE-PARA                                00593034
+006000     END-READ.                                                    00600033
+006800                                                                  00680028
+006900 2200-MOVE-PARA.                                                  00690018
+007000      MOVE O-EMP-ID TO W-EMP-ID.                                  00700033
+007010      MOVE O-EMP-NAME TO W-EMP-NAME.                              00701033
+007011      MOVE O-EMP-SAL TO W-EMP-SAL.                                00701133
+007012      DISPLAY W-EMP-ID W-EMP-NAME W-EMP-SAL.                      00701233
+007020 9000-CLOSE-PARA.                                                 00702012
+007030     CLOSE IN-FILE.                                               00703022
+007100 9999-ERROR-CODE.                                                 00710000
+007200     DISPLAY " ERROR IN FILE : " W-I-STATUS.                      00720022
+007300     STOP RUN.                                                    00730000
+

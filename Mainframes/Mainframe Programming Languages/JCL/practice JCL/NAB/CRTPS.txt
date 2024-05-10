@@ -1,0 +1,15 @@
+//UGBPCRPS JOB AF-1055,'CREATE PSS',
+//             MSGCLASS=X,MSGLEVEL=(1,1),
+//             CLASS=P,NOTIFY=&SYSUID
+//*
+//STEP1   EXEC PGM=IEFBR14
+//DD1      DD  DSN=SDAF.NANI.P732083.INPUT.SE,
+//             DISP=(NEW,CATLG,DELETE),
+//             UNIT=SYSDA,
+//             SPACE=(TRK,(5,5),RLSE),
+//             LRECL=584,
+//             BLKSIZE=584,
+//             RECFM=FB
+//SYSPRINT DD  SYSOUT=*
+//SYSIN    DD  DUMMY
+

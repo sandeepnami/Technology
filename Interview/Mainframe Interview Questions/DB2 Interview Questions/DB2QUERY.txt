@@ -1,0 +1,85 @@
+/***********************************************************************
+***********REXX SUB PRGOGRAM FOR QUERYING AND SAVEING DATA IN CSV FORMAT
+**QUERY=SQLQUERY WITH SPACES REPLACED BY HYPHEN                         
+**FILEIN=INPUT DATSET NAME PASSED AS STRING                             
+***********************************************************************/
+ARG QUERY FILEIN                                                        
+SAY "iNSIDE DB2QUERY"                                                   
+say query                                                               
+say filein                                                              
+/*FILEIN  = "SDAF.PP41303.ACCOUNTS.GROUP.MPID.SE" */                    
+/*ALLOCATION OF DATASET*/                                               
+"ALLOC FI(FILEIN) DA('"FILEIN"') SHR "                                  
+/*BUILD BACK THE QUERY*/                                                
+QUERY = TRANSLATE(QUERY," ","-")                                        
+SAY QUERY                                                               
+/************************DATABASE RELATED CONNECTIONS START HERE******/ 
+/* DEFINING SUBSYSTEM */                                                
+SUBSYS = "DB2"                                                          
+/* DEFINING THE QUERY                                                   
+QUERY = "SELECT MP_ID,AF_ALW_AC_GRP",                                   
+           "FROM SGAF.BUALW_AC_TYPE",                                   
+           "WHERE AF_ALW_AC_GRP='"group"'"                              
+*/                                                                      
+                                                                        
+/* HOST CMD ENV AVAILABLE ? */                                          
+ADDRESS TSO "SUBCOM DSNREXX"                                            
+IF RC THEN                                                              
+   S_RC = RXSUBCOM('ADD','DSNREXX','DSNREXX')                           
+                                                                        
+ADDRESS DSNREXX "CONNECT" SUBSYS                                        
+   IF SQLCODE <> 0 THEN                                                 
+      say "connection problem:" SQLCODE                                 
+                                                                        
+ADDRESS DSNREXX "EXECSQL DECLARE  C1 CURSOR FOR S1"                     
+IF SQLCODE <> 0 THEN                                                    
+   say  "cursor creation :"SQLCODE                                
+                                                                  
+ADDRESS DSNREXX "EXECSQL PREPARE  S1 FROM :QUERY"                 
+IF SQLCODE <> 0 THEN                                              
+DO                                                                
+   say "query exection :"SQLCODE                                  
+   SAY QUERY                                                      
+END                                                               
+ADDRESS DSNREXX "EXECSQL DESCRIBE S1 INTO :OUTPUT"                
+IF SQLCODE <> 0 THEN                                              
+   say "query s1 into output:" SQLCODE                            
+                                                                  
+ADDRESS DSNREXX "EXECSQL OPEN C1"                                 
+IF SQLCODE <> 0 THEN                                              
+   say "OPEN CURSOR:"SQLCODE                                      
+                                                                  
+  SAY "fetching of cursor starts here"                            
+                                                                  
+I=0                                                               
+DO UNTIL(SQLCODE <> 0)                                            
+   ADDRESS DSNREXX "EXECSQL FETCH C1 USING DESCRIPTOR :OUTPUT"    
+   IF SQLCODE = 0 THEN                                            
+     DO                                                           
+        I = I + 1                                                 
+        FILEIN_ARR.I= ""                                          
+        DO                                                        
+           DO J = 1 TO OUTPUT.SQLD                                
+           /* SAY "  > COLUMN NUMBER: " J                         
+              SAY "    COLUMN NAME:   " OUTPUT.J.SQLNAME          
+              SAY "    COLUMN TYPE:   " OUTPUT.J.SQLTYPE          
+              SAY "    COLUMN VALUE:  " OUTPUT.J.SQLDATA */       
+              FILEIN_ARR.I = FILEIN_ARR.I","OUTPUT.J.SQLDATA      
+           END                                                    
+        END                                                       
+        FILEIN_ARR.I= STRIP(FILEIN_ARR.I,B,",")                   
+     END                                                          
+   ELSE                                                           
+   DO                                                             
+      SAY "SQLCODE FOR FETCHING THE CURSOR" SQLCODE              
+      SAY QUERY                                                  
+   END                                                           
+END                                                              
+FILEIN_ARR.0 = I                                                 
+"EXECIO "FILEIN_ARR.0" DISKW FILEIN (FINIS STEM FILEIN_ARR."     
+"FREE FI(FILEIN)"                                                
+                                                                 
+ADDRESS DSNREXX "EXECSQL CLOSE C1"                               
+ADDRESS DSNREXX "EXECSQL COMMIT"                                 
+ADDRESS DSNREXX "DISCONNECT"                                     
+EXIT RC                                                          

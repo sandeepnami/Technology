@@ -1,0 +1,34 @@
+//#T53VXVF JOB (9999,0205,3),'MOUNIKA         ',                        JOB09851
+//         CLASS=A,MSGCLASS=X,NOTIFY=&SYSUID                            00020037
+//*******************************************************************   00030079
+//***  THE GENERATION REFERS TO EITHER CURRENT (0) OR RELATIVE    ***   00040037
+//***  NUMBER, DO NOT USE (-1) TO REFER TO YESTERDAYS FILE.       ***   00050037
+//***  GENERATION(3) IS THE SAME AS (-3).                         ***   00060037
+//*******************************************************************   00070037
+//*                                                                     00080037
+//HSMREST   EXEC PGM=IKJEFT01,DYNAMNBR=20                               00090037
+//SYSUDUMP DD SYSOUT=*                                                  00100037
+//SYSTSPRT DD SYSOUT=*                                                  00110037
+//SYSOUT   DD SYSOUT=*                                                  00120037
+//SYSPRINT DD SYSOUT=*                                                  00130037
+//SYSTSIN DD *                                                          00140037
+  HRECOVER ('PTY.TFF.WDD1501.F14V01.G0104V00')+                         00227099
+   NEWNAME('TST.M53.VXV.WDD1501.F14V01.TES01')                          00228099
+  HRECOVER ('PTY.TFF.WDD1501.F14V01.G0105V00')+                         00229099
+   NEWNAME('TST.M53.VXV.WDD1501.F14V01.TES02')                          00230099
+  HRECOVER ('PTY.TFF.WDD1501.F14V01.G0106V00')+                         00231099
+   NEWNAME('TST.M53.VXV.WDD1501.F14V01.TES03')                          00231199
+  HRECOVER ('PTY.TFF.WDD1501.F14V01.G0107V00')+                         00231299
+   NEWNAME('TST.M53.VXV.WDD1501.F14V01.TES04')                          00231399
+  HRECOVER ('PTY.TFF.WDD1501.F14V01.G0108V00')+                         00231499
+   NEWNAME('TST.M53.VXV.WDD1501.F14V01.TES05')                          00231599
+  HRECOVER ('PTY.TFF.WDD1501.F14V01.G0109V00')+                         00231699
+   NEWNAME('TST.M53.VXV.WDD1501.F14V01.TES06')                          00231799
+  HRECOVER ('PTY.TFF.WDD1501.F14V01.G0110V00')+                         00231899
+   NEWNAME('TST.M53.VXV.WDD1501.F14V01.TES07')                          00231999
+  HRECOVER ('PTY.TFF.WDD1501.F14V01.G0111V00')+                         00232099
+   NEWNAME('TST.M53.VXV.WDD1501.F14V01.TES08')                          00232199
+  HRECOVER ('PTY.TFF.WDD1501.F14V01.G0112V00')+                         00232299
+   NEWNAME('TST.M53.VXV.WDD1501.F14V01.TES09')                          00232399
+/*                                                                      00233064
+

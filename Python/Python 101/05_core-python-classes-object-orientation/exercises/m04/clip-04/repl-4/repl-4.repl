@@ -1,0 +1,5 @@
+>>> from simple_list import *                                                   
+>>> SortedIntList.__mro__                                                       
+(<class 'simple_list.SortedIntList'>, <class 'simple_list.IntList'>, <class 'sim
+ple_list.SortedList'>, <class 'simple_list.SimpleList'>, <class 'object'>)      
+>>>                                                                             

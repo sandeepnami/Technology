@@ -1,0 +1,24 @@
+//CMPREPGM JOB (9999,0206,3),'COMPARE   ',MSGCLASS=X,
+//         MSGLEVEL=(1,1),CLASS=B,NOTIFY=&SYSUID
+//*********************************************************************
+//**
+//*********************************************************************
+//COMPARE1 EXEC PGM=COMPAREX,COND=(8,LT),
+//         REGION=0M
+//SYSPRINT DD DSN=TST.M53.SXN.EXT11P0.PRD.INE,
+//         SPACE=(CYL,(1,1)),
+//         DISP=(NEW,CATLG,DELETE)
+//*        DISP=SHR
+//*YSPRINT DD   SYSOUT=*
+//SYSUT1   DD DISP=SHR,DSN=NDVR.AFC.PPY.PRD.PROGRAM(EXT11P0)
+//SYSUT2   DD DISP=SHR,DSN=NDVR.AFC.PPY.INT.TFE.PROGRAM(EXT11P0)
+//SYSIN    DD *
+MAXDIFF=2000,,
+  FIELD=(001,678)
+,,,
+FORMAT=14,,,,
+,,
+,,
+,,,,
+//*
+

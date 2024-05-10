@@ -1,0 +1,10 @@
+//UELA003A JOB 'RUN STATS',CLASS=A,MSGCLASS=X,NOTIFY=&SYSUID,  
+//         MSGLEVEL=(1,1),REGION=0M,TIME=1440                  
+//STEP1 EXEC DSNUPROC,UID='UADA007.RUNSTA',                    
+//      UTPROC='',                                             
+//      SYSTEM='DB2A'                                          
+//ATPRINT  DD SYSOUT=*                                         
+//SYSIN DD *                                                   
+   RUNSTATS TABLESPACE(DELT01.STEME)                           
+   TABLE(UELA003.EMP26) COLUMN(ALL)                            
+/*                                                                     

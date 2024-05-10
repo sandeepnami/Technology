@@ -1,0 +1,67 @@
+/* REXX TO COPY PDS MEMBERS INTO ANOTHER FILE                           00010000
+** THIS IS ALSO EXAMPLE FOR USING CALLING ANOTHER REXX                  00011000
+** THIS IS MEMBER READS MEMBERS OF THE PDS(LIB ) AND COMPARES WITH LIB2 00012000
+** THIS RETURNS COMMON MEMBERS OF BOTH THE PDS                          00012100
+*/                                                                      00013000
+/*NANI SAMPLE EXAMPLES                                                  00014000
+LIB="CHGMAN.LV231.STG.#000316.MSC"                                      00020000
+LIB2="PNDVPSC.V823.SRCLIB"                                              00020100
+                                                                        00020200
+OUTDD="CDKVPGE.FIX.SANDEEPN.IN1.SE"                                     00021000
+OUTDD2="CDKVPGE.FIX.SANDEEPN.IN2.SE"                                    00021100
+*/                                                                      00021300
+/*INDD1 IS THE FILE WHOSE INTERSECTION TO BE FOUND*/                    00021423
+INDD1="CDKVPGE.FIX.SANDEEPN.IN3.SE"                                     00021526
+INDD2="CDKVPGE.FIX.SANDEEPN.IN4.SE"                                     00021626
+OUTDD1="CDKVPGE.FIX.SANDEEPN.IN1.SE"                                    00021825
+OUTDD2="CDKVPGE.FIX.SANDEEPN.IN2.SE"                                    00021825
+                                                                        00021924
+"ALLOC FI(INDD1) DA('"INDD1"') SHR "                                    00022023
+"ALLOC FI(INDD2) DA('"INDD2"') SHR "                                    00022123
+"ALLOC FI(OUTDD1) DA('"OUTDD1"') SHR "                                  00022223
+"ALLOC FI(OUTDD2) DA('"OUTDD2"') SHR "                                  00022223
+                                                                        00022324
+"EXECIO * DISKR INDD1 (STEM MAST. FINIS"                                00022424
+"EXECIO * DISKR INDD2 (STEM SLAV. FINIS"                                00022524
+                                                                        00050500
+J = 0                                                                   00051000
+MATCH = 0                                                               00052024
+CNT = 0 /*TESTING IF LEAVE WORKS*/                                      00053026
+DO I = 1 TO MAST.0                                                      00060024
+    CNT=0                                                               00060126
+    MAST1.I=STRIP(MAST.I)                                               00060224
+    PARSE VAR MAST.I . "(" MAST_MEM ")" .                               00060326
+    MATCH = 0/*INITIALISE MATCH FOR EACH MASTER REC */                  00060425
+    DO K = 1 TO SLAV.0                                                  00060524
+       CNT = CNT +1                                                     00060626
+       SLAV.K=STRIP(SLAV.K)                                             00060724
+       PARSE VAR SLAV.K . "(" SLAV_MEM ")" .                            00060826
+       IF MAST_MEM = SLAV_MEM THEN                                      00060926
+       DO                                                               00061000
+          MATCH = 1                                                     00061124
+     /*   SAY "MATCHED REC= " SLAV.K */                                 00061225
+          SLAV_REC = SLAV.K
+          LEAVE                                                         00061326
+       END                                                              00061400
+    END/*END OF SLAV DO */                                              00062024
+ /* SAY "LOOPING CNT= " CNT */                                          00062126
+    IF MATCH <> 0 THEN                                                  00063026
+    DO                                                                  00064024
+       J= J + 1                                                         00064124
+       OUT1.J = MAST1.I                                                 00065024
+       OUT2.J = SLAV_REC                                                00065024
+    END                                                                 00066024
+END                                                                     00081000
+
+OUT1.0=J                                                                00081124
+OUT2.0=J                                                                00081124
+                                                                        00081300
+"EXECIO" OUT1.0 "DISKW OUTDD1 (STEM OUT1. FINIS"                        00082024
+"EXECIO" OUT2.0 "DISKW OUTDD2 (STEM OUT2. FINIS"                        00082024
+                                                                        00083000
+"FREE FI(OUTDD1)"                                                       00085024
+"FREE FI(OUTDD2)"                                                       00085024
+"FREE FI(INDD1)"                                                        00086025
+"FREE FI(INDD2)"                                                        00087025
+EXIT(0)                                                                 00100000
+

@@ -1,0 +1,24 @@
+//SORTCONV JOB AF-1055,'CONVERT TO PD',
+//             MSGCLASS=X,MSGLEVEL=(1,1),
+//             CLASS=P,NOTIFY=&SYSUID
+//*____________________________________________________________________
+//*ACCOUNT AND BSB EXTRACT FROM CAMASTER
+//*____________________________________________________________________
+//*
+//SORT001  EXEC PGM=SORT
+//SYSOUT   DD SYSOUT=*
+//SYSPRINT DD SYSOUT=*
+//*SORTIN IS A VB FILE
+//SORTIN   DD DSN=SDAF.N2.CAMASTER.DISK.IN,DISP=SHR
+//SORTOUT  DD DSN=SDCA.CA.CA953.FLNNNNN.PRODUCT.CONVRSN.PD,
+//            DISP=OLD
+//SYSIN    DD    *
+ SORT FIELDS=COPY
+ OUTFIL VTOF,BUILD=(6,3,PD,TO=ZD,LENGTH=5,
+                    9,5,PD,TO=ZD,LENGTH=9,
+                    16,2,
+                    18,2,
+                    80,3,PD,TO=ZD,LENGTH=5,
+                    57X)
+/*
+

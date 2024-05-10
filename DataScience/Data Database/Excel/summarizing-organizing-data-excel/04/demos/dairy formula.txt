@@ -1,0 +1,1 @@
+=IF(ISNUMBER(FIND(B5,"Milk Cheese Yoghurt Cream")),"True","False")

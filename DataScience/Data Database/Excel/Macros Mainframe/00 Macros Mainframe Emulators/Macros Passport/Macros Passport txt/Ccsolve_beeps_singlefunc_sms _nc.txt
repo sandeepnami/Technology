@@ -1,0 +1,470 @@
+Sub ZMain
+Dim PrNoOld, PrNoCurr,ret,R1,C1,C2,R2, login_flag,to_addr,cc_addr
+
+to_addr = "sandeep_nami@mahindrasatyam.com"
+cc_addr = "deepak_kemidi@mahindrasatyam.com;santhosh_kumarp@mahindrasatyam.com;"_
+&"Chandrakanth_Kaspa@mahindrasatyam.com;Chetan_Reddy@mahindrasatyam.com;Mahesh_Dandu@mahindrasatyam.com;"_
+&"Pranati_Sengupta@mahindrasatyam.com;Sowmya_Bokka@mahindrasatyam.com;Pavankumar_Krovvidi@mahindrasatyam.com;"_
+&"Nandini_Munipalli@mahindrasatyam.com;Ramesh_Tenneti@mahindrasatyam.com;Deepthi_Mallidi@mahindrasatyam.com;Melquer_Minj@mahindrasatyam.com"
+
+
+to_phone = "9052298330,9441156635,9052219615,8885844825,9505001010,9908159485,8790803366"
+
+uname = "PSAL"
+pwd = "DEN13APR"
+login_scr = "CCSSOLVE"
+search_label = "Occurred Date ............"
+
+Set Sys = CreateObject("PASSPORT.System")
+
+
+Set Sess = Sys.ActiveSession
+
+
+Set MyScreen = Sess.Screen
+
+
+
+Set MyArea = MyScreen.Area(6, 6, 6, 12)
+
+
+MyArea.Select     
+MyScreen.Copy
+PrNoOld = MyArea.Value
+
+
+
+Set MyArea = MyScreen.Area(6, 16, 6, 22)
+MyArea.Select     
+MyScreen.Copy
+country = MyArea.Value
+
+
+
+For count_time = 1 to 360
+    SendHostKeys ("<PF6>")
+    ret = wait(3)
+    
+    Set MyArea = MyScreen.Area(6, 6, 6, 12)
+    MyArea.Select     
+    MyScreen.Copy
+    PrNoCurr = MyArea.Value
+   
+
+
+ret_curr = IsNumeric( PrNoCurr )
+ret_old = IsNumeric( PrNoOld )
+If ret_curr = false or ret_old = false Then
+
+msg = "CCSolve in maintainance"
+subject = "High Risk CCSolve in maintainance"
+outlook_send msg,subject,to_addr,cc_addr
+
+count_f3 = logout_cc( MyScreen ) 
+
+if (count_f3 = 10) then
+	Exit Sub
+end if
+
+
+'nani comment start remove after testing
+ret = Wait(180)	
+C1 = 6
+C2 = 13
+R1 = 6
+R2 = 41
+
+
+For i = R1 to R2
+Set MyArea = MyScreen.Area(i, C1, i, C2)
+MyArea.Select     
+MyScreen.Copy
+scr_name = MyArea.Value
+
+If scr_name = login_scr Then
+	Set MyArea = MyScreen.Area(i, 2, i, 2)
+	MyArea.Select     
+	MyScreen.Copy
+	MyArea.Value = "s"
+	SendHostKeys ("<ENTER>")
+	ret = wait(6)
+                    
+	Set MyArea = MyScreen.Area(21, 40, 21, 43)
+	MyArea.Select     
+	MyScreen.Copy
+	MyArea.Value = uname
+                  
+	Set MyArea = MyScreen.Area(21, 64, 21, 73)
+	MyArea.Select     
+	MyScreen.Copy
+	MyArea.Value = pwd
+	SendHostKeys ("<ENTER>")
+	ret = wait(6)
+	SendHostKeys ("S.P.P")
+	ret = wait(6)
+	SendHostKeys ("<ENTER>")
+	ret = wait(6)
+	login_flag = 1
+
+
+	SR1=5
+	SR2=21
+	SC1=2
+	SC2=27
+	For j = SR1 to SR2
+	Set MyArea = MyScreen.Area(j, SC1, j, SC2)
+	MyArea.Select     
+	MyScreen.Copy
+	search_cc = MyArea.Value
+	If search_cc = search_label Then
+		
+		Set MyArea = MyScreen.Area(10, 29, 10, 29)
+		MyArea.Select     
+		MyScreen.Copy
+		MyArea.Value = "="
+		Set MyArea = MyScreen.Area(10, 49, 10, 49)
+		MyArea.Select     
+		MyScreen.Copy
+		MyArea.Value = "="
+		SendHostKeys ("<ENTER>")
+		ret = wait(6)
+		
+		Set MyArea = MyScreen.Area(10, 49, 10, 50)
+		MyArea.Select     
+		MyScreen.Copy
+		MyArea.Value = MyArea.Value + 1
+		SendHostKeys ("<PF6>")
+		ret = wait(6)
+                    	Exit For
+
+	End If
+	Next
+	Exit For 
+End If
+Next ' end of master CCsolve maint for
+
+End If
+
+
+
+    ret_curr = IsNumeric( PrNoCurr )
+    ret_old = IsNumeric( PrNoOld )
+If  login_flag > 0 Then
+	msg = capture_screen( MyScreen )
+	subject = "High Risk CCsolve Screen capture"
+	outlook_send msg,subject,to_addr,cc_addr
+
+End If
+
+    IF ret_curr =true And ret_old = true And count_time mod 10 = 0 Then
+	msg = capture_screen( MyScreen )
+	subject = "High Priority CCsolve Screen capture Every 30mins"
+	outlook_send msg,subject,to_addr,cc_addr
+    End If
+
+    IF PrNoCurr<>PrNoOld And  ret_curr =true And ret_old = true Then
+        
+           PRDIFF = PrNoCurr - PrNoOld            
+          
+          
+Set MyArea = MyScreen.Area(6, 16, 6, 22)
+MyArea.Select     
+MyScreen.Copy
+country = MyArea.Value
+
+           IF (country <> "GEGCFUK" AND country <> "GECBRUS") OR PRDIFF > 1 Then
+	
+
+msg=""
+For count_msg= 1 to  PRDIFF 
+row_pr= 6+(count_msg-1)
+Set MyArea = MyScreen.Area(row_pr, 6, row_pr, 79)
+MyArea.Select     
+MyScreen.Copy
+msg = msg & Chr(13) & MyArea.Value
+
+Next
+
+
+
+Set otlApp = CreateObject("Outlook.Application")
+Set otlNewMail = otlApp.CreateItem(olMailItem)
+
+With otlNewMail
+.SentOnBehalfOfName = "VisionPlus_Servicedesk@mahindrasatyam.com"
+.To = to_addr
+.CC = cc_addr
+.Subject = "High Risk"
+.body = "Hi," & Chr(13) & "There is a PR raised and PR info is "  & Chr(13)  & msg
+
+.Display
+ .send
+END With
+
+
+       	get_beep()
+
+	 response = send_sms( msg, to_phone )
+	if  IsNumeric( response ) = false Then
+		  msg = "Error in sending sms" & Chr(13) & response
+		 subject =  "High Risk SMS send Fail"
+		 outlook_send msg,subject,to_addr,cc_addr
+ 	END IF 
+
+          END IF
+    END If 
+    
+    ret = Wait(180)
+    login_flag = 0                              'initialise the Login flag
+   PrNoOld = PrNoCurr	' Set the PrNoOld at last to compare with currprno
+Next
+
+End Sub
+
+
+
+Function get_beep()
+	For loopvar = 1 To 20
+	        Beep
+	        ret = wait(1)
+                     Next        
+END Function 
+
+
+Function logout_cc( MyScreen )
+Dim ret,scr_name,exit_master
+exit_master = 0
+login_scr = "CCSSOLVE"
+C1 = 6
+C2 = 13
+R1 = 6
+R2 = 41
+for count_f3 = 1 to 10
+
+
+For i = R1 to R2
+Set MyArea = MyScreen.Area(i, C1, i, C2)
+MyArea.Select     
+MyScreen.Copy
+scr_name = MyArea.Value
+
+If scr_name = login_scr Then
+ 	 
+	exit_master = 1
+      	 Exit For
+End If
+Next
+If exit_master > 0 Then
+	Exit For
+End If
+
+SendHostKeys ("<PF3>")   
+ret = wait(6)
+Next
+logout_cc = count_f3
+END Function
+
+
+Sub outlook_send( msg, subject,to_addr,cc_addr )
+Dim  ret
+
+Set otlApp = CreateObject("Outlook.Application")
+Set otlNewMail = otlApp.CreateItem(olMailItem)
+
+With otlNewMail
+.SentOnBehalfOfName = "VisionPlus_Servicedesk@mahindrasatyam.com"
+.To = to_addr
+.CC = cc_addr
+.Subject = subject 
+.body = "Hi," & Chr(13) & "There is a PR raised and PR info is "  & Chr(13)  & msg 
+
+.Display
+ .send
+END With
+
+End Sub
+
+
+Function capture_screen( MyScreen )
+Dim ret, msg, row_st, row_end, col_st, col_end
+msg=""
+row_st = 6
+row_end = 41
+col_st = 6
+col_end = 79
+
+For count_msg= row_st to  row_end  
+Set MyArea = MyScreen.Area(count_msg, col_st , count_msg, col_end )
+MyArea.Select     
+MyScreen.Copy
+msg = msg & Chr(13) & MyArea.Value
+
+Next
+capture_screen = msg
+End Function 
+
+
+
+Function send_sms( msg,to_phone)
+Dim HttpReq 
+  Set HttpReq  = CreateObject("Microsoft.XMLHTTP")
+  Dim uname, pwd, provider, sms_api, request_str, surl
+
+ Dim count_providers
+  count_providers = 6
+  ReDim Provider_list(count_providers)
+  Provider_list(1) = "fullonsms"
+  Provider_list(2) = "site2sms"
+  Provider_list(3) = "indiarocks"
+  Provider_list(4) = "ultoo"
+  Provider_list(5) = "youmint"
+  Provider_list(6) = "smsabc"
+for i = 1 to count_providers 
+  uname = "9052298330"
+   pwd = "namiin"
+
+  provider = Provider_list(i)
+
+  max_msg_len = 90
+
+   msg_len = Len(msg)
+
+
+   If msg_len > max_msg_len Then
+    msg = Mid(msg, 1, max_msg_len)
+	
+	msg = msg & Chr(13) & "Please check the mail for rest of the PRs "
+	
+   end if 
+'nani comment check if urlencode is needed then only use it
+'msg = URLEncodeNew(msg)
+
+
+  
+  
+
+  sms_api = "http://ubaid.tk/sms/sms.aspx"  '---
+
+    
+  'for ubaid    -working
+  request_str = "uid=" & uname & "&pwd=" & pwd & "&msg=" & msg & "&phone=" & to_phone & "&provider=" & provider
+
+  'for madsacsoft -- Not working
+  'request_str = "usr=" & uname & "&pwd=" & pwd & "&msg=" & msg & "&to=" & to_phone & "&site=" & provider
+
+  surl = sms_api & "?" & request_str
+  
+
+  
+
+
+
+  HttpReq.Open "GET", surl, False
+  HttpReq.Send
+ 
+  Status = HttpReq.Status
+  response = HttpReq.ResponseText
+  If Status = 503 Then
+    'MsgBox "The URL = " & surl & "Failed to open"
+  End If
+  
+
+if   IsNumeric( response ) then
+	if response = 1 then
+		Exit For
+	End if 
+End If
+Next
+send_sms = response
+
+
+End Function 
+
+
+'********************Url encode New version********************
+Public Function URLEncodeNew(StringVal) 
+
+StringLen = Len(StringVal)
+
+If StringLen > 0 Then
+    'ReDim result(StringLen) As String
+    'Dim i As Long, CharCode As Integer
+    'Dim Char As String, Space As String
+    SpaceAsPlus = false
+    ReDim result(StringLen)
+
+    If SpaceAsPlus = true Then 
+	Space1 = "+" 
+    Else 
+	Space1 = "%20"
+    End if
+
+    For i = 1 To StringLen
+       Char = Mid(StringVal, i, 1)
+      Case_val = Asc(Char)
+     
+     ' Select Case CharCode
+      '  Case 97 To 122, 65 To 90, 48 To 57, 45, 46, 95, 126
+       '   result(i) = Char
+        'Case 32
+        '  result(i) = Space
+       ' Case 0 To 15
+       '   result(i) = "%0" & Hex(CharCode)
+       ' Case Else
+       '   result(i) = "%" & Hex(CharCode)
+      'End Select
+'*******This if else is replacement of above select becoz of selects incopatability with passport
+       If (case_val >= 48 And case_val <= 57)  or (case_val >= 65 And case_val <= 90)  or (case_val >= 97 And case_val <= 122) or _
+	(case_val = 45) or (case_val = 45) or (case_val = 46) or (case_val = 95)OR (case_val = 126)  then
+	result(i) = Char
+       Elseif  case_val = 32 Then
+	result(i) = Space1
+      Elseif  case_val >= 0 And case_val <= 15 Then
+	result(i) = "%0" & Hex(CharCode)
+      Else
+                      result(i) = "%" & Hex(CharCode)
+     End If
+
+    Next 
+    URLEncodeNew = Join(result, "")
+  End If
+
+End Function
+
+
+
+
+
+
+
+
+
+
+
+
+
+Function get_country()
+
+Set Sys = CreateObject("PASSPORT.System")
+Set Sess = Sys.ActiveSession
+Set MyScreen = Sess.Screen
+Set MyArea = MyScreen.Area(6, 16, 6, 22)
+MyArea.Select     
+MyScreen.Copy
+country = MyArea.Value
+get_country = country 
+END Function
+
+Function get_prinfo ()
+
+Set Sys = CreateObject("PASSPORT.System")
+Set Sess = Sys.ActiveSession
+Set MyScreen = Sess.Screen
+Set MyArea = MyScreen.Area(6, 6, 6, 79)
+MyArea.Select     
+MyScreen.Copy
+prinfo = MyArea.Value
+'MsgBox "PrNoOld=" & PrNoOld & " PrNoCurr=" & PrNoCurr
+get_prinfo = prinfo 
+END Function
+

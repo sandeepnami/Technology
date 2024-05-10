@@ -1,0 +1,20 @@
+Sub ZMain()
+Dim loopvar, ret
+ret = MsgBox("Test",0, "Beeps")
+For loopvar = 1 To 1
+	Beep
+Next 
+ret = MsgBox("Did you hear the beeps msg1",0, "Beeps")
+For loopvar = 1 To 5
+	Beep
+Next
+ret = MsgBox("Did you hear the beeps msg2", 0, "Beeps")
+For loopvar = 1 To 10
+	Beep
+Next
+ret = MsgBox("Did you hear the beeps msg3", 0, "Beeps")
+
+ret = MsgBox("Did you hear the beeps msg4", 0, "Beeps")
+End Sub
+
+

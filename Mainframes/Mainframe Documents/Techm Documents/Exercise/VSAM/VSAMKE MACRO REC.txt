@@ -1,0 +1,7 @@
+*VSAMKE MACRO
+VSAMKE-DATA  1   80  
+EMP-ID		 1   03  N
+EMP-NAME     4   11  A
+EMP-DEPT-ID  15  03  N
+EMP-SALARY   18  05  N
+    

@@ -1,0 +1,113 @@
+Sub ZMain
+'settings
+'show
+'deleted =  n
+Dim ret	
+end_check1 = "======= "
+'8 spaces
+end_check2 = "        "
+'jobs to be excluded
+exception_job = "CDKGFRBA"
+'List of jobs
+'Action tobe performed hold or release MH / MR
+'hold jobs
+'action = "H"
+'free jobs
+action= "F"
+max_rows = 40
+wait_time = "5"
+Set Sys = CreateObject("PASSPORT.System")
+'selects the currently active session
+Set Sess = Sys.ActiveSession
+'selects the screen object
+Set MyScreen = Sess.Screen
+
+for i = 1 to max_rows
+	Set MyArea = MyScreen.Area(4+i-1,4, 4+i-1, 11)
+	MyArea.Select     
+	MyScreen.Copy
+		
+	'end check
+	if  MyArea.Value = end_check1 then
+		exit For
+	end if 
+	' hold all
+	if  MyArea.Value <> end_check2 AND MyArea.Value <> exception_job then 
+		Set MyArea = MyScreen.Area(4+i-1,2, 4+i-1, 2)
+		MyArea.Select     
+		MyScreen.Copy
+		MyArea.Value = "H"
+	end if
+Next 
+SendHostKeys ("<ENTER>")
+ret = wait(15)
+
+' For checking the status of held jobs
+SendHostKeys ("<HOME>")
+SendHostKeys ("<ENTER>")
+ret = wait(wait_time)
+'Hold process complete
+
+for i = 1 to max_rows
+	Set MyArea = MyScreen.Area(4+i-1,4, 4+i-1, 11)
+	MyArea.Select     
+	MyScreen.Copy
+		
+	'end check
+	if  MyArea.Value = end_check1 then
+		exit For	
+	end if 
+	' hold all
+	if  MyArea.Value <> end_check2 AND MyArea.Value <> exception_job then 
+		Set MyArea = MyScreen.Area(4+i-1,2, 4+i-1, 2)
+		MyArea.Select     
+		MyScreen.Copy
+		MyArea.Value = "D"
+	end if
+Next 
+SendHostKeys ("<ENTER>")
+ret = wait(wait_time)
+
+'delete confirmation
+for i = 1 to max_rows
+	Set MyArea = MyScreen.Area(4+i-1,4, 4+i-1, 11)
+	MyArea.Select     
+	MyScreen.Copy
+	check_end = MyArea.Value
+	
+	'end check
+	if   check_end = end_check1 then
+		exit For	
+	end if 
+	
+	'SPECIAL EXCEPTION CHECK
+	Set MyArea = MyScreen.Area(3+i-1,2, 3+i-1, 2)
+	MyArea.Select     
+	MyScreen.Copy
+	IF MyArea.Value = "d" THEN
+		MsgBox "There is some error please run the script again"
+		EXIT SUB
+	END IF
+	
+	if  MyArea.Value <> end_check2 AND MyArea.Value <> exception_job then 
+		Set MyArea = MyScreen.Area(4+i-1,36, 4+i-1, 36)
+		MyArea.Select     
+		MyScreen.Copy
+		MyArea.Value = "Y"
+		SendHostKeys ("<ENTER>")
+		ret = wait(wait_time)
+	end if
+Next 
+'Delete process complete
+
+' For checking the status of held jobs
+ SendHostKeys ("<ENTER>")
+ret = wait(wait_time)
+SendHostKeys ("<HOME>")
+SendHostKeys ("M")
+SendHostKeys ("<PF7>")
+ret = wait(wait_time)
+ 
+
+End Sub
+ 

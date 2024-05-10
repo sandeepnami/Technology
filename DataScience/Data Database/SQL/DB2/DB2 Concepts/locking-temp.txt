@@ -1,0 +1,53 @@
+--------
+LOCKING:
+TRANSACTION is a logical unit of work.
+The transaction can end with a COMMIT or ROLLBACK.
+see the day wise ppt..
+
+COMMIT: This operation signals successful end-of-transaction.
+changes has to be committed or made permanent.
+
+ROLLBACK: This operation signals unsuccessful end-of-transaction. Changes has to be rolled back or undone.
+
+DB2 resolves the concurrency problems by means of LOCKING:
+The effect of lock is to lock the other transactions out of
+the object, and thereby preventing them from changing it.
+
+LOCKING FACILITIES IN DB2:
+Locks can be acquried by one of the methods given below:
+
+a) The SQL statement LOCK TABLE.
+b) The ISOLATION parameter on the BIND PACKAGE command.
+c) The table space LOCKSIZE parameter.
+d) ACQURE/RELEASE parameters on the BIND PLAN command.
+
+a) SQL statement:
+
+SYNTAX:
+
+LOCK TABLE table IN mode MODE;
+
+EG,
+
+LOCK TABLE EMPLOYEE IN EXCLUSIVE MODE;
+
+b) ISOLATION parameter (CS,RR,RS,UR)
+
+c) LOCKSIZE (PAGE,TABLE, TABLESPACE, OR ANY)
+-------------------------------------------
+SYNTAX:
+-------
+CREATE TABLESPACE <tablespace-name>
+IN <database-name>
+USING STOGROUP <stogroup-name>
+	PRIQTY 	qty
+	SECQTY	qty
+	ERASE	YES/NO
+LOCKSIZE 	ANY/PAGE/TABLESPACE/TABLE
+BUFFERPOOL 	BP0/BP1/BP2/BP32K
+CLOSE		YES/NO	DSETPASS password
+FREEPAGE 	<amount>	PCTFREE <amount>	
+-----------------------------------------------
+
+d) ACQUIRE or RELEASE (See the JCL)
+

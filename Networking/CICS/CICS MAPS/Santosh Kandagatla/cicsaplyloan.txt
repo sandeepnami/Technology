@@ -1,0 +1,355 @@
+000100 IDENTIFICATION DIVISION.                                         00010001
+000200 PROGRAM-ID. CS2P03.                                              00020053
+000300 ENVIRONMENT DIVISION.                                            00030001
+000400 DATA DIVISION.                                                   00040001
+000500 WORKING-STORAGE SECTION.                                         00050001
+000600       EXEC SQL                                                   00060001
+000700          INCLUDE SQLCA                                           00070001
+000800       END-EXEC.                                                  00080001
+000900       EXEC SQL                                                   00090001
+001000          INCLUDE CUST228                                         00100051
+001100       END-EXEC.                                                  00110001
+001110       EXEC SQL                                                   00111017
+001120          INCLUDE LOAN228                                         00112051
+001130       END-EXEC.                                                  00113018
+001200       COPY APD228.                                               00120051
+001300       COPY DFHBMSCA.                                             00130001
+001400       COPY DFHAID.                                               00140001
+001410 01 WS-CAP                            PIC 9(10).                  00141056
+001420 01 WS-TOT-INTRST                     PIC 9(07).                  00142056
+001421 01 WS-RESP                           PIC S9(08) COMP.            00142168
+001430 01  WS-CUST-THSAL       PIC 9(07)V99.                            00143019
+001440 01  WS-CUST-GSAL        PIC 9(07)V99.                            00144019
+001450 01  X                   PIC 9(07)V99.                            00145019
+001460 01  Y                   PIC 9(07)V99.                            00146019
+001470 01  WS-MAX              PIC S9(09) USAGE COMP.                   00147042
+001500 01 WS-DATE.                                                      00150001
+001600     03 W-DD             PIC 99.                                  00160060
+001700     03 FILLER           PIC  X VALUE '/'.                        00170060
+001800     03 W-MM             PIC 99.                                  00180060
+001900     03 FILLER           PIC X  VALUE '/'.                        00190060
+002000     03 W-YY             PIC 99.                                  00200060
+002100 01 WS-TIME.                                                      00210001
+002200     03  W-HH        PIC 99.                                      00220001
+002300     03 FILLER      PIC X VALUE '/'.                              00230001
+002400     03  W-MI        PIC 99.                                      00240001
+002500     03 FILLER      PIC X VALUE '/'.                              00250001
+002600     03  W-SEC       PIC 99.                                      00260001
+002700 01  WS-COMMAREA.                                                 00270001
+002710     03  WS-USER-ID    PIC    X(10) .                             00271050
+002711     03  WS-CUST-ID    PIC    S9(09) USAGE COMP.                  00271116
+002720     03  WS-TYPE       PIC    X(5) .                              00272002
+002730     03  WS-LNAMNT     PIC    9(7) .                              00273032
+002740     03  WS-TENURE     PIC    9(3) .                              00274002
+002750     03  WS-ROI        PIC    9(1) .                              00275002
+002760     03  WS-EMI        PIC    9(7) .                              00276002
+002770     03  WS-ELG-AMNT   PIC    9(7)V99.                            00277049
+002800 LINKAGE SECTION.                                                 00280001
+002900 01 DFHCOMMAREA.                                                  00290001
+003000     03  D-USER-ID     PIC    X(10).                              00300002
+003001     03  D-CUST-ID    PIC    S9(09) USAGE COMP.                   00300118
+003010     03  D-TYPE        PIC    X(5) .                              00301002
+003020     03  D-LNAMNT        PIC    9(7) .                            00302032
+003030     03  D-TENURE      PIC    9(3) .                              00303002
+003040     03  D-ROI         PIC    9(1) .                              00304002
+003050     03  D-EMI         PIC    9(7) .                              00305002
+003060     03  D-ELG-AMNT    PIC    9(7)V99.                            00306049
+003100 PROCEDURE DIVISION.                                              00310001
+003200 0000-MAIN-LINE.                                                  00320001
+003300        EVALUATE TRUE                                             00330001
+003400        WHEN EIBCALEN =  10                                       00340050
+003500             PERFORM 2000-SEND-PARA                               00350001
+003600        WHEN EIBAID = DFHENTER                                    00360001
+003700             PERFORM 3000-RECIEVE-PARA                            00370001
+003800        WHEN EIBAID = DFHPF5                                      00380001
+003900               PERFORM 2000-SEND-PARA                             00390001
+004000        WHEN EIBAID = DFHPF6                                      00400001
+004100               PERFORM 4000-APPLY-PARA                            00410002
+004200        WHEN EIBAID = DFHPF3                                      00420001
+004300               PERFORM  5000-GOTO-MAIN-PARA                       00430002
+004310        WHEN EIBAID = DFHPF12                                     00431001
+004320               PERFORM  6000-EXIT-PARA                            00432002
+004330        WHEN EIBAID = DFHPF9                                      00433057
+004340              PERFORM 7000-MAIN-MENU-PARA                         00434057
+004400        END-EVALUATE.                                             00440001
+004500 2000-SEND-PARA.                                                  00450009
+004700        MOVE LOW-VALUES TO       APDMAPI   APDMAPO.               00470051
+004710        MOVE D-USER-ID      TO      WS-USER-ID.                   00471054
+004800        PERFORM 2100-DATE-PARA.                                   00480001
+004900        EXEC CICS SEND                                            00490001
+005000         MAP('APDMAP')                                            00500051
+005100         MAPSET('APD228')                                         00510051
+005200         ERASE                                                    00520001
+005300        END-EXEC.                                                 00530001
+005400                                                                  00540001
+005500       EXEC CICS RETURN                                           00550001
+005600         TRANSID('IM26')                                          00560050
+005700         COMMAREA(WS-COMMAREA)                                    00570001
+005800         LENGTH(LENGTH OF WS-COMMAREA)                            00580050
+005900       END-EXEC.                                                  00590001
+006000 2100-DATE-PARA.                                                  00600009
+006100                                                                  00610001
+006200          EXEC CICS ASKTIME                                       00620001
+006300           ABSTIME(WS-TIME)                                       00630001
+006400          END-EXEC.                                               00640001
+006500          EXEC CICS FORMATTIME                                    00650001
+006600             ABSTIME(WS-TIME)                                     00660001
+006700             DDMMYY(WS-DATE)                                      00670001
+006800             DATESEP                                              00680001
+006900             TIME(WS-TIME)                                        00690001
+007000             TIMESEP                                              00700001
+007100          END-EXEC.                                               00710001
+007200                                                                  00720001
+007300          MOVE WS-DATE    TO     DATEO.                           00730001
+007400          MOVE WS-TIME    TO     TIMEO.                           00740001
+007500 3000-RECIEVE-PARA.                                               00750009
+007600                                                                  00760001
+007700        EXEC CICS RECEIVE                                         00770001
+007800         MAP('APDMAP')                                            00780051
+007900         MAPSET('APD228')                                         00790051
+007910         RESP(WS-RESP)                                            00791069
+008000        END-EXEC.                                                 00800001
+008001        EVALUATE TRUE                                             00800167
+008002          WHEN WS-RESP = DFHRESP(NORMAL)                          00800267
+008003             PERFORM 3100-PROCESS-PARA                            00800367
+008004          WHEN WS-RESP = DFHRESP(LENGERR)                         00800467
+008005                MOVE "LENGTH ERROR" TO MSGO                       00800567
+008006                PERFORM 6000-EXIT-PARA                            00800667
+008007          WHEN WS-RESP = DFHRESP(MAPFAIL)                         00800767
+008008                MOVE "PLEASE ENTER VALID DATA" TO MSGO            00800867
+008009                PERFORM 2000-SEND-PARA                            00800967
+008010                PERFORM 7000-SEND-MSG-PARA                        00801067
+008011          END-EVALUATE.                                           00801167
+008012 3100-PROCESS-PARA.                                               00801267
+008013      MOVE DFHCOMMAREA TO WS-COMMAREA.                            00801367
+008014     IF LTYPEL = 0 OR LTYPEI NOT = "HOMEL" AND                    00801470
+008015                                           LTYPEI NOT = "PRSNL"   00801570
+008016             MOVE "ENTER THE LOAN TYPE" TO MSGO                   00801667
+008017             PERFORM 7000-SEND-MSG-PARA                           00801767
+008018      ELSE IF LAMNTL < 7 OR LAMNTI = 0 OR LAMNTI IS NOT NUMERIC   00801873
+008019             MOVE "ENTER THE LOAN AMOUNT" TO MSGO                 00801967
+008020             PERFORM 7000-SEND-MSG-PARA                           00802067
+008021           ELSE IF LTENUREL < 3 OR LTENUREI < 60 OR LTENUREI > 12000802171
+008022             OR LTENUREI IS NOT NUMERIC                           00802267
+008023            MOVE "ENTER THE LOAN PERIOD IN RANGE" TO MSGO         00802367
+008024            PERFORM 7000-SEND-MSG-PARA                            00802467
+008025      ELSE                                                        00802567
+008026          MOVE      LTYPEI          TO    WS-TYPE                 00802667
+008027          MOVE      LAMNTI          TO    WS-LNAMNT               00802767
+008028          MOVE      LTENUREI        TO    WS-TENURE               00802867
+008029                                                                  00802904
+008030          MOVE      D-USER-ID(6:5) TO    WS-CUST-ID               00803067
+008100        EXEC SQL                                                  00810001
+008200          SELECT CUST_THSAL,                                      00820001
+008300                 CUST_GSAL                                        00830001
+008700           INTO :HV2-CUST-THSAL,                                  00870008
+008800                :HV2-CUST-GSAL                                    00880008
+009200          FROM UELT228.CUSTTBL                                    00920051
+009300          WHERE CUST_ID=:WS-CUST-ID                               00930001
+009400        END-EXEC                                                  00940067
+009410       MOVE HV2-CUST-THSAL    TO   WS-CUST-THSAL                  00941067
+009420       MOVE  HV2-CUST-GSAL    TO   WS-CUST-GSAL                   00942067
+009430                                                                  00943019
+009500       COMPUTE X  =  WS-CUST-THSAL  * 12                          00950067
+009501       COMPUTE Y  =  WS-CUST-GSAL  / 2                            00950167
+009502       EVALUATE TRUE ALSO TRUE                                    00950231
+009510        WHEN   X > 24000 ALSO WS-CUST-THSAL > Y                   00951028
+009700              PERFORM 3100-EMI-AMNT-ROI-PARA                      00970002
+009900        WHEN OTHER                                                00990021
+009910              MOVE LOW-VALUES TO APDMAPI APDMAPO                  00991051
+010000              MOVE 'NOT ELIGILBLE DUE TO SALARY' TO MSGO          01000036
+010010              MOVE D-USER-ID  TO WS-USER-ID                       01001064
+010100              EXEC CICS SEND                                      01010001
+010200               MAP('APDMAP')                                      01020051
+010300               MAPSET('APD228')                                   01030051
+010400               ERASE                                              01040001
+010500              END-EXEC                                            01050015
+010700              EXEC CICS RETURN                                    01070001
+010800                TRANSID('IM26')                                   01080050
+010900                COMMAREA(WS-COMMAREA)                             01090001
+011000                LENGTH(45)                                        01100004
+011100              END-EXEC                                            01110014
+011200        END-EVALUATE                                              01120067
+011210     END-IF                                                       01121067
+011220     END-IF                                                       01122067
+011230     END-IF.                                                      01123067
+011300 3100-EMI-AMNT-ROI-PARA.                                          01130009
+011400                                                                  01140001
+011500     COMPUTE WS-CAP = WS-CUST-THSAL * 40 .                        01150039
+011510                                                                  01151001
+011600         IF ( WS-CAP < 1500000 )                                  01160001
+011700                       MOVE WS-CAP TO WS-ELG-AMNT                 01170032
+011800             ELSE                                                 01180032
+011900                       MOVE 1500000 TO WS-ELG-AMNT                01190032
+012000         END-IF.                                                  01200001
+012100                                                                  01210001
+012200         IF WS-LNAMNT <= 1000000                                  01220032
+012300           MOVE 4 TO WS-ROI                                       01230001
+012400         ELSE                                                     01240001
+012500           MOVE 7 TO WS-ROI                                       01250001
+012600         END-IF.                                                  01260001
+012700                                                                  01270001
+012800                                                                  01280001
+012900     COMPUTE WS-TOT-INTRST = ( WS-LNAMNT * WS-ROI                 01290032
+013000                                            * LTENUREI ) / 1200 . 01300002
+013100                                                                  01310002
+013200     COMPUTE WS-EMI = ( WS-LNAMNT + WS-TOT-INTRST ) / LTENUREI.   01320032
+013300                                                                  01330002
+013400         MOVE WS-ROI       TO LROIO    .                          01340002
+013500         MOVE WS-EMI       TO LEMIO    .                          01350002
+013510         MOVE WS-LNAMNT    TO APPAMTO  .                          01351033
+013600         MOVE WS-ELG-AMNT  TO ELAMNTO  .                          01360002
+013610         MOVE D-USER-ID TO WS-USER-ID.                            01361064
+013700         PERFORM 2100-DATE-PARA.                                  01370027
+013800          EXEC CICS SEND                                          01380002
+013900           MAP('APDMAP')                                          01390051
+014000           MAPSET('APD228')                                       01400051
+014100           ERASE                                                  01410002
+014200          END-EXEC.                                               01420002
+014400          EXEC CICS RETURN                                        01440002
+014500            TRANSID('IM26')                                       01450050
+014600            COMMAREA(WS-COMMAREA)                                 01460002
+014700            LENGTH(45)                                            01470004
+014800          END-EXEC.                                               01480002
+014900 4000-APPLY-PARA.                                                 01490009
+014901           PERFORM 2200-MOVE-PARA.                                01490146
+014910         IF WS-LNAMNT > WS-ELG-AMNT                               01491032
+014911                                                                  01491145
+014912             MOVE LOW-VALUES TO APDMAPI APDMAPO                   01491251
+014913             MOVE D-USER-ID TO WS-USER-ID                         01491363
+014914             PERFORM 2100-DATE-PARA                               01491435
+014920             MOVE "APP AMNT EXCEEDED ELGBLE AMNT" TO MSGO         01492035
+014930                                                                  01493032
+014940             EXEC CICS SEND                                       01494032
+014950              MAP('APDMAP')                                       01495051
+014960              MAPSET('APD228')                                    01496051
+014970              ERASE                                               01497032
+014980             END-EXEC                                             01498035
+014991             EXEC CICS RETURN                                     01499132
+014992              TRANSID('IM26')                                     01499250
+014993              COMMAREA(WS-COMMAREA)                               01499332
+014994              LENGTH(45)                                          01499432
+014995             END-EXEC                                             01499535
+014996        ELSE                                                      01499632
+015000              PERFORM 2100-DATE-PARA                              01500035
+015001              PERFORM 2200-INSERT-PARA                            01500135
+015002        END-IF.                                                   01500235
+015003 2200-INSERT-PARA.                                                01500335
+015004              EXEC SQL                                            01500442
+015005                SELECT MAX(APP_ID)                                01500542
+015006                INTO :WS-MAX                                      01500642
+015007                FROM UELT228.LOANAPPL                             01500751
+015008              END-EXEC.                                           01500842
+015009                    ADD 1 TO WS-MAX.                              01500942
+015011              MOVE  WS-MAX         TO       HV-APP-ID      .      01501151
+015020              MOVE  D-TYPE         TO       HV-LOAN-TYPE   .      01502051
+015040              MOVE  D-LNAMNT       TO       HV-APP-AMT     .      01504051
+015050              MOVE  D-CUST-ID      TO       HV-CUST-ID     .      01505051
+015060              MOVE  D-TENURE       TO       HV-APP-PERIOD .       01506051
+015070              MOVE  'P'            TO       HV-APP-STATUS .       01507051
+015080              MOVE  'PENDING'      TO       HV-REMARKS     .      01508051
+015090              MOVE  D-ROI          TO       HV-APP-ROI     .      01509052
+015091              MOVE  D-EMI          TO       HV-APP-EMI     .      01509152
+015092              MOVE  D-ELG-AMNT     TO       HV-ELI-AMT     .      01509252
+015100            EXEC SQL                                              01510042
+015200             INSERT INTO UELT228.LOANAPPL                         01520051
+015300                    (APP_ID    ,                                  01530003
+015400                     LOAN_TYPE ,                                  01540003
+015500                     APP_DATE  ,                                  01550003
+015600                     APP_AMT   ,                                  01560003
+015700                     CUST_ID   ,                                  01570003
+015710                     APP_PERIOD,                                  01571003
+015720                     APP_STATUS,                                  01572003
+015730                     REMARKS   ,                                  01573003
+015731                     APP_ROI   ,                                  01573152
+015740                     APP_EMI   ,                                  01574052
+015750                     ELI_AMT   )                                  01575052
+015800            VALUES(:HV-APP-ID     ,                               01580051
+015900                   :HV-LOAN-TYPE ,                                01590051
+016000                   CURRENT DATE   ,                               01600019
+016100                   :HV-APP-AMT    ,                               01610051
+016200                   :HV-CUST-ID    ,                               01620051
+016210                   :HV-APP-PERIOD,                                01621051
+016220                   :HV-APP-STATUS,                                01622051
+016230                   :HV-REMARKS    ,                               01623051
+016240                   :HV-APP-ROI    ,                               01624052
+016250                   :HV-APP-EMI    ,                               01625052
+016260                   :HV-ELI-AMT    )                               01626052
+016300           END-EXEC.                                              01630035
+016400                                                                  01640003
+016401       EVALUATE SQLCODE                                           01640118
+016402       WHEN 0                                                     01640218
+016410          MOVE LOW-VALUES TO       APDMAPI   APDMAPO              01641051
+016411          MOVE D-USER-ID TO WS-USER-ID                            01641164
+016412          PERFORM 2100-DATE-PARA                                  01641218
+016420          MOVE 'APPLIED SUCCESSFULLY' TO MSGO                     01642018
+016500                  EXEC CICS SEND                                  01650018
+016600                   MAP('APDMAP')                                  01660051
+016700                   MAPSET('APD228')                               01670051
+016800                   ERASE                                          01680018
+016900                  END-EXEC                                        01690018
+017000                  EXEC CICS RETURN                                01700018
+017010                  TRANSID('IM26')                                 01701050
+017020                  COMMAREA(WS-COMMAREA)                           01702045
+017030                  LENGTH(45)                                      01703045
+017100                  END-EXEC                                        01710018
+017110       WHEN OTHER                                                 01711018
+017120           MOVE SQLCODE     TO MSGO                               01712019
+017121           MOVE D-USER-ID TO WS-USER-ID                           01712164
+017130           EXEC CICS SEND                                         01713018
+017140            MAP('APDMAP')                                         01714051
+017150            MAPSET('APD228')                                      01715051
+017160            ERASE                                                 01716018
+017170           END-EXEC                                               01717018
+017180           EXEC CICS RETURN                                       01718018
+017181           TRANSID('IM26')                                        01718150
+017182           COMMAREA(WS-COMMAREA)                                  01718245
+017183           LENGTH(45)                                             01718345
+017190           END-EXEC                                               01719018
+017191       END-EVALUATE.                                              01719135
+017200 5000-GOTO-MAIN-PARA.                                             01720011
+017210              MOVE LOW-VALUES TO       APDMAPI   APDMAPO.         01721051
+017230               EXEC CICS XCTL                                     01723056
+017240                PROGRAM('CS2MAIN')                                01724056
+017250               END-EXEC.                                          01725056
+018010 7000-SEND-MSG-PARA.                                              01801019
+018030        PERFORM 2100-DATE-PARA.                                   01803019
+018040        EXEC CICS SEND                                            01804019
+018050         MAP('APDMAP')                                            01805051
+018060         MAPSET('APD228')                                         01806051
+018070         ERASE                                                    01807019
+018080        END-EXEC.                                                 01808019
+018090                                                                  01809019
+018091       EXEC CICS RETURN                                           01809119
+018092         TRANSID('IM26')                                          01809250
+018093         COMMAREA(WS-COMMAREA)                                    01809319
+018094         LENGTH(45)                                               01809419
+018100       END-EXEC.                                                  01810019
+018110 6000-EXIT-PARA.                                                  01811019
+018200               MOVE LOW-VALUES TO       APDMAPI   APDMAPO.        01820051
+018300                 EXEC CICS SEND                                   01830018
+018400                      MAP('APDMAP')                               01840051
+018500                      MAPSET('APD228')                            01850051
+018600                      ERASE                                       01860061
+018800                END-EXEC.                                         01880018
+018900                EXEC CICS RETURN                                  01890018
+018910                TRANSID('IM26')                                   01891058
+018920                COMMAREA(WS-COMMAREA)                             01892058
+018930                LENGTH(45)                                        01893058
+019000                END-EXEC.                                         01900018
+019100 2200-MOVE-PARA.                                                  01910038
+019300            MOVE  D-CUST-ID  TO   WS-CUST-ID .                    01930037
+019400            MOVE  D-TYPE     TO   WS-TYPE .                       01940037
+019500            MOVE  D-LNAMNT   TO   WS-LNAMNT .                     01950037
+019600            MOVE  D-TENURE   TO   WS-TENURE .                     01960037
+019700            MOVE  D-ROI      TO   WS-ROI .                        01970037
+019800            MOVE  D-EMI      TO   WS-EMI .                        01980037
+019900            MOVE  D-ELG-AMNT TO   WS-ELG-AMNT .                   01990037
+020000 7000-MAIN-MENU-PARA.                                             02000057
+020010            MOVE D-USER-ID TO WS-USER-ID.                         02001060
+020100            EXEC CICS XCTL                                        02010057
+020200             PROGRAM('CS2P62')                                    02020066
+020300             COMMAREA(WS-USER-ID)                                 02030057
+020400             LENGTH(LENGTH OF WS-USER-ID)                         02040057
+020500            END-EXEC.                                             02050057
+

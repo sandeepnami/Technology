@@ -1,0 +1,31 @@
+/* REXX TO sequencially read a PS file                          
+*/                                                              
+/*NANI COMMENT FOR STD INPUT                                    
+*/                                                              
+/*INPUT*/                                                       
+INDD1="SDAF.NANI.P732083.INPUT.SE"                              
+OUTDD1="SDAF.P732083.OUTPUT.WRITE.SE"                           
+STRING="EMAIL"                                                  
+                                                                
+/*ALLOCATION OF DATASET*/                                       
+"ALLOC FI(INDD1) DA('"INDD1"') SHR "                            
+"ALLOC FI(OUTDD1) DA('"OUTDD1"') SHR "                          
+                                                                
+"EXECIO * DISKR INDD1(STEM INARR1. FINIS"                       
+"FREE F(INDD1)"                                                 
+                                                                
+/*SAY "ALLOCATION COMPLETE"*/                                   
+I = 1                                                           
+/* INARR.0 will have the number of */                           
+/* elements in the stem             */                          
+DO WHILE I <= INARR1.0                                          
+ /*SAY ' LINE ' I ' : ' inarr1.I */                             
+   OUTARR1.I = SUBSTR(INARR1.I,1,3)","SUBSTR(INARR1.I,4,11),    
+               ","SUBSTR(INARR1.I,15,9)                         
+   I = I + 1                                                    
+END                                                             
+OUTARR1.0=INARR1.0                                              
+/*writng stem data to file */                                   
+"EXECIO "OUTARR1.0" DISKW OUTDD1 (FINIS STEM OUTARR1."          
+"FREE FI(OUTDD1)"                                               
+EXIT                                                            

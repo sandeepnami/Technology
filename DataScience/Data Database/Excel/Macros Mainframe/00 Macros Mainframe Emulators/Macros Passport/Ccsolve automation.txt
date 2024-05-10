@@ -1,0 +1,8 @@
+Sub ZMain()
+Dim Text, ret
+for i = 1 to 150
+	SendHostKeys ("<PF6>")
+	'ret = Wait(10)	
+	ret = Wait(240)	
+Next
+End Sub

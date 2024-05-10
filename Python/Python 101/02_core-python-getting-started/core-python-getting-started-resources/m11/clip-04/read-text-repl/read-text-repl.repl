@@ -1,0 +1,20 @@
+>>> g.read(32)                                                                  
+'What are the roots that clutch, '                                              
+>>> g.read()                                                                    
+'what branches grow\nOut of this stony rubbish? '                               
+>>> g.read()                                                                    
+''                                                                              
+>>> g.seek(0)                                                                   
+0                                                                               
+>>> g.readline()                                                                
+'What are the roots that clutch, what branches grow\n'                          
+>>> g.readline()                                                                
+'Out of this stony rubbish? '                                                   
+>>> g.readline()                                                                
+''                                                                              
+>>> g.seek(0)                                                                   
+0                                                                               
+>>> g.readlines()                                                               
+['What are the roots that clutch, what branches grow\n', 'Out of this stony rubb
+ish? ']                                                                         
+>>> g.close()                                                                   

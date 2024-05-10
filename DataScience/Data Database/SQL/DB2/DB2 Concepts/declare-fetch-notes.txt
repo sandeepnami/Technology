@@ -1,0 +1,21 @@
+--------------------------------------------------
+DECLARE CURSOR NOTES.
+--------------------------------------------------
+INSENSITIVE: POPULATES A DECLARED TEMP TABLE, SCROLLS ON THE TEMP TABLE, NEVER LOOKS BACK AT THE
+THE BASE TABLE.
+SENSITIVE: May look back to pick up latest change, possible want to update using this cursor
+
+ASENSITIVE is the default for version v8
+-------------------------------------------------
+
+-------------------------------------------------
+FETCH CURSOR NOTES:
+-------------------------------------------------
+INSENSITIVE: Use temp table values
+SENSITIVE: Refresh from base table
+ORIENTATION: NEXT, BEFORE, AFTER 
+-------------------------------------------------
+FETCH ORIENTATION - 
+RELATIVE keyword is used to position the cursor relative to the current postion
+ABSOLUTE keyword is used to position the cursor relative to the top or bottom.
+-------------------------------------------------

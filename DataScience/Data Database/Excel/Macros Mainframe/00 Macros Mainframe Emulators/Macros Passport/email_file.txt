@@ -1,0 +1,43 @@
+ KM9NMACC---------------------- MAI : Primary Menu -----------------------------
+ Command ===>                                              TUE 16-APR-2013 21.43
+                                                                        KM9NMACC
+                    S or /=Select L=Logon H=Hide M=Modify C=Cancel ?=Action List
+     ---ID--- Status    Application                                             
+     TSOD1    <->       TSO European Dev                                        
+     CCICHUBB <->       V+ Train BB CICS Hungary                                
+     DCICHUBB <->       V+ HU BB CICS Dev                                       
+     QCICHUBB <->       Development BB CICS Hungary                             
+     WCICHUBB <->       V+ Development BB CICS Hungary                          
+     ZCICHUBB <->       V+ HU BB CICS Training                                  
+     TMOND1   <->       The Monitor for CICS - D1                               
+     B93ACC   <->       IGCF Acceptance B93                                     
+     CCSSOLVE <->       Problem/Change System on GCF1                           
+     NETMEURP <->       European Prod MAI (IGCFP1)                              
+     KCICPLGS <->       V+ TST CICS IP (PL)                                     
+     MCICPLGS <->       V+ TST CICS IP (PL)                                     
+     TCICPLGS <->       V+ TST CICS IP (PL)                                     
+     VCICPLGS <->       V+ TST CICS IP (PL)                                     
+     WCICPLGS <->       V+ TST CICS IP (PL)                                     
+     XCICPLGS <->       V+ TST CICS IP (PL)                                     
+     YCICPLGS <->       V+ TST CICS IP (PL)                                     
+     ZCICPLGS <->       V+ TST CICS IP(PL)                                      
+     KM9TMMVS <->       TMON/MVS on IGCFD1                                      
+     ACICDKGE <->       V+ ACC Denmark                                          
+     SCICDKGE <->       V+ SYSTST Denmark                                       
+     TCICDKGE <->       V+ TST Denmark                                          
+     TCICLVGN <->        V+ v8.23 TST Latvia                                    
+     VCICDKMW <->       V+ TST Denmark                                          
+     WCICLVGN <->        V+ V8.23 DEV Latvia                                    
+     ZCICDKGE <->       V+ Trn Denmark                                          
+     ACICLVGN <->        V+ V8.23 ACC Latvia                                    
+     CCICDKGE <->       V+ Conv Denmark                                         
+     DCICDKGE <->       V+ Dev Denmark                                          
+     DCICLVGN <->        V+ V8.23 DEV Latvia                                    
+     GCICLVGN <->        V+ v8.23 TST Latvia                                    
+     ICICDKGE <->       V+ Acc Denmark                                          
+     LCICDKGE <->       V+ ACC Denmark                                          
+     RCICDKGE <->       V+ ACC Denmark                                          
+     ACICCHGE <->       V+ Switzerland (Acc)                                    
+     BCICCHGE <->       V+ Switzerland (Acc B)                                  
+  F1=Help      F2=Split     F3=Exit                                F6=Refresh   
+  F7=Backward  F8=Forward   F9=Swap     F10=Right    F11=Hide                   

@@ -1,0 +1,48 @@
+/* REXX TO search a string in pds and get matched members          
+*/                                                                 
+/*NANI COMMENT FOR STD INPUT                                       
+*/                                                                 
+/*INPUT                                                            
+STRING="ATTACHMENT"                                                
+PDSDD="NAB.MASTER.CNTL"  */                                        
+PDSDD="NAB.MASTER.CNTL"                                            
+WRITE="SDAF.NANI.P732083.MATCH.SE"                                 
+STRING="EMAIL"                                                     
+                                                                   
+/*ALLOCATION OF DATASET*/                                          
+"ALLOC FI(PDSDD) DA('"PDSDD"') SHR "                               
+"ALLOC FI(WRITE) DA('"WRITE"') SHR "                               
+/*READ MEMBERS OF THE PDS*/                                        
+X = OUTTRAP('PDSMEM.')                                             
+"LISTDS '"PDSDD"' MEMBERS"                                         
+X=OUTTRAP('OFF')                                                   
+"FREE FI(PDSDD)"                                                   
+                                                                   
+COUNT = 0                                                          
+MATCH = 0                                                          
+DO I = 7 TO PDSMEM.0                                               
+  MEMBER = STRIP(PDSMEM.I)                                         
+  SAY "MEMBER NAME IS" MEMBER                                      
+  "ALLOC FI(PDSFI) DA('"PDSDD"("MEMBER")') SHR "                   
+  "EXECIO * DISKR PDSFI (FINIS STEM IN."                           
+  "FREE FI(PDSFI)"                                                 
+  DO K = 1 TO IN.0                                                 
+   /*  SAY "MEMBER SEARCHED IS" MEMBER */                          
+       IF POS(STRING,IN.K) <> 0 THEN                               
+         DO                                                        
+          MATCH = MATCH+1                                          
+          WRITE.MATCH=MEMBER                                       
+          COUNT = COUNT + 1                                        
+          LEAVE/*BREAK OUT OF LOOP*/                  
+         END                                          
+       ELSE                                           
+         NOP/*NO OPERATION*/                          
+  END                                                 
+END                                                   
+WRITE.0=MATCH                                         
+SAY "NO OF MATCHED MEMBERS" COUNT                     
+"EXECIO" WRITE.0 "DISKW WRITE (STEM WRITE. FINIS"     
+/*"EXECIO" DD.0 "DISKW OUTDD (STEM DD. FINIS"*/       
+                                                      
+"FREE FI(WRITE)"                                      
+EXIT(0)                                               

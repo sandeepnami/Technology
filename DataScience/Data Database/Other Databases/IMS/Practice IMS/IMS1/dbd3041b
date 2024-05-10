@@ -1,0 +1,10 @@
+ PRINT   NOGEN                                                          00010000
+ DBD     NAME=DBD3041B,ACCESS=(INDEX,VSAM)                              00020007
+ DATASET DD1=DBD3041B,BLOCK=333                                         00030007
+ SEGM    NAME=SECPNTR,PARENT=0,BYTES=10                                 00040001
+ LCHILD  NAME=(LOCSEG,DBD3041A),INDEX=SECKEY                            00041002
+ FIELD   NAME=(LOCXID,SEQ),BYTES=10,START=1,TYPE=C                      00050006
+ DBDGEN                                                                 00160000
+ FINISH                                                                 00170000
+ END                                                                    00180000
+

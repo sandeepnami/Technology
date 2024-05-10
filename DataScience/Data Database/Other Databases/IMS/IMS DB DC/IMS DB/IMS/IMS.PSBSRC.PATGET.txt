@@ -1,0 +1,18 @@
+                                                                                
+ EDIT       MTPLB06.IMS.PSBSRC(PATGET) - 01.13              Columns 00001 00072 
+  Command ===>                                                  Scroll ===> CSR  
+  ****** ***************************** Top of Data ******************************
+ 000100  PCB       TYPE=DB,NAME=HOSPDB,KEYLEN=50,PROCOPT=LS                     
+ 000200  SENSEG    NAME=HOSPITAL,PARENT=0                                       
+ 000300  SENSEG    NAME=WARD,PARENT=HOSPITAL                                    
+ 000420  SENSEG    NAME=PATIENT,PARENT=WARD                                     
+ 000480  SENSEG    NAME=SYMPTOM,PARENT=PATIENT                                  
+ 000490  SENSEG    NAME=TREATMNT,PARENT=PATIENT                                 
+ 000500  SENSEG    NAME=DOCTOR,PARENT=PATIENT                                   
+ 000600  SENSEG    NAME=FACILITY,PARENT=HOSPITAL                                
+ 000700  PSBGEN    LANG=COBOL,PSBNAME=PATGET                                    
+ 000800  END                                                                    
+ ****** **************************** Bottom of Data ****************************
+                                                                                
+                                                                                
+                                                                                

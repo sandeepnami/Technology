@@ -1,0 +1,13 @@
+//UGBWAIT  JOB 345,'WAIT STEP',                                         00010027
+//             MSGCLASS=X,MSGLEVEL=(1,1),                               00020024
+//             CLASS=2,NOTIFY=&SYSUID                                   00030024
+//*WAIT1   EXEC IESWAIT,PARM=99                                         00030228
+//*STEP010 EXEC PGM=BPXBATCH,                                           00030428
+//*             PARM='SH /BIN/SLEEP 60'                                 00030528
+//*                                                                     00030628
+//STEP010 EXEC PGM=AOPBATCH,                                            00030728
+//             PARM='/BIN/SLEEP 60'                                     00030828
+//STDOUT   DD  SYSOUT=*                                                 00030928
+//STDERR   DD  SYSOUT=*                                                 00031028
+//STDIN    DD  DUMMY                                                    00032028
+

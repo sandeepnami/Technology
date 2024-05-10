@@ -1,0 +1,18 @@
+/***********************************************************************
+***********REXX TO SHOW THE CALLING OF A FUNCTION(ANOTHER REXX)*********
+***********************************************************************/
+/*INPUT*/                                                               
+GRPMPID = "SDAF.PP41303.ACCOUNTS.GROUP.MPID.SE"                         
+                                                                        
+/*SAY "READ SUCCESSFUL"*/                                               
+/*******HARDCODING STARTS HERE*****************************************/
+group = "SUBS01"                                                        
+/*******HARDCODING ENDS HERE*******************************************/
+/* DEFINING THE QUERY */                                                
+QUERY = "SELECT MP_ID,AF_ALW_AC_GRP",                                   
+           "FROM SGAF.BUALW_AC_TYPE",                                   
+           "WHERE AF_ALW_AC_GRP='"group"'"                              
+                                                                        
+QUERY = SPACE(QUERY,1,"-")                                              
+CALL DB2QUERY QUERY GRPMPID                                             
+EXIT                                                                    
